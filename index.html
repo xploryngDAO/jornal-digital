@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#07080d">
+<title>📰 Jornal Digital — Notícias do Mundo</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#07080d;--panel:rgba(13,16,24,.92);--line:rgba(110,168,254,.18);--txt:#e6e9ef;--mut:#9aa3b2;--acc:#6ea8fe;--red:#ff6b6b;--green:#7ee787;--yellow:#ffd166}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,'Segoe UI',sans-serif;overflow-x:hidden}
+a{color:var(--acc);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1200px;margin:0 auto;padding:20px}
+header{background:linear-gradient(135deg,#1a1f2e,#0d1117);padding:30px 20px;text-align:center;border-bottom:1px solid var(--line)}
+header h1{font-size:2.5rem;margin-bottom:8px}
+header p{color:var(--mut);font-size:1rem}
+header .meta{color:var(--mut);font-size:.85rem;margin-top:10px}
+nav{position:sticky;top:0;background:rgba(7,8,13,.95);backdrop-filter:blur(10px);padding:12px 20px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
+nav a{color:var(--mut);padding:6px 12px;border-radius:6px;transition:.2s}
+nav a:hover{color:var(--txt);background:rgba(110,168,254,.1)}
+section{margin:40px 0}
+section h2{font-size:1.8rem;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--acc)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;transition:.2s}
+.card:hover{border-color:var(--acc)}
+.card h3{font-size:1.1rem;margin-bottom:6px}
+.card .source{color:var(--mut);font-size:.8rem;margin-bottom:8px}
+.card .impact{background:rgba(110,168,254,.08);border-left:3px solid var(--acc);padding:8px 12px;margin-top:8px;font-size:.9rem;border-radius:0 6px 6px 0}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75rem;margin-right:4px;margin-bottom:4px}
+.tag.politica{background:rgba(255,107,107,.2);color:var(--red)}
+.tag.economia{background:rgba(255,209,102,.2);color:var(--yellow)}
+.tag.tecnologia{background:rgba(126,231,135,.2);color:var(--green)}
+.tag.mundo{background:rgba(110,168,254,.2);color:var(--acc)}
+#globe-container{width:100%;height:500px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:20px 0}
+#graph-container{width:100%;height:500px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:20px 0}
+.correlation{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
+.correlation h3{color:var(--acc);margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+footer{text-align:center;padding:30px;color:var(--mut);border-top:1px solid var(--line);margin-top:40px}
+@media(max-width:768px){
+  header h1{font-size:1.8rem}
+  .container{padding:12px}
+  #globe-container,#graph-container{height:350px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>📰 Jornal Digital — Notícias do Mundo</h1>
+  <p>Consolidação e correlação de notícias capturadas em 18/11/2026</p>
+  <div class="meta">Fontes: G1, BBC News, Valor Econômico | Atualizado às 14:00 (horário de Brasília)</div>
+</header>
+
+<nav>
+  <a href="#mundo">🌐 Mundo</a>
+  <a href="#politica">🏛️ Política</a>
+  <a href="#economia">💰 Economia</a>
+  <a href="#tecnologia">💻 Tecnologia</a>
+  <a href="#social">📊 Social</a>
+  <a href="#globo">🌍 Mapa 3D</a>
+  <a href="#grafo">🔗 Grafo 3D</a>
+  <a href="#correlacoes">📈 Correlações</a>
+</nav>
+
+<div class="container">
+
+<!-- MUNDO -->
+<section id="mundo">
+  <h2>🌐 Mundo / Geopolítica</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>Cúpula histórica Trump–Xi–Putin na China</h3>
+      <div class="source">BBC, Valor</div>
+      <p>Os três líderes se reúnem pela primeira vez em encontro muito aguardado. Xi e Putin criticam políticas ocidentais às vésperas.</p>
+      <div class="impact">Impacto: Redefinição de alianças globais, tarifas, restrições de chips e cadeias de suprimento. Pode afetar preços de commodities e câmbio.</div>
+    </div>
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>Nvidia: escândalo de espionagem pode restringir chips à China</h3>
+      <div class="source">BBC</div>
+      <p>Ameaça aos sonhos de IA chineses. EUA podem aumentar restrições de venda de chips avançados.</p>
+      <div class="impact">Impacto: Guerra de chips se intensifica. Empresas americanas (Nvidia, Anthropic) ganham valor; China busca alternativas domésticas. Custos de hardware sobem globalmente.</div>
+    </div>
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>Democratas vencem Senado no Alasca</h3>
+      <div class="source">BBC</div>
+      <p>Confirma domínio na eleição de meio de mandato. Hakeem Jeffries nominado para Speaker da Câmara — primeiro congressista negro.</p>
+      <div class="impact">Impacto: Mudança no equilíbrio político americano pode afetar políticas de imigração, comércio e relações internacionais.</div>
+    </div>
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>Claudia Sheinbaum viaja em voo comercial para a China</h3>
+      <div class="source">G1</div>
+      <p>Presidente do México viraliza ao viajar para a China em voo comercial.</p>
+      <div class="impact">Impacto: Sinal de aproximação México-China, pode afetar relações comerciais com EUA e cadeias de suprimento na América do Norte.</div>
+    </div>
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>William e Kate refletem sobre laços UK-Índia</h3>
+      <div class="source">BBC</div>
+      <p>Refletem sobre laços "duradouros" entre Reino Unido e Índia com Modi.</p>
+      <div class="impact">Impacto: Fortalecimento de laços diplomáticos e comerciais pós-Brexit.</div>
+    </div>
+    <div class="card">
+      <span class="tag mundo">Mundo</span>
+      <h3>Kuwait repeliu primeiro ataque iraniano em dois meses</h3>
+      <div class="source">BBC</div>
+      <p>Após EUA atacarem ilha. Tensões no Oriente Médio persistem.</p>
+      <div class="impact">Impacto: Risco geopolítico pode afetar preços de petróleo e segurança energética global.</div>
+    </div>
+  </div>
+</section>
+
+<!-- POLÍTICA -->
+<section id="politica">
+  <h2>🏛️ Política</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag politica">Política</span>
+      <h3>Operação contra Esportes da Sorte bloqueia R$ 2,3 bi</h3>
+      <div class="source">G1, Valor</div>
+      <p>Dono da Esportes da Sorte é alvo. Receita revela ocultação de recursos via remessas ao exterior. PF apreende iate, aviões e carros de luxo em PE.</p>
+      <div class="impact">Impacto: Endurecimento da fiscalização pode desestabilizar setor de apostas online e aumentar regulação. Fluxo de dinheiro ilegal drena economia formal.</div>
+    </div>
+    <div class="card">
+      <span class="tag politica">Política</span>
+      <h3>Ajuste fiscal: relator diz ter votos, mas custo político subiu</h3>
+      <div class="source">Valor</div>
+      <p>Análise de César Felício. Resistência alta na Câmara.</p>
+      <div class="impact">Impacto: Sem aprovação, previdência pode consumir R$ 379 bi adicionais em 10 anos. Afeta contas públicas e confiança de investidores.</div>
+    </div>
+    <div class="card">
+      <span class="tag politica">Política</span>
+      <h3>Reforma tributária: créditos de PIS/Cofins para quitar CBS</h3>
+      <div class="source">Valor</div>
+      <p>Receita garantirá uso de créditos. Observatório Tributário estreia com live do secretário da Receita.</p>
+      <div class="impact">Impacto: Simplificação tributária pode reduzir custos para empresas, mas implementação gradual gera incerteza.</div>
+    </div>
+    <div class="card">
+      <span class="tag politica">Política</span>
+      <h3>Ex-jogadora Gabi Morais presa em operação contra CV</h3>
+      <div class="source">G1</div>
+      <p>Operação contra o Comando Vermelho no Ceará. PM faz operação no Rio pelo 3º dia seguido.</p>
+      <div class="impact">Impacto: Crime organizado segue forte, exigindo cooperação internacional. Segurança pública é tema central.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ECONOMIA -->
+<section id="economia">
+  <h2>💰 Economia / Finanças</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>Ibovespa cai ~1,2% a 167.566 pts</h3>
+      <div class="source">G1, Valor</div>
+      <p>Investidores nervosos com cúpula geopolítica e dólar forte.</p>
+      <div class="impact">Impacto: Redução de exposição a ativos brasileiros. Renda fixa pode beneficiar, mas inflação corrói ganho real.</div>
+    </div>
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>Dólar comercial: R$ 5,830 (+0,82%)</h3>
+      <div class="source">G1, Valor</div>
+      <p>Dólar forte e juros nos EUA levam TS Lombard a reduzir exposição ao Brasil. Dólar dispara, pressiona inflação.</p>
+      <div class="impact">Impacto: Custo de vida em alta (alimentos, combustíveis, importados). Famílias de baixa renda mais afetadas. Crédito mais caro.</div>
+    </div>
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>BlackRock compra SulAmérica Asset por até R$ 850 mi</h3>
+      <div class="source">Valor</div>
+      <p>Maior gestora de ativos do mundo expande presença no Brasil.</p>
+      <div class="impact">Impacto: Consolidação do mercado de gestão de ativos. Competição pode beneficiar investidores.</div>
+    </div>
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>Pensão pode subir R$ 379 bi em 10 anos</h3>
+      <div class="source">Valor</div>
+      <p>Sem nova reforma, despesa previdenciária cresce exponencialmente.</p>
+      <div class="impact">Impacto: Pressão fiscal pode forçar cortes em outros setores ou aumento de impostos.</div>
+    </div>
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>Bancos acumulam imóveis com disparo de distratos</h3>
+      <div class="source">Valor</div>
+      <p>Crédito imobiliário se deteriora. Classe média que apostou em imóveis está em dificuldade.</p>
+      <div class="impact">Impacto: Estresse no setor imobiliário. Afeta construção civil e empregos.</div>
+    </div>
+    <div class="card">
+      <span class="tag economia">Economia</span>
+      <h3>Anthropic (Claude) prepara IPO</h3>
+      <div class="source">BBC, Valor</div>
+      <p>Testa apetite dos investidores por IA. Fundadores se tornarão multibilionários.</p>
+      <div class="impact">Impacto: Consolidação do mercado de IA. Pode atrair mais investimento para o setor.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia">
+  <h2>💻 Tecnologia</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag tecnologia">Tecnologia</span>
+      <h3>Toyota inaugura 2ª fábrica em Sorocaba (híbrido flex)</h3>
+      <div class="source">Valor, G1</div>
+      <p>Investimento estrangeiro em manufatura. Novo modelo híbrido flex.</p>
+      <div class="impact">Impacto: Geração de empregos, redução de dependência de importações, avanço da transição energética.</div>
+    </div>
+    <div class="card">
+      <span class="tag tecnologia">Tecnologia</span>
+      <h3>Chinese Jetour assume fábrica da Land Rover no Brasil</h3>
+      <div class="source">Valor</div>
+      <p>Entrada de marca chinesa na manufatura automotiva brasileira.</p>
+      <div class="impact">Impacto: Mais concorrência, preços potencialmente menores, novos empregos.</div>
+    </div>
+    <div class="card">
+      <span class="tag tecnologia">Tecnologia</span>
+      <h3>GTA 6 lançado na Nova Zelândia</h3>
+      <div class="source">BBC, Valor</div>
+      <p>Primeiros países já têm acesso. Críticos chamam de "obra-prima". Ação da criadora salta.</p>
+      <div class="impact">Impacto: Indústria de games se consolida como setor econômico relevante. Impacto cultural global.</div>
+    </div>
+    <div class="card">
+      <span class="tag tecnologia">Tecnologia</span>
+      <h3>Outages de tecnologia: hacks, IA ou atualizações atrasadas?</h3>
+      <div class="source">BBC</div>
+      <p>Série de interrupções deixa usuários inquietos. Rubio diz que EUA não estão "sob ataque sistêmico".</p>
+      <div class="impact">Impacto: Risco cibernético em infraestrutura crítica. Custos de compliance e segurança aumentam.</div>
+    </div>
+    <div class="card">
+      <span class="tag tecnologia">Tecnologia</span>
+      <h3>Enem 2026: gabarito divulgado, questão de matemática anulada</h3>
+      <div class="source">G1</div>
+      <p>Cursinhos discordam. Enem 2028 poderá exigir duas redações.</p>
+      <div class="impact">Impacto: Insegurança para milhões de estudantes. Mudanças na avaliação podem afetar preparação.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <h2>📊 Social / Dados</h2>
+  <div class="grid">
+    <div class="card">
+      <span class="tag politica">Social</span>
+      <h3>Violência no Brasil atinge mais pretos e pardos</h3>
+      <div class="source">Valor (IBGE)</div>
+      <p>Dados do IBGE mostram desproporção. Desigualdade educacional reduz, mas persiste.</p>
+      <div class="impact">Impacto: Desigualdade estrutural afeta capital humano e produtividade. Políticas públicas ainda não fecharam lacunas.</div>
+    </div>
+    <div class="card">
+      <span class="tag politica">Social</span>
+      <h3>Gana: novo jato presidencial de US$ 60 mi gera revolta</h3>
+      <div class="source">BBC</div>
+      <p>Revolta pública com gasto em meio a dificuldades econômicas.</p>
+      <div class="impact">Impacto: Tensão social e questionamento sobre prioridades de gasto público.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MAPA 3D -->
+<section id="globo">
+  <h2>🌍 Mapa 3D — Referências Geográficas</h2>
+  <p style="color:var(--mut);margin-bottom:10px">Gire o globo para ver onde as notícias acontecem. Clique nos marcadores para detalhes.</p>
+  <div id="globe-container"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo">
+  <h2>🔗 Grafo 3D — Correlações entre Notícias</h2>
+  <p style="color:var(--mut);margin-bottom:10px">Nós representam notícias e categorias. Arestas mostram correlações. Clique em um nó para detalhes.</p>
+  <div id="graph-container"></div>
+</section>
+
+<!-- CORRELAÇÕES -->
+<section id="correlacoes">
+  <h2>📈 Análise de Correlação</h2>
+  <div class="correlation">
+    <h3>A. Geopolítica → Mercados Financeiros</h3>
+    <p>A cúpula Trump–Xi–Putin ocorre com dólar forte (R$ 5,83) e Ibovespa em queda (~1,2%). A TS Lombard reduziu exposição ao Brasil. Se houver escalada comercial, inflação global sobe, forçando juros altos — aprofundando desvalorização do real.</p>
+  </div>
+  <div class="correlation">
+    <h3>B. Guerra Tecnológica (EUA–China) → IA e Mercados</h3>
+    <p>O escândalo de espionagem da Nvidia pode restringir chips à China. A Anthropic prepara IPO testando apetite por IA. A China enfrenta obstáculo inesperado. Mercado bifurcado: empresas americanas ganham valor, China busca alternativas.</p>
+  </div>
+  <div class="correlation">
+    <h3>C. Crise Fiscal Brasileira → Vida Cotidiana</h3>
+    <p>Pensão pode subir R$ 379 bi em 10 anos. Ajuste fiscal enfrenta resistência. Dólar dispara e pressiona inflação. Bancos acumulam imóveis com distratos. Crédito mais caro afeta classe média.</p>
+  </div>
+  <div class="correlation">
+    <h3>D. Apostas Ilegais e Crime → Economia Paralela</h3>
+    <p>Operação contra Esportes da Sorte bloqueou R$ 2,3 bi. Fluxo de dinheiro ilegal drena economia formal, distorce concorrência e aumenta custos de compliance. Endurecimento da fiscalização pode afetar setor de apostas.</p>
+  </div>
+  <div class="correlation">
+    <h3>E. Energia e Indústria → Emprego e Preços</h3>
+    <p>Toyota inaugura 2ª fábrica (híbrido flex). Jetour assume fábrica da Land Rover. Ambev vê potencial para triplicar cevada. Investimentos em manufatura podem gerar empregos mesmo com dólar alto.</p>
+  </div>
+  <div class="correlation">
+    <h3>F. Tecnologia → Políticas Públicas e Educação</h3>
+    <p>Mudanças no Enem (duas redações em 2028). Questão anulada de 2026 gera insegurança. Violência desproporcional contra pretos e pardos. Políticas públicas ainda não fecharam lacunas educacionais.</p>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <p>📰 Jornal Digital — Gerado automaticamente pelo agente Jornalista</p>
+  <p>Dados capturados em 18/11/2026 às 14:00 (horário de Brasília)</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+  {lat:39.9,lng:116.4,name:"Pequim, China",title:"Cúpula Trump-Xi-Putin",cat:"mundo",color:"#ff6b6b",size:1.2},
+  {lat:55.75,lng:37.62,name:"Moscou, Rússia",title:"Putin na cúpula",cat:"mundo",color:"#ff6b6b",size:0.8},
+  {lat:38.9,lng:-77.04,name:"Washington, EUA",title:"Trump, Jeffries, Democratas",cat:"politica",color:"#6ea8fe",size:1.0},
+  {lat:-15.79,lng:-47.88,name:"Brasília, Brasil",title:"Ajuste fiscal, Pensão, Reforma tributária",cat:"economia",color:"#ffd166",size:1.0},
+  {lat:-23.55,lng:-46.63,name:"São Paulo, Brasil",title:"Ibovespa, Dólar, Enel, BlackRock",cat:"economia",color:"#ffd166",size:1.1},
+  {lat:-22.91,lng:-43.17,name:"Rio de Janeiro, Brasil",title:"Operação contra CV, Apostas",cat:"politica",color:"#ff6b6b",size:0.9},
+  {lat:-8.05,lng:-34.88,name:"Recife, Brasil",title:"PF apreende iate e aviões (Esportes da Sorte)",cat:"politica",color:"#ff6b6b",size:0.8},
+  {lat:-23.43,lng:-47.45,name:"Sorocaba, Brasil",title:"Toyota 2ª fábrica",cat:"tecnologia",color:"#7ee787",size:0.8},
+  {lat:51.51,lng:-0.13,name:"Londres, Reino Unido",title:"BBC News, Energy bills, Tech outages",cat:"mundo",color:"#6ea8fe",size:1.0},
+  {lat:28.61,lng:77.21,name:"Nova Delhi, Índia",title:"William e Kate com Modi",cat:"mundo",color:"#6ea8fe",size:0.7},
+  {lat:19.43,lng:-99.13,name:"Cidade do México, México",title:"Claudia Sheinbaum",cat:"mundo",color:"#6ea8fe",size:0.7},
+  {lat:29.38,lng:47.99,name:"Kuwait",title:"Ataque iraniano repelido",cat:"mundo",color:"#ff6b6b",size:0.6},
+  {lat:5.6,name:"Acra, Gana",title:"Jato presidencial US$ 60 mi",cat:"mundo",color:"#ff6b6b",size:0.6},
+  {lat:-41.29,lng:174.78,name:"Wellington, Nova Zelândia",title:"GTA 6 lançado",cat:"tecnologia",color:"#7ee787",size:0.8},
+  {lat:-33.87,lng:151.21,name:"Sydney, Austrália",title:"Críquete, escândalo sandpaper",cat:"social",color:"#9aa3b2",size:0.6}
+];
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+// Auto-rotate
+world.controls().autoRotate = true;
+world.controls().autoRotateSpeed = 0.5;
+world.pointOfView({ lat: -15, lng: -47, altitude: 2.5 });
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+  // Categorias (hubs)
+  {id:"cat-mundo",name:"Mundo/Geopolítica",type:"hub",color:"#ff6b6b",size:8},
+  {id:"cat-politica",name:"Política",type:"hub",color:"#ff6b6b",size:7},
+  {id:"cat-economia",name:"Economia",type:"hub",color:"#ffd166",size:7},
+  {id:"cat-tecnologia",name:"Tecnologia",type:"hub",color:"#7ee787",size:7},
+  {id:"cat-social",name:"Social",type:"hub",color:"#9aa3b2",size:6},
+  // Notícias (nós)
+  {id:"n-cupula",name:"Cúpula Trump-Xi-Putin",type:"news",color:"#ff6b6b",size:5,desc:"Reunião inédita dos três líderes na China"},
+  {id:"n-nvidia",name:"Nvidia: espionagem",type:"news",color:"#ff6b6b",size:4,desc:"Escândalo pode restringir chips à China"},
+  {id:"n-democratas",name:"Democratas vencem Alasca",type:"news",color:"#6ea8fe",size:4,desc:"Domínio na eleição de meio de mandato"},
+  {id:"n-sheinbaum",name:"Sheinbaum voo comercial",type:"news",color:"#6ea8fe",size:3,desc:"Presidente do México viraliza"},
+  {id:"n-kuwait",name:"Kuwait repeliu ataque iraniano",type:"news",color:"#ff6b6b",size:3,desc:"Tensões no Oriente Médio"},
+  {id:"n-esportes",name:"Esportes da Sorte: R$ 2,3 bi",type:"news",color:"#ff6b6b",size:5,desc:"Operação contra apostas ilegais"},
+  {id:"n-ajuste",name:"Ajuste fiscal",type:"news",color:"#ff6b6b",size:4,desc:"Relator diz ter votos, custo político subiu"},
+  {id:"n-reforma",name:"Reforma tributária (CBS)",type:"news",color:"#ffd166",size:3,desc:"Créditos PIS/Cofins para quitar CBS"},
+  {id:"n-cv",name:"Operação contra CV",type:"news",color:"#ff6b6b",size:3,desc:"Ex-jogadora presa no Ceará"},
+  {id:"n-ibovespa",name:"Ibovespa -1,2%",type:"news",color:"#ffd166",size:5,desc:"Bolsa em queda com nervosismo"},
+  {id:"n-dolar",name:"Dólar R$ 5,83 (+0,82%)",type:"news",color:"#ffd166",size:5,desc:"Dólar forte pressiona inflação"},
+  {id:"n-blackrock",name:"BlackRock compra SulAmérica",type:"news",color:"#ffd166",size:3,desc:"Até R$ 850 milhões"},
+  {id:"n-pensao",name:"Pensão +R$ 379 bi/10 anos",type:"news",color:"#ffd166",size:4,desc:"Sem reforma, despesa cresce"},
+  {id:"n-distratos",name:"Bancos acumulam imóveis",type:"news",color:"#ffd166",size:3,desc:"Disparo de distratos imobiliários"},
+  {id:"n-anthropic",name:"Anthropic IPO",type:"news",color:"#7ee787",size:4,desc:"Testa apetite por IA"},
+  {id:"n-toyota",name:"Toyota 2ª fábrica Sorocaba",type:"news",color:"#7ee787",size:4,desc:"Híbrido flex, investimento estrangeiro"},
+  {id:"n-jetour",name:"Jetour assume fábrica Land Rover",type:"news",color:"#7ee787",size:3,desc:"Marca chinesa no Brasil"},
+  {id:"n-gta6",name:"GTA 6 lançado NZ",type:"news",color:"#7ee787",size:4,desc:"Obra-prima segundo críticos"},
+  {id:"n-outages",name:"Outages de tecnologia",type:"news",color:"#7ee787",size:3,desc:"Interrupções deixam usuários inquietos"},
+  {id:"n-enem",name:"Enem 2026: questão anulada",type:"news",color:"#7ee787",size:3,desc:"Cursinhos discordam"},
+  {id:"n-violencia",name:"Violência: pretos e pardos",type:"news",color:"#9aa3b2",size:4,desc:"Dados do IBGE mostram desproporção"},
+  {id:"n-educacao",name:"Desigualdade educacional",type:"news",color:"#9aa3b2",size:3,desc:"Reduz mas persiste"},
+  {id:"n-gana",name:"Gana: jato US$ 60 mi",type:"news",color:"#9aa3b2",size:3,desc:"Revolta pública"}
+];
+
+const graphLinks = [
+  // Categoria -> Notícias
+  {source:"cat-mundo",target:"n-cupula"},{source:"cat-mundo",target:"n-nvidia"},{source:"cat-mundo",target:"n-democratas"},
+  {source:"cat-mundo",target:"n-sheinbaum"},{source:"cat-mundo",target:"n-kuwait"},
+  {source:"cat-politica",target:"n-esportes"},{source:"cat-politica",target:"n-ajuste"},{source:"cat-politica",target:"n-reforma"},{source:"cat-politica",target:"n-cv"},
+  {source:"cat-economia",target:"n-ibovespa"},{source:"cat-economia",target:"n-dolar"},{source:"cat-economia",target:"n-blackrock"},{source:"cat-economia",target:"n-pensao"},{source:"cat-economia",target:"n-distratos"},
+  {source:"cat-tecnologia",target:"n-anthropic"},{source:"cat-tecnologia",target:"n-toyota"},{source:"cat-tecnologia",target:"n-jetour"},{source:"cat-tecnologia",target:"n-gta6"},{source:"cat-tecnologia",target:"n-outages"},{source:"cat-tecnologia",target:"n-enem"},
+  {source:"cat-social",target:"n-violencia"},{source:"cat-social",target:"n-educacao"},{source:"cat-social",target:"n-gana"},
+  // Correlações
+  {source:"n-cupula",target:"n-dolar",weak:true},{source:"n-cupula",target:"n-ibovespa",weak:true},{source:"n-cupula",target:"n-nvidia",weak:true},
+  {source:"n-nvidia",target:"n-anthropic",weak:true},
+  {source:"n-dolar",target:"n-ibovespa",weak:true},{source:"n-dolar",target:"n-pensao",weak:true},{source:"n-dolar",target:"n-distratos",weak:true},
+  {source:"n-ajuste",target:"n-pensao",weak:true},{source:"n-ajuste",target:"n-ibovespa",weak:true},
+  {source:"n-esportes",target:"n-dolar",weak:true},
+  {source:"n-toyota",target:"n-jetour",weak:true},
+  {source:"n-violencia",target:"n-educacao",weak:true},{source:"n-violencia",target:"n-enem",weak:true}
+];
+
+const graph = ForceGraph3D()(document.getElementById('graph-container'))
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info') || createGraphInfo();
+    info.style.display = 'block';
+    info.innerHTML = `<h3>${n.name}</h3><p>${n.desc || ''}</p><button onclick="this.parentElement.style.display='none'" style="margin-top:8px;padding:4px 8px;background:#12161f;border:1px solid #2a3242;color:#c6cddb;border-radius:6px;cursor:pointer">Fechar</button>`;
+  });
+
+graph.graphData({nodes: graphNodes, links: graphLinks});
+graph.zoomToFit(900, 60);
+
+function createGraphInfo(){
+  const div = document.createElement('div');
+  div.id = 'graph-info';
+  div.style.cssText = 'position:absolute;bottom:14px;right:14px;background:rgba(13,16,24,.95);border:1px solid rgba(110,168,254,.28);border-radius:12px;padding:16px;width:300px;z-index:10;display:none';
+  document.getElementById('grafo').appendChild(div);
+  return div;
+}
+</script>
+</body>
+</html>

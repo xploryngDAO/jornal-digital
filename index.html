@@ -51,6 +51,7 @@ section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom
 #graph-info button{margin-top:.5rem}
 footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line)}
 @media(max-width:46rem){.lead{grid-template-columns:1fr;gap:1rem}}
+.lead{background:linear-gradient(125deg,#0b1e2e,#143d48);color:#fff;padding:clamp(1.5rem,5vw,4rem);border-radius:1rem;margin-top:1.5rem}.lead h1{font-family:Georgia,serif;font-size:clamp(2.3rem,5vw,4.8rem);line-height:1.02;letter-spacing:-.035em}.lead .meta{color:#b4e5dc}.lead .brief{color:#102432;background:#f5fbfa}.archive-search{padding:clamp(1rem,3vw,2rem);background:#eef5f4;border-radius:1rem;color:#102432}.archive-search label{display:inline-block;margin:.4rem 1rem .4rem 0}.archive-search input,.archive-search select{display:block;max-width:100%;padding:.45rem}.archive-search li{padding:.5rem 0}.archive-search summary{cursor:pointer}.archive-search a{color:#064f62}#filtro-editorias button{padding:.4rem .8rem;margin:.25rem;border:1px solid #547481;border-radius:1rem}#filtro-editorias button[aria-pressed=true]{background:#143d48;color:#fff}
 </style>
 </head>
 <body>
@@ -86,9 +87,14 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
   </aside>
 </section>
 
-<section id="edicoes" aria-labelledby="titulo-edicoes">
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
   <h2 id="titulo-edicoes">Edições por dia</h2>
-  <p>O arquivo preserva o que foi registrado em cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, energia, chips"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados"></ul>
+  </div>
   <details open><summary>19 de novembro de 2026</summary><ul>
     <li><a href="edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
   </ul></details>
@@ -552,5 +558,6 @@ graph.onEngineStop(() => {
   filter.hidden = false;
 })();
 </script>
+<script src="arquivo.js" defer></script>
 </body>
 </html>

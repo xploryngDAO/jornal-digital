@@ -4,6 +4,7 @@
   const topic = document.querySelector('#arquivo-tema');
   const status = document.querySelector('#arquivo-status');
   const results = document.querySelector('#arquivo-resultados');
+  const archiveBase = new URL('.', document.currentScript.src);
   const normalize = value => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
   const stories = (window.pautasArquivadas || []).map(story => ({ ...story, search: normalize(`${story.title} ${story.body} ${story.date}`) }));
   function render() {
@@ -18,7 +19,7 @@
       const body = document.createElement('p');
       body.textContent = story.body;
       const link = document.createElement('a');
-      link.href = story.url;
+      link.href = new URL(story.url, archiveBase);
       link.textContent = 'Abrir edição e consultar fontes';
       detail.append(title, body, link);
       row.append(detail);

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161c47">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:hover{text-decoration:underline}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:1rem}
+.explore{padding:clamp(1rem,3vw,2rem);background:var(--panel);border-radius:1.1rem}
+#graph-info{padding:.85rem 1rem;border:1px solid var(--line);border-radius:.5rem}
+#graph-info button{margin-top:.5rem}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line)}
+@media(max-width:46rem){.lead{grid-template-columns:1fr;gap:1rem}}
+:root{--bg:#f6f7fb;--panel:#fff;--line:#cbd0de;--txt:#161c47;--mut:#4b5674;--acc:#293b9e;--night:#10162f;--signal:#e4ef86}
+.container,.masthead{width:min(100% - 2rem,76rem)}
+.skip-link{position:fixed;top:.75rem;left:.75rem;z-index:20;background:white;padding:.6rem 1rem;transform:translateY(-200%)}
+.skip-link:focus{transform:none}
+header{background:var(--panel);color:var(--txt);padding:clamp(1.4rem,4vw,3rem) 0 1.25rem;border-top:.45rem solid var(--txt)}
+.masthead{align-items:end;gap:.75rem 2rem}
+.masthead-brand{display:grid;gap:.55rem}
+.masthead strong{font:700 clamp(2.65rem,8.5vw,6.5rem)/.87 var(--serif);letter-spacing:-.065em}
+.masthead p{color:var(--mut);font-size:.9rem}
+.edition-stamp{border-left:3px solid var(--acc);padding-left:.75rem}
+.edition-stamp time{display:block;font-weight:750;color:var(--txt)}
+nav{padding-inline:max(1rem,calc((100% - 76rem)/2));white-space:normal;flex-wrap:wrap;background:var(--txt);border:0}
+nav a{color:#fff;flex:0 0 auto;padding:.25rem 0}
+nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
+.lead{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:0;align-items:stretch;margin-top:clamp(1.25rem,3vw,2.5rem);background:var(--panel);border:1px solid var(--line);border-radius:1.2rem 1.2rem 1.2rem .2rem;overflow:hidden}
+.lead-main{display:grid;align-content:center;justify-items:start;gap:1rem;padding:clamp(1.35rem,4.5vw,4rem);color:white;background:var(--txt)}
+.lead h1{font-size:clamp(2.4rem,5.3vw,5.1rem);line-height:.99;letter-spacing:-.045em;margin:0}
+.lead-main>p:not(.lead-label){font-size:clamp(1.03rem,1.7vw,1.22rem);color:#e5e8ff}
+.lead-label{font-weight:750;color:var(--signal);font-size:.9rem}
+.lead-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
+.lead-actions a{color:white}
+.lead-actions .lead-read{background:var(--signal);color:var(--txt);font-weight:750;text-decoration:none;padding:.55rem .85rem;border-radius:.35rem}
+.lead .brief{background:var(--panel);color:var(--txt);border-radius:0;display:grid;align-content:center;padding:clamp(1.25rem,3vw,2.5rem)}
+.brief h2{font-size:clamp(1.5rem,3vw,2.05rem);margin:0}
+.brief ul{list-style:none;display:grid}
+.brief li{padding:.75rem 0;border-bottom:1px solid var(--line)}
+.brief li:last-child{border:0;padding-bottom:0}
+.brief li span{display:block;color:var(--mut);font-size:.8rem;font-weight:700}
+.brief li a{display:inline-block;font:700 1.15rem/1.3 var(--serif)}
+.desk-heading{border-top:3px solid var(--txt);padding-top:1rem;font-size:clamp(1.75rem,4vw,2.6rem)}
+#filtro-editorias{margin-top:.75rem}
+#filtro-editorias button{color:var(--txt);background:#fff;padding:.45rem .8rem;margin:.2rem;border:1px solid var(--line);border-radius:1rem;cursor:pointer}
+#filtro-editorias button[aria-pressed=true]{background:var(--txt);color:#fff}
+#filtro-editorias~section:is(#mundo,#politica,#economia,#tecnologia){margin-top:1.5rem;margin-bottom:2rem}
+.desk-section h2{font:750 1.1rem/1.4 system-ui,sans-serif;color:var(--acc)}
+.archive-search{padding:clamp(1rem,3vw,2rem);background:#eceffd;border-radius:1rem;color:var(--txt)}
+.archive-search label{display:inline-block;margin:.4rem 1rem .4rem 0}
+.archive-search input,.archive-search select{display:block;max-width:100%;padding:.55rem;border:1px solid var(--mut);border-radius:.3rem;font:inherit}
+.archive-search ul,#locais-noticias,#correlacoes ul{padding-inline-start:1.3rem}
+.archive-search li{padding:.35rem 0}
+.archive-search summary{cursor:pointer;font-weight:700}
+#arquivo-resultados{max-height:32rem;overflow:auto;overscroll-behavior:contain}
+#locais-noticias button,#graph-info button,#leitura button{font:inherit;color:var(--acc);background:var(--panel);border:1px solid var(--line);border-radius:.35rem;padding:.35rem .6rem;cursor:pointer;margin-top:.3rem}
+#leitura{margin:auto;max-height:85dvh;color:var(--txt)}
+#leitura::backdrop{background:rgba(16,22,47,.72)}
+#leitura form{display:flex;justify-content:flex-end}
+#leitura h2{font-size:clamp(1.45rem,4vw,2rem);margin:.6rem 0}
+@media(max-width:44rem){
+  .masthead{align-items:start}.edition-stamp{margin-top:.45rem}
+  nav{position:static;gap:.25rem .85rem}
+  .lead{grid-template-columns:1fr}.lead h1{text-wrap:wrap}
+  .brief li a{font-size:1.08rem}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header>
+  <div class="masthead">
+    <div class="masthead-brand"><strong>Jornal Digital</strong><p>Política, economia e tecnologia em perspectiva</p></div>
+    <p class="edition-stamp">Edição arquivada <time datetime="2026-11-19T14:00:00-03:00">19 nov. 2026, 14h de Brasília</time></p>
+  </div>
+</header>
+
+<nav aria-label="Editorias e visualizações">
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#historico">Linha do tempo</a>
+  <a href="#globo">Globo 3D</a>
+  <a href="#grafo">Grafo 3D</a>
+  <a href="#edicoes">Arquivo</a>
+</nav>
+
+<main id="conteudo" class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div class="lead-main">
+    <p class="lead-label">Manchete de Mundo</p>
+    <h1 id="manchete">Corte internacional decide o caso dos rohingya</h1>
+    <p>A decisão, aguardada na edição das 8h, foi publicada. Segundo a BBC, a Corte concluiu que Myanmar cometeu genocídio contra os rohingya. Veja o que mudou e o que ainda depende de execução.</p>
+    <div class="lead-actions">
+      <a class="lead-read" href="#mundo" data-open-story="rohingya">Ler matéria</a>
+      <a href="#historico">Ver linha do tempo</a>
+    </div>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Também nesta edição</h2>
+    <ul>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="shenzhen">Shenzhen: três presidentes publicam declaração conjunta</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="escala">Decreto regulamenta a transição para a escala 5x2</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="cambio">Banco Central vende dólares no mercado à vista</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="gta">GTA VI completa lançamento em consoles</a></li>
+    </ul>
+  </aside>
+</section>
+
+<h2 class="desk-heading">Notícias por editoria</h2>
+
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+</div>
+<section id="mundo" class="desk-section">
+  <h2>Mundo</h2>
+  <div class="grid"><article class="card" id="pauta-rohingya"><h3>A Corte decide o caso dos rohingya</h3><p><strong>Fato — 19/11/2026.</strong> A Corte Internacional de Justiça publicou a decisão de mérito em Gâmbia x Myanmar, que ainda era aguardada na edição das 8h. Segundo a BBC, a Corte concluiu, por maioria, que Myanmar cometeu genocídio contra os rohingya. O registro oficial confirma a publicação da decisão e lista votos divergentes; o PDF não abriu nesta captura. <a href="https://www.bbc.com/news/articles/c804wzp20ddvo">BBC News</a> · <a href="https://www.icj-cij.org/case/178">Processo oficial</a>.</p></article><article class="card" id="pauta-shenzhen"><h3>Shenzhen: três presidentes publicam declaração conjunta</h3><p><strong>Fato — 19/11/2026.</strong> EUA, China e Rússia anunciaram continuidade do diálogo sobre riscos nucleares depois da reunião em Shenzhen. A declaração é a novidade em relação à captura das 8h; não é um tratado com limites verificáveis. <a href="https://g1.globo.com/mundo/noticia/2026/11/19/china-russia-e-eua-manterao-dialogo-sobre-riscos-nucleares.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/c623j4ln97x7o">BBC News</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/19/trump-xi-e-putin-realizam-reunio-trilateral-histrica.ghtml">Valor, chamada na capa</a>.</p></article></div>
+</section>
+
+<!-- POLÍTICA -->
+<section id="politica" class="desk-section">
+  <h2>Política</h2>
+  <div class="grid"><article class="card" id="pauta-escala"><h3>Decreto regulamenta a transição para a escala 5x2</h3><p><strong>Fato — 19/11/2026.</strong> Lula assinou a regulamentação da Emenda Constitucional 141. O Planalto informa transição sem redução salarial: 42 horas semanais a partir de <strong>16/12/2026</strong> e 40 a partir de <strong>16/12/2027</strong>. O G1 relata que a transição ainda será discutida no plenário do STF. <a href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2026/11/presidente-lula-assina-decreto-que-regulamenta-a-jornada-5x2">Planalto</a> · <a href="https://g1.globo.com/politica/noticia/2026/11/19/lula-assina-regulamentacao-da-escala-5x2-medida-esta-prevista-para-comecar-a-valer-em-dezembro.ghtml">G1</a>.</p></article></div>
+</section>
+
+<!-- ECONOMIA -->
+<section id="economia" class="desk-section">
+  <h2>Economia</h2>
+  <div class="grid"><article class="card" id="pauta-cambio"><h3>Banco Central vende dólares no mercado à vista</h3><p><strong>Fato — 19/11/2026.</strong> G1 e Valor registraram venda extraordinária de US$ 1 bilhão pelo Banco Central. O G1 observou desaceleração da alta após a operação; a manchete do Valor indicava que o dólar voltou a superar R$ 5,92. Nenhuma dessas observações é cotação de fechamento. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/19/bc-vende-us-1-bilho-no-mercado-vista-em-leilo-extraordinrio.ghtml">Valor, chamada na capa</a>.</p></article></div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia" class="desk-section">
+  <h2>Tecnologia</h2>
+  <div class="grid"><article class="card" id="pauta-gta"><h3>GTA VI completa lançamento em consoles</h3><p><strong>Fato — 19/11/2026.</strong> A Rockstar confirmou disponibilidade para PlayStation 5 e Xbox Series X|S. A BBC relata o fim da liberação por fusos, desdobramento da pauta já acompanhada em 18/11. <a href="https://www.rockstargames.com/VI">Rockstar Games</a> · <a href="https://www.bbc.com/news/articles/c6z74ep2n17zo">BBC News</a>.</p></article><article class="card" id="pauta-anthropic"><h3>Anthropic começa a ser negociada na Nasdaq</h3><p><strong>Também no radar — 19/11/2026.</strong> A BBC acompanhou o início efetivo da negociação da Anthropic na Nasdaq, tema da edição das 8h. O G1 também cobre a estreia, mas as cifras de captação diferem entre as coberturas consultadas. Sem prospecto confirmado, esta captura não consolida valores nem rankings. <a href="https://www.bbc.com/news/live/c933xxm82mr8t">BBC ao vivo</a> · <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a>.</p></article></div>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation"><h3>A Corte decide o caso dos rohingya</h3><ol class="timeline"><li><time datetime="2019-11-11">11/11/2019</time>a Gâmbia apresentou a ação. <a href="https://www.icj-cij.org/case/178">Registro da Corte</a>.</li><li><time datetime="2020-01-23">23/01/2020</time>a Corte indicou medidas provisórias. <a href="https://www.icj-cij.org/case/178">Registro da Corte</a>.</li><li><time datetime="2022-07-22">22/07/2022</time>a Corte rejeitou as objeções preliminares à jurisdição e à admissibilidade. <a href="https://www.icj-cij.org/case/178">Decisão de 2022, listada no processo</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>decisão sobre o mérito; a BBC relata a conclusão por maioria. <a href="https://www.bbc.com/news/articles/c804wzp20ddvo">BBC News</a>.</li></ol><p><strong>Nexo e contraponto.</strong> É o mesmo processo, mas as medidas provisórias e a decisão sobre jurisdição não resolviam a acusação. A BBC registra que Myanmar alegou responder a ataques de grupos armados e que a Corte não aceitou essa explicação como suficiente para afastar a intenção genocida. Trata-se da responsabilidade de um Estado, não de uma condenação penal individual. <strong>Cenário:</strong> a decisão pode orientar diplomacia e reparação; não determina quando haverá retorno seguro a Rakhine. Acompanhar medidas de execução e proteção aos refugiados.</p></article>
+  <article class="correlation"><h3>Shenzhen: três presidentes publicam declaração conjunta</h3><ol class="timeline"><li><time datetime="2021-02-03">03/02/2021</time>EUA e Rússia prorrogaram o New START, com limites e mecanismos de verificação. <a href="https://www.armscontrol.org/factsheets/new-start-glance">Arms Control Association</a>.</li><li><time datetime="2026-02-05">05/02/2026</time>terminou a vigência do tratado prorrogado. <a href="https://www.armscontrol.org/factsheets/new-start-glance">Arms Control Association</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>a declaração reúne também a China, que não era parte do tratado. <a href="https://www.bbc.com/news/articles/c623j4ln97x7o">BBC News</a>.</li></ol><p><strong>Nexo e contraponto.</strong> O vencimento explica por que distinguir diálogo de controle verificável, não por que houve a reunião, realizada à margem da APEC e com outros temas em pauta, como energia. <strong>Cenário:</strong> transparência e previsibilidade só aumentariam com compromissos concretos e mecanismos de verificação. Acompanhar se aparecem termos, prazos e procedimentos.</p></article>
+  <article class="correlation"><h3>Decreto regulamenta a transição para a escala 5x2</h3><ol class="timeline"><li><time datetime="1988-10-05">05/10/1988</time>a Constituição estabeleceu o limite geral de 44 horas semanais. <a href="https://www2.senado.leg.br/bdsf/handle/id/518231">Acervo do Senado</a> · <a href="https://g1.globo.com/politica/noticia/2026/11/19/lula-assina-regulamentacao-da-escala-5x2-medida-esta-prevista-para-comecar-a-valer-em-dezembro.ghtml">Histórico no G1</a>.</li><li><time datetime="2026-10-16">16/10/2026</time>a EC 141 foi promulgada e alterou o artigo 7º para reduzir a jornada e prever dois dias de repouso remunerado. <a href="https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm">Texto da emenda</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>decreto detalha a aplicação, inclusive o cálculo do salário-hora. <a href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2026/11/presidente-lula-assina-decreto-que-regulamenta-a-jornada-5x2">Planalto</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A emenda muda o direito; o decreto disciplina a aplicação. Mantido o salário mensal, um divisor de horas menor eleva o valor da hora de quem muda de jornada. Isso não significa que todo trabalhador receberá mais no fim do mês ou que todo fim de semana será livre. <strong>Cenário:</strong> famílias podem reorganizar descanso e cuidados; empresas podem ajustar escalas, contratações e produtividade. Não há base nesta captura para estimar efeito líquido sobre emprego ou inflação. Acompanhar o STF, portarias do Ministério do Trabalho e acordos por categoria.</p></article>
+  <article class="correlation"><h3>Banco Central vende dólares no mercado à vista</h3><ol class="timeline"><li><time datetime="2024-12-19">19/12/2024</time>o BC também vendeu dólares das reservas em leilões à vista; houve ainda votação de um pacote fiscal na Câmara. <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote">Agência Brasil</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>nova venda à vista em sessão de alta do dólar e discussão fiscal. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A ferramenta é a mesma: uma venda à vista amplia a oferta imediata de dólares. Em 2024 também houve notícia fiscal; nesta sessão, fatores domésticos e externos concorreram. A sequência de preços não permite isolar o efeito do leilão nem extrapolar a direção do câmbio. <strong>Cenário:</strong> se a pressão persistir, importados, viagens e insumos podem encarecer; o repasse a preços e juros depende da duração do movimento, da demanda e da exposição de cada empresa. Acompanhar fechamento, novas operações e tramitação fiscal.</p></article>
+  <article class="correlation"><h3>GTA VI completa lançamento em consoles</h3><ol class="timeline"><li><time datetime="2023-11-08">08/11/2023</time>a Rockstar anunciou que divulgaria o primeiro trailer do próximo GTA. <a href="https://www.rockstargames.com/newswire/article/4kok877a13aa32/a-message-from-rockstar-games">Comunicado</a>.</li><li><time datetime="2025-05-02">02/05/2025</time>a empresa anunciou então o lançamento para 26/05/2026. <a href="https://www.rockstargames.com/newswire/article/258aa538o412ok/grand-theft-auto-vi-is-now-coming-may-26-2026">Comunicado</a>.</li><li><time datetime="2026-11-10">10/11/2026</time>a Rockstar anunciou o pré-carregamento. <a href="https://www.rockstargames.com/newswire/article/89834o94713o21">Comunicado</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>disponibilidade confirmada nos consoles listados. <a href="https://www.rockstargames.com/VI">Página oficial</a>.</li></ol><p><strong>Nexo e contraponto.</strong> É o mesmo produto, do anúncio à distribuição; o cronograma mudou. Anúncio, pré-carregamento, compras e receita são medidas diferentes. <strong>Cenário:</strong> a estreia pode concentrar gastos do público em jogos e consoles no curto prazo, mas não comprova retorno financeiro nem crescimento do setor. Acompanhar vendas divulgadas e sua janela de comparação. Sem ponto no globo: o lançamento foi distribuído e o cenário do jogo é fictício.</p></article>
+</section>
+
+<!-- MAPA 3D -->
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <p>Este globo mostra a edição das 14h de 19/11. Para outras datas, consulte o <a href="#edicoes">arquivo</a>, incluindo o <a href="../edicoes/2026-11-19-0800.html#globe-container">globo da edição das 8h</a>.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <p>Este grafo mostra a edição das 14h de 19/11. Para outras datas, consulte o <a href="#edicoes">arquivo</a>, incluindo o <a href="../edicoes/2026-11-19-0800.html#grafo">grafo da edição das 8h</a>.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<!-- CORRELAÇÕES -->
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> novas escalas podem reorganizar descanso e cuidados; a aplicação depende da categoria e de regras complementares.</li><li><strong>Macroeconomia:</strong> câmbio persistentemente pressionado pode encarecer insumos; o leilão não determina inflação ou juros.</li><li><strong>Finanças:</strong> estreia de jogo ou ação não comprova retorno sustentado.</li><li><strong>Cenário global:</strong> acompanhe a execução da decisão em Myanmar e se o diálogo nuclear ganha mecanismos verificáveis.</li></ul></article></section>
+
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Arquivo de edições</h2>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="../edicoes/2026-11-19-1400.html">14h — Edição</a> · <a href="../edicoes/noticias-2026-11-19-1400.md" download>Relatório</a></li>
+    <li><a href="../edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="../edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="../edicoes/2026-11-18-2000.html">20h — Edição</a> · <a href="../edicoes/noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="../edicoes/2026-11-18-1400.html">14h — Edição</a> · <a href="../edicoes/noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, energia, chips"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados" tabindex="0" aria-label="Resultados da busca"></ul>
+  </div>
+</section>
+
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog"><button>Fechar</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
+</main>
+
+<footer>
+  <p>Jornal Digital — Edições do agente Jornalista</p>
+  <p>Dados capturados em 19/11/2026 às 14:00 (horário de Brasília)</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+  {
+    "lat": 22.54,
+    "lng": 114.06,
+    "name": "Shenzhen, China",
+    "title": "Declaração trilateral",
+    "story": "shenzhen",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 52.08,
+    "lng": 4.3,
+    "name": "Haia, Países Baixos",
+    "title": "Decisão sobre os rohingya",
+    "story": "rohingya",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": -15.79,
+    "lng": -47.88,
+    "name": "Brasília, Brasil",
+    "title": "Regulamentação da escala 5x2",
+    "story": "escala",
+    "color": "#ff6b6b",
+    "size": 1
+  }
+];
+
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || reader.open || typeof reader.showModal !== 'function') return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  document.getElementById('leitura-conteudo').replaceChildren(card.querySelector('p').cloneNode(true));
+  reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+for (const link of document.querySelectorAll('[data-open-story]')) {
+  const card = document.getElementById(`pauta-${link.dataset.openStory}`);
+  if (!card || typeof reader.showModal !== 'function') continue;
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    readStory(card);
+  });
+}
+function readLocation(place) {
+  readStory(document.getElementById(`pauta-${place.story}`));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: -15, lng: -47, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+  {
+    "id": "mundo",
+    "name": "Mundo",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "rohingya",
+    "name": "A Corte decide o caso dos rohingya",
+    "type": "news",
+    "desc": "Fato — 19/11/2026. A Corte Internacional de Justiça publicou a decisão de mérito em Gâmbia x Myanmar, que ainda era aguardada na edição das 8h. Segundo a BBC, a Corte concluiu, por maioria, que Myanmar cometeu genocídio contra os rohingya. O registro oficial confirma a publicação da decisão e lista votos divergentes; o PDF não abriu nesta captura.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/articles/c804wzp20ddvo"
+  },
+  {
+    "id": "rohingya-0",
+    "name": "11/11/2019 — a Gâmbia apresentou a ação.",
+    "type": "history",
+    "desc": "a Gâmbia apresentou a ação.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "rohingya-1",
+    "name": "23/01/2020 — a Corte indicou medidas provisórias.",
+    "type": "history",
+    "desc": "a Corte indicou medidas provisórias.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "rohingya-2",
+    "name": "22/07/2022 — a Corte rejeitou as objeções preliminares à jurisdição e à admissibilidade.",
+    "type": "history",
+    "desc": "a Corte rejeitou as objeções preliminares à jurisdição e à admissibilidade.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "shenzhen",
+    "name": "Shenzhen: três presidentes publicam declaração conjunta",
+    "type": "news",
+    "desc": "Fato — 19/11/2026. EUA, China e Rússia anunciaram continuidade do diálogo sobre riscos nucleares depois da reunião em Shenzhen. A declaração é a novidade em relação à captura das 8h; não é um tratado com limites verificáveis.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/mundo/noticia/2026/11/19/china-russia-e-eua-manterao-dialogo-sobre-riscos-nucleares.ghtml"
+  },
+  {
+    "id": "shenzhen-0",
+    "name": "03/02/2021 — EUA e Rússia prorrogaram o New START, com limites e mecanismos de verificação.",
+    "type": "history",
+    "desc": "EUA e Rússia prorrogaram o New START, com limites e mecanismos de verificação.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.armscontrol.org/factsheets/new-start-glance"
+  },
+  {
+    "id": "shenzhen-1",
+    "name": "05/02/2026 — terminou a vigência do tratado prorrogado.",
+    "type": "history",
+    "desc": "terminou a vigência do tratado prorrogado.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.armscontrol.org/factsheets/new-start-glance"
+  },
+  {
+    "id": "politica",
+    "name": "Política",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "escala",
+    "name": "Decreto regulamenta a transição para a escala 5x2",
+    "type": "news",
+    "desc": "Fato — 19/11/2026. Lula assinou a regulamentação da Emenda Constitucional 141. O Planalto informa transição sem redução salarial: 42 horas semanais a partir de 16/12/2026 e 40 a partir de 16/12/2027. O G1 relata que a transição ainda será discutida no plenário do STF.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/noticias/2026/11/presidente-lula-assina-decreto-que-regulamenta-a-jornada-5x2"
+  },
+  {
+    "id": "escala-0",
+    "name": "05/10/1988 — a Constituição estabeleceu o limite geral de 44 horas semanais.",
+    "type": "history",
+    "desc": "a Constituição estabeleceu o limite geral de 44 horas semanais.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www2.senado.leg.br/bdsf/handle/id/518231"
+  },
+  {
+    "id": "escala-1",
+    "name": "16/10/2026 — a EC 141 foi promulgada e alterou o artigo 7º para reduzir a jornada e prever dois dias de repouso remunerado.",
+    "type": "history",
+    "desc": "a EC 141 foi promulgada e alterou o artigo 7º para reduzir a jornada e prever dois dias de repouso remunerado.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm"
+  },
+  {
+    "id": "economia",
+    "name": "Economia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "cambio",
+    "name": "Banco Central vende dólares no mercado à vista",
+    "type": "news",
+    "desc": "Fato — 19/11/2026. G1 e Valor registraram venda extraordinária de US$ 1 bilhão pelo Banco Central. O G1 observou desaceleração da alta após a operação; a manchete do Valor indicava que o dólar voltou a superar R$ 5,92. Nenhuma dessas observações é cotação de fechamento.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml"
+  },
+  {
+    "id": "cambio-0",
+    "name": "19/12/2024 — o BC também vendeu dólares das reservas em leilões à vista; houve ainda votação de um pacote fiscal na Câmara.",
+    "type": "history",
+    "desc": "o BC também vendeu dólares das reservas em leilões à vista; houve ainda votação de um pacote fiscal na Câmara.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote"
+  },
+  {
+    "id": "tecnologia",
+    "name": "Tecnologia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "gta",
+    "name": "GTA VI completa lançamento em consoles",
+    "type": "news",
+    "desc": "Fato — 19/11/2026. A Rockstar confirmou disponibilidade para PlayStation 5 e Xbox Series X|S. A BBC relata o fim da liberação por fusos, desdobramento da pauta já acompanhada em 18/11.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.rockstargames.com/VI"
+  },
+  {
+    "id": "gta-0",
+    "name": "08/11/2023 — a Rockstar anunciou que divulgaria o primeiro trailer do próximo GTA.",
+    "type": "history",
+    "desc": "a Rockstar anunciou que divulgaria o primeiro trailer do próximo GTA.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.rockstargames.com/newswire/article/4kok877a13aa32/a-message-from-rockstar-games"
+  },
+  {
+    "id": "gta-1",
+    "name": "02/05/2025 — a empresa anunciou então o lançamento para 26/05/2026.",
+    "type": "history",
+    "desc": "a empresa anunciou então o lançamento para 26/05/2026.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.rockstargames.com/newswire/article/258aa538o412ok/grand-theft-auto-vi-is-now-coming-may-26-2026"
+  },
+  {
+    "id": "gta-2",
+    "name": "10/11/2026 — a Rockstar anunciou o pré-carregamento.",
+    "type": "history",
+    "desc": "a Rockstar anunciou o pré-carregamento.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.rockstargames.com/newswire/article/89834o94713o21"
+  },
+  {
+    "id": "anthropic",
+    "name": "Anthropic começa a ser negociada na Nasdaq",
+    "type": "news",
+    "desc": "Também no radar — 19/11/2026. A BBC acompanhou o início efetivo da negociação da Anthropic na Nasdaq, tema da edição das 8h. O G1 também cobre a estreia, mas as cifras de captação diferem entre as coberturas consultadas. Sem prospecto confirmado, esta captura não consolida valores nem rankings.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/live/c933xxm82mr8t"
+  }
+];
+
+const graphLinks = [
+  {
+    "source": "mundo",
+    "target": "rohingya",
+    "label": "Editoria"
+  },
+  {
+    "source": "rohingya-0",
+    "target": "rohingya-1",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "rohingya-1",
+    "target": "rohingya-2",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "rohingya-2",
+    "target": "rohingya",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "mundo",
+    "target": "shenzhen",
+    "label": "Editoria"
+  },
+  {
+    "source": "shenzhen-0",
+    "target": "shenzhen-1",
+    "label": "Contexto diplomático, não causal"
+  },
+  {
+    "source": "shenzhen-1",
+    "target": "shenzhen",
+    "label": "Contexto diplomático, não causal"
+  },
+  {
+    "source": "politica",
+    "target": "escala",
+    "label": "Editoria"
+  },
+  {
+    "source": "escala-0",
+    "target": "escala-1",
+    "label": "Mudança e regulamentação da jornada"
+  },
+  {
+    "source": "escala-1",
+    "target": "escala",
+    "label": "Mudança e regulamentação da jornada"
+  },
+  {
+    "source": "economia",
+    "target": "cambio",
+    "label": "Editoria"
+  },
+  {
+    "source": "cambio-0",
+    "target": "cambio",
+    "label": "Precedente: leilão à vista"
+  },
+  {
+    "source": "tecnologia",
+    "target": "gta",
+    "label": "Editoria"
+  },
+  {
+    "source": "gta-0",
+    "target": "gta-1",
+    "label": "Marcos do mesmo lançamento"
+  },
+  {
+    "source": "gta-1",
+    "target": "gta-2",
+    "label": "Marcos do mesmo lançamento"
+  },
+  {
+    "source": "gta-2",
+    "target": "gta",
+    "label": "Marcos do mesmo lançamento"
+  },
+  {
+    "source": "tecnologia",
+    "target": "anthropic",
+    "label": "Editoria"
+  }
+];
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { document.getElementById(id).hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', event => { if (!event.defaultPrevented) select(topic); });
+  });
+  filter.hidden = false;
+})();
+</script>
+<script src="../arquivo-dados.js" defer></script>
+<script src="../arquivo.js" defer></script>
+</body>
+</html>

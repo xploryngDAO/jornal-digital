@@ -1,5 +1,47 @@
 window.pautasArquivadas = [
   {
+    "title": "A Corte decide o caso dos rohingya",
+    "body": "Fato — 19/11/2026. A Corte Internacional de Justiça publicou a decisão de mérito em Gâmbia x Myanmar, que ainda era aguardada na edição das 8h. Segundo a BBC, a Corte concluiu, por maioria, que Myanmar cometeu genocídio contra os rohingya. O registro oficial confirma a publicação da decisão e lista votos divergentes; o PDF não abriu nesta captura. BBC News · Processo oficial .",
+    "topic": "mundo",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#mundo"
+  },
+  {
+    "title": "Shenzhen: três presidentes publicam declaração conjunta",
+    "body": "Fato — 19/11/2026. EUA, China e Rússia anunciaram continuidade do diálogo sobre riscos nucleares depois da reunião em Shenzhen. A declaração é a novidade em relação à captura das 8h; não é um tratado com limites verificáveis. G1 · BBC News · Valor, chamada na capa .",
+    "topic": "mundo",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#mundo"
+  },
+  {
+    "title": "Decreto regulamenta a transição para a escala 5x2",
+    "body": "Fato — 19/11/2026. Lula assinou a regulamentação da Emenda Constitucional 141. O Planalto informa transição sem redução salarial: 42 horas semanais a partir de 16/12/2026 e 40 a partir de 16/12/2027 . O G1 relata que a transição ainda será discutida no plenário do STF. Planalto · G1 .",
+    "topic": "politica",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#politica"
+  },
+  {
+    "title": "Banco Central vende dólares no mercado à vista",
+    "body": "Fato — 19/11/2026. G1 e Valor registraram venda extraordinária de US$ 1 bilhão pelo Banco Central. O G1 observou desaceleração da alta após a operação; a manchete do Valor indicava que o dólar voltou a superar R$ 5,92. Nenhuma dessas observações é cotação de fechamento. G1 · Valor, chamada na capa .",
+    "topic": "economia",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#economia"
+  },
+  {
+    "title": "GTA VI completa lançamento em consoles",
+    "body": "Fato — 19/11/2026. A Rockstar confirmou disponibilidade para PlayStation 5 e Xbox Series X|S. A BBC relata o fim da liberação por fusos, desdobramento da pauta já acompanhada em 18/11. Rockstar Games · BBC News .",
+    "topic": "tecnologia",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#tecnologia"
+  },
+  {
+    "title": "Anthropic começa a ser negociada na Nasdaq",
+    "body": "Também no radar — 19/11/2026. A BBC acompanhou o início efetivo da negociação da Anthropic na Nasdaq, tema da edição das 8h. O G1 também cobre a estreia, mas as cifras de captação diferem entre as coberturas consultadas. Sem prospecto confirmado, esta captura não consolida valores nem rankings. BBC ao vivo · G1 .",
+    "topic": "tecnologia",
+    "date": "19/11/2026 às 14:00",
+    "url": "edicoes/2026-11-19-1400.html#tecnologia"
+  },
+  {
     "title": "19/11 — Gâmbia x Myanmar:",
     "body": "a BBC acompanhava a leitura da decisão sobre a acusação de genocídio contra os rohingya; a Corte Internacional de Justiça confirmou a sessão, mas o dispositivo não foi confirmado nesta edição. BBC ao vivo · Processo oficial .",
     "topic": "mundo",

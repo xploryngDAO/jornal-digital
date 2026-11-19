@@ -3,68 +3,102 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#07080d">
-<title>📰 Jornal Digital — Notícias do Mundo</title>
+<meta name="theme-color" content="#e9eef0">
+<title>Jornal Digital — Notícias em perspectiva</title>
 <script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
 <style>
-:root{--bg:#07080d;--panel:rgba(13,16,24,.92);--line:rgba(110,168,254,.18);--txt:#e6e9ef;--mut:#9aa3b2;--acc:#6ea8fe;--red:#ff6b6b;--green:#7ee787;--yellow:#ffd166}
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:var(--bg);color:var(--txt);font:14px/1.5 system-ui,'Segoe UI',sans-serif;overflow-x:hidden}
-a{color:var(--acc);text-decoration:none}
-a:hover{text-decoration:underline}
-.container{max-width:1200px;margin:0 auto;padding:20px}
-header{background:linear-gradient(135deg,#1a1f2e,#0d1117);padding:30px 20px;text-align:center;border-bottom:1px solid var(--line)}
-header h1{font-size:2.5rem;margin-bottom:8px}
-header p{color:var(--mut);font-size:1rem}
-header .meta{color:var(--mut);font-size:.85rem;margin-top:10px}
-nav{position:sticky;top:0;background:rgba(7,8,13,.95);backdrop-filter:blur(10px);padding:12px 20px;display:flex;gap:15px;flex-wrap:wrap;justify-content:center;border-bottom:1px solid var(--line);z-index:10}
-nav a{color:var(--mut);padding:6px 12px;border-radius:6px;transition:.2s}
-nav a:hover{color:var(--txt);background:rgba(110,168,254,.1)}
-section{margin:40px 0}
-section h2{font-size:1.8rem;margin-bottom:20px;padding-bottom:10px;border-bottom:2px solid var(--acc)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:12px;transition:.2s}
-.card:hover{border-color:var(--acc)}
-.card h3{font-size:1.1rem;margin-bottom:6px}
-.card .source{color:var(--mut);font-size:.8rem;margin-bottom:8px}
-.card .impact{background:rgba(110,168,254,.08);border-left:3px solid var(--acc);padding:8px 12px;margin-top:8px;font-size:.9rem;border-radius:0 6px 6px 0}
-.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.75rem;margin-right:4px;margin-bottom:4px}
-.tag.politica{background:rgba(255,107,107,.2);color:var(--red)}
-.tag.economia{background:rgba(255,209,102,.2);color:var(--yellow)}
-.tag.tecnologia{background:rgba(126,231,135,.2);color:var(--green)}
-.tag.mundo{background:rgba(110,168,254,.2);color:var(--acc)}
-#globe-container{width:100%;height:500px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:20px 0}
-#graph-container{width:100%;height:500px;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:20px 0}
-.correlation{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:16px}
-.correlation h3{color:var(--acc);margin-bottom:10px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-footer{text-align:center;padding:30px;color:var(--mut);border-top:1px solid var(--line);margin-top:40px}
-@media(max-width:768px){
-  header h1{font-size:1.8rem}
-  .container{padding:12px}
-  #globe-container,#graph-container{height:350px}
-}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:hover{text-decoration:underline}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:1rem}
+.explore{padding:clamp(1rem,3vw,2rem);background:var(--panel);border-radius:1.1rem}
+#graph-info{padding:.85rem 1rem;border:1px solid var(--line);border-radius:.5rem}
+#graph-info button{margin-top:.5rem}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line)}
+@media(max-width:46rem){.lead{grid-template-columns:1fr;gap:1rem}}
 </style>
 </head>
 <body>
 <header>
-  <h1>📰 Jornal Digital — Notícias do Mundo</h1>
-  <p>Consolidação e correlação de notícias capturadas em 18/11/2026</p>
-  <div class="meta">Fontes: G1, BBC News, Valor Econômico | Atualizado às 20:00 (horário de Brasília)</div>
+  <div class="masthead"><strong>Jornal Digital</strong><p>Política, economia e tecnologia em perspectiva</p></div>
 </header>
 
-<nav>
-  <a href="#mundo">🌐 Mundo</a>
-  <a href="#politica">🏛️ Política</a>
-  <a href="#economia">💰 Economia</a>
-  <a href="#tecnologia">💻 Tecnologia</a>
-  <a href="#social">📊 Social</a>
-  <a href="#globo">🌍 Mapa 3D</a>
-  <a href="#grafo">🔗 Grafo 3D</a>
-  <a href="#correlacoes">📈 Correlações</a>
+<nav aria-label="Editorias e visualizações">
+  <a href="#historico">Linha do tempo</a>
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#social">Sociedade</a>
+  <a href="#globo">Globo 3D</a>
+  <a href="#grafo">Grafo 3D</a>
 </nav>
 
-<div class="container">
+<main class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div>
+    <p class="meta">Edição de <time datetime="2026-11-18T20:00:00-03:00">18 nov. 2026, às 20h de Brasília</time></p>
+    <h1 id="manchete">A disputa por chips não começou hoje</h1>
+    <p>Os controles de exportação dos EUA de 2022 e 2023 ajudam a entender por que o acesso a chips avançados segue no centro da disputa tecnológica. O histórico dá contexto, mas não explica sozinho cada nova manchete ou os movimentos de mercado.</p>
+    <p class="edition-note">As notas da edição original foram preservadas. Muitas só identificam o veículo; manchetes e números sem link direto não foram reconfirmados neste redesenho.</p>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Nesta edição</h2>
+    <ol>
+      <li><a href="#historico">Como as regras sobre chips mudaram desde 2022</a></li>
+      <li><a href="#economia">As pautas de dólar, Bolsa e crédito no Brasil</a></li>
+      <li><a href="#globo">Onde estão as notícias, no globo 3D</a></li>
+    </ol>
+  </aside>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation">
+    <h3>Chips avançados: de onde vem a pressão sobre o acesso</h3>
+    <ol class="timeline">
+      <li><time datetime="2022-10-13">13 out. 2022</time>Os EUA publicam controles sobre a exportação de determinados chips avançados, equipamentos e usos ligados à produção de semicondutores na China. <a href="https://www.govinfo.gov/content/pkg/FR-2022-10-13/html/2022-21658.htm">Regra de 2022</a></li>
+      <li><time datetime="2023-10-25">25 out. 2023</time>Uma atualização revê os critérios que determinam quais chips de computação avançada ficam sujeitos a controles. <a href="https://www.govinfo.gov/content/pkg/FR-2023-10-25/html/2023-23055.htm">Regra de 2023</a></li>
+      <li><time datetime="2026-11-18">18 nov. 2026</time>A edição traz o tema <a href="#tecnologia">tecnologia e IA</a>. As regras anteriores mostram que as barreiras de acesso já existiam; não confirmam alegações recentes sobre empresas nem explicam por si só as cotações do dia.</li>
+    </ol>
+    <p><strong>O que pode mudar:</strong> regras de licenciamento podem alterar os mercados atendidos pelos fabricantes e o acesso à infraestrutura de IA. Um impacto nos preços pagos por consumidores depende também de oferta, demanda, câmbio e repasse.</p>
+  </article>
+</section>
 
 <!-- MUNDO -->
 <section id="mundo">
@@ -312,22 +346,24 @@ footer{text-align:center;padding:30px;color:var(--mut);border-top:1px solid var(
 </section>
 
 <!-- MAPA 3D -->
-<section id="globo">
-  <h2>🌍 Mapa 3D — Referências Geográficas</h2>
-  <p style="color:var(--mut);margin-bottom:10px">Gire o globo para ver onde as notícias acontecem. Clique nos marcadores para detalhes.</p>
-  <div id="globe-container"></div>
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Passe o mouse para pausar o giro. Arraste para explorar e passe sobre um marcador para ler seu resumo.</p>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
 </section>
 
 <!-- GRAFO 3D -->
-<section id="grafo">
-  <h2>🔗 Grafo 3D — Correlações entre Notícias</h2>
-  <p style="color:var(--mut);margin-bottom:10px">Nós representam notícias e categorias. Arestas mostram correlações. Clique em um nó para detalhes.</p>
-  <div id="graph-container"></div>
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
 </section>
 
 <!-- CORRELAÇÕES -->
 <section id="correlacoes">
-  <h2>📈 Análise de Correlação</h2>
+  <h2>Hipóteses da edição original</h2>
+  <p class="section-note" style="margin-bottom:1rem">Leituras arquivadas. As justaposições abaixo não comprovam relações causais; consulte a <a href="#historico">linha do tempo com fontes</a> para o contexto documentado.</p>
   <div class="correlation">
     <h3>A. Geopolítica → Mercados Financeiros</h3>
     <p>A cúpula Trump–Xi–Putin ocorre com dólar forte (R$ 5,86) e Ibovespa em queda (~1,34%). A TS Lombard reduziu exposição ao Brasil. Se houver escalada comercial, inflação global sobe, forçando juros altos — aprofundando desvalorização do real. Investigação dos Democratas sobre secretário de Trump no escândalo da Nvidia pode amplificar tensões.</p>
@@ -362,10 +398,10 @@ footer{text-align:center;padding:30px;color:var(--mut);border-top:1px solid var(
   </div>
 </section>
 
-</div>
+</main>
 
 <footer>
-  <p>📰 Jornal Digital — Gerado automaticamente pelo agente Jornalista</p>
+  <p>Jornal Digital — Edições do agente Jornalista</p>
   <p>Dados capturados em 18/11/2026 às 20:00 (horário de Brasília)</p>
 </footer>
 
@@ -384,7 +420,7 @@ const newsLocations = [
   {lat:28.61,lng:77.21,name:"Nova Delhi, Índia",title:"William e Kate com Modi",cat:"mundo",color:"#6ea8fe",size:0.7},
   {lat:19.43,lng:-99.13,name:"Cidade do México, México",title:"Claudia Sheinbaum",cat:"mundo",color:"#6ea8fe",size:0.7},
   {lat:29.38,lng:47.99,name:"Kuwait",title:"Ataque iraniano repelido",cat:"mundo",color:"#ff6b6b",size:0.6},
-  {lat:5.6,name:"Acra, Gana",title:"Jato presidencial US$ 60 mi",cat:"mundo",color:"#ff6b6b",size:0.6},
+  {lat:5.6,lng:-0.2,name:"Acra, Gana",title:"Jato presidencial US$ 60 mi",cat:"mundo",color:"#ff6b6b",size:0.6},
   {lat:-41.29,lng:174.78,name:"Wellington, Nova Zelândia",title:"GTA 6 lançado",cat:"tecnologia",color:"#7ee787",size:0.8},
   {lat:25.76,lng:-80.19,name:"Miami, EUA",title:"Inundações no Sul da Flórida",cat:"social",color:"#9aa3b2",size:0.7},
   {lat:48.86,lng:2.35,name:"Paris, França",title:"Xiaomi na Europa",cat:"tecnologia",color:"#7ee787",size:0.6},
@@ -393,6 +429,10 @@ const newsLocations = [
 
 // ========== GLOBO 3D ==========
 const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
 const world = Globe()(globeContainer)
   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
@@ -407,9 +447,33 @@ const world = Globe()(globeContainer)
 
 world.pointsData(newsLocations);
 
-world.controls().autoRotate = true;
-world.controls().autoRotateSpeed = 0.5;
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
 world.pointOfView({ lat: -15, lng: -47, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
 
 // ========== GRAFO 3D ==========
 const graphNodes = [
@@ -417,6 +481,8 @@ const graphNodes = [
   {id:"cat-politica",name:"Política",type:"hub",color:"#ff6b6b",size:7},
   {id:"cat-economia",name:"Economia",type:"hub",color:"#ffd166",size:7},
   {id:"cat-tecnologia",name:"Tecnologia",type:"hub",color:"#7ee787",size:7},
+  {id:"hist-chip-2022",name:"2022: EUA publicam controles de chips",type:"history",color:"#61dfd3",size:4,desc:"Antecedente regulatório documentado. Veja a linha do tempo."},
+  {id:"hist-chip-2023",name:"2023: EUA atualizam os critérios",type:"history",color:"#61dfd3",size:4,desc:"Atualização das regras de computação avançada. Veja a linha do tempo."},
   {id:"cat-social",name:"Social",type:"hub",color:"#9aa3b2",size:6},
   {id:"n-cupula",name:"Cúpula Trump-Xi-Putin",type:"news",color:"#ff6b6b",size:5,desc:"Reunião inédita dos três líderes na China"},
   {id:"n-nvidia",name:"Nvidia: espionagem + investigação",type:"news",color:"#ff6b6b",size:4,desc:"Escândalo pode restringir chips à China; Democratas investigam secretário de Trump"},
@@ -450,6 +516,8 @@ const graphNodes = [
 ];
 
 const graphLinks = [
+  {source:"hist-chip-2022",target:"hist-chip-2023",label:"Atualização regulatória"},
+  {source:"hist-chip-2023",target:"cat-tecnologia",label:"Contexto histórico; não indica causalidade"},
   {source:"cat-mundo",target:"n-cupula"},{source:"cat-mundo",target:"n-nvidia"},{source:"cat-mundo",target:"n-jeffries"},
   {source:"cat-mundo",target:"n-alasca"},{source:"cat-mundo",target:"n-sheinbaum"},{source:"cat-mundo",target:"n-kuwait"},
   {source:"cat-mundo",target:"n-ucrania"},
@@ -471,9 +539,12 @@ const graphLinks = [
   {source:"n-inundacoes",target:"n-gana",weak:true}
 ];
 
-const graph = ForceGraph3D()(document.getElementById('graph-container'))
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
   .backgroundColor('#07080d')
   .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
   .nodeColor(n => n.color)
   .nodeVal(n => n.size)
   .nodeRelSize(4)
@@ -483,20 +554,38 @@ const graph = ForceGraph3D()(document.getElementById('graph-container'))
   .linkDirectionalParticles(0)
   .enableNodeDrag(true)
   .onNodeClick(n => {
-    const info = document.getElementById('graph-info') || createGraphInfo();
-    info.style.display = 'block';
-    info.innerHTML = `<h3>${n.name}</h3><p>${n.desc || ''}</p><button onclick="this.parentElement.style.display='none'" style="margin-top:8px;padding:4px 8px;background:#12161f;border:1px solid #2a3242;color:#c6cddb;border-radius:6px;cursor:pointer">Fechar</button>`;
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.type === 'history') {
+      const source = document.createElement('a');
+      source.href = '#historico';
+      source.textContent = 'Ver linha do tempo e fontes';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
   });
 
+fitCanvas(graphContainer, graph);
 graph.graphData({nodes: graphNodes, links: graphLinks});
-graph.zoomToFit(900, 60);
-
-function createGraphInfo(){
-  const div = document.createElement('div');
-  div.id = 'graph-info';
-  div.style.cssText = 'position:absolute;bottom:14px;right:14px;background:rgba(13,16,24,.95);border:1px solid rgba(110,168,254,.28);border-radius:12px;padding:16px;width:300px;z-index:10;display:none';
-  document.getElementById('grafo').appendChild(div);
-  return div;
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
 }
 </script>
 </body>

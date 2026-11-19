@@ -150,7 +150,8 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
 <!-- MAPA 3D -->
 <section id="globo" class="explore">
   <h2>Onde as notícias acontecem</h2>
-  <p class="section-note">Passe o mouse para pausar o giro. Arraste para explorar e passe sobre um marcador para ler seu resumo.</p>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
   <div id="globe-container" aria-label="Globo de referências geográficas"></div>
 </section>
 
@@ -165,6 +166,10 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
 <!-- CORRELAÇÕES -->
 <section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> o efeito no 13º depende do cálculo individual; para refugiados, a segurança depende de execução e condições no terreno, não apenas de uma decisão judicial.</li><li><strong>Macroeconomia:</strong> eventual efeito fiscal depende da vigência, das medidas aprovadas e da execução dos repasses; não extrapolamos inflação ou juros.</li><li><strong>Finanças:</strong> a estreia é um novo sinal de demanda por exposição à IA, não prova de rentabilidade nem de que o setor todo esteja bem precificado.</li><li><strong>Cenário global:</strong> a sessão da Corte pode orientar respostas diplomáticas; na questão nuclear, o indicador relevante é se surgirem termos e mecanismos verificáveis, não apenas declarações.</li></ul><p>Não há evidência de que o ajuste do Senado tenha provocado mudança no contracheque do 13º.</p></article></section>
 
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog"><button>Fechar</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
 </main>
 
 <footer>
@@ -201,6 +206,39 @@ const newsLocations = [
   }
 ];
 
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || reader.open) return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  document.getElementById('leitura-conteudo').replaceChildren(card.querySelector('p').cloneNode(true));
+  reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+const locationSections = ['mundo', 'mundo', 'politica'];
+const matchTitles = ['Shenzhen', 'Myanmar', 'Ajuste fiscal'];
+function readLocation(place) {
+  const idx = newsLocations.indexOf(place);
+  readStory(cards.find(card => card.closest('section')?.id === locationSections[idx] && card.querySelector('h3').textContent.includes(matchTitles[idx])));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
 // ========== GLOBO 3D ==========
 const globeContainer = document.getElementById('globe-container');
 if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
@@ -210,7 +248,11 @@ try {
 const world = Globe()(globeContainer)
   .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
   .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
-  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
   .pointLat(d => d.lat)
   .pointLng(d => d.lng)
   .pointColor(d => d.color)

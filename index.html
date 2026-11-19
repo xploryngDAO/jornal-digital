@@ -59,6 +59,7 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
 </header>
 
 <nav aria-label="Editorias e visualizações">
+  <a href="#edicoes">Edições por dia</a>
   <a href="#historico">Linha do tempo</a>
   <a href="#mundo">Mundo</a>
   <a href="#politica">Política</a>
@@ -85,6 +86,18 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
   </aside>
 </section>
 
+<section id="edicoes" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Edições por dia</h2>
+  <p>O arquivo preserva o que foi registrado em cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-18-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-18-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+</section>
+
 <section id="historico" aria-labelledby="titulo-historico">
   <h2 id="titulo-historico">O que veio antes</h2>
   <article class="correlation"><h3>Rohingya: o caminho até o julgamento</h3><ol class="timeline"><li><time datetime="2019-11-11">11/11/2019</time>A Gâmbia protocola a ação. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2020-01-23">23/01/2020</time>A Corte indica medidas provisórias. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2022-07-22">22/07/2022</time>A Corte reconhece jurisdição e admissibilidade. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2026-11-19">19/11/2026</time>Sessão de mérito; resultado não confirmado nesta edição. <a href="https://www.icj-cij.org/case/178">Fonte</a></li></ol><p>Jurisdição e medidas provisórias não decidem a acusação de genocídio. Mesmo uma decisão de mérito não garante retorno seguro de refugiados.</p></article>
@@ -101,6 +114,13 @@ footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid
 </section>
 
 <!-- MUNDO -->
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+</div>
 <section id="mundo">
   <h2>Mundo</h2>
   <div class="grid"><article class="card"><h3>19/11 — Gâmbia x Myanmar:</h3><p>a BBC acompanhava a leitura da decisão sobre a acusação de genocídio contra os rohingya; a Corte Internacional de Justiça confirmou a sessão, mas o dispositivo não foi confirmado nesta edição. <a href="https://www.bbc.com/news/live/cr93z32d2344t">BBC ao vivo</a> · <a href="https://www.icj-cij.org/case/178">Processo oficial</a>.</p></article><article class="card"><h3>19/11 — Shenzhen:</h3><p>Trump, Xi e Putin se reuniram; o G1 relata discussão sobre armas nucleares sem anúncio de acordo. <a href="https://g1.globo.com/mundo/noticia/2026/11/19/trump-putin-e-xi-fazem-reuniao-trilateral-historica.ghtml">G1</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/19/trump-xi-e-putin-realizam-reunio-trilateral-histrica.ghtml">Valor</a>.</p></article></div>
@@ -470,6 +490,23 @@ graph.onEngineStop(() => {
 } catch {
   showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
 }
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { document.getElementById(id).hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', () => select(topic));
+  });
+  filter.hidden = false;
+})();
 </script>
 </body>
 </html>

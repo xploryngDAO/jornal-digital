@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e9eef0">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:hover{text-decoration:underline}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:1rem}
+.explore{padding:clamp(1rem,3vw,2rem);background:var(--panel);border-radius:1.1rem}
+#graph-info{padding:.85rem 1rem;border:1px solid var(--line);border-radius:.5rem}
+#graph-info button{margin-top:.5rem}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line)}
+@media(max-width:46rem){.lead{grid-template-columns:1fr;gap:1rem}}
+</style>
+</head>
+<body>
+<aside style="padding:1rem;background:#fff;color:#111"><a href="../index.html#edicoes">Voltar ao arquivo</a> — Edição arquivada. Informações e análises da captura original; não reconfirmadas nesta republicação.</aside>
+<header>
+  <div class="masthead"><strong>Jornal Digital</strong><p>Política, economia e tecnologia em perspectiva</p></div>
+</header>
+
+<nav aria-label="Editorias e visualizações">
+  <a href="#historico">Linha do tempo</a>
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#globo">Globo 3D</a>
+  <a href="#grafo">Grafo 3D</a>
+</nav>
+
+<main class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div>
+    <p class="meta">Edição de <time datetime="2026-11-19T08:00:00-03:00">19 nov. 2026, às 08h de Brasília</time></p>
+    <h1 id="manchete">Da denúncia à decisão: sete anos do caso Rohingya</h1>
+    <p>A Corte Internacional de Justiça marcou a leitura da decisão no processo entre Gâmbia e Myanmar. Veja o que as etapas anteriores estabeleceram — e o que ainda não foi confirmado.</p>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Nesta edição</h2>
+    <ol>
+      <li><a href="#historico">A linha do tempo do caso Rohingya</a></li>
+      <li><a href="#economia">O que pode mudar no 13º</a></li>
+      <li><a href="#globo">Onde estão as notícias, no globo 3D</a></li>
+    </ol>
+  </aside>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation"><h3>Rohingya: o caminho até o julgamento</h3><ol class="timeline"><li><time datetime="2019-11-11">11/11/2019</time>A Gâmbia protocola a ação. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2020-01-23">23/01/2020</time>A Corte indica medidas provisórias. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2022-07-22">22/07/2022</time>A Corte reconhece jurisdição e admissibilidade. <a href="https://www.icj-cij.org/case/178">Fonte</a></li><li><time datetime="2026-11-19">19/11/2026</time>Sessão de mérito; resultado não confirmado nesta edição. <a href="https://www.icj-cij.org/case/178">Fonte</a></li></ol><p>Jurisdição e medidas provisórias não decidem a acusação de genocídio. Mesmo uma decisão de mérito não garante retorno seguro de refugiados.</p></article>
+  <article class="correlation"><h3>Controle nuclear: o precedente do New START</h3><ol class="timeline"><li><time datetime="2021-02-03">03/02/2021</time>EUA e Rússia prorrogam o tratado bilateral. <a href="https://www.armscontrol.org/factsheets/new-start-glance">Fonte</a></li><li><time datetime="2026-02-05">05/02/2026</time>Termina o período de prorrogação. <a href="https://www.armscontrol.org/factsheets/new-start-glance">Fonte</a></li></ol><p>O vencimento ajuda a entender o peso da discussão em Shenzhen, mas não explica por que a reunião ocorreu. A China não era parte do tratado e não houve anúncio de acordo no encontro.</p></article>
+  <article class="correlation">
+    <h3>Chips avançados: de onde vem a pressão sobre o acesso</h3>
+    <ol class="timeline">
+      <li><time datetime="2022-10-13">13 out. 2022</time>Os EUA publicam controles sobre a exportação de determinados chips avançados, equipamentos e usos ligados à produção de semicondutores na China. <a href="https://www.govinfo.gov/content/pkg/FR-2022-10-13/html/2022-21658.htm">Regra de 2022</a></li>
+      <li><time datetime="2023-10-25">25 out. 2023</time>Uma atualização revê os critérios que determinam quais chips de computação avançada ficam sujeitos a controles. <a href="https://www.govinfo.gov/content/pkg/FR-2023-10-25/html/2023-23055.htm">Regra de 2023</a></li>
+      <li><time datetime="2026-11-19">19 nov. 2026</time>A estreia da Anthropic traz o tema <a href="#tecnologia">tecnologia e IA</a>. As regras anteriores mostram que as barreiras de acesso já existiam; não explicam o preço da oferta da Anthropic; demanda, custos e condições de mercado também importam.</li>
+    </ol>
+    <p><strong>O que pode mudar:</strong> regras de licenciamento podem alterar os mercados atendidos pelos fabricantes e o acesso à infraestrutura de IA. Um impacto nos preços pagos por consumidores depende também de oferta, demanda, câmbio e repasse.</p>
+  </article>
+</section>
+
+<!-- MUNDO -->
+<section id="mundo">
+  <h2>Mundo</h2>
+  <div class="grid"><article class="card"><h3>19/11 — Gâmbia x Myanmar:</h3><p>a BBC acompanhava a leitura da decisão sobre a acusação de genocídio contra os rohingya; a Corte Internacional de Justiça confirmou a sessão, mas o dispositivo não foi confirmado nesta edição. <a href="https://www.bbc.com/news/live/cr93z32d2344t">BBC ao vivo</a> · <a href="https://www.icj-cij.org/case/178">Processo oficial</a>.</p></article><article class="card"><h3>19/11 — Shenzhen:</h3><p>Trump, Xi e Putin se reuniram; o G1 relata discussão sobre armas nucleares sem anúncio de acordo. <a href="https://g1.globo.com/mundo/noticia/2026/11/19/trump-putin-e-xi-fazem-reuniao-trilateral-historica.ghtml">G1</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/19/trump-xi-e-putin-realizam-reunio-trilateral-histrica.ghtml">Valor</a>.</p></article></div>
+</section>
+
+<!-- POLÍTICA -->
+<section id="politica">
+  <h2>Política</h2>
+  <div class="grid"><article class="card"><h3>18/11 — Ajuste fiscal:</h3><p>o Valor informou na capa a conclusão da análise no Senado após negociação sobre repasses estaduais. Não confirmamos a íntegra ou o efeito fiscal; votação não equivale a vigência. <a href="https://valor.globo.com/politica/noticia/2026/11/18/senado-destaques-do-projeto-de-ajuste-fiscal.ghtml">Valor</a>.</p></article></div>
+</section>
+
+<!-- ECONOMIA -->
+<section id="economia">
+  <h2>Economia</h2>
+  <div class="grid"><article class="card"><h3>19/11 — Décimo terceiro:</h3><p>o G1 explica como as regras de IR podem alterar o valor líquido para parte dos trabalhadores. Não generalizamos o efeito nem validamos faixas de renda nesta captura. <a href="https://g1.globo.com/trabalho-e-carreira/noticia/2026/11/19/13o-salario-calculadora-mostra-quanto-voce-vai-receber-com-descontos-e-novas-regras-do-ir.ghtml">G1</a>.</p></article></div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia">
+  <h2>Tecnologia</h2>
+  <div class="grid"><article class="card"><h3>19/11 — Anthropic:</h3><p>BBC e G1 já tratavam a estreia em bolsa da empresa do Claude como ocorrida, após a fase de precificação destacada pelo Valor em 18/11. A edição omite cifras sem confirmação no prospecto; captação não é valor de mercado. <a href="https://www.bbc.com/news/articles/c6742m39xgzxo">BBC</a> · <a href="https://g1.globo.com/inovacao/noticia/2026/11/19/anthropic-dona-do-claude-estreia-na-bolsa-conheca-a-empresa.ghtml">G1</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/18/anthropic-precifica-ao-em-us-83-acima-da-faixa-indicativa.ghtml">Valor, 18/11</a>.</p></article></div>
+</section>
+
+<!-- SOCIAL -->
+
+
+<!-- MAPA 3D -->
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Passe o mouse para pausar o giro. Arraste para explorar e passe sobre um marcador para ler seu resumo.</p>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<!-- CORRELAÇÕES -->
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> o efeito no 13º depende do cálculo individual; para refugiados, a segurança depende de execução e condições no terreno, não apenas de uma decisão judicial.</li><li><strong>Macroeconomia:</strong> eventual efeito fiscal depende da vigência, das medidas aprovadas e da execução dos repasses; não extrapolamos inflação ou juros.</li><li><strong>Finanças:</strong> a estreia é um novo sinal de demanda por exposição à IA, não prova de rentabilidade nem de que o setor todo esteja bem precificado.</li><li><strong>Cenário global:</strong> a sessão da Corte pode orientar respostas diplomáticas; na questão nuclear, o indicador relevante é se surgirem termos e mecanismos verificáveis, não apenas declarações.</li></ul><p>Não há evidência de que o ajuste do Senado tenha provocado mudança no contracheque do 13º.</p></article></section>
+
+</main>
+
+<footer>
+  <p>Jornal Digital — Edições do agente Jornalista</p>
+  <p>Dados capturados em 19/11/2026 às 08:00 (horário de Brasília)</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+  {
+    "lat": 22.54,
+    "lng": 114.06,
+    "name": "Shenzhen, China",
+    "title": "Cúpula trilateral",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 52.08,
+    "lng": 4.3,
+    "name": "Haia, Países Baixos",
+    "title": "Corte Internacional de Justiça",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": -15.79,
+    "lng": -47.88,
+    "name": "Brasília, Brasil",
+    "title": "Ajuste fiscal no Senado",
+    "color": "#ffd166",
+    "size": 1
+  }
+];
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundImageUrl('//unpkg.com/three-globe/example/img/night-sky.png')
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: -15, lng: -47, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+  {
+    "id": "Mundo",
+    "name": "Mundo",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "Mundo-0",
+    "name": "19/11 — Gâmbia x Myanmar:",
+    "type": "news",
+    "desc": "a BBC acompanhava a leitura da decisão sobre a acusação de genocídio contra os rohingya; a Corte Internacional de Justiça confirmou a sessão, mas o dispositivo não foi confirmado nesta edição.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/live/cr93z32d2344t"
+  },
+  {
+    "id": "Mundo-1",
+    "name": "19/11 — Shenzhen:",
+    "type": "news",
+    "desc": "Trump, Xi e Putin se reuniram; o G1 relata discussão sobre armas nucleares sem anúncio de acordo.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/mundo/noticia/2026/11/19/trump-putin-e-xi-fazem-reuniao-trilateral-historica.ghtml"
+  },
+  {
+    "id": "Política",
+    "name": "Política",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "Política-0",
+    "name": "18/11 — Ajuste fiscal:",
+    "type": "news",
+    "desc": "o Valor informou na capa a conclusão da análise no Senado após negociação sobre repasses estaduais. Não confirmamos a íntegra ou o efeito fiscal; votação não equivale a vigência.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://valor.globo.com/politica/noticia/2026/11/18/senado-destaques-do-projeto-de-ajuste-fiscal.ghtml"
+  },
+  {
+    "id": "Economia",
+    "name": "Economia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "Economia-0",
+    "name": "19/11 — Décimo terceiro:",
+    "type": "news",
+    "desc": "o G1 explica como as regras de IR podem alterar o valor líquido para parte dos trabalhadores. Não generalizamos o efeito nem validamos faixas de renda nesta captura.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/trabalho-e-carreira/noticia/2026/11/19/13o-salario-calculadora-mostra-quanto-voce-vai-receber-com-descontos-e-novas-regras-do-ir.ghtml"
+  },
+  {
+    "id": "Tecnologia",
+    "name": "Tecnologia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "Tecnologia-0",
+    "name": "19/11 — Anthropic:",
+    "type": "news",
+    "desc": "BBC e G1 já tratavam a estreia em bolsa da empresa do Claude como ocorrida, após a fase de precificação destacada pelo Valor em 18/11. A edição omite cifras sem confirmação no prospecto; captação não é valor de mercado.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/articles/c6742m39xgzxo"
+  },
+  {
+    "id": "ci0",
+    "name": "2019-11-11: A Gâmbia protocola a ação.",
+    "type": "history",
+    "desc": "A Gâmbia protocola a ação.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "ci1",
+    "name": "2020-01-23: A Corte indica medidas provisórias.",
+    "type": "history",
+    "desc": "A Corte indica medidas provisórias.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "ci2",
+    "name": "2022-07-22: A Corte reconhece jurisdição e admissibilidade.",
+    "type": "history",
+    "desc": "A Corte reconhece jurisdição e admissibilidade.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.icj-cij.org/case/178"
+  },
+  {
+    "id": "start",
+    "name": "05/02/2026: fim da prorrogação do New START",
+    "type": "history",
+    "desc": "Precedente bilateral; não causou a cúpula.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.armscontrol.org/factsheets/new-start-glance"
+  },
+  {
+    "id": "2022-10-13",
+    "name": "2022-10-13: controle de chips",
+    "type": "history",
+    "desc": "Contexto de acesso à infraestrutura, não explicação da oferta.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.govinfo.gov/content/pkg/FR-2022-10-13/html/2022-21658.htm"
+  },
+  {
+    "id": "2023-10-25",
+    "name": "2023-10-25: controle de chips",
+    "type": "history",
+    "desc": "Contexto de acesso à infraestrutura, não explicação da oferta.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.govinfo.gov/content/pkg/FR-2023-10-25/html/2023-23055.htm"
+  }
+];
+
+const graphLinks = [
+  {
+    "source": "Mundo",
+    "target": "Mundo-0",
+    "label": "Editoria"
+  },
+  {
+    "source": "Mundo",
+    "target": "Mundo-1",
+    "label": "Editoria"
+  },
+  {
+    "source": "Política",
+    "target": "Política-0",
+    "label": "Editoria"
+  },
+  {
+    "source": "Economia",
+    "target": "Economia-0",
+    "label": "Editoria"
+  },
+  {
+    "source": "Tecnologia",
+    "target": "Tecnologia-0",
+    "label": "Editoria"
+  },
+  {
+    "source": "ci0",
+    "target": "ci1",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "ci1",
+    "target": "ci2",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "ci2",
+    "target": "Mundo-0",
+    "label": "Etapa do mesmo processo"
+  },
+  {
+    "source": "start",
+    "target": "Mundo-1",
+    "label": "Contexto diplomático; não causal"
+  },
+  {
+    "source": "2022-10-13",
+    "target": "2023-10-25",
+    "label": "Revisão regulatória"
+  },
+  {
+    "source": "2023-10-25",
+    "target": "Tecnologia-0",
+    "label": "Contexto de infraestrutura; não causal"
+  }
+];
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+</body>
+</html>

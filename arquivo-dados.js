@@ -1,5 +1,33 @@
 window.pautasArquivadas = [
   {
+    "title": "Ataque russo atinge pontes em Kyiv",
+    "body": "Fato — 20/11/2026. BBC e The Kyiv Independent noticiaram que três pontes de Kyiv foram atingidas durante um ataque russo que alcançou outras regiões. A BBC relatou fechamento das pontes e orientação municipal para evitar viagens de carro sem necessidade. As contagens da capa e da matéria da BBC não coincidiam; o balanço de vítimas não foi consolidado aqui. BBC · The Kyiv Independent .",
+    "topic": "mundo",
+    "date": "20/11/2026 às 08:00",
+    "url": "edicoes/2026-11-20-0800.html#mundo"
+  },
+  {
+    "title": "Da mobilização em Porto Alegre ao feriado nacional",
+    "body": "Fato — 20/11/2026. O G1 RS ouviu Antônio Carlos Côrtes, um dos fundadores do Grupo Palmares, sobre a mobilização que fez do 20 de novembro uma referência nacional. O feriado celebrado hoje não é uma nova sanção: a lei é de 2023. G1 RS, 20/11/2026 · Valor, chamada pública, 20/11/2026 .",
+    "topic": "politica",
+    "date": "20/11/2026 às 08:00",
+    "url": "edicoes/2026-11-20-0800.html#politica"
+  },
+  {
+    "title": "Feriado suspende a negociação de ações na B3",
+    "body": "Fato — 20/11/2026. A B3 não prevê negociação em renda variável, renda fixa privada, ETFs de renda fixa nem derivativos listados nesta sexta-feira. É uma diferença de calendário, não um sinal de preço nem uma paralisação dos mercados estrangeiros. O Valor publicou um guia de funcionamento de serviços em São Paulo; só a chamada foi usada. Calendário oficial da B3, selecionar 2026 · Valor, 20/11/2026 .",
+    "topic": "economia",
+    "date": "20/11/2026 às 08:00",
+    "url": "edicoes/2026-11-20-0800.html#economia"
+  },
+  {
+    "title": "Alberta atrai projetos de IA, mas enfrenta resistência local",
+    "body": "Fato — reportagem publicada em 19/11/2026 às 21h13 de Brasília (20/11 UTC). A BBC compara projetos de infraestrutura de IA em Alberta e Utah. O cadastro oficial de Alberta lista a primeira etapa do Wonder Valley como proposta. A reportagem registra apoio político e resistência de moradores e de uma comunidade indígena, sem comprovar obra concluída nem migração efetiva de capital dos EUA para o Canadá. BBC · Cadastro oficial de Alberta .",
+    "topic": "tecnologia",
+    "date": "20/11/2026 às 08:00",
+    "url": "edicoes/2026-11-20-0800.html#tecnologia"
+  },
+  {
     "title": "A Corte decide o caso dos rohingya",
     "body": "Fato — 19/11/2026. A Corte Internacional de Justiça publicou a decisão de mérito em Gâmbia x Myanmar, que ainda era aguardada na edição das 8h. Segundo a BBC, a Corte concluiu, por maioria, que Myanmar cometeu genocídio contra os rohingya. O registro oficial confirma a publicação da decisão e lista votos divergentes; o PDF não abriu nesta captura. BBC News · Processo oficial .",
     "topic": "mundo",

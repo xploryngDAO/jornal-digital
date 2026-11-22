@@ -6,7 +6,7 @@
   const results = document.querySelector('#arquivo-resultados');
   const archiveBase = new URL('.', document.currentScript.src);
   const normalize = value => value.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
-  const stories = (window.pautasArquivadas || []).map(story => ({ ...story, search: normalize(`${story.title} ${story.body} ${story.date}`) }));
+  const stories = (window.pautasArquivadas || []).map(story => ({ ...story, search: normalize(`${story.title} ${story.body} ${story.date} ${story.topic}`) }));
   function render() {
     const query = normalize(term.value.trim());
     const matches = stories.filter(story => (!topic.value || story.topic === topic.value) && story.search.includes(query));
@@ -20,7 +20,7 @@
       body.textContent = story.body;
       const link = document.createElement('a');
       link.href = new URL(story.url, archiveBase);
-      link.textContent = 'Abrir edição e consultar fontes';
+      link.textContent = story.url.startsWith('#') ? 'Ler na edição vigente' : 'Abrir edição e consultar fontes';
       detail.append(title, body, link);
       row.append(detail);
       return row;

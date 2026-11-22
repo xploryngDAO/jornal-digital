@@ -14,7 +14,7 @@ def text(html):
 def extract(page):
     """Pautas de uma edição, sem contar os links do arquivo para a própria edição."""
     for topic, section in re.findall(r'<section id="(mundo|politica|economia|tecnologia|social)"[^>]*>(.*?)</section>', page, re.S):
-        for card in re.findall(r'<article class="card"[^>]*>(.*?)</article>', section, re.S):
+        for card in re.findall(r'<article class=["\']card[^>]*?>(.*?)</article>', section, re.S):
             title = re.search(r'<h3[^>]*>(.*?)</h3>', card, re.S)
             if title:
                 body = ' '.join(map(text, re.findall(r'<p[^>]*>(.*?)</p>', card, re.S)))
@@ -22,6 +22,9 @@ def extract(page):
 
 stories = []
 editions = {}
+# A capa vigente entra na busca pelo próprio index.html; cada relatório publicado vale como edição.
+if (root / 'index.html').exists():
+    editions['__capa__'] = (root / 'index.html').read_text(encoding='utf-8')
 for edition in sorted((root / 'edicoes').glob('????-??-??-????.html'), reverse=True):
     editions[edition.stem] = edition.read_text(encoding='utf-8')
 
@@ -36,6 +39,11 @@ if db.exists():
         con.close()
 
 for eid in sorted(editions, reverse=True):
+    if eid == '__capa__':
+        capa = editions.pop('__capa__')
+        for title, body, topic in extract(capa):
+            stories.append(dict(title=title, body=body, topic=topic, date='capa vigente', url=f'#{topic}'))
+        continue
     year, month, day, hour = eid.split('-')
     date = f'{day}/{month}/{year} às {hour[:2]}:{hour[2:]}'
     for title, body, topic in extract(editions[eid]):

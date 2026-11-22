@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161c47">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:hover{text-decoration:underline}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:1rem}
+.explore{padding:clamp(1rem,3vw,2rem);background:var(--panel);border-radius:1.1rem}
+#graph-info{padding:.85rem 1rem;border:1px solid var(--line);border-radius:.5rem}
+#graph-info button{margin-top:.5rem}
+footer{text-align:center;padding:2rem 1rem;color:var(--mut);border-top:1px solid var(--line)}
+@media(max-width:46rem){.lead{grid-template-columns:1fr;gap:1rem}}
+:root{--bg:#f6f7fb;--panel:#fff;--line:#cbd0de;--txt:#161c47;--mut:#4b5674;--acc:#293b9e;--night:#10162f;--signal:#e4ef86}
+.container,.masthead{width:min(100% - 2rem,76rem)}
+.skip-link{position:fixed;top:.75rem;left:.75rem;z-index:20;background:white;padding:.6rem 1rem;transform:translateY(-200%)}
+.skip-link:focus{transform:none}
+header{background:var(--panel);color:var(--txt);padding:clamp(1.4rem,4vw,3rem) 0 1.25rem;border-top:.45rem solid var(--txt)}
+.masthead{align-items:end;gap:.75rem 2rem}
+.masthead-brand{display:grid;gap:.55rem}
+.masthead strong{font:700 clamp(2.65rem,8.5vw,6.5rem)/.87 var(--serif);letter-spacing:-.065em}
+.masthead p{color:var(--mut);font-size:.9rem}
+.edition-stamp{border-left:3px solid var(--acc);padding-left:.75rem}
+.edition-stamp time{display:block;font-weight:750;color:var(--txt)}
+nav{padding-inline:max(1rem,calc((100% - 76rem)/2));white-space:normal;flex-wrap:wrap;background:var(--txt);border:0}
+nav a{color:#fff;flex:0 0 auto;padding:.25rem 0}
+nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
+.lead{grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:0;align-items:stretch;margin-top:clamp(1.25rem,3vw,2.5rem);background:var(--panel);border:1px solid var(--line);border-radius:1.2rem 1.2rem 1.2rem .2rem;overflow:hidden}
+.lead-main{display:grid;align-content:center;justify-items:start;gap:1rem;padding:clamp(1.35rem,4.5vw,4rem);color:white;background:var(--txt)}
+.lead h1{font-size:clamp(2.4rem,5.3vw,5.1rem);line-height:.99;letter-spacing:-.045em;margin:0}
+.lead-main>p:not(.lead-label){font-size:clamp(1.03rem,1.7vw,1.22rem);color:#e5e8ff}
+.lead-label{font-weight:750;color:var(--signal);font-size:.9rem}
+.lead-actions{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem 1.2rem}
+.lead-actions a{color:white}
+.lead-actions .lead-read{background:var(--signal);color:var(--txt);font-weight:750;text-decoration:none;padding:.55rem .85rem;border-radius:.35rem}
+.lead .brief{background:var(--panel);color:var(--txt);border-radius:0;display:grid;align-content:center;padding:clamp(1.25rem,3vw,2.5rem)}
+.brief h2{font-size:clamp(1.5rem,3vw,2.05rem);margin:0}
+.brief ul{list-style:none;display:grid}
+.brief li{padding:.75rem 0;border-bottom:1px solid var(--line)}
+.brief li:last-child{border:0;padding-bottom:0}
+.brief li span{display:block;color:var(--mut);font-size:.8rem;font-weight:700}
+.brief li a{display:inline-block;font:700 1.15rem/1.3 var(--serif)}
+.desk-heading{border-top:3px solid var(--txt);padding-top:1rem;font-size:clamp(1.75rem,4vw,2.6rem)}
+#filtro-editorias{margin-top:.75rem}
+#filtro-editorias button{color:var(--txt);background:#fff;padding:.45rem .8rem;margin:.2rem;border:1px solid var(--line);border-radius:1rem;cursor:pointer}
+#filtro-editorias button[aria-pressed=true]{background:var(--txt);color:#fff}
+#filtro-editorias~section:is(#mundo,#politica,#economia,#tecnologia){margin-top:1.5rem;margin-bottom:2rem}
+.desk-section h2{font:750 1.1rem/1.4 system-ui,sans-serif;color:var(--acc)}
+.archive-search{padding:clamp(1rem,3vw,2rem);background:#eceffd;border-radius:1rem;color:var(--txt)}
+.archive-search label{display:inline-block;margin:.4rem 1rem .4rem 0}
+.archive-search input,.archive-search select{display:block;max-width:100%;padding:.55rem;border:1px solid var(--mut);border-radius:.3rem;font:inherit}
+.archive-search ul,#locais-noticias,#correlacoes ul{padding-inline-start:1.3rem}
+.archive-search li{padding:.35rem 0}
+.archive-search summary{cursor:pointer;font-weight:700}
+#arquivo-resultados{max-height:32rem;overflow:auto;overscroll-behavior:contain}
+#locais-noticias button,#graph-info button,#leitura button{font:inherit;color:var(--acc);background:var(--panel);border:1px solid var(--line);border-radius:.35rem;padding:.35rem .6rem;cursor:pointer;margin-top:.3rem}
+#leitura{margin:auto;max-height:85dvh;color:var(--txt)}
+#leitura::backdrop{background:rgba(16,22,47,.72)}
+#leitura form{display:flex;justify-content:flex-end}
+#leitura h2{font-size:clamp(1.45rem,4vw,2rem);margin:.6rem 0}
+@media(max-width:44rem){
+  .masthead{align-items:start}.edition-stamp{margin-top:.45rem}
+  nav{position:static;gap:.25rem .85rem}
+  .lead{grid-template-columns:1fr}.lead h1{text-wrap:wrap}
+  .brief li a{font-size:1.08rem}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header>
+  <div class="masthead">
+    <div class="masthead-brand"><strong>Jornal Digital</strong><p>Política, economia e tecnologia em perspectiva</p></div>
+    <p class="edition-stamp">Edição mais recente <time datetime="2026-11-22T14:00:00-03:00">22 nov. 2026, 14h de Brasília</time></p>
+  </div>
+</header>
+
+<nav aria-label="Editorias e visualizações">
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#historico">Linha do tempo</a>
+  <a href="#globo">Globo 3D</a>
+  <a href="#grafo">Grafo 3D</a>
+  <a href="#edicoes">Arquivo</a>
+</nav>
+
+<main id="conteudo" class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div class="lead-main">
+    <p class="lead-label">Manchete de Mundo</p>
+    <h1 id="manchete">COP31 termina sem acordo: a primeira vez desde 2009</h1>
+    <p>A União Europeia e outros países rejeitaram o texto final porque ele não cita os combustíveis fósseis. O que muda agora — e o que não muda.</p>
+    <div class="lead-actions">
+      <a class="lead-read" href="#mundo" data-open-story="cop31">Ler matéria</a>
+      <a href="#historico">Ver linha do tempo</a>
+    </div>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Também nesta edição</h2>
+    <ul>
+      <li><span>Política</span><a href="#politica" data-open-story="pec">A PEC da Segurança e a guarda que pode virar polícia</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="fiscal">Ajuste fiscal passa no Senado e espera a Câmara</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="ia-acoes">Nvidia e Anthropic puxam a correção nas ações de IA</a></li>
+    </ul>
+  </aside>
+</section>
+
+<h2 class="desk-heading">Notícias por editoria</h2>
+
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+</div>
+<section id="mundo" class="desk-section">
+  <h2>Mundo</h2>
+  <div class="grid"><article class="card" id="pauta-cop31"><h3>COP31 termina sem acordo: a primeira vez desde 2009</h3><p><strong>Fato — 22/11/2026.</strong> A COP31, em Antália (Turquia), terminou sem texto final adotado depois que a União Europeia, as Ilhas Marshall, a Noruega, o Panamá e Vanuatu rejeitaram a proposta das presidências turca e australiana, que citava a decisão da COP28 de Dubai apenas por remissão, sem repetir o compromisso sobre combustíveis fósseis nem prazos, e descartava o mapa do caminho da COP30 de Belém. O presidente turco da conferência, Murat Kurum, disse que não haveria novo texto. A conferência passou mais de 44 horas do prazo e se tornou a mais longa da história. O G1 registra que a última vez que negociações climáticas da ONU terminaram sem consenso unânime foi em Copenhague, em 2009. A Rússia defendeu a exclusão do compromisso, e a UE acusou países produtores de petróleo de sequestrar a negociação. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml">G1, 09h00</a> · <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-fracasso-brasil-turquia.ghtml">G1, reação do Brasil, 13h36</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/22/negociaes-climticas-devem-fracassar-e-cop31-deve-ficar-sem-acordo-final.ghtml">Valor</a> · <a href="https://www.bbc.com/news/live/crly5w901n20t">BBC News</a>.</p></article></div>
+</section>
+
+<!-- POLÍTICA -->
+<section id="politica" class="desk-section">
+  <h2>Política</h2>
+  <div class="grid"><article class="card" id="pauta-pec"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><p><strong>Fato — 22/11/2026.</strong> A PEC da Segurança Pública foi aprovada em definitivo pelo Congresso em 3/11/2026 e permite que prefeitos criem polícias municipais, do zero ou a partir de guardas civis já existentes, mas a mudança não é automática e nenhuma prefeitura pode concluí-la antes de a emenda entrar em vigor — o que ainda não ocorreu. O texto inclui na Constituição o Susp, criado em 2018. Segundo o G1, com dados da Rais, há 1.417 municípios com guardas civis ativas, cerca de 107 mil agentes, e ao menos 10 capitais já têm projetos ou estudos. Em abril de 2026, o STF havia proibido cidades de rebatizar guardas como polícia municipal; a PEC autoriza a criação sob regras. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a> · <a href="https://g1.globo.com/politica/noticia/2026/11/22/exigencias-policia-municipal-prefeituras.ghtml">G1, exigências</a>.</p></article><article class="card" id="pauta-fiscal"><h3>Ajuste fiscal passa no Senado e espera a Câmara</h3><p><strong>Fato — 18/11/2026, captado em 22/11/2026.</strong> O Senado concluiu em 18/11 a votação do PLP 299/2026 em turno suplementar, com 69 votos a favor e 2 contrários; o texto principal havia sido aprovado em 12/11 e a matéria segue para a Câmara. Em 21/11, Lula rebateu críticas da esquerda ao ajuste, disse que não fará cortes em educação, saúde e salário mínimo e reiterou confiança em Bruno Moretti. <strong>Acesso parcial:</strong> a reportagem do Valor exigiu assinatura após o lide. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/21/lula-rebate-crticas-ao-ajuste-fiscal-diz-que-no-far-cortes-em-educao-e-sade-e-elogia-moretti.ghtml">Valor, trecho público</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/22/agenda-de-politica-camara-deve-votar-ajuste-fiscal-e-lula-discute-nome-para-stf.ghtml">Valor, agenda</a>.</p></article></div>
+</section>
+
+<!-- ECONOMIA -->
+<section id="economia" class="desk-section">
+  <h2>Economia</h2>
+  <div class="grid"><article class="card" id="pauta-cambio"><h3>O câmbio e o custo do impasse fiscal</h3><p><strong>Contexto — 19/11/2026, desdobramento em 22/11/2026.</strong> O Jornal Digital registrou em 19/11 a venda extraordinária de US$ 1 bilhão à vista pelo Banco Central e o dólar comercial fechando em alta. Nesta captura, a capa do Valor exibia cotações de 19/11 — Ibovespa a 166.376 pontos, variação de −0,69%, e dólar comercial a R$ 5,9344, alta de 1,15% —, sem atualização para 20/11. São valores de referência da captura, não fechamento de hoje. A reportagem do Valor sobre uma ordem bilionária segue atrás de assinatura e não foi lida. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1, fechamento de 19/11</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/19/uma-unica-ordem-bilionaria-por-dolares-expos-desequilibrio-no-mercado-que-levou-bc-a-agir.ghtml">Valor, acesso restrito</a>.</p></article></div>
+</section>
+
+<!-- TECNOLOGIA -->
+<section id="tecnologia" class="desk-section">
+  <h2>Tecnologia</h2>
+  <div class="grid"><article class="card" id="pauta-ia-acoes"><h3>Nvidia e Anthropic puxam a correção nas ações de IA</h3><p><strong>Fato — 20/11/2026.</strong> As ações da Anthropic caíram 8,5% no fechamento de sexta, depois de estrearem na Nasdaq na quinta com alta de 17%. No mesmo dia, o S&P 500 caiu 3,7%, o Dow Jones 1,9% e o Nasdaq 5,3%; o S&amp;P 500 e o Dow entraram em correção. A BBC cita mais de US$ 1 trilhão gastos em IA por poucas empresas no último ano e questões específicas envolvendo a Nvidia. O Valor registrou que a Nvidia fechou em queda de 13,8%, a US$ 125,84, sétima perda seguida, quase 48% abaixo da máxima de 6/10. A BBC nota que os três índices ainda estavam acima do nível de um ano antes. <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC</a> · <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</p></article><article class="card" id="pauta-chips"><h3>Washington restringe chips e ameaça frear centros de dados no exterior</h3><p><strong>Fato — 22/11/2026.</strong> A BBC registrou que Trump ameaçou proibir empresas americanas de construir centros de dados de IA fora dos EUA, sem detalhar como a regra funcionaria, e que Washington anunciou na segunda-feira anterior, 16/11, exigência de licença para compra de chips avançados, para monitorar uso por empresas chinesas. São anúncios de intenção: a reportagem diz que faltam detalhes de aplicação e que a política pode não se concretizar. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</p></article></div>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation"><h3>COP31 termina sem acordo: a primeira vez desde 2009</h3><ol class="timeline"><li><time datetime="2015-12-12">12/12/2015</time>a COP21 adotou o Acordo de Paris, com a meta de conter o aquecimento bem abaixo de 2 °C e buscar 1,5 °C. <a href="https://unfccc.int/process-and-meetings/the-paris-agreement">UNFCCC, texto e status do Acordo</a>.</li><li><time datetime="2023-12-13">13/12/2023</time>a decisão FCCC/PA/CMA/2023/L.17, primeiro balanço global da COP28 em Dubai, foi publicada pela presidência como proposta. É o documento citado pela COP31 — e não repetido por ela. <a href="https://unfccc.int/documents/636608">UNFCCC, documento 636608</a>.</li><li><time datetime="2025-11-21">21/11/2025</time>a COP30 terminou em Belém; a ONU registrou o encerramento com a fala do secretário-executivo de que "a cooperação climática está viva". O mapa do caminho descartado em Antália nasceu desse processo. <a href="https://unfccc.int/cop30">UNFCCC, página oficial da COP30</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>sem consenso, a COP31 encerra sem decisão adotada. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml">G1</a> · <a href="https://www.bbc.com/news/live/crly5w901n20t">BBC</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A COP decide por consenso: um bloco de países pode vetar a adoção. Por isso a arquitetura de Dubai continua sendo a referência formal, mas não ganhou mecanismo novo em Antália — a remissão mantém o precedente sem criar obrigação adicional. <strong>Contraponto:</strong> um texto rejeitado por um grupo não mede o apoio da maioria, e não houve votação registrada. <strong>Cenário:</strong> o Acordo de Paris e os compromissos nacionais seguem válidos; o efeito prático recai sobre financiamento de adaptação e sobre a previsibilidade para investidores.</p></article>
+  <article class="correlation"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><ol class="timeline"><li><time datetime="2026-04-01">Abril de 2026</time>o STF proibiu cidades de rebatizar guardas civis como polícia municipal, ao analisar lei de São Paulo. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">Relato do G1</a>, que remete ao julgamento; o acórdão não foi consultado.</li><li><time datetime="2026-11-03">03/11/2026</time>o Congresso aprova em definitivo a PEC, que inclui o Susp na Constituição e autoriza polícias municipais sob regras. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>G1 detalha as exigências e registra que a emenda ainda não entrou em vigor. <a href="https://g1.globo.com/politica/noticia/2026/11/22/exigencias-policia-municipal-prefeituras.ghtml">G1, exigências</a>.</li></ol><p><strong>Nexo e contraponto.</strong> O que mudou é a base constitucional da atribuição policial municipal; o que se repetiu é o conflito federativo sobre competência, que o STF havia travado. <strong>Limite:</strong> sem promulgação, nenhuma polícia municipal está em operação; projetos anunciados não são força criada.</p></article>
+  <article class="correlation"><h3>Ajuste fiscal passa no Senado e espera a Câmara</h3><ol class="timeline"><li><time datetime="2024-12-19">19/12/2024</time>o BC vendeu dólares das reservas à vista em leilões, em dia de votação de pacote fiscal na Câmara — precedente já registrado na edição de 19/11. <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote">Agência Brasil</a>.</li><li><time datetime="2026-11-12">12/11/2026</time>o Senado aprova o texto principal do PLP 299/2026. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-18">18/11/2026</time>turno suplementar concluído, 69 votos a 2; a matéria segue para a Câmara. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>o BC vende US$ 1 bilhão à vista e o dólar fecha em alta. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A sequência legislativa — Senado conclui, Câmara aprecia, sanção e execução no Orçamento de 2027 — é o mecanismo. Não há relação demonstrada entre a tramitação e o câmbio de 19/11: os eventos correram na mesma semana, e coincidência não estabelece causa. O padrão de leilão em dia de votação fiscal se repetiu em 2024, mas as condições eram outras. <strong>Cenário:</strong> se a Câmara mudar o texto, ele volta ao Senado e o calendário escorrega.</p></article>
+  <article class="correlation"><h3>Nvidia e Anthropic puxam a correção nas ações de IA</h3><ol class="timeline"><li><time datetime="2026-10-06">06/10/2026</time>máxima de fechamento da Nvidia, referência da queda acumulada de quase 48% até 20/11. <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</li><li><time datetime="2026-11-16">16/11/2026</time>Washington anuncia exigência de licença para compra de chips avançados. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>a Anthropic estreia na Nasdaq com alta de 17%, pauta registrada na edição de 19/11 deste jornal. <a href="https://www.bbc.com/news/live/c933xxm82mr8t">BBC</a>.</li><li><time datetime="2026-11-20">20/11/2026</time>Anthropic cai 8,5%; Nvidia cai 13,8% na sétima perda seguida; índices americanos fecham em baixa. <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC</a> · <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A estreia fixa um preço de referência e expõe a empresa à volatilidade; ao mesmo tempo, o volume de investimento em IA e as dúvidas sobre retorno pressionam o setor inteiro. <strong>Evidência contrária:</strong> os três índices ainda estavam acima do nível de um ano antes, e uma investigação da SEC é procedimento, não condenação. <strong>Cenário:</strong> se o mercado exigir retorno antes de financiar capacidade, a construção de centros de dados pode desacelerar; nesta captura, nenhum corte foi anunciado.</p></article>
+</section>
+
+<!-- MAPA 3D -->
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <p>Este globo mostra a edição das 14h de 22/11. Veja também o <a href="edicoes/2026-11-20-0800.html#globe-container">globo da edição anterior</a>.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <p>Este grafo mostra a edição das 14h de 22/11. Veja também o <a href="edicoes/2026-11-20-0800.html#grafo">grafo da edição anterior</a>.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<!-- CORRELAÇÕES -->
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> a PEC da Segurança ainda não muda o policiamento de nenhuma cidade; sem promulgação, guardas seguem com as atribuições atuais.</li><li><strong>Macroeconomia:</strong> o ajuste fiscal só produz efeito orçamentário depois da Câmara e da sanção; o dólar de 19/11 e as cotações exibidas são de referência, não previsão.</li><li><strong>Finanças:</strong> a correção nas ações de IA reflete preço e expectativa; os índices americanos ainda estavam acima do nível de um ano antes.</li><li><strong>Cenário global:</strong> sem decisão na COP31, o Acordo de Paris e os compromissos nacionais seguem válidos, mas não há mecanismo novo nem prazo para a transição energética.</li></ul></article></section>
+
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Arquivo de edições</h2>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>22 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/noticias-2026-11-22-1400.md" download>14h — Relatório</a> (edição vigente na capa)</li>
+  </ul></details>
+  <details open><summary>20 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-20-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-20-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-19-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-19-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-18-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-18-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, energia, chips"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados" tabindex="0" aria-label="Resultados da busca"></ul>
+  </div>
+</section>
+
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog"><button>Fechar</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
+</main>
+
+<footer>
+  <p>Jornal Digital — Edições do agente Jornalista</p>
+  <p>Dados capturados em 22/11/2026 às 14:00 (horário de Brasília)</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+  {
+    "lat": 36.90,
+    "lng": 30.70,
+    "name": "Antália, Turquia",
+    "title": "COP31 termina sem acordo",
+    "story": "cop31",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 25.76,
+    "lng": -80.19,
+    "name": "Miami, EUA",
+    "title": "Nvidia e Anthropic puxam a correção",
+    "story": "ia-acoes",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 38.91,
+    "lng": -77.04,
+    "name": "Washington, EUA",
+    "title": "Licença para chips e centros de dados",
+    "story": "chips",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": -15.79,
+    "lng": -47.88,
+    "name": "Brasília, DF",
+    "title": "PEC da Segurança e ajuste fiscal",
+    "story": "pec",
+    "color": "#ff6b6b",
+    "size": 1
+  }
+];
+
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || reader.open || typeof reader.showModal !== 'function') return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  document.getElementById('leitura-conteudo').replaceChildren(card.querySelector('p').cloneNode(true));
+  reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+for (const link of document.querySelectorAll('[data-open-story]')) {
+  const card = document.getElementById(`pauta-${link.dataset.openStory}`);
+  if (!card || typeof reader.showModal !== 'function') continue;
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    readStory(card);
+  });
+}
+function readLocation(place) {
+  readStory(document.getElementById(`pauta-${place.story}`));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: -15, lng: -47, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+  {
+    "id": "mundo",
+    "name": "Mundo",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "cop31",
+    "name": "COP31 termina sem acordo: a primeira vez desde 2009",
+    "type": "news",
+    "desc": "Fato — 22/11/2026. A COP31, em Antália, terminou sem texto adotado após UE, Ilhas Marshall, Noruega, Panamá e Vanuatu rejeitarem a proposta, que citava a COP28 sem repetir o compromisso sobre combustíveis fósseis nem prazos. O G1 registra a primeira falta de consenso unânime desde Copenhague (2009).",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml"
+  },
+  {
+    "id": "cop31-0",
+    "name": "12/12/2015 — a COP21 adotou o Acordo de Paris, com a meta de 1,5 °C.",
+    "type": "history",
+    "desc": "a COP21 adotou o Acordo de Paris, tratado vinculante com a meta de conter o aquecimento.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://unfccc.int/process-and-meetings/the-paris-agreement"
+  },
+  {
+    "id": "cop31-1",
+    "name": "13/12/2023 — a decisão da COP28 em Dubai reconheceu a transição para longe dos combustíveis fósseis.",
+    "type": "history",
+    "desc": "a decisão FCCC/PA/CMA/2023/L.17, primeiro balanço global, foi publicada como proposta da presidência da COP28.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://unfccc.int/documents/636608"
+  },
+  {
+    "id": "cop31-2",
+    "name": "21/11/2025 — a COP30 terminou em Belém, com o mapa do caminho que a COP31 descartou.",
+    "type": "history",
+    "desc": "a COP30 foi encerrada em Belém; a ONU registrou a fala de encerramento do secretário-executivo.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://unfccc.int/cop30"
+  },
+  {
+    "id": "politica",
+    "name": "Política",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "pec",
+    "name": "A PEC da Segurança e a guarda que pode virar polícia",
+    "type": "news",
+    "desc": "Fato — 22/11/2026. A PEC foi aprovada em definitivo em 3/11/2026 e autoriza polícias municipais sob regras, mas nenhuma prefeitura pode concluir a transformação antes de a emenda entrar em vigor. Há 1.417 municípios com guardas civis ativas, segundo o G1 com dados da Rais.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
+  },
+  {
+    "id": "pec-0",
+    "name": "Abril de 2026 — o STF proibiu rebatizar guardas civis como polícia municipal.",
+    "type": "history",
+    "desc": "o STF analisou lei de São Paulo que renomeava a guarda; o acórdão não foi consultado nesta captura.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
+  },
+  {
+    "id": "pec-1",
+    "name": "03/11/2026 — o Congresso aprova a PEC da Segurança em definitivo.",
+    "type": "history",
+    "desc": "a PEC inclui o Susp na Constituição e autoriza polícias municipais sob regras.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
+  },
+  {
+    "id": "fiscal",
+    "name": "Ajuste fiscal passa no Senado e espera a Câmara",
+    "type": "news",
+    "desc": "Fato — 18/11/2026. O Senado concluiu a votação do PLP 299/2026 em turno suplementar, 69 a 2; o texto segue para a Câmara. Em 21/11, Lula rebateu críticas ao ajuste e disse que não cortará educação, saúde e salário mínimo.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027"
+  },
+  {
+    "id": "fiscal-0",
+    "name": "12/11/2026 — o Senado aprova o texto principal do PLP 299/2026.",
+    "type": "history",
+    "desc": "o texto principal foi aprovado no Senado; o turno suplementar veio em 18/11.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027"
+  },
+  {
+    "id": "economia",
+    "name": "Economia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "cambio",
+    "name": "Cotações de referência e custo do impasse fiscal",
+    "type": "news",
+    "desc": "Contexto — 19/11/2026. O Jornal Digital registrou a venda de US$ 1 bilhão à vista pelo BC e o dólar fechando em alta. A capa do Valor exibia cotações de 19/11 (Ibovespa 166.376 pts, −0,69%; dólar R$ 5,9344, +1,15%), sem atualização para 20/11.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml"
+  },
+  {
+    "id": "tecnologia",
+    "name": "Tecnologia",
+    "type": "hub",
+    "desc": "",
+    "color": "#ffd166",
+    "size": 5
+  },
+  {
+    "id": "ia-acoes",
+    "name": "Nvidia e Anthropic puxam a correção nas ações de IA",
+    "type": "news",
+    "desc": "Fato — 20/11/2026. Anthropic caiu 8,5% após estrear com alta de 17%; S&P 500 −3,7%, Nasdaq −5,3%; Nvidia −13,8%, quase 48% abaixo da máxima de 6/10. Os índices ainda estavam acima do nível de um ano antes.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/articles/c6808ym10vzgo"
+  },
+  {
+    "id": "ia-0",
+    "name": "06/10/2026 — máxima de fechamento da Nvidia, referência da queda acumulada.",
+    "type": "history",
+    "desc": "máxima de fechamento registrada pelo Valor.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml"
+  },
+  {
+    "id": "ia-1",
+    "name": "19/11/2026 — a Anthropic estreia na Nasdaq com alta de 17%.",
+    "type": "history",
+    "desc": "estreia na Nasdaq, pauta da edição de 19/11 deste jornal.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.bbc.com/news/live/c933xxm82mr8t"
+  },
+  {
+    "id": "chips",
+    "name": "Washington restringe chips e ameaça frear centros de dados no exterior",
+    "type": "news",
+    "desc": "Fato — 16/11 e 22/11/2026. Os EUA anunciaram exigência de licença para chips avançados; Trump ameaçou proibir empresas americanas de construir centros de dados de IA no exterior, sem detalhar a aplicação.",
+    "color": "#ff6b6b",
+    "size": 4,
+    "url": "https://www.bbc.com/news/articles/cmde1lw9y54ko"
+  },
+  {
+    "id": "chips-0",
+    "name": "16/11/2026 — anúncio de licença para compra de chips avançados.",
+    "type": "history",
+    "desc": "Washington anunciou a exigência de licença para monitorar uso por empresas chinesas.",
+    "color": "#61dfd3",
+    "size": 4,
+    "url": "https://www.bbc.com/news/articles/cmde1lw9y54ko"
+  }
+];
+
+
+const graphLinks = [
+  {
+    "source": "mundo",
+    "target": "cop31",
+    "label": "Editoria"
+  },
+  {
+    "source": "cop31-0",
+    "target": "cop31-1",
+    "label": "Etapa do mesmo processo climático"
+  },
+  {
+    "source": "cop31-1",
+    "target": "cop31-2",
+    "label": "Etapa do mesmo processo climático"
+  },
+  {
+    "source": "cop31-2",
+    "target": "cop31",
+    "label": "Etapa do mesmo processo climático"
+  },
+  {
+    "source": "politica",
+    "target": "pec",
+    "label": "Editoria"
+  },
+  {
+    "source": "pec-0",
+    "target": "pec-1",
+    "label": "Conflito de competência, não causal"
+  },
+  {
+    "source": "pec-1",
+    "target": "pec",
+    "label": "Mudança constitucional e regulamentação"
+  },
+  {
+    "source": "politica",
+    "target": "fiscal",
+    "label": "Editoria"
+  },
+  {
+    "source": "fiscal-0",
+    "target": "fiscal",
+    "label": "Etapa do mesmo processo legislativo"
+  },
+  {
+    "source": "economia",
+    "target": "cambio",
+    "label": "Editoria"
+  },
+  {
+    "source": "cambio",
+    "target": "fiscal",
+    "label": "Mesma semana, sem causalidade demonstrada",
+    "weak": true
+  },
+  {
+    "source": "tecnologia",
+    "target": "ia-acoes",
+    "label": "Editoria"
+  },
+  {
+    "source": "ia-0",
+    "target": "ia-1",
+    "label": "Marcos do mesmo ciclo de mercado"
+  },
+  {
+    "source": "ia-1",
+    "target": "ia-acoes",
+    "label": "Preço de referência e volatilidade"
+  },
+  {
+    "source": "tecnologia",
+    "target": "chips",
+    "label": "Editoria"
+  },
+  {
+    "source": "chips-0",
+    "target": "chips",
+    "label": "Política de exportação e infraestrutura"
+  },
+  {
+    "source": "chips",
+    "target": "ia-acoes",
+    "label": "Pressão regulatória sobre o setor de IA"
+  }
+];
+
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { document.getElementById(id).hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', event => { if (!event.defaultPrevented) select(topic); });
+  });
+  filter.hidden = false;
+})();
+</script>
+<script src="arquivo-dados.js" defer></script>
+<script src="arquivo.js" defer></script>
+</body>
+</html>

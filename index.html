@@ -38,6 +38,10 @@ section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom
 .card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
 .card .source{margin-bottom:.55rem}
 .card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.card.is-new{border-left:4px solid var(--acc)}
+.new-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:var(--acc);color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.card.is-updated{border-left:4px solid #b25409}
+.upd-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:#b25409;color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
 .tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
 .timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
@@ -111,7 +115,7 @@ nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
 <header>
   <div class="masthead">
     <div class="masthead-brand"><strong>Jornal Digital</strong><p>Política, economia e tecnologia em perspectiva</p></div>
-    <p class="edition-stamp">Edição mais recente <time datetime="2026-11-22T14:00:00-03:00">22 nov. 2026, 14h de Brasília</time></p>
+    <p class="edition-stamp">Edição mais recente <time datetime="2026-11-22T20:00:00-03:00">22 nov. 2026, 20h de Brasília</time></p>
   </div>
 </header>
 
@@ -129,20 +133,23 @@ nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
 <main id="conteudo" class="container">
 <section class="lead" aria-labelledby="manchete">
   <div class="lead-main">
-    <p class="lead-label">Manchete de Mundo</p>
-    <h1 id="manchete">COP31 termina sem acordo: a primeira vez desde 2009</h1>
-    <p>A União Europeia e outros países rejeitaram o texto final porque ele não cita os combustíveis fósseis. O que muda agora — e o que não muda.</p>
+    <p class="lead-label">Manchete de Mundo · edição das 20h</p>
+    <h1 id="manchete">UE deixa a plenária e a COP31 encerra sem acordo</h1>
+    <p>Depois de o texto final omitir os combustíveis fósseis, os europeus abandonaram a sessão de Antália. Guterres falou em "profunda decepção"; a última vez que o acordo político de uma COP colapsou foi em Copenhague, em 2009.</p>
     <div class="lead-actions">
-      <a class="lead-read" href="#mundo" data-open-story="cop31">Ler matéria</a>
+      <a class="lead-read" href="#mundo" data-open-story="cop31-ue">Ler matéria</a>
       <a href="#historico">Ver linha do tempo</a>
     </div>
   </div>
   <aside class="brief" aria-labelledby="resumo-edicao">
     <h2 id="resumo-edicao">Também nesta edição</h2>
     <ul>
-      <li><span>Política</span><a href="#politica" data-open-story="pec">A PEC da Segurança e a guarda que pode virar polícia</a></li>
-      <li><span>Política</span><a href="#politica" data-open-story="fiscal">Ajuste fiscal passa no Senado e espera a Câmara</a></li>
-      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="ia-acoes">Nvidia e Anthropic puxam a correção nas ações de IA</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="fiscal-camara">Câmara vota o ajuste fiscal nesta segunda, com R$ 50 bi em 2027</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="dosimetria">STF marca para dezembro o julgamento da Lei da Dosimetria</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="bolsonaro">Bolsonaro segue estável na UTI, sem previsão de alta</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="java">Falha crítica no Java exigiu correção da Oracle na terça</a></li>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="camara-eua">Democratas têm a maior bancada na Câmara dos EUA desde 1992</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="china-margem">Bolsas chinesas cortam exigência de margem de 100% para 80%</a></li>
     </ul>
   </aside>
 </section>
@@ -158,40 +165,61 @@ nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
 </div>
 <section id="mundo" class="desk-section">
   <h2>Mundo</h2>
-  <div class="grid"><article class="card" id="pauta-cop31"><h3>COP31 termina sem acordo: a primeira vez desde 2009</h3><p><strong>Fato — 22/11/2026.</strong> A COP31, em Antália (Turquia), terminou sem texto final adotado depois que a União Europeia, as Ilhas Marshall, a Noruega, o Panamá e Vanuatu rejeitaram a proposta das presidências turca e australiana, que citava a decisão da COP28 de Dubai apenas por remissão, sem repetir o compromisso sobre combustíveis fósseis nem prazos, e descartava o mapa do caminho da COP30 de Belém. O presidente turco da conferência, Murat Kurum, disse que não haveria novo texto. A conferência passou mais de 44 horas do prazo e se tornou a mais longa da história. O G1 registra que a última vez que negociações climáticas da ONU terminaram sem consenso unânime foi em Copenhague, em 2009. A Rússia defendeu a exclusão do compromisso, e a UE acusou países produtores de petróleo de sequestrar a negociação. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml">G1, 09h00</a> · <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-fracasso-brasil-turquia.ghtml">G1, reação do Brasil, 13h36</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/22/negociaes-climticas-devem-fracassar-e-cop31-deve-ficar-sem-acordo-final.ghtml">Valor</a> · <a href="https://www.bbc.com/news/live/crly5w901n20t">BBC News</a>.</p></article></div>
+  <div class="grid">
+<article class="card is-new" id="pauta-cop31-ue"><span class="new-tag">Novo · 20h</span><h3>UE deixa a plenária e a COP31 encerra sem acordo</h3><p><strong>Fato — 22/11/2026.</strong> A COP31, em Antália (Turquia), terminou sem texto adotado depois que a União Europeia, países insulares do Pacífico e outros rejeitaram o rascunho apresentado na madrugada de domingo, que não trazia a expressão "combustíveis fósseis" e só citava o acordo da COP28 de 2023 pelo compromisso de "transição para longe" dos fósseis nos sistemas de energia. Líderes e delegados europeus deixaram a plenária em protesto. O comissário europeu do Clima, Wopke Hoekstra, disse que o texto desviava o foco da redução de petróleo, gás e carvão ao apostar na captura e armazenamento de carbono. O secretário-geral da ONU, António Guterres, em sua última COP, falou em "profunda decepção" e acusou interesses fósseis de usar "o manual da Big Tobacco". A conferência se tornou a mais longa da história e é o primeiro colapso do acordo político central de uma COP desde Copenhague, em 2009. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/uma-vergonha-delegados-da-uniao-europeia-deixam-plenaria-apos-colapso-de-negociacoes-na-cop31.ghtml">G1, 10h14</a> · <a href="https://www.bbc.com/news/articles/cqwy06zrd26lo">BBC News, atualizado 18h18 UTC</a> · <a href="https://www.bbc.com/news/articles/cmq8lyv8lkjwo">BBC, o que vem depois</a>.</p></article>
+<article class="card" id="pauta-cop31"><h3>COP31 termina sem acordo: a primeira vez desde 2009</h3><p><strong>Fato — 22/11/2026.</strong> As presidências turca e australiana apresentaram na noite de 21/11 um texto que citava a decisão da COP28 de Dubai apenas por remissão, sem repetir o compromisso sobre combustíveis fósseis nem prazos, e descartava o mapa do caminho da COP30 de Belém; o presidente turco da conferência, Murat Kurum, disse que não haveria novo texto. A Rússia defendeu a exclusão do compromisso, e a UE acusou países produtores de petróleo de sequestrar a negociação. Países pobres criticaram a ausência de compromissos financeiros claros dos ricos. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml">G1, 09h00</a> · <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-fracasso-brasil-turquia.ghtml">G1, reação do Brasil</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/22/negociaes-climticas-devem-fracassar-e-cop31-deve-ficar-sem-acordo-final.ghtml">Valor</a> · <a href="https://www.bbc.com/news/live/crly5w901n20t">BBC News</a>.</p></article>
+<article class="card is-new" id="pauta-camara-eua"><span class="new-tag">Novo · 20h</span><h3>Democratas conquistam a maior bancada na Câmara dos EUA desde 1992</h3><p><strong>Fato — 22/11/2026.</strong> Com a recontagem no 5º distrito da Carolina do Norte, Chuck Hubbard derrotou Virginia Foxx por 330 votos com 99% apurado, e ela reconheceu a derrota. Os democratas somam ao menos 258 cadeiras contra ao menos 173 dos republicanos, com quatro distritos ainda sem resultado; em 1992, também chegaram a 258. Hubbard perdera para Foxx em 2024 por nove pontos. <a href="https://www.bbc.com/news/articles/c6vg29g7dlyno">BBC, 20h26 UTC</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/22/bancada-democrata-na-camara-dos-eua-atinge-marca-historica.ghtml">G1</a>.</p></article>
+<article class="card is-new" id="pauta-guerra"><span class="new-tag">Novo · 20h</span><h3>Ponte da Crimeia, retaliação em Kiev e míssil russo na Polônia</h3><p><strong>Fato — 16/11 a 22/11/2026.</strong> A Ucrânia atacou a Ponte da Crimeia em 16/11 e voltou a atingi-la em 17/11, causando queda de um vão rodoviário. Em 20/11, a Rússia retaliou com um dos maiores ataques da guerra: a Ucrânia relata mais de 110 mísseis e 400 drones, pontes de Kiev fechadas e ao menos nove mortos. Na madrugada de 21/11, um míssil de cruzeiro Kh-101 caiu em Nowy Lipowiec, no sudeste da Polônia, a 50 km da fronteira; ninguém se feriu e Varsóvia falou em "provocação". Um navio russo com destino à Rússia foi atacado por drones no Golfo da Finlândia e rebocado, e o governo do leste da Líbia atribuiu a explosão de um navio russo em Benghazi a um drone. <a href="https://www.bbc.com/news/articles/c6x29gn4pdn9o">BBC, Kiev</a> · <a href="https://www.bbc.com/news/articles/cqx2x9dklxnro">BBC, Polônia</a> · <a href="https://www.bbc.com/news/articles/cj752ddve27ko">BBC, Golfo da Finlândia</a> · <a href="https://www.bbc.com/news/articles/cr894gjz0j0yo">BBC, Benghazi</a>.</p></article>
+</div>
 </section>
 
 <!-- POLÍTICA -->
 <section id="politica" class="desk-section">
   <h2>Política</h2>
-  <div class="grid"><article class="card" id="pauta-pec"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><p><strong>Fato — 22/11/2026.</strong> A PEC da Segurança Pública foi aprovada em definitivo pelo Congresso em 3/11/2026 e permite que prefeitos criem polícias municipais, do zero ou a partir de guardas civis já existentes, mas a mudança não é automática e nenhuma prefeitura pode concluí-la antes de a emenda entrar em vigor — o que ainda não ocorreu. O texto inclui na Constituição o Susp, criado em 2018. Segundo o G1, com dados da Rais, há 1.417 municípios com guardas civis ativas, cerca de 107 mil agentes, e ao menos 10 capitais já têm projetos ou estudos. Em abril de 2026, o STF havia proibido cidades de rebatizar guardas como polícia municipal; a PEC autoriza a criação sob regras. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a> · <a href="https://g1.globo.com/politica/noticia/2026/11/22/exigencias-policia-municipal-prefeituras.ghtml">G1, exigências</a>.</p></article><article class="card" id="pauta-fiscal"><h3>Ajuste fiscal passa no Senado e espera a Câmara</h3><p><strong>Fato — 18/11/2026, captado em 22/11/2026.</strong> O Senado concluiu em 18/11 a votação do PLP 299/2026 em turno suplementar, com 69 votos a favor e 2 contrários; o texto principal havia sido aprovado em 12/11 e a matéria segue para a Câmara. Em 21/11, Lula rebateu críticas da esquerda ao ajuste, disse que não fará cortes em educação, saúde e salário mínimo e reiterou confiança em Bruno Moretti. <strong>Acesso parcial:</strong> a reportagem do Valor exigiu assinatura após o lide. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/21/lula-rebate-crticas-ao-ajuste-fiscal-diz-que-no-far-cortes-em-educao-e-sade-e-elogia-moretti.ghtml">Valor, trecho público</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/22/agenda-de-politica-camara-deve-votar-ajuste-fiscal-e-lula-discute-nome-para-stf.ghtml">Valor, agenda</a>.</p></article></div>
+  <div class="grid">
+<article class="card is-new" id="pauta-dosimetria"><span class="new-tag">Novo · 20h</span><h3>STF marca para dezembro o julgamento da Lei da Dosimetria</h3><p><strong>Fato — 17/11 a 22/11/2026.</strong> A Lei da Dosimetria (Lei 15.402/2026), promulgada em 8/5/2026, pode reduzir a pena de Jair Bolsonaro, que cumpre 27 anos e 3 meses desde novembro de 2025. Em 9/5/2026, o ministro Alexandre de Moraes suspendeu a aplicação da lei às execuções penais dos condenados pelos atos de 8 de janeiro. Em 17/11, os presidentes da Câmara, Hugo Motta, e do Senado, Davi Alcolumbre, pediram a pauta; em 19/11 o relator liberou os processos, e o plenário virtual julga de 4 a 15 de dezembro. Ainda não há votos. <a href="https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/">STF, 09/05/2026</a> · <a href="https://www12.senado.leg.br/noticias/materias/2026/11/17/davi-e-motta-pedem-julgamento-das-acoes-da-lei-da-dosimetria">Senado, 17/11/2026</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/22/lei-dosimetria-bolsonaro-stf-entenda.ghtml">Valor</a>.</p></article>
+<article class="card is-new" id="pauta-bolsonaro"><span class="new-tag">Novo · 20h</span><h3>Bolsonaro segue clinicamente estável na UTI, sem previsão de alta</h3><p><strong>Fato — 22/11/2026.</strong> O Hospital DF Star informou na tarde deste domingo que Jair Bolsonaro está clinicamente estável, na UTI, com "abdômen agudo obstrutivo", em tratamento clínico, jejum e suporte nutricional, sem previsão de alta. Ele está em prisão domiciliar humanitária desde 24/3/2026, autorizada por Moraes. No sábado, o ministro autorizou visitas diárias dos filhos, vedados celulares e câmeras. <a href="https://g1.globo.com/politica/politico/noticia/2026/11/22/bolsonaro-esta-estavel-diz-hospital.ghtml">G1, 13h54</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/22/michelle-diz-que-bolsonaro-passou-a-noite-sem-dores.ghtml">Valor</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/21/moraes-autoriza-visitas-de-filhos-de-bolsonaro-ao-hospital-mas-veda-celular.ghtml">Valor, visitas</a>.</p></article>
+<article class="card" id="pauta-pec"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><p><strong>Fato — 22/11/2026.</strong> A PEC da Segurança Pública foi aprovada em definitivo pelo Congresso em 3/11/2026 e permite que prefeitos criem polícias municipais, do zero ou a partir de guardas civis já existentes, mas a mudança não é automática e nenhuma prefeitura pode concluí-la antes de a emenda entrar em vigor — o que ainda não ocorreu, sem data de promulgação marcada. O texto inclui na Constituição o Susp, criado em 2018. Segundo o G1, com dados da Rais, há 1.417 municípios com guardas civis ativas, cerca de 107 mil agentes. Em abril de 2026, o STF havia proibido cidades de rebatizar guardas como polícia municipal. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a> · <a href="https://g1.globo.com/politica/noticia/2026/11/22/exigencias-policia-municipal-prefeituras.ghtml">G1, exigências</a> · <a href="https://api.cnm.org.br/comunicacao/noticias/pec-da-seguranca-cnm-orienta-municipios-sobre-criacao-de-policias-municipais">CNM, orientação a municípios</a>.</p></article>
+</div>
 </section>
 
 <!-- ECONOMIA -->
 <section id="economia" class="desk-section">
   <h2>Economia</h2>
-  <div class="grid"><article class="card" id="pauta-cambio"><h3>O câmbio e o custo do impasse fiscal</h3><p><strong>Contexto — 19/11/2026, desdobramento em 22/11/2026.</strong> O Jornal Digital registrou em 19/11 a venda extraordinária de US$ 1 bilhão à vista pelo Banco Central e o dólar comercial fechando em alta. Nesta captura, a capa do Valor exibia cotações de 19/11 — Ibovespa a 166.376 pontos, variação de −0,69%, e dólar comercial a R$ 5,9344, alta de 1,15% —, sem atualização para 20/11. São valores de referência da captura, não fechamento de hoje. A reportagem do Valor sobre uma ordem bilionária segue atrás de assinatura e não foi lida. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1, fechamento de 19/11</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/19/uma-unica-ordem-bilionaria-por-dolares-expos-desequilibrio-no-mercado-que-levou-bc-a-agir.ghtml">Valor, acesso restrito</a>.</p></article></div>
+  <div class="grid">
+<article class="card is-updated" id="pauta-fiscal-camara"><span class="upd-tag">Atualizado · 20h</span><h3>Câmara vota o ajuste fiscal nesta segunda, com R$ 50 bi projetados para 2027</h3><p><strong>Fato — 22/11/2026.</strong> O relator Mauro Benevides (União Brasil-CE) manteve o texto aprovado pelo Senado, e o presidente da Câmara, Hugo Motta, marcou a votação do PLP 299/2026 para segunda-feira (23), dia atípico. O impacto projetado nas contas públicas é de R$ 50 bilhões em 2027, segundo o relator do Senado, Eduardo Braga. Entre as medidas: limitar créditos tributários cruzados usados para compensar impostos — na prática, parte dos tributos hoje pagos com crédito passaria a ser paga em dinheiro. Empresas usaram R$ 200,1 bilhões em créditos para pagar tributos federais de janeiro a setembro de 2026, segundo o G1 com dados da Receita. CNI, Fiesp e Fiemg dizem que os grandes empresários arcarão com a maior parte do custo. <a href="https://g1.globo.com/politica/noticia/2026/11/22/camara-deve-votar-projeto-de-ajuste-fiscal-nesta-segunda.ghtml">G1</a> · <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a> · <a href="https://www12.senado.leg.br/orcamento/documentos/estudos/tipos-de-estudos/notas-tecnicas-e-informativos/ni_substitutivo_plp_299_2026.pdf">Nota técnica do Senado</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/22/agenda-de-politica-camara-deve-votar-ajuste-fiscal-e-lula-discute-nome-para-stf.ghtml">Valor, agenda</a>.</p></article>
+<article class="card is-new" id="pauta-china-margem"><span class="new-tag">Novo · 20h</span><h3>Bolsas chinesas cortam exigência de margem de 100% para 80%</h3><p><strong>Fato — 22/11/2026.</strong> Xangai e Shenzhen reduzem a exigência mínima de margem de 100% para 80%, com efeito a partir de 30 de novembro, para permitir comprar mais ações com a mesma garantia, e cortam taxas de negociação; Shenzhen propôs criar formadores de mercado no ChiNext. É estímulo à alavancagem, não injeção de capital público. <a href="https://economia.uol.com.br/noticias/reuters/2026/11/22/bolsas-chinesas-flexibilizam-requisitos-para-operacoes-com-margem-para-apoiar-mercado-de-acoes.amp.htm">Reuters/UOL</a>. <strong>Não verificado em comunicado primário das bolsas.</strong></p></article>
+<article class="card" id="pauta-cambio"><h3>O câmbio e o custo do impasse fiscal</h3><p><strong>Contexto — 19/11/2026, desdobramento em 22/11/2026.</strong> Em 19/11 o Banco Central vendeu US$ 1 bilhão à vista e o dólar comercial fechou em alta, a R$ 5,9344 (+1,15%), com o Ibovespa a 166.376 pontos (−0,69%). São as cotações que a capa do Valor ainda exibia nesta captura, referentes a 19/11 — não são valores de hoje nem previsão. A intervenção em dia de votação fiscal tem precedente em 19/12/2024, mas as condições eram outras, e coincidência não estabelece causa. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1, fechamento de 19/11</a> · <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote">Agência Brasil, 19/12/2024</a>.</p></article>
+</div>
 </section>
 
 <!-- TECNOLOGIA -->
 <section id="tecnologia" class="desk-section">
   <h2>Tecnologia</h2>
-  <div class="grid"><article class="card" id="pauta-ia-acoes"><h3>Nvidia e Anthropic puxam a correção nas ações de IA</h3><p><strong>Fato — 20/11/2026.</strong> As ações da Anthropic caíram 8,5% no fechamento de sexta, depois de estrearem na Nasdaq na quinta com alta de 17%. No mesmo dia, o S&P 500 caiu 3,7%, o Dow Jones 1,9% e o Nasdaq 5,3%; o S&amp;P 500 e o Dow entraram em correção. A BBC cita mais de US$ 1 trilhão gastos em IA por poucas empresas no último ano e questões específicas envolvendo a Nvidia. O Valor registrou que a Nvidia fechou em queda de 13,8%, a US$ 125,84, sétima perda seguida, quase 48% abaixo da máxima de 6/10. A BBC nota que os três índices ainda estavam acima do nível de um ano antes. <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC</a> · <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</p></article><article class="card" id="pauta-chips"><h3>Washington restringe chips e ameaça frear centros de dados no exterior</h3><p><strong>Fato — 22/11/2026.</strong> A BBC registrou que Trump ameaçou proibir empresas americanas de construir centros de dados de IA fora dos EUA, sem detalhar como a regra funcionaria, e que Washington anunciou na segunda-feira anterior, 16/11, exigência de licença para compra de chips avançados, para monitorar uso por empresas chinesas. São anúncios de intenção: a reportagem diz que faltam detalhes de aplicação e que a política pode não se concretizar. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</p></article></div>
+  <div class="grid">
+<article class="card is-new" id="pauta-java"><span class="new-tag">Novo · 20h</span><h3>Falha crítica no Java: a Oracle corrigiu na terça-feira</h3><p><strong>Fato — 17/11 e 22/11/2026.</strong> A empresa de cibersegurança Calif usou IA para encontrar uma falha crítica nas funções de memória do Java, linguagem usada por bancos, governos e hospitais; a Oracle publicou correção em 17/11. A Calif já havia achado uma vulnerabilidade no PHP que afetou cerca de 30 milhões de sites antes da correção. Na mesma semana, o FBI investiga uma aparente invasão da base NCIC, usada por polícias para mandados e antecedentes, e o diretor de cibersegurança da Casa Branca foi demitido. A NSA afirmou que sua paralisação veio de "manutenção de rotina", e as autoridades negaram ataque nos apagões recentes: <strong>não há conexão demonstrada entre os três episódios</strong>. <a href="https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/22/a-falha-critica-descoberta-na-linguagem-de-programacao-usada-por-90-das-grandes-empresas-do-mundo.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cvze7de86pk3o">BBC, NCIC</a> · <a href="https://www.bbc.com/news/articles/cwz0k3nn5p5mo">BBC, demissão</a>.</p></article>
+<article class="card is-new" id="pauta-gta"><span class="new-tag">Novo · 20h</span><h3>GTA VI arrecada US$ 3,79 bilhões em um dia</h3><p><strong>Fato — 19/11/2026.</strong> Lançado em 19/11, o GTA VI arrecadou US$ 3,79 bilhões no primeiro dia, segundo a Take-Two/Rockstar, com 32,5 milhões de cópias pré-vendidas; a empresa não divulgou unidades vendidas no dia. A BBC, independente, arredonda para US$ 3,8 bilhões e chama o lançamento de o maior do entretenimento. O GTA V, de 2013, virou plataforma de receita recorrente por uma década. <a href="https://ir.take2games.com/node/32701/pdf">Comunicado da Take-Two</a> · <a href="https://www.bbc.com/news/articles/c9zr5nyv5dj2o">BBC</a>.</p></article>
+<article class="card is-new" id="pauta-coreia"><span class="new-tag">Novo · 20h</span><h3>Coreia do Sul perde o ministro da Educação por fraude com IA no exame</h3><p><strong>Fato — 22/11/2026.</strong> O ministro da Educação, Choi Kyo-jin, renunciou depois que o Suneung, exame de admissão universitária feito na quinta-feira (19/11), teve 111 candidatos flagrados com dispositivos inteligentes não autorizados entre cerca de 500 mil inscritos. O gatilho foi a confissão de Han Won-seok, 34 anos, que admitiu ter usado minicâmera, celular e IA para acertar 159 de 160 questões no exame de contabilidade fiscal em abril. O presidente Lee Jae Myung aceitou a renúncia. O Suneung dura até nove horas e concentra o acesso às melhores universidades. <a href="https://www.bbc.com/news/articles/cw3dgk29d37no">BBC, 09h20 UTC</a>.</p></article>
+<article class="card" id="pauta-ia-acoes"><h3>Nvidia e Anthropic puxam a correção nas ações de IA</h3><p><strong>Fato — 20/11/2026.</strong> A Anthropic estreou na Nasdaq em 19/11 a US$ 97, alta de 17%, com valor de mercado de US$ 1,75 trilhão, e caiu 8,5% no fechamento de sexta. No mesmo dia, o S&amp;P 500 caiu 3,7%, o Dow Jones 1,9% e o Nasdaq 5,3%. A Nvidia fechou em queda de 13,8%, a US$ 125,84, sétima perda seguida, quase 48% abaixo da máxima de 6/10. A crise da Nvidia começou com a saída do CEO Jensen Huang em 11/11, após admissão de um caso extraconjugal e uma investigação interna; em 20/11 a Reuters informou que a SEC apurava questões contábeis. A BBC nota que os índices ainda estavam acima do nível de um ano antes. <a href="https://g1.globo.com/economia/noticia/2026/11/19/acoes-anthropic-nasdaq.ghtml">G1, estreia</a> · <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC, sell-off</a> · <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a> · <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm">Documento da Nvidia à SEC</a>.</p></article>
+<article class="card" id="pauta-chips"><h3>Washington restringe chips e ameaça frear centros de dados no exterior</h3><p><strong>Fato — 16/11 e 20/11/2026.</strong> Trump ameaçou proibir empresas americanas de construir centros de dados de IA fora dos EUA, sem detalhar a aplicação, e Washington anunciou na segunda-feira (16/11) exigência de licença para compra de chips avançados, para monitorar uso por empresas chinesas. A medida afeta países do Sudeste Asiático que investiram em centros de dados. São anúncios de intenção. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</p></article>
+</div>
 </section>
 
 <section id="historico" aria-labelledby="titulo-historico">
   <h2 id="titulo-historico">O que veio antes</h2>
-  <article class="correlation"><h3>COP31 termina sem acordo: a primeira vez desde 2009</h3><ol class="timeline"><li><time datetime="2015-12-12">12/12/2015</time>a COP21 adotou o Acordo de Paris, com a meta de conter o aquecimento bem abaixo de 2 °C e buscar 1,5 °C. <a href="https://unfccc.int/process-and-meetings/the-paris-agreement">UNFCCC, texto e status do Acordo</a>.</li><li><time datetime="2023-12-13">13/12/2023</time>a decisão FCCC/PA/CMA/2023/L.17, primeiro balanço global da COP28 em Dubai, foi publicada pela presidência como proposta. É o documento citado pela COP31 — e não repetido por ela. <a href="https://unfccc.int/documents/636608">UNFCCC, documento 636608</a>.</li><li><time datetime="2025-11-21">21/11/2025</time>a COP30 terminou em Belém; a ONU registrou o encerramento com a fala do secretário-executivo de que "a cooperação climática está viva". O mapa do caminho descartado em Antália nasceu desse processo. <a href="https://unfccc.int/cop30">UNFCCC, página oficial da COP30</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>sem consenso, a COP31 encerra sem decisão adotada. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml">G1</a> · <a href="https://www.bbc.com/news/live/crly5w901n20t">BBC</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A COP decide por consenso: um bloco de países pode vetar a adoção. Por isso a arquitetura de Dubai continua sendo a referência formal, mas não ganhou mecanismo novo em Antália — a remissão mantém o precedente sem criar obrigação adicional. <strong>Contraponto:</strong> um texto rejeitado por um grupo não mede o apoio da maioria, e não houve votação registrada. <strong>Cenário:</strong> o Acordo de Paris e os compromissos nacionais seguem válidos; o efeito prático recai sobre financiamento de adaptação e sobre a previsibilidade para investidores.</p></article>
-  <article class="correlation"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><ol class="timeline"><li><time datetime="2026-04-01">Abril de 2026</time>o STF proibiu cidades de rebatizar guardas civis como polícia municipal, ao analisar lei de São Paulo. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">Relato do G1</a>, que remete ao julgamento; o acórdão não foi consultado.</li><li><time datetime="2026-11-03">03/11/2026</time>o Congresso aprova em definitivo a PEC, que inclui o Susp na Constituição e autoriza polícias municipais sob regras. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>G1 detalha as exigências e registra que a emenda ainda não entrou em vigor. <a href="https://g1.globo.com/politica/noticia/2026/11/22/exigencias-policia-municipal-prefeituras.ghtml">G1, exigências</a>.</li></ol><p><strong>Nexo e contraponto.</strong> O que mudou é a base constitucional da atribuição policial municipal; o que se repetiu é o conflito federativo sobre competência, que o STF havia travado. <strong>Limite:</strong> sem promulgação, nenhuma polícia municipal está em operação; projetos anunciados não são força criada.</p></article>
-  <article class="correlation"><h3>Ajuste fiscal passa no Senado e espera a Câmara</h3><ol class="timeline"><li><time datetime="2024-12-19">19/12/2024</time>o BC vendeu dólares das reservas à vista em leilões, em dia de votação de pacote fiscal na Câmara — precedente já registrado na edição de 19/11. <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote">Agência Brasil</a>.</li><li><time datetime="2026-11-12">12/11/2026</time>o Senado aprova o texto principal do PLP 299/2026. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-18">18/11/2026</time>turno suplementar concluído, 69 votos a 2; a matéria segue para a Câmara. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>o BC vende US$ 1 bilhão à vista e o dólar fecha em alta. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A sequência legislativa — Senado conclui, Câmara aprecia, sanção e execução no Orçamento de 2027 — é o mecanismo. Não há relação demonstrada entre a tramitação e o câmbio de 19/11: os eventos correram na mesma semana, e coincidência não estabelece causa. O padrão de leilão em dia de votação fiscal se repetiu em 2024, mas as condições eram outras. <strong>Cenário:</strong> se a Câmara mudar o texto, ele volta ao Senado e o calendário escorrega.</p></article>
-  <article class="correlation"><h3>Nvidia e Anthropic puxam a correção nas ações de IA</h3><ol class="timeline"><li><time datetime="2026-10-06">06/10/2026</time>máxima de fechamento da Nvidia, referência da queda acumulada de quase 48% até 20/11. <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</li><li><time datetime="2026-11-16">16/11/2026</time>Washington anuncia exigência de licença para compra de chips avançados. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>a Anthropic estreia na Nasdaq com alta de 17%, pauta registrada na edição de 19/11 deste jornal. <a href="https://www.bbc.com/news/live/c933xxm82mr8t">BBC</a>.</li><li><time datetime="2026-11-20">20/11/2026</time>Anthropic cai 8,5%; Nvidia cai 13,8% na sétima perda seguida; índices americanos fecham em baixa. <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC</a> · <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</li></ol><p><strong>Nexo e contraponto.</strong> A estreia fixa um preço de referência e expõe a empresa à volatilidade; ao mesmo tempo, o volume de investimento em IA e as dúvidas sobre retorno pressionam o setor inteiro. <strong>Evidência contrária:</strong> os três índices ainda estavam acima do nível de um ano antes, e uma investigação da SEC é procedimento, não condenação. <strong>Cenário:</strong> se o mercado exigir retorno antes de financiar capacidade, a construção de centros de dados pode desacelerar; nesta captura, nenhum corte foi anunciado.</p></article>
+  <article class="correlation"><h3>COP31: a decisão de Dubai citada, nunca repetida</h3><ol class="timeline"><li><time datetime="2015-12-12">12/12/2015</time>a COP21 adota o Acordo de Paris, com a meta de conter o aquecimento bem abaixo de 2 °C e buscar 1,5 °C. <a href="https://unfccc.int/process-and-meetings/the-paris-agreement">UNFCCC, texto e status do Acordo</a>.</li><li><time datetime="2023-12-13">13/12/2023</time>a decisão FCCC/PA/CMA/2023/L.17, primeiro balanço global da COP28 em Dubai, reconhece a transição para longe dos combustíveis fósseis. É o documento que a COP31 cita por remissão, sem repetir a fórmula. <a href="https://unfccc.int/documents/636608">UNFCCC, documento 636608</a>.</li><li><time datetime="2025-11-21">21/11/2025</time>a COP30 termina em Belém; o mapa do caminho descartado em Antália nasceu desse processo. <a href="https://unfccc.int/cop30">UNFCCC, página oficial da COP30</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>o rascunho da COP31 já não menciona combustíveis fósseis. <a href="https://valor.globo.com/mundo/noticia/2026/11/19/rascunho-da-cop31-retira-meno-a-combustveis-fsseis-s-vsperas-do-prazo-final-das-negociacoes.ghtml">Valor</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>a UE deixa a plenária, Guterres fala em "profunda decepção" e a conferência encerra sem decisão adotada. <a href="https://www.bbc.com/news/articles/cqwy06zrd26lo">BBC</a> · <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/22/uma-vergonha-delegados-da-uniao-europeia-deixam-plenaria-apos-colapso-de-negociacoes-na-cop31.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A COP decide por consenso — a redação que passa é a que nenhum bloco veta. Em 2023, o consenso possível foi a fórmula "transição para longe dos fósseis"; em 2026 ela não se repetiu, e a remissão a Dubai manteve o precedente sem criar obrigação nova. <strong>Contraponto:</strong> não houve votação, e a rejeição por um bloco não mede a posição da maioria; a BBC relata que países pobres rejeitaram o texto por outro motivo, a falta de dinheiro de adaptação. <strong>Cenário:</strong> Paris e os planos nacionais seguem válidos; sem regra nova, o custo do financiamento de adaptação fica com os bancos de desenvolvimento e a filantropia.</p></article>
+  <article class="correlation"><h3>A PEC da Segurança e a guarda que pode virar polícia</h3><ol class="timeline"><li><time datetime="2018-01-01">2018</time>é criado o Susp, agora incorporado à Constituição pela PEC. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a>.</li><li><time datetime="2026-04-01">Abril de 2026</time>o STF proíbe cidades de rebatizar guardas civis como polícia municipal ao analisar lei de São Paulo. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">Relato do G1</a>; o acórdão não foi consultado.</li><li><time datetime="2026-11-03">03/11/2026</time>o Congresso aprova a PEC em definitivo, autorizando polícias municipais sob regras. <a href="https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml">G1</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>a CNM orienta municípios: sem promulgação e sem regulamentação federal, nenhuma transformação pode começar. <a href="https://api.cnm.org.br/comunicacao/noticias/pec-da-seguranca-cnm-orienta-municipios-sobre-criacao-de-policias-municipais">CNM</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O STF barrou o efeito por via de lei municipal; a PEC muda a base constitucional, e por isso a transformação passa a depender de lei municipal, acreditação estadual e regulamentação federal. <strong>Limite:</strong> promulgação sem data marcada; projeto anunciado não é força criada.</p></article>
+  <article class="correlation"><h3>O ajuste fiscal e o crédito tributário como moeda</h3><ol class="timeline"><li><time datetime="2024-12-19">19/12/2024</time>o BC vende dólares das reservas à vista em leilões, em dia de votação de pacote fiscal na Câmara. <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote">Agência Brasil</a>.</li><li><time datetime="2026-11-12">12/11/2026</time>o Senado aprova o texto principal do PLP 299/2026. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-18">18/11/2026</time>o turno suplementar se conclui, 69 a 2; a matéria vai à Câmara. <a href="https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027">Senado Notícias</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>o BC vende US$ 1 bilhão à vista e o dólar fecha em alta. <a href="https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml">G1</a>.</li><li><time datetime="2026-11-23">23/11/2026</time>a Câmara vota o PLP 299/2026, com o texto do Senado mantido pelo relator. <a href="https://g1.globo.com/politica/noticia/2026/11/22/camara-deve-votar-projeto-de-ajuste-fiscal-nesta-segunda.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Limitar a compensação de créditos tributários troca "moeda fiscal" por caixa: eleva a arrecadação no curto prazo sem criar tributo novo, e é por isso que as entidades industriais contestam a medida. As empresas usaram R$ 200,1 bilhões em créditos de janeiro a setembro de 2026, segundo o G1 com dados da Receita. <strong>Contraponto:</strong> os R$ 50 bilhões são projeção, não arrecadação realizada. <strong>Sobre o câmbio:</strong> a venda de dólares pelo BC na mesma semana do impasse não prova causa; o padrão de intervenção em dia de votação fiscal se repetiu em 2024, com outras condições.</p></article>
+  <article class="correlation"><h3>Do 8 de janeiro à Lei da Dosimetria e ao julgamento do STF</h3><ol class="timeline"><li><time datetime="2023-01-08">08/01/2023</time>atos de vandalismo em Brasília geram as condenações que a lei de 2026 alcança. Referência de contexto citada nas reportagens do STF.</li><li><time datetime="2026-05-08">08/05/2026</time>a Lei 15.402/2026, a Lei da Dosimetria, é promulgada. <a href="https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/">STF</a>.</li><li><time datetime="2026-05-09">09/05/2026</time>Moraes suspende a aplicação da lei às execuções penais dos condenados de 8 de janeiro, até o plenário julgar. <a href="https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/">STF</a>.</li><li><time datetime="2026-11-17">17/11/2026</time>Câmara e Senado pedem que as ações sejam pautadas. <a href="https://www12.senado.leg.br/noticias/materias/2026/11/17/davi-e-motta-pedem-julgamento-das-acoes-da-lei-da-dosimetria">Senado</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>o relator libera os processos para o plenário virtual de 4 a 15 de dezembro. <a href="https://www1.folha.uol.com.br/poder/2026/11/19/moraes-marca-para-4-de-dezembro-julgamento-sobre-dosimetria-que-pode-beneficiar-bolsonaro.shtml">Folha</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>o G1 informa que Bolsonaro está estável na UTI; não há vínculo entre a internação e o calendário do julgamento. <a href="https://g1.globo.com/politica/politico/noticia/2026/11/22/bolsonaro-esta-estavel-diz-hospital.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A lei muda o cálculo da pena e poderia reduzir os 27 anos e 3 meses de Bolsonaro; se o STF a declarar válida, ela vale para os condenados de 8 de janeiro, e a suspensão de maio cai. <strong>Contraponto:</strong> validar a lei não revoga a condenação nem concede prisão domiciliar — o regime humanitário vigente desde 24/3/2026 foi decisão separada de Moraes. <strong>Limite:</strong> não li o inteiro teor da lei nem o acórdão de maio; o julgamento ainda não começou, e não há votos.</p></article>
+  <article class="correlation"><h3>Nvidia, Anthropic e a correção nas ações de IA</h3><ol class="timeline"><li><time datetime="2026-10-06">06/10/2026</time>máxima de fechamento da Nvidia, referência da queda de quase 48% até 20/11. <a href="https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml">Valor</a>.</li><li><time datetime="2026-11-08">08/11/2026</time>Jensen Huang admite um caso extraconjugal; o conselho abre investigação interna sobre possível operação de inteligência estrangeira. <a href="https://www.fidelity.com/news/article/company-news/202611121145RTRSNEWSCOMBINED_KCN3WM22K-OUSBS_1">Reuters</a>.</li><li><time datetime="2026-11-11">11/11/2026</time>o conselho aceita a renúncia de Huang, efetiva na hora; a CFO Colette Kress assume interinamente. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm">Documento da Nvidia à SEC</a>.</li><li><time datetime="2026-11-16">16/11/2026</time>Washington anuncia exigência de licença para compra de chips avançados. <a href="https://www.bbc.com/news/articles/cmde1lw9y54ko">BBC</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>a Anthropic estreia na Nasdaq a US$ 97, alta de 17%, valor de mercado de US$ 1,75 trilhão. <a href="https://g1.globo.com/economia/noticia/2026/11/19/acoes-anthropic-nasdaq.ghtml">G1</a>.</li><li><time datetime="2026-11-20">20/11/2026</time>Anthropic cai 8,5%; Nvidia cai 13,8% na sétima perda seguida; o Nasdaq perde 5,3%; a Reuters informa que a SEC apura questões contábeis da Nvidia. <a href="https://www.bbc.com/news/articles/c6808ym10vzgo">BBC</a> · <a href="https://www.investing.com/news/economy-news/exclusiveus-secs-nvidia-probe-is-examining-potential-accounting-issues-sources-say-5042460">Reuters</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Uma saída de CEO por crise de governança muda a avaliação de risco da empresa e contamina o setor: quem financia capacidade precisa precificar incerteza sobre liderança e contabilidade. <strong>Evidência contrária:</strong> os três índices ainda estavam acima do nível de um ano antes, a investigação da SEC é procedimento, não condenação, e a estreia da Anthropic colocou US$ 1,75 trilhão de valor de mercado em uma empresa que ainda depende de receita futura.</p></article>
+  <article class="correlation"><h3>Falhas de software e a cadeia de dependência</h3><ol class="timeline"><li><time datetime="2026-11-17">17/11/2026</time>a Oracle publica a correção da falha de memória do Java achada com IA pela Calif. <a href="https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/22/a-falha-critica-descoberta-na-linguagem-de-programacao-usada-por-90-das-grandes-empresas-do-mundo.ghtml">G1</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>apagões atingem bancos e o controle de tráfego aéreo dos EUA; as autoridades dizem que não houve ataque. <a href="https://www.bbc.com/news/articles/cr930ney9d1po">BBC</a>.</li><li><time datetime="2026-11-20">20/11/2026</time>o diretor de cibersegurança da Casa Branca é demitido. <a href="https://www.bbc.com/news/articles/cwz0k3nn5p5mo">BBC</a>.</li><li><time datetime="2026-11-21">21/11/2026</time>relatos de invasão do NCIC; o FBI não comenta. <a href="https://www.bbc.com/news/articles/cvze7de86pk3o">BBC</a>.</li></ol><p><strong>Nexo e limite.</strong> O mecanismo conhecido é o da cadeia de dependência: uma biblioteca usada por bancos e governos concentra risco, e a correção só protege quem atualiza. <strong>Contraponto:</strong> nenhuma fonte liga a falha do Java aos apagões ou à invasão do NCIC; a NSA fala em manutenção e as autoridades negam ataque. Trate os três como episódios simultâneos, não como cadeia causal.</p></article>
 </section>
 
 <!-- MAPA 3D -->
 <section id="globo" class="explore">
   <h2>Onde as notícias acontecem</h2>
   <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
-  <p>Este globo mostra a edição das 14h de 22/11. Veja também o <a href="edicoes/2026-11-20-0800.html#globe-container">globo da edição anterior</a>.</p>
+  <p>Este globo mostra a edição das 20h de 22/11. Veja também o <a href="edicoes/2026-11-22-1400.html#globe-container">globo da edição das 14h</a>.</p>
   <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
   <div id="globe-container" aria-label="Globo de referências geográficas"></div>
 </section>
@@ -200,19 +228,20 @@ nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
 <section id="grafo" class="explore">
   <h2>Como as notícias se conectam</h2>
   <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
-  <p>Este grafo mostra a edição das 14h de 22/11. Veja também o <a href="edicoes/2026-11-20-0800.html#grafo">grafo da edição anterior</a>.</p>
+  <p>Este grafo mostra a edição das 20h de 22/11. Veja também o <a href="edicoes/2026-11-22-1400.html#grafo">grafo da edição das 14h</a>.</p>
   <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
   <div id="graph-info" aria-live="polite" hidden></div>
 </section>
 
 <!-- CORRELAÇÕES -->
-<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> a PEC da Segurança ainda não muda o policiamento de nenhuma cidade; sem promulgação, guardas seguem com as atribuições atuais.</li><li><strong>Macroeconomia:</strong> o ajuste fiscal só produz efeito orçamentário depois da Câmara e da sanção; o dólar de 19/11 e as cotações exibidas são de referência, não previsão.</li><li><strong>Finanças:</strong> a correção nas ações de IA reflete preço e expectativa; os índices americanos ainda estavam acima do nível de um ano antes.</li><li><strong>Cenário global:</strong> sem decisão na COP31, o Acordo de Paris e os compromissos nacionais seguem válidos, mas não há mecanismo novo nem prazo para a transição energética.</li></ul></article></section>
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> a PEC da Segurança continua sem efeito prático — sem promulgação, guardas mantêm as atribuições atuais. Quem usa serviços de bancos e hospitais depende de atualização de software contra a falha do Java.</li><li><strong>Macroeconomia:</strong> o ajuste fiscal só muda o Orçamento de 2027 depois da Câmara e da sanção; os R$ 50 bilhões são projeção. O limite à compensação de créditos troca crédito fiscal por caixa.</li><li><strong>Finanças:</strong> a correção nas ações de IA reflete preço, governança e expectativa; os índices americanos ainda estavam acima do nível de um ano antes, e uma investigação da SEC não é condenação. As bolsas chinesas estimulam alavancagem com margem menor a partir de 30/11.</li><li><strong>Cenário global:</strong> sem decisão na COP31, Paris e os planos nacionais seguem válidos, mas não há mecanismo novo nem prazo; a violação do espaço aéreo polonês elevou o custo político da guerra sem alterar o Artigo 5 da Otan.</li></ul></article></section>
 
 <section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
   <h2 id="titulo-edicoes">Arquivo de edições</h2>
   <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
   <details open><summary>22 de novembro de 2026</summary><ul>
-    <li><a href="edicoes/noticias-2026-11-22-1400.md" download>14h — Relatório</a> (edição vigente na capa)</li>
+    <li><a href="edicoes/noticias-2026-11-22-2000.md" download>20h — Relatório</a> (edição vigente na capa)</li>
+    <li><a href="edicoes/2026-11-22-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-22-1400.md" download>Relatório</a></li>
   </ul></details>
   <details open><summary>20 de novembro de 2026</summary><ul>
     <li><a href="edicoes/2026-11-20-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-20-0800.md" download>Relatório</a></li>
@@ -240,7 +269,7 @@ nav a:focus-visible,.lead a:focus-visible{outline-color:var(--signal)}
 
 <footer>
   <p>Jornal Digital — Edições do agente Jornalista</p>
-  <p>Dados capturados em 22/11/2026 às 14:00 (horário de Brasília)</p>
+  <p>Dados capturados em 22/11/2026 às 20:00 (horário de Brasília)</p>
 </footer>
 
 <script>
@@ -250,8 +279,8 @@ const newsLocations = [
     "lat": 36.90,
     "lng": 30.70,
     "name": "Antália, Turquia",
-    "title": "COP31 termina sem acordo",
-    "story": "cop31",
+    "title": "UE deixa a plenária e a COP31 encerra sem acordo",
+    "story": "cop31-ue",
     "color": "#ff6b6b",
     "size": 1
   },
@@ -259,7 +288,7 @@ const newsLocations = [
     "lat": 25.76,
     "lng": -80.19,
     "name": "Miami, EUA",
-    "title": "Nvidia e Anthropic puxam a correção",
+    "title": "Correção nas ações de IA e restrição a chips",
     "story": "ia-acoes",
     "color": "#ff6b6b",
     "size": 1
@@ -268,7 +297,7 @@ const newsLocations = [
     "lat": 38.91,
     "lng": -77.04,
     "name": "Washington, EUA",
-    "title": "Licença para chips e centros de dados",
+    "title": "Licença para chips, demissão na cibersegurança e bancada democrata",
     "story": "chips",
     "color": "#ff6b6b",
     "size": 1
@@ -277,8 +306,44 @@ const newsLocations = [
     "lat": -15.79,
     "lng": -47.88,
     "name": "Brasília, DF",
-    "title": "PEC da Segurança e ajuste fiscal",
-    "story": "pec",
+    "title": "Ajuste fiscal na Câmara, Dosimetria no STF e Bolsonaro na UTI",
+    "story": "fiscal-camara",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 50.32,
+    "lng": 22.30,
+    "name": "Nowy Lipowiec, Polônia",
+    "title": "Míssil russo cai no sudeste do país",
+    "story": "guerra",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 50.45,
+    "lng": 30.52,
+    "name": "Kiev, Ucrânia",
+    "title": "Retaliação russa atinge pontes da capital",
+    "story": "guerra",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 37.57,
+    "lng": 126.98,
+    "name": "Seul, Coreia do Sul",
+    "title": "Ministro da Educação renuncia por fraude no Suneung",
+    "story": "coreia",
+    "color": "#ff6b6b",
+    "size": 1
+  },
+  {
+    "lat": 31.23,
+    "lng": 121.47,
+    "name": "Xangai, China",
+    "title": "Bolsas cortam exigência de margem para 80%",
+    "story": "china-margem",
     "color": "#ff6b6b",
     "size": 1
   }
@@ -378,265 +443,83 @@ function showVizFallback(container, message){
 
 // ========== GRAFO 3D ==========
 const graphNodes = [
-  {
-    "id": "mundo",
-    "name": "Mundo",
-    "type": "hub",
-    "desc": "",
-    "color": "#ffd166",
-    "size": 5
-  },
-  {
-    "id": "cop31",
-    "name": "COP31 termina sem acordo: a primeira vez desde 2009",
-    "type": "news",
-    "desc": "Fato — 22/11/2026. A COP31, em Antália, terminou sem texto adotado após UE, Ilhas Marshall, Noruega, Panamá e Vanuatu rejeitarem a proposta, que citava a COP28 sem repetir o compromisso sobre combustíveis fósseis nem prazos. O G1 registra a primeira falta de consenso unânime desde Copenhague (2009).",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml"
-  },
-  {
-    "id": "cop31-0",
-    "name": "12/12/2015 — a COP21 adotou o Acordo de Paris, com a meta de 1,5 °C.",
-    "type": "history",
-    "desc": "a COP21 adotou o Acordo de Paris, tratado vinculante com a meta de conter o aquecimento.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://unfccc.int/process-and-meetings/the-paris-agreement"
-  },
-  {
-    "id": "cop31-1",
-    "name": "13/12/2023 — a decisão da COP28 em Dubai reconheceu a transição para longe dos combustíveis fósseis.",
-    "type": "history",
-    "desc": "a decisão FCCC/PA/CMA/2023/L.17, primeiro balanço global, foi publicada como proposta da presidência da COP28.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://unfccc.int/documents/636608"
-  },
-  {
-    "id": "cop31-2",
-    "name": "21/11/2025 — a COP30 terminou em Belém, com o mapa do caminho que a COP31 descartou.",
-    "type": "history",
-    "desc": "a COP30 foi encerrada em Belém; a ONU registrou a fala de encerramento do secretário-executivo.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://unfccc.int/cop30"
-  },
-  {
-    "id": "politica",
-    "name": "Política",
-    "type": "hub",
-    "desc": "",
-    "color": "#ffd166",
-    "size": 5
-  },
-  {
-    "id": "pec",
-    "name": "A PEC da Segurança e a guarda que pode virar polícia",
-    "type": "news",
-    "desc": "Fato — 22/11/2026. A PEC foi aprovada em definitivo em 3/11/2026 e autoriza polícias municipais sob regras, mas nenhuma prefeitura pode concluir a transformação antes de a emenda entrar em vigor. Há 1.417 municípios com guardas civis ativas, segundo o G1 com dados da Rais.",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
-  },
-  {
-    "id": "pec-0",
-    "name": "Abril de 2026 — o STF proibiu rebatizar guardas civis como polícia municipal.",
-    "type": "history",
-    "desc": "o STF analisou lei de São Paulo que renomeava a guarda; o acórdão não foi consultado nesta captura.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
-  },
-  {
-    "id": "pec-1",
-    "name": "03/11/2026 — o Congresso aprova a PEC da Segurança em definitivo.",
-    "type": "history",
-    "desc": "a PEC inclui o Susp na Constituição e autoriza polícias municipais sob regras.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"
-  },
-  {
-    "id": "fiscal",
-    "name": "Ajuste fiscal passa no Senado e espera a Câmara",
-    "type": "news",
-    "desc": "Fato — 18/11/2026. O Senado concluiu a votação do PLP 299/2026 em turno suplementar, 69 a 2; o texto segue para a Câmara. Em 21/11, Lula rebateu críticas ao ajuste e disse que não cortará educação, saúde e salário mínimo.",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027"
-  },
-  {
-    "id": "fiscal-0",
-    "name": "12/11/2026 — o Senado aprova o texto principal do PLP 299/2026.",
-    "type": "history",
-    "desc": "o texto principal foi aprovado no Senado; o turno suplementar veio em 18/11.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027"
-  },
-  {
-    "id": "economia",
-    "name": "Economia",
-    "type": "hub",
-    "desc": "",
-    "color": "#ffd166",
-    "size": 5
-  },
-  {
-    "id": "cambio",
-    "name": "Cotações de referência e custo do impasse fiscal",
-    "type": "news",
-    "desc": "Contexto — 19/11/2026. O Jornal Digital registrou a venda de US$ 1 bilhão à vista pelo BC e o dólar fechando em alta. A capa do Valor exibia cotações de 19/11 (Ibovespa 166.376 pts, −0,69%; dólar R$ 5,9344, +1,15%), sem atualização para 20/11.",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml"
-  },
-  {
-    "id": "tecnologia",
-    "name": "Tecnologia",
-    "type": "hub",
-    "desc": "",
-    "color": "#ffd166",
-    "size": 5
-  },
-  {
-    "id": "ia-acoes",
-    "name": "Nvidia e Anthropic puxam a correção nas ações de IA",
-    "type": "news",
-    "desc": "Fato — 20/11/2026. Anthropic caiu 8,5% após estrear com alta de 17%; S&P 500 −3,7%, Nasdaq −5,3%; Nvidia −13,8%, quase 48% abaixo da máxima de 6/10. Os índices ainda estavam acima do nível de um ano antes.",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://www.bbc.com/news/articles/c6808ym10vzgo"
-  },
-  {
-    "id": "ia-0",
-    "name": "06/10/2026 — máxima de fechamento da Nvidia, referência da queda acumulada.",
-    "type": "history",
-    "desc": "máxima de fechamento registrada pelo Valor.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://valor.globo.com/valor-data/internacional/noticia/2026/11/21/nvidia-perde-us-3-trilhoes-em-valor-de-mercado-em-meio-a-crise-de-governanca-e-investigacao-da-sec.ghtml"
-  },
-  {
-    "id": "ia-1",
-    "name": "19/11/2026 — a Anthropic estreia na Nasdaq com alta de 17%.",
-    "type": "history",
-    "desc": "estreia na Nasdaq, pauta da edição de 19/11 deste jornal.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://www.bbc.com/news/live/c933xxm82mr8t"
-  },
-  {
-    "id": "chips",
-    "name": "Washington restringe chips e ameaça frear centros de dados no exterior",
-    "type": "news",
-    "desc": "Fato — 16/11 e 22/11/2026. Os EUA anunciaram exigência de licença para chips avançados; Trump ameaçou proibir empresas americanas de construir centros de dados de IA no exterior, sem detalhar a aplicação.",
-    "color": "#ff6b6b",
-    "size": 4,
-    "url": "https://www.bbc.com/news/articles/cmde1lw9y54ko"
-  },
-  {
-    "id": "chips-0",
-    "name": "16/11/2026 — anúncio de licença para compra de chips avançados.",
-    "type": "history",
-    "desc": "Washington anunciou a exigência de licença para monitorar uso por empresas chinesas.",
-    "color": "#61dfd3",
-    "size": 4,
-    "url": "https://www.bbc.com/news/articles/cmde1lw9y54ko"
-  }
-];
+  {"id":"mundo","name":"Mundo","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"cop31-ue","name":"UE deixa a plenária e a COP31 encerra sem acordo","type":"news","desc":"Fato — 22/11/2026. O rascunho final não citava combustíveis fósseis; UE e ilhas do Pacífico rejeitaram, e os europeus deixaram a plenária. Guterres falou em profunda decepção.","color":"#ff6b6b","size":5,"url":"https://www.bbc.com/news/articles/cqwy06zrd26lo"},
+  {"id":"cop31","name":"COP31 termina sem acordo: a primeira vez desde 2009","type":"news","desc":"Fato — 22/11/2026. Texto citava a COP28 só por remissão, sem repetir o compromisso sobre fósseis; Rússia defendeu a exclusão e países pobres criticaram a falta de dinheiro.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/meio-ambiente/noticia/2026/11/22/cop31-acordo-final-plenaria.ghtml"},
+  {"id":"cop31-h1","name":"13/12/2023 — a decisão da COP28 em Dubai reconheceu a transição para longe dos fósseis.","type":"history","desc":"decisão FCCC/PA/CMA/2023/L.17, o documento citado pela COP31.","color":"#61dfd3","size":4,"url":"https://unfccc.int/documents/636608"},
+  {"id":"cop31-h2","name":"21/11/2025 — a COP30 terminou em Belém.","type":"history","desc":"o mapa do caminho descartado em Antália nasceu desse processo.","color":"#61dfd3","size":4,"url":"https://unfccc.int/cop30"},
+  {"id":"cop31-h3","name":"19/11/2026 — rascunho da COP31 já omitia combustíveis fósseis.","type":"history","desc":"o G1 e o Valor registraram o texto sem a expressão.","color":"#61dfd3","size":4,"url":"https://valor.globo.com/mundo/noticia/2026/11/19/rascunho-da-cop31-retira-meno-a-combustveis-fsseis-s-vsperas-do-prazo-final-das-negociacoes.ghtml"},
+  {"id":"camara-eua","name":"Democratas conquistam a maior bancada na Câmara dos EUA desde 1992","type":"news","desc":"Fato — 22/11/2026. Chuck Hubbard venceu Virginia Foxx por 330 votos na Carolina do Norte; os democratas somam ao menos 258 cadeiras.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/c6vg29g7dlyno"},
+  {"id":"guerra","name":"Ponte da Crimeia, retaliação em Kiev e míssil russo na Polônia","type":"news","desc":"Fato — 16/11 a 22/11/2026. A Ucrânia atingiu a ponte da Crimeia; a Rússia retaliou em Kiev em 20/11, e um Kh-101 caiu na Polônia em 21/11.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/cqx2x9dklxnro"},
+  {"id":"guerra-h1","name":"16 e 17/11/2026 — a Ucrânia ataca a Ponte da Crimeia.","type":"history","desc":"o segundo ataque causou queda de um vão rodoviário, segundo o Ministério da Defesa ucraniano e o ISW.","color":"#61dfd3","size":4,"url":"https://understandingwar.org/research/russia-ukraine/russian-offensive-campaign-assessment-november-17-2026/"},
+  {"id":"guerra-h2","name":"28/02/2026 — EUA e Israel atacam o Irã.","type":"history","desc":"marco da escalada regional citada pelo Valor no ataque ao Bahrein.","color":"#61dfd3","size":4,"url":"https://commonslibrary.parliament.uk/research-briefings/cbp-10521/"},
 
+  {"id":"politica","name":"Política","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"dosimetria","name":"STF marca para dezembro o julgamento da Lei da Dosimetria","type":"news","desc":"Fato — 19/11/2026. Plenário virtual de 4 a 15 de dezembro decide se a Lei 15.402/2026 vale para os condenados de 8 de janeiro.","color":"#ff6b6b","size":4,"url":"https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/"},
+  {"id":"dosimetria-h1","name":"09/05/2026 — Moraes suspende a aplicação da lei às execuções penais.","type":"history","desc":"decisão do relator até o plenário julgar.","color":"#61dfd3","size":4,"url":"https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/"},
+  {"id":"dosimetria-h2","name":"17/11/2026 — Câmara e Senado pedem pauta das ações.","type":"history","desc":"Motta e Alcolumbre pediram o julgamento.","color":"#61dfd3","size":4,"url":"https://www12.senado.leg.br/noticias/materias/2026/11/17/davi-e-motta-pedem-julgamento-das-acoes-da-lei-da-dosimetria"},
+  {"id":"bolsonaro","name":"Bolsonaro segue clinicamente estável na UTI","type":"news","desc":"Fato — 22/11/2026. Abdômen agudo obstrutivo, jejum e suporte nutricional, sem previsão de alta; Moraes autorizou visitas diárias dos filhos.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/politica/politico/noticia/2026/11/22/bolsonaro-esta-estavel-diz-hospital.ghtml"},
+  {"id":"pec","name":"A PEC da Segurança e a guarda que pode virar polícia","type":"news","desc":"Fato — 22/11/2026. Autoriza polícias municipais sob regras, mas nada começa antes da promulgação e da regulamentação.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"},
+  {"id":"pec-h1","name":"Abril de 2026 — o STF proibiu rebatizar guardas civis como polícia municipal.","type":"history","desc":"o STF analisou lei de São Paulo; o acórdão não foi consultado.","color":"#61dfd3","size":4,"url":"https://g1.globo.com/politica/noticia/2026/11/22/pec-da-seguranca-como-uma-guarda-civil-municipal-pode-virar-policia.ghtml"},
+
+  {"id":"economia","name":"Economia","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"fiscal-camara","name":"Câmara vota o ajuste fiscal nesta segunda","type":"news","desc":"Fato — 22/11/2026. Relator mantém o texto do Senado; impacto projetado de R$ 50 bi em 2027; limite à compensação de créditos é o ponto contestado.","color":"#ff6b6b","size":5,"url":"https://g1.globo.com/politica/noticia/2026/11/22/camara-deve-votar-projeto-de-ajuste-fiscal-nesta-segunda.ghtml"},
+  {"id":"fiscal-h1","name":"18/11/2026 — o Senado conclui o PLP 299/2026, 69 a 2.","type":"history","desc":"o texto principal foi aprovado em 12/11.","color":"#61dfd3","size":4,"url":"https://www12.senado.leg.br/noticias/videos/2026/11/senado-aprova-ajuste-fiscal-para-2027"},
+  {"id":"fiscal-h2","name":"19/12/2024 — o BC vende dólares à vista em dia de votação fiscal.","type":"history","desc":"precedente de intervenção em dia de votação de pacote fiscal.","color":"#61dfd3","size":4,"url":"https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/dolar-cai-para-r-612-com-intervencao-do-bc-e-aprovacao-de-pacote"},
+  {"id":"china-margem","name":"Bolsas chinesas cortam exigência de margem de 100% para 80%","type":"news","desc":"Fato — 22/11/2026. Xangai e Shenzhen reduzem a margem a partir de 30/11 e cortam taxas; não confirmado em comunicado primário.","color":"#ff6b6b","size":4,"url":"https://economia.uol.com.br/noticias/reuters/2026/11/22/bolsas-chinesas-flexibilizam-requisitos-para-operacoes-com-margem-para-apoiar-mercado-de-acoes.amp.htm"},
+  {"id":"cambio","name":"Cotações de referência e custo do impasse fiscal","type":"news","desc":"Contexto — 19/11/2026. Dólar R$ 5,9344 (+1,15%) e Ibovespa 166.376 pts (−0,69%), cotações de 19/11 exibidas na capa do Valor.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/economia/noticia/2026/11/19/dolar-ibovespa.ghtml"},
+
+  {"id":"tecnologia","name":"Tecnologia","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"java","name":"Falha crítica no Java: a Oracle corrigiu na terça-feira","type":"news","desc":"Fato — 17/11/2026. Falha de memória no Java achada com IA pela Calif; correção publicada pela Oracle.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/22/a-falha-critica-descoberta-na-linguagem-de-programacao-usada-por-90-das-grandes-empresas-do-mundo.ghtml"},
+  {"id":"java-h1","name":"21/11/2026 — relatos de invasão do NCIC do FBI.","type":"history","desc":"aparente invasão da base de antecedentes; o FBI não comentou. Sem vínculo demonstrado com a falha do Java.","color":"#61dfd3","size":4,"url":"https://www.bbc.com/news/articles/cvze7de86pk3o"},
+  {"id":"coreia","name":"Coreia do Sul perde o ministro da Educação por fraude com IA no exame","type":"news","desc":"Fato — 22/11/2026. 111 candidatos do Suneung flagrados com dispositivos inteligentes; Choi Kyo-jin renunciou.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/cw3dgk29d37no"},
+  {"id":"gta","name":"GTA VI arrecada US$ 3,79 bilhões em um dia","type":"news","desc":"Fato — 19/11/2026. Número do comunicado da Take-Two/Rockstar; a BBC arredonda para US$ 3,8 bi.","color":"#ff6b6b","size":4,"url":"https://ir.take2games.com/node/32701/pdf"},
+  {"id":"ia-acoes","name":"Nvidia e Anthropic puxam a correção nas ações de IA","type":"news","desc":"Fato — 20/11/2026. Anthropic −8,5% após estrear a US$ 97 (+17%); Nvidia −13,8%; Nasdaq −5,3%.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/c6808ym10vzgo"},
+  {"id":"ia-h1","name":"11/11/2026 — o conselho da Nvidia aceita a renúncia de Jensen Huang.","type":"history","desc":"crise de governança após admissão de caso extraconjugal; Colette Kress assume interinamente.","color":"#61dfd3","size":4,"url":"https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm"},
+  {"id":"ia-h2","name":"20/11/2026 — a SEC apura questões contábeis da Nvidia.","type":"history","desc":"informação da Reuters; investigação é procedimento, não condenação.","color":"#61dfd3","size":4,"url":"https://www.investing.com/news/economy-news/exclusiveus-secs-nvidia-probe-is-examining-potential-accounting-issues-sources-say-5042460"},
+  {"id":"chips","name":"Washington restringe chips e ameaça frear centros de dados no exterior","type":"news","desc":"Fato — 16/11 e 20/11/2026. Licença para chips avançados e ameaça de proibir centros de dados de empresas americanas no exterior.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/cmde1lw9y54ko"}
+];
 
 const graphLinks = [
-  {
-    "source": "mundo",
-    "target": "cop31",
-    "label": "Editoria"
-  },
-  {
-    "source": "cop31-0",
-    "target": "cop31-1",
-    "label": "Etapa do mesmo processo climático"
-  },
-  {
-    "source": "cop31-1",
-    "target": "cop31-2",
-    "label": "Etapa do mesmo processo climático"
-  },
-  {
-    "source": "cop31-2",
-    "target": "cop31",
-    "label": "Etapa do mesmo processo climático"
-  },
-  {
-    "source": "politica",
-    "target": "pec",
-    "label": "Editoria"
-  },
-  {
-    "source": "pec-0",
-    "target": "pec-1",
-    "label": "Conflito de competência, não causal"
-  },
-  {
-    "source": "pec-1",
-    "target": "pec",
-    "label": "Mudança constitucional e regulamentação"
-  },
-  {
-    "source": "politica",
-    "target": "fiscal",
-    "label": "Editoria"
-  },
-  {
-    "source": "fiscal-0",
-    "target": "fiscal",
-    "label": "Etapa do mesmo processo legislativo"
-  },
-  {
-    "source": "economia",
-    "target": "cambio",
-    "label": "Editoria"
-  },
-  {
-    "source": "cambio",
-    "target": "fiscal",
-    "label": "Mesma semana, sem causalidade demonstrada",
-    "weak": true
-  },
-  {
-    "source": "tecnologia",
-    "target": "ia-acoes",
-    "label": "Editoria"
-  },
-  {
-    "source": "ia-0",
-    "target": "ia-1",
-    "label": "Marcos do mesmo ciclo de mercado"
-  },
-  {
-    "source": "ia-1",
-    "target": "ia-acoes",
-    "label": "Preço de referência e volatilidade"
-  },
-  {
-    "source": "tecnologia",
-    "target": "chips",
-    "label": "Editoria"
-  },
-  {
-    "source": "chips-0",
-    "target": "chips",
-    "label": "Política de exportação e infraestrutura"
-  },
-  {
-    "source": "chips",
-    "target": "ia-acoes",
-    "label": "Pressão regulatória sobre o setor de IA"
-  }
-];
+  {"source":"mundo","target":"cop31-ue","label":"Editoria"},
+  {"source":"mundo","target":"cop31","label":"Editoria"},
+  {"source":"mundo","target":"camara-eua","label":"Editoria"},
+  {"source":"mundo","target":"guerra","label":"Editoria"},
+  {"source":"cop31-h1","target":"cop31-h2","label":"Etapa do mesmo processo climático"},
+  {"source":"cop31-h2","target":"cop31-h3","label":"Etapa do mesmo processo climático"},
+  {"source":"cop31-h3","target":"cop31-ue","label":"Redação final sem a menção aos fósseis"},
+  {"source":"cop31","target":"cop31-ue","label":"Mesmo desfecho, ângulos complementares"},
+  {"source":"guerra-h1","target":"guerra","label":"Ataque e retaliação, conforme fontes ucranianas e Otan"},
+  {"source":"guerra-h2","target":"guerra","label":"Contexto de escalada regional, sem causalidade"},
+  {"source":"guerra","target":"cop31-ue","label":"Mesmo período, sem causalidade demonstrada","weak":true},
 
+  {"source":"politica","target":"dosimetria","label":"Editoria"},
+  {"source":"politica","target":"bolsonaro","label":"Editoria"},
+  {"source":"politica","target":"pec","label":"Editoria"},
+  {"source":"dosimetria-h1","target":"dosimetria-h2","label":"Etapa do mesmo processo judicial"},
+  {"source":"dosimetria-h2","target":"dosimetria","label":"Pauta do julgamento"},
+  {"source":"dosimetria","target":"bolsonaro","label":"Pena em discussão; internação sem nexo causal","weak":true},
+  {"source":"pec-h1","target":"pec","label":"Conflito de competência, não causal"},
+
+  {"source":"economia","target":"fiscal-camara","label":"Editoria"},
+  {"source":"economia","target":"china-margem","label":"Editoria"},
+  {"source":"economia","target":"cambio","label":"Editoria"},
+  {"source":"fiscal-h1","target":"fiscal-camara","label":"Etapa do mesmo processo legislativo"},
+  {"source":"fiscal-h2","target":"cambio","label":"Padrão repetido em 2024, condições distintas"},
+  {"source":"cambio","target":"fiscal-camara","label":"Mesma semana, sem causalidade demonstrada","weak":true},
+  {"source":"china-margem","target":"ia-acoes","label":"Ambos mexem em apetite por risco, sem nexo direto","weak":true},
+
+  {"source":"tecnologia","target":"java","label":"Editoria"},
+  {"source":"tecnologia","target":"coreia","label":"Editoria"},
+  {"source":"tecnologia","target":"gta","label":"Editoria"},
+  {"source":"tecnologia","target":"ia-acoes","label":"Editoria"},
+  {"source":"tecnologia","target":"chips","label":"Editoria"},
+  {"source":"java-h1","target":"java","label":"Mesma semana, sem vínculo demonstrado","weak":true},
+  {"source":"ia-h1","target":"ia-h2","label":"Marcos do mesmo ciclo de governança"},
+  {"source":"ia-h2","target":"ia-acoes","label":"Precificação de risco"},
+  {"source":"ia-h1","target":"ia-acoes","label":"Precificação de risco"},
+  {"source":"chips","target":"ia-acoes","label":"Pressão regulatória sobre o setor de IA"}
+];
 
 const graphContainer = document.getElementById('graph-container');
 try {

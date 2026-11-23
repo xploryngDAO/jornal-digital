@@ -13,7 +13,7 @@ def text(html):
 
 def extract(page):
     """Pautas de uma edição, sem contar os links do arquivo para a própria edição."""
-    for topic, section in re.findall(r'<section id="(mundo|politica|economia|tecnologia|social)"[^>]*>(.*?)</section>', page, re.S):
+    for topic, section in re.findall(r'<section id="(mundo|politica|economia|tecnologia|saude|ciencia|esporte|cultura|social)"[^>]*>(.*?)</section>', page, re.S):
         for card in re.findall(r'<article class=["\']card[^>]*?>(.*?)</article>', section, re.S):
             title = re.search(r'<h3[^>]*>(.*?)</h3>', card, re.S)
             if title:

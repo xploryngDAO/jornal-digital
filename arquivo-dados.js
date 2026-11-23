@@ -1,115 +1,248 @@
 window.pautasArquivadas = [
   {
-    "title": "Ucrânia reivindica o afundamento de uma corveta russa em Benghazi",
-    "body": "Fato — 22/11 e 23/11/2026. Zelensky afirmou nesta segunda-feira que a Ucrânia afundou com sete drones marítimos a corveta Merkury , \"um dos navios mais novos da Rússia\", na base naval de Benghazi, e que um helicóptero Ka-27 foi destruído. O governo do leste da Líbia relatou a explosão no domingo de manhã, enquanto o navio reabastecia, e a BBC verificou vídeos geolocalizados e imagem de satélite da Planet Labs com a embarcação em chamas às 05h47 GMT. A missão da ONU no país pediu \"investigação imediata, independente e transparente\" e disse que \"a Líbia não pode se tornar campo de batalha de conflitos estrangeiros\". O Ministério da Defesa da Rússia não havia comentado. O incêndio está documentado; o afundamento e o helicóptero são alegação ucraniana. G1, 23/11 · BBC, 23/11 .",
+    "title": "Kremlin fala em \"escalada\" e a Vantor mostra a corveta emborcada",
+    "body": "Fato — 23/11/2026. O porta-voz Dmitri Peskov chamou a \"expansão da atividade terrorista no Báltico\" de \"tendência perigosa\" e disse que ela \"leva a uma escalada de tensões na região\", mas não comentou diretamente os ataques na Líbia, remetendo ao Ministério da Defesa. A empresa de inteligência Vantor divulgou imagens que mostram, segundo ela, a corveta Merkury atracada no sábado e, no domingo, emborcada e afundada, com apenas a proa visível — primeiro registro visual do afundamento, ainda que seja análise de empresa privada. O governo do leste da Líbia diz que o navio usava o porto sob \"acordo marítimo existente\" e acusa Trípoli de hospedar militares ucranianos; o governo reconhecido pela ONU nega. Sete drones, o helicóptero Ka-27 e o navio MV Angara são alegações ucranianas , sem confirmação russa. BBC, 23/11 · G1, 23/11 .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Ataque russo mata 11 em Dymer; menino é resgatado após 14 horas",
-    "body": "Fato — 22/11 e 23/11/2026. Bombardeios na madrugada de domingo atingiram um prédio residencial em Dymer, na região de Kiev, matando 11 pessoas, segundo as autoridades ucranianas; um menino de 7 anos foi resgatado vivo após 14 horas, e uma mulher de 79 anos também sobreviveu. Um ataque a uma casa em Bila Tserkva matou mais uma pessoa, e um mercadinho em Vyshneve foi atingido, com três mortos e 13 feridos segundo Zelensky. O edifício de Dymer foi atingido às 05h locais. Números das autoridades ucranianas; não há confirmação independente do total. BBC, 23/11 .",
+    "title": "Exército dos EUA adia para quarta a detonação em Iowa",
+    "body": "Fato — 23/11/2026. A detonação das cinco toneladas de explosivos degradados na fábrica de Middletown, Iowa, passou de \"até 24/11\" para quarta-feira, 25/11 , segundo o Exército, para ter \"condições meteorológicas mais favoráveis\" e instalar todas as medidas de mitigação. A ordem judicial que suspendeu a operação continua em vigor. O adiamento enfraquece o argumento de urgência : se era possível esperar dois dias, a ação não era de horas. Comunicado do Exército · BBC, 23/11 .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Espanha vota domingo, e o PP pode precisar do Vox",
-    "body": "Fato — 23/11/2026. As pesquisas apontam vitória do PP, de Alberto Núñez Feijóo, sem maioria absoluta, e um Vox que quase dobraria a bancada; a extrema direita não participa do governo central desde 1975. Pedro Sánchez, há oito anos no poder, está atrás nas pesquisas, mas a diferença diminuiu, e ele cita a reeleição de Lula como exemplo de mobilização. O resultado é acompanhado em capitais europeias por causa das eleições de 2027 na França, na Polônia e na Itália. Em 2023, as pesquisas também davam vantagem à direita e Sánchez foi investido. G1, 23/11 · Congresso espanhol, 2023 .",
+    "title": "Democratas chegam a 258 cadeiras, a maior bancada desde 1992",
+    "body": "Fato — 23/11/2026. Com a virada de uma cadeira na Carolina do Norte, os democratas chegaram a 258 cadeiras na Câmara dos EUA e preparam uma agenda de 100 dias focada em custo de vida e em investigações sobre o governo. Quatro disputas ainda estavam indefinidas. Nexo: é o Congresso que assume em janeiro, com a senadora Elizabeth Warren na Comissão Bancária prometendo leis de controle de exportação. BBC · Valor .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Exército dos EUA diz à Justiça que vai detonar explosivos em Iowa",
-    "body": "Fato — 21/11 e 23/11/2026. O Departamento de Justiça informou à corte no sábado que o Exército seguirá com a detonação de cinco toneladas de explosivos degradados em Middletown, Iowa, apesar da decisão que a suspendeu por tempo indeterminado. O governo alega risco de explosão espontânea do azoteto de chumbo se a temperatura cair abaixo de −1 °C e diz que as portas do bunker já foram removidas. O plano é agir até 24/11, sob isenção de emergência; grupos ambientais alegam que alternativas mais seguras não foram avaliadas. BBC, 23/11 · G1, 23/11 .",
+    "title": "COP31: a Arábia Saudita na linha de frente da resistência",
+    "body": "Contexto — 23/11/2026. Segundo o Valor, Riad teve \"grande peso\" no colapso do acordo, liderando a resistência a referências à redução da dependência de combustíveis fósseis. A BBC registra que a COP31, a mais longa da história, terminou sem o \"Pacto de Antália\" e que o primeiro-ministro da Austrália, país co-anfitrião, atribuiu a falha a \"tempos geopolíticos difíceis\". O desfecho já foi publicado na edição das 20h de 22/11. BBC, encerramento · Valor, análise .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "COP31: é a primeira COP desde o aviso de que o mundo passa de 1,5 °C",
-    "body": "Contexto — 23/11/2026. A BBC resume o legado do encontro que terminou sem o \"Pacto de Antália\": foi a COP mais longa da história, a primeira desde que a ONU avisou que as temperaturas devem ultrapassar 1,5 °C, e o próprio rascunho reconhecia que a ação climática falhou na meta central. O ano trouxe colapso de geleiras, calor recorde na Europa e incêndios na Ásia, segundo a emissora. O desfecho já foi publicado na edição das 20h de 22/11. BBC, 23/11 · BBC, encerramento .",
-    "topic": "mundo",
+    "title": "Lula exonera o articulador político para ele votar o ajuste",
+    "body": "Fato — 23/11/2026. Lula exonerou temporariamente José Guimarães da Secretaria de Relações Institucionais; a exoneração foi assinada em 19/11 e publicada nesta segunda no Diário Oficial. Com isso, Guimarães reassume o mandato de deputado e participa das discussões sobre emendas e da votação do PLP 299/2026, e deve voltar ao ministério depois. O plenário votava em dia atípico, e não havia resultado ao fim desta captura — antes do mérito, é preciso aprovar o requerimento de urgência. G1, 23/11 · Câmara .",
+    "topic": "politica",
     "date": "capa vigente",
-    "url": "#mundo"
+    "url": "#politica"
   },
   {
-    "title": "O que os bilionários russos esperam de um futuro sem Putin",
-    "body": "Contexto — 23/11/2026. Reportagem da BBC relembra a reunião em que Putin, horas após invadir a Ucrânia em 24/2/2022, exigiu apoio de mais de 36 empresários no Kremlin; eles não falaram. Em 2003, Mikhail Khodorkovsky criticou o presidente e passou dez anos preso. É matéria interpretativa sobre expectativas de oligarcas, sem fato novo de governo. G1/BBC, 23/11 .",
-    "topic": "mundo",
+    "title": "Braga diz que o governo precisa enviar uma PEC de ajuste nesta semana",
+    "body": "Fato — 23/11/2026. O líder do MDB no Senado e relator do Orçamento, Eduardo Braga , afirma que uma PEC com novas medidas de ajuste é necessária para acomodar as promessas de campanha de Lula no Orçamento de 2027, e diz que o envio cabe ao Executivo. Leitura: é o reconhecimento, por quem relatou o PLP, de que o projeto votado hoje não fecha a conta. Valor, 05h00 .",
+    "topic": "politica",
     "date": "capa vigente",
-    "url": "#mundo"
+    "url": "#politica"
+  },
+  {
+    "title": "A vaga de Barroso chega à mesa com a cúpula do Congresso e do STF",
+    "body": "Fato — 23/11/2026. Segundo o blog do Valdo Cruz, Lula reuniu no sábado (21) os presidentes do Senado, Davi Alcolumbre, e da Câmara, Hugo Motta, e os ministros Gilmar Mendes, Cristiano Zanin e Alexandre de Moraes para definir o substituto de Luís Roberto Barroso , aposentado em outubro de 2025 — vaga ainda sem ocupante. Lula disse que gostaria de reenviar o nome de Jorge Messias , mas entende se for inviável; houve reação em favor do ex-senador Rodrigo Pacheco. Antecedente: o Senado rejeitou Messias em 29/4/2026, por 42 a 34 — primeira rejeição de um indicado ao STF em 132 anos. G1, 23/11 · STF, aposentadoria .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
   },
   {
     "title": "STF julga a Lei da Dosimetria de 4 a 15 de dezembro",
-    "body": "Fato — segue em pauta. A Lei 15.402/2026, promulgada em 8/5/2026, pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. STF, 09/05/2026 · Senado, 17/11/2026 .",
+    "body": "Fato — segue em pauta. A Lei 15.402/2026 pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. STF, 09/05/2026 · Senado, 17/11/2026 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "A PEC da Segurança segue sem promulgação marcada",
-    "body": "Fato — segue em pauta. Aprovada em definitivo em 3/11/2026, a PEC autoriza polícias municipais sob regras, mas nada começa antes da promulgação e da regulamentação federal; nesta captura não há data nova. G1 · CNM .",
+    "title": "Escala 5x2: a AGU pede ao STF que reconheça perda de objeto",
+    "body": "Fato — 23/11/2026. A Advocacia-Geral da União sustenta que a liminar de Dino não é mais necessária após a regulamentação do governo, porque mantê-la criaria duas regras sobre a mesma norma ; a ação que contesta o período de transição ainda será julgada pelo plenário. Separadamente, o Instituto Doméstica Legal estima que o fim da escala 6x1 afete mais de 100 mil trabalhadores domésticos , com redistribuição de horas, alteração de contratos e atualização no eSocial. G1, AGU · G1, domésticos .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Câmara vota o ajuste fiscal hoje, antes do relatório que pode contingenciar 2027",
-    "body": "Fato — 23/11/2026. Hugo Motta marcou a votação do PLP 299/2026 em plenário para esta segunda-feira, após requerimento de urgência, em dia atípico. O relator, Mauro Benevides (União Brasil-CE), manteve integralmente o texto do Senado. O Valor informa o motivo tático: o governo quer aprovar o projeto antes da publicação do RARDP (Relatório de Avaliação de Receitas e Despesas), previsto para terça-feira. Lula disse no sábado que a proposta \"não é uma reforma, mas um ajuste\" de 2027 e que não cortará programas sociais. Frentes do setor produtivo sugerem mudanças. O impacto de R$ 50 bilhões em 2027 é projeção do relator do Senado, Eduardo Braga. Valor, 05h00 · G1 · Senado · IFI, risco fiscal de 2027 .",
+    "title": "Dólar toca R$ 6 pela primeira vez desde abril de 2025",
+    "body": "Fato — 23/11/2026. O dólar comercial operava a R$ 5,9857 perto das 14h (+0,86%), após máxima de R$ 6,0055 . O último fechamento acima de R$ 6 foi em 21/1/2025 (R$ 6,0302) e a última passagem intraday havia sido em 9/4/2025 (R$ 6,0961). O Ibovespa caía 0,79%, a 165.066 pontos. O Valor atribui a alta a duas causas : expectativa sobre as contas públicas brasileiras e juros americanos mais altos. O diretor do BC Nilton David disse que o \"greed virou fear\" após a eleição e vê indícios de exagero : em três semanas, a Selic implícita passou de cerca de 200 pontos-base abaixo para 200 pontos-base acima do esperado. Valor intradiário, sem fechamento nesta captura. G1 · Valor .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Nvidia reconduz Jensen Huang e a ação sobe 34%",
+    "body": "Fato — 23/11/2026. O conselho reconduziu Jensen Huang a presidente, CEO e membro do conselho, com efeito imediato, por unanimidade. O comunicado de Harvey Jones diz que o conselho ouviu \"altos funcionários do governo dos Estados Unidos\" e está \"confiante de que o retorno não representa riscos à segurança nacional\". Trump disse à CNBC que falou com os diretores e que \"convenci\" ; o deputado republicano Don Bacon criticou, e a senadora Elizabeth Warren chamou a decisão de \"irresponsável\". Nvidia +34,45%; Nasdaq +7,25%. Em 17/11, o mesmo conselho dissera que não recontrataria o fundador. G1 · BBC · Valor .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Focus eleva a inflação e passa a esperar Selic a 13% em 2027",
+    "body": "Fato — 23/11/2026. Economistas consultados no boletim Focus elevaram as projeções de inflação para 2026 e 2027 e passaram a projetar corte menor dos juros no ano que vem, com Selic em 13% em 2027. Limite: os números são os das manchetes de G1 e Valor; não li o Focus integral. Valor · G1 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Braskem fecha acordo com credores de US$ 4,9 bi, com aporte da Petrobras",
+    "body": "Preliminar — 23/11/2026. Segundo o Valor, com base em fontes , a Braskem fechou acordo com credores no valor de US$ 4,9 bilhões, com aporte de US$ 1,3 bilhão da Petrobras. Não é comunicado das empresas , e o corpo da matéria está sob assinatura. Valor, 23/11 .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
     "title": "Crédito fiscal dos bancos: R$ 163 bi e uma discussão que vem de 2013",
-    "body": "Fato — 23/11/2026. O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a R$ 163 bilhões e, pela legislação, precisa começar a ser reduzido neste ano, segundo o Valor. Parte do setor diz que a lei atual não tem como ser cumprida e que converter DTA em prejuízo fiscal afetaria capital; o BC, segundo o jornal, vê abertura ao diálogo, mas entende que os bancos poderiam reduzir o JCP. A discussão, que já foi revista desde 2013, chegou ao balanço: o BB quer converter até R$ 14 bilhões de DTAs. Nexo: menos crédito fiscal reconhecido significa menos capital regulatório e, possivelmente, menos oferta de crédito — inferência do setor, não fato observado. Valor, ativos fiscais · Valor, desde 2013 · Lei 15.078/2024 · LC 214/2025 .",
+    "body": "Segue em pauta. O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a R$ 163 bilhões e, pela legislação, precisa começar a cair neste ano, segundo o Valor. Parte do setor diz que a lei não tem como ser cumprida sem afetar capital; o BC, segundo o jornal, vê abertura ao diálogo. O ponto entrou no PLP votado hoje, com o limite à compensação de créditos cruzados. Inferência do setor, não fato observado: menos crédito fiscal, menos capital regulatório, possivelmente menos oferta de crédito. Valor · Lei 15.078/2024 .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Nvidia: pivô do escândalo teve contato com agente chinês, diz o NYT",
-    "body": "Fato — 22/11 e 23/11/2026. Segundo o New York Times, citado por G1/Reuters e pelo Valor, Alice Huang manteve contato com um funcionário do Ministério da Segurança do Estado da China da primavera de 2025 ao outono deste ano, durante o relacionamento com o então CEO da Nvidia. Ela comandou a Megaspeed, cliente importante da empresa, investigada desde 2024 por suspeita de contrabando de chips para a China. O governo dos EUA diz não ter concluído que ela fosse espiã — o procurador-geral Todd Blanche e o diretor de Inteligência Nacional, Jay Clayton, repetiram isso. A revelação de 29/10 precedeu a renúncia de Jensen Huang, em 11/11. G1/Reuters · Valor · Documento da Nvidia à SEC .",
+    "title": "Febraban chama o pacote de \"Plano Moretti\"",
+    "body": "Contexto — 23/11/2026. Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o \"Plano Moretti\" é \"um bom começo\", desde que não seja desidratado, e prevê inadimplência difícil ao menos no primeiro semestre de 2027. Acesso parcial: só o primeiro parágrafo estava legível. Valor, 05h00 .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Indústria e varejo cortam investimento, e 2027 herda o baixo patamar",
-    "body": "Fato — 23/11/2026. Levantamento do Valor com balanços de 2026 mostra que a maioria das grandes indústrias de bens de consumo e varejistas de capital aberto reduziu investimentos, com queda citada de 31% ; o mercado projeta manutenção do baixo patamar em 2027. A FecomercioSP aponta a reforma tributária e o fim da escala 6x1 como fatores que seguram investimentos. Limite: só o lead estava acessível, sem explicar se a queda é do agregado ou de um subconjunto. Valor, 05h00 .",
-    "topic": "economia",
+    "title": "Quem decidiu a volta de Huang: empresa, governo ou mercado?",
+    "body": "Análise — 23/11/2026. Há três versões no mesmo dia. Empresa: o conselho \"recebeu informações de altos funcionários do governo\" e concluiu que não há risco. Governo: Trump diz que \"convenci\" os diretores e que eles \"pediram garantia\"; segundo a BBC, ele tem posição declarada em ações da empresa (compra de US$ 265 mil, venda de até US$ 15 mil em setembro). Mercado: a Nvidia vinha de sete quedas seguidas, e o Nasdaq subiu 7,25% no mesmo dia — o repique foi de todo o setor. O que é fato: a única fonte sobre a intervenção do governo é a fala do próprio presidente e o comunicado da empresa; não há documento público do conselho. BBC · G1/CNBC .",
+    "topic": "tecnologia",
     "date": "capa vigente",
-    "url": "#economia"
+    "url": "#tecnologia"
   },
   {
-    "title": "Febraban chama o pacote de \"Plano Moretti\" e pede que não seja desidratado",
-    "body": "Fato — 23/11/2026. Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o \"Plano Moretti\" é \"um bom começo\" para o ajuste fiscal, desde que as medidas não sejam desidratadas, e prevê que \"pelo menos o primeiro semestre [de 2027] ainda vai ser desafiador em termos de inadimplência\". Acesso parcial: apenas o primeiro parágrafo estava legível nesta captura. Valor, 05h00 .",
-    "topic": "economia",
+    "title": "CrowdStrike compra a Zscaler por US$ 43,9 bilhões em ações",
+    "body": "Fato — 23/11/2026. A transação é totalmente em ações e, segundo as empresas, cria uma das maiores fornecedoras especializadas em segurança cibernética do mundo, unindo proteção de dispositivos à segurança de rede. Nexo: é a consolidação de um setor que, na semana passada, teve falha crítica no Java, demissão do diretor de cibersegurança da Casa Branca e suspeita de invasão do NCIC. Valor · Comunicado da CrowdStrike .",
+    "topic": "tecnologia",
     "date": "capa vigente",
-    "url": "#economia"
-  },
-  {
-    "title": "Dólar a 1,1% de R$ 6: a cotação mais recente é de 19/11",
-    "body": "Contexto — 23/11/2026. Em coluna publicada hoje, Sergio Lamucci escreve que o dólar subiu 18,9%, de R$ 4,9930 para R$ 5,9344, desde o segundo turno, por incerteza fiscal e expectativa de juros altos nos EUA. A cotação é a de 19/11 , último fechamento disponível (a B3 não operou em 20/11, feriado da Consciência Negra); não há fechamento novo nesta captura. O segundo turno foi em 25/10/2026, com Lula reeleito. Coincidência não é causa: o colunista é argumentativo e a alta tem duas explicações declaradas. Valor, 23/11 · G1, fechamento de 19/11 · TSE, resultado .",
-    "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "url": "#tecnologia"
   },
   {
     "title": "O boom de IA em São Francisco e o medo da correção",
-    "body": "Contexto — 23/11/2026. A BBC mostra que a cidade vive novo ciclo de alta — aluguéis e imóveis subindo, escritórios vazios voltando a ocupar, contratações caras na OpenAI e na Anthropic — e que cresce o temor de uma \"correção significativa\" nos preços das ações de IA; o FMI, no mês passado, entrou na lista de instituições que alertam para essa possibilidade. Limite: o relatório do FMI não foi consultado; o alerta é sobre possibilidade, não previsão. BBC, 23/11 · BBC, correção de 20/11 .",
+    "body": "Contexto — 23/11/2026. A BBC mostra São Francisco em novo ciclo de alta, com aluguéis e imóveis subindo e contratações caras na OpenAI e na Anthropic, e o temor crescente de uma \"correção significativa\" nos preços das ações de IA. O FMI alertou no mês passado sobre essa possibilidade. A alta de hoje não resolve o alerta; ela o aumenta , porque concentra mais valor em menos empresas. BBC, 23/11 .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
     "title": "Falha crítica no Java e a onda de apagões: sem ligação demonstrada",
-    "body": "Fato — 17/11 a 23/11/2026. A Calif achou com IA uma falha de memória no Java; a Oracle corrigiu em 17/11. Na mesma semana, o diretor de cibersegurança da Casa Branca foi demitido (20/11) e o FBI investigava uma aparente invasão do NCIC. Nada indica que os episódios estejam conectados, e o G1 trata a onda de apagões como efeito de atualizações pendentes, IA ou ataques, sem conclusão. G1, apagões · BBC, demissão · G1, Java .",
+    "body": "Fato — 17/11 a 23/11/2026. Uma falha de memória no Java foi encontrada com ajuda de IA e corrigida pela Oracle em 17/11. Na mesma semana, o diretor de cibersegurança da Casa Branca foi demitido (20/11) e o FBI investigava uma aparente invasão do NCIC. Nada indica conexão entre os episódios. G1, apagões · BBC, demissão .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
+  },
+  {
+    "title": "Ucrânia reivindica o afundamento de uma corveta russa em Benghazi",
+    "body": "Fato — 22/11 e 23/11/2026. Zelensky afirmou nesta segunda-feira que a Ucrânia afundou com sete drones marítimos a corveta Merkury , \"um dos navios mais novos da Rússia\", na base naval de Benghazi, e que um helicóptero Ka-27 foi destruído. O governo do leste da Líbia relatou a explosão no domingo de manhã, enquanto o navio reabastecia, e a BBC verificou vídeos geolocalizados e imagem de satélite da Planet Labs com a embarcação em chamas às 05h47 GMT. A missão da ONU no país pediu \"investigação imediata, independente e transparente\" e disse que \"a Líbia não pode se tornar campo de batalha de conflitos estrangeiros\". O Ministério da Defesa da Rússia não havia comentado. O incêndio está documentado; o afundamento e o helicóptero são alegação ucraniana. G1, 23/11 · BBC, 23/11 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "Ataque russo mata 11 em Dymer; menino é resgatado após 14 horas",
+    "body": "Fato — 22/11 e 23/11/2026. Bombardeios na madrugada de domingo atingiram um prédio residencial em Dymer, na região de Kiev, matando 11 pessoas, segundo as autoridades ucranianas; um menino de 7 anos foi resgatado vivo após 14 horas, e uma mulher de 79 anos também sobreviveu. Um ataque a uma casa em Bila Tserkva matou mais uma pessoa, e um mercadinho em Vyshneve foi atingido, com três mortos e 13 feridos segundo Zelensky. O edifício de Dymer foi atingido às 05h locais. Números das autoridades ucranianas; não há confirmação independente do total. BBC, 23/11 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "Espanha vota domingo, e o PP pode precisar do Vox",
+    "body": "Fato — 23/11/2026. As pesquisas apontam vitória do PP, de Alberto Núñez Feijóo, sem maioria absoluta, e um Vox que quase dobraria a bancada; a extrema direita não participa do governo central desde 1975. Pedro Sánchez, há oito anos no poder, está atrás nas pesquisas, mas a diferença diminuiu, e ele cita a reeleição de Lula como exemplo de mobilização. O resultado é acompanhado em capitais europeias por causa das eleições de 2027 na França, na Polônia e na Itália. Em 2023, as pesquisas também davam vantagem à direita e Sánchez foi investido. G1, 23/11 · Congresso espanhol, 2023 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "Exército dos EUA diz à Justiça que vai detonar explosivos em Iowa",
+    "body": "Fato — 21/11 e 23/11/2026. O Departamento de Justiça informou à corte no sábado que o Exército seguirá com a detonação de cinco toneladas de explosivos degradados em Middletown, Iowa, apesar da decisão que a suspendeu por tempo indeterminado. O governo alega risco de explosão espontânea do azoteto de chumbo se a temperatura cair abaixo de −1 °C e diz que as portas do bunker já foram removidas. O plano é agir até 24/11, sob isenção de emergência; grupos ambientais alegam que alternativas mais seguras não foram avaliadas. BBC, 23/11 · G1, 23/11 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "COP31: é a primeira COP desde o aviso de que o mundo passa de 1,5 °C",
+    "body": "Contexto — 23/11/2026. A BBC resume o legado do encontro que terminou sem o \"Pacto de Antália\": foi a COP mais longa da história, a primeira desde que a ONU avisou que as temperaturas devem ultrapassar 1,5 °C, e o próprio rascunho reconhecia que a ação climática falhou na meta central. O ano trouxe colapso de geleiras, calor recorde na Europa e incêndios na Ásia, segundo a emissora. O desfecho já foi publicado na edição das 20h de 22/11. BBC, 23/11 · BBC, encerramento .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "O que os bilionários russos esperam de um futuro sem Putin",
+    "body": "Contexto — 23/11/2026. Reportagem da BBC relembra a reunião em que Putin, horas após invadir a Ucrânia em 24/2/2022, exigiu apoio de mais de 36 empresários no Kremlin; eles não falaram. Em 2003, Mikhail Khodorkovsky criticou o presidente e passou dez anos preso. É matéria interpretativa sobre expectativas de oligarcas, sem fato novo de governo. G1/BBC, 23/11 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#mundo"
+  },
+  {
+    "title": "STF julga a Lei da Dosimetria de 4 a 15 de dezembro",
+    "body": "Fato — segue em pauta. A Lei 15.402/2026, promulgada em 8/5/2026, pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. STF, 09/05/2026 · Senado, 17/11/2026 .",
+    "topic": "politica",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#politica"
+  },
+  {
+    "title": "A PEC da Segurança segue sem promulgação marcada",
+    "body": "Fato — segue em pauta. Aprovada em definitivo em 3/11/2026, a PEC autoriza polícias municipais sob regras, mas nada começa antes da promulgação e da regulamentação federal; nesta captura não há data nova. G1 · CNM .",
+    "topic": "politica",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#politica"
+  },
+  {
+    "title": "Câmara vota o ajuste fiscal hoje, antes do relatório que pode contingenciar 2027",
+    "body": "Fato — 23/11/2026. Hugo Motta marcou a votação do PLP 299/2026 em plenário para esta segunda-feira, após requerimento de urgência, em dia atípico. O relator, Mauro Benevides (União Brasil-CE), manteve integralmente o texto do Senado. O Valor informa o motivo tático: o governo quer aprovar o projeto antes da publicação do RARDP (Relatório de Avaliação de Receitas e Despesas), previsto para terça-feira. Lula disse no sábado que a proposta \"não é uma reforma, mas um ajuste\" de 2027 e que não cortará programas sociais. Frentes do setor produtivo sugerem mudanças. O impacto de R$ 50 bilhões em 2027 é projeção do relator do Senado, Eduardo Braga. Valor, 05h00 · G1 · Senado · IFI, risco fiscal de 2027 .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "Crédito fiscal dos bancos: R$ 163 bi e uma discussão que vem de 2013",
+    "body": "Fato — 23/11/2026. O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a R$ 163 bilhões e, pela legislação, precisa começar a ser reduzido neste ano, segundo o Valor. Parte do setor diz que a lei atual não tem como ser cumprida e que converter DTA em prejuízo fiscal afetaria capital; o BC, segundo o jornal, vê abertura ao diálogo, mas entende que os bancos poderiam reduzir o JCP. A discussão, que já foi revista desde 2013, chegou ao balanço: o BB quer converter até R$ 14 bilhões de DTAs. Nexo: menos crédito fiscal reconhecido significa menos capital regulatório e, possivelmente, menos oferta de crédito — inferência do setor, não fato observado. Valor, ativos fiscais · Valor, desde 2013 · Lei 15.078/2024 · LC 214/2025 .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "Nvidia: pivô do escândalo teve contato com agente chinês, diz o NYT",
+    "body": "Fato — 22/11 e 23/11/2026. Segundo o New York Times, citado por G1/Reuters e pelo Valor, Alice Huang manteve contato com um funcionário do Ministério da Segurança do Estado da China da primavera de 2025 ao outono deste ano, durante o relacionamento com o então CEO da Nvidia. Ela comandou a Megaspeed, cliente importante da empresa, investigada desde 2024 por suspeita de contrabando de chips para a China. O governo dos EUA diz não ter concluído que ela fosse espiã — o procurador-geral Todd Blanche e o diretor de Inteligência Nacional, Jay Clayton, repetiram isso. A revelação de 29/10 precedeu a renúncia de Jensen Huang, em 11/11. G1/Reuters · Valor · Documento da Nvidia à SEC .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "Indústria e varejo cortam investimento, e 2027 herda o baixo patamar",
+    "body": "Fato — 23/11/2026. Levantamento do Valor com balanços de 2026 mostra que a maioria das grandes indústrias de bens de consumo e varejistas de capital aberto reduziu investimentos, com queda citada de 31% ; o mercado projeta manutenção do baixo patamar em 2027. A FecomercioSP aponta a reforma tributária e o fim da escala 6x1 como fatores que seguram investimentos. Limite: só o lead estava acessível, sem explicar se a queda é do agregado ou de um subconjunto. Valor, 05h00 .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "Febraban chama o pacote de \"Plano Moretti\" e pede que não seja desidratado",
+    "body": "Fato — 23/11/2026. Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o \"Plano Moretti\" é \"um bom começo\" para o ajuste fiscal, desde que as medidas não sejam desidratadas, e prevê que \"pelo menos o primeiro semestre [de 2027] ainda vai ser desafiador em termos de inadimplência\". Acesso parcial: apenas o primeiro parágrafo estava legível nesta captura. Valor, 05h00 .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "Dólar a 1,1% de R$ 6: a cotação mais recente é de 19/11",
+    "body": "Contexto — 23/11/2026. Em coluna publicada hoje, Sergio Lamucci escreve que o dólar subiu 18,9%, de R$ 4,9930 para R$ 5,9344, desde o segundo turno, por incerteza fiscal e expectativa de juros altos nos EUA. A cotação é a de 19/11 , último fechamento disponível (a B3 não operou em 20/11, feriado da Consciência Negra); não há fechamento novo nesta captura. O segundo turno foi em 25/10/2026, com Lula reeleito. Coincidência não é causa: o colunista é argumentativo e a alta tem duas explicações declaradas. Valor, 23/11 · G1, fechamento de 19/11 · TSE, resultado .",
+    "topic": "economia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#economia"
+  },
+  {
+    "title": "O boom de IA em São Francisco e o medo da correção",
+    "body": "Contexto — 23/11/2026. A BBC mostra que a cidade vive novo ciclo de alta — aluguéis e imóveis subindo, escritórios vazios voltando a ocupar, contratações caras na OpenAI e na Anthropic — e que cresce o temor de uma \"correção significativa\" nos preços das ações de IA; o FMI, no mês passado, entrou na lista de instituições que alertam para essa possibilidade. Limite: o relatório do FMI não foi consultado; o alerta é sobre possibilidade, não previsão. BBC, 23/11 · BBC, correção de 20/11 .",
+    "topic": "tecnologia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#tecnologia"
+  },
+  {
+    "title": "Falha crítica no Java e a onda de apagões: sem ligação demonstrada",
+    "body": "Fato — 17/11 a 23/11/2026. A Calif achou com IA uma falha de memória no Java; a Oracle corrigiu em 17/11. Na mesma semana, o diretor de cibersegurança da Casa Branca foi demitido (20/11) e o FBI investigava uma aparente invasão do NCIC. Nada indica que os episódios estejam conectados, e o G1 trata a onda de apagões como efeito de atualizações pendentes, IA ou ataques, sem conclusão. G1, apagões · BBC, demissão · G1, Java .",
+    "topic": "tecnologia",
+    "date": "23/11/2026 às 08:00",
+    "url": "edicoes/2026-11-23-0800.html#tecnologia"
   },
   {
     "title": "UE deixa a plenária e a COP31 encerra sem acordo",

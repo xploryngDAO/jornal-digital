@@ -1,108 +1,220 @@
 window.pautasArquivadas = [
   {
-    "title": "UE deixa a plenária e a COP31 encerra sem acordo",
-    "body": "Fato — 22/11/2026. A COP31, em Antália (Turquia), terminou sem texto adotado depois que a União Europeia, países insulares do Pacífico e outros rejeitaram o rascunho apresentado na madrugada de domingo, que não trazia a expressão \"combustíveis fósseis\" e só citava o acordo da COP28 de 2023 pelo compromisso de \"transição para longe\" dos fósseis nos sistemas de energia. Líderes e delegados europeus deixaram a plenária em protesto. O comissário europeu do Clima, Wopke Hoekstra, disse que o texto desviava o foco da redução de petróleo, gás e carvão ao apostar na captura e armazenamento de carbono. O secretário-geral da ONU, António Guterres, em sua última COP, falou em \"profunda decepção\" e acusou interesses fósseis de usar \"o manual da Big Tobacco\". A conferência se tornou a mais longa da história e é o primeiro colapso do acordo político central de uma COP desde Copenhague, em 2009. G1, 10h14 · BBC News, atualizado 18h18 UTC · BBC, o que vem depois .",
+    "title": "Ucrânia reivindica o afundamento de uma corveta russa em Benghazi",
+    "body": "Fato — 22/11 e 23/11/2026. Zelensky afirmou nesta segunda-feira que a Ucrânia afundou com sete drones marítimos a corveta Merkury , \"um dos navios mais novos da Rússia\", na base naval de Benghazi, e que um helicóptero Ka-27 foi destruído. O governo do leste da Líbia relatou a explosão no domingo de manhã, enquanto o navio reabastecia, e a BBC verificou vídeos geolocalizados e imagem de satélite da Planet Labs com a embarcação em chamas às 05h47 GMT. A missão da ONU no país pediu \"investigação imediata, independente e transparente\" e disse que \"a Líbia não pode se tornar campo de batalha de conflitos estrangeiros\". O Ministério da Defesa da Rússia não havia comentado. O incêndio está documentado; o afundamento e o helicóptero são alegação ucraniana. G1, 23/11 · BBC, 23/11 .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
+  },
+  {
+    "title": "Ataque russo mata 11 em Dymer; menino é resgatado após 14 horas",
+    "body": "Fato — 22/11 e 23/11/2026. Bombardeios na madrugada de domingo atingiram um prédio residencial em Dymer, na região de Kiev, matando 11 pessoas, segundo as autoridades ucranianas; um menino de 7 anos foi resgatado vivo após 14 horas, e uma mulher de 79 anos também sobreviveu. Um ataque a uma casa em Bila Tserkva matou mais uma pessoa, e um mercadinho em Vyshneve foi atingido, com três mortos e 13 feridos segundo Zelensky. O edifício de Dymer foi atingido às 05h locais. Números das autoridades ucranianas; não há confirmação independente do total. BBC, 23/11 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Espanha vota domingo, e o PP pode precisar do Vox",
+    "body": "Fato — 23/11/2026. As pesquisas apontam vitória do PP, de Alberto Núñez Feijóo, sem maioria absoluta, e um Vox que quase dobraria a bancada; a extrema direita não participa do governo central desde 1975. Pedro Sánchez, há oito anos no poder, está atrás nas pesquisas, mas a diferença diminuiu, e ele cita a reeleição de Lula como exemplo de mobilização. O resultado é acompanhado em capitais europeias por causa das eleições de 2027 na França, na Polônia e na Itália. Em 2023, as pesquisas também davam vantagem à direita e Sánchez foi investido. G1, 23/11 · Congresso espanhol, 2023 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Exército dos EUA diz à Justiça que vai detonar explosivos em Iowa",
+    "body": "Fato — 21/11 e 23/11/2026. O Departamento de Justiça informou à corte no sábado que o Exército seguirá com a detonação de cinco toneladas de explosivos degradados em Middletown, Iowa, apesar da decisão que a suspendeu por tempo indeterminado. O governo alega risco de explosão espontânea do azoteto de chumbo se a temperatura cair abaixo de −1 °C e diz que as portas do bunker já foram removidas. O plano é agir até 24/11, sob isenção de emergência; grupos ambientais alegam que alternativas mais seguras não foram avaliadas. BBC, 23/11 · G1, 23/11 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "COP31: é a primeira COP desde o aviso de que o mundo passa de 1,5 °C",
+    "body": "Contexto — 23/11/2026. A BBC resume o legado do encontro que terminou sem o \"Pacto de Antália\": foi a COP mais longa da história, a primeira desde que a ONU avisou que as temperaturas devem ultrapassar 1,5 °C, e o próprio rascunho reconhecia que a ação climática falhou na meta central. O ano trouxe colapso de geleiras, calor recorde na Europa e incêndios na Ásia, segundo a emissora. O desfecho já foi publicado na edição das 20h de 22/11. BBC, 23/11 · BBC, encerramento .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "O que os bilionários russos esperam de um futuro sem Putin",
+    "body": "Contexto — 23/11/2026. Reportagem da BBC relembra a reunião em que Putin, horas após invadir a Ucrânia em 24/2/2022, exigiu apoio de mais de 36 empresários no Kremlin; eles não falaram. Em 2003, Mikhail Khodorkovsky criticou o presidente e passou dez anos preso. É matéria interpretativa sobre expectativas de oligarcas, sem fato novo de governo. G1/BBC, 23/11 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "STF julga a Lei da Dosimetria de 4 a 15 de dezembro",
+    "body": "Fato — segue em pauta. A Lei 15.402/2026, promulgada em 8/5/2026, pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. STF, 09/05/2026 · Senado, 17/11/2026 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "A PEC da Segurança segue sem promulgação marcada",
+    "body": "Fato — segue em pauta. Aprovada em definitivo em 3/11/2026, a PEC autoriza polícias municipais sob regras, mas nada começa antes da promulgação e da regulamentação federal; nesta captura não há data nova. G1 · CNM .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Câmara vota o ajuste fiscal hoje, antes do relatório que pode contingenciar 2027",
+    "body": "Fato — 23/11/2026. Hugo Motta marcou a votação do PLP 299/2026 em plenário para esta segunda-feira, após requerimento de urgência, em dia atípico. O relator, Mauro Benevides (União Brasil-CE), manteve integralmente o texto do Senado. O Valor informa o motivo tático: o governo quer aprovar o projeto antes da publicação do RARDP (Relatório de Avaliação de Receitas e Despesas), previsto para terça-feira. Lula disse no sábado que a proposta \"não é uma reforma, mas um ajuste\" de 2027 e que não cortará programas sociais. Frentes do setor produtivo sugerem mudanças. O impacto de R$ 50 bilhões em 2027 é projeção do relator do Senado, Eduardo Braga. Valor, 05h00 · G1 · Senado · IFI, risco fiscal de 2027 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Crédito fiscal dos bancos: R$ 163 bi e uma discussão que vem de 2013",
+    "body": "Fato — 23/11/2026. O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a R$ 163 bilhões e, pela legislação, precisa começar a ser reduzido neste ano, segundo o Valor. Parte do setor diz que a lei atual não tem como ser cumprida e que converter DTA em prejuízo fiscal afetaria capital; o BC, segundo o jornal, vê abertura ao diálogo, mas entende que os bancos poderiam reduzir o JCP. A discussão, que já foi revista desde 2013, chegou ao balanço: o BB quer converter até R$ 14 bilhões de DTAs. Nexo: menos crédito fiscal reconhecido significa menos capital regulatório e, possivelmente, menos oferta de crédito — inferência do setor, não fato observado. Valor, ativos fiscais · Valor, desde 2013 · Lei 15.078/2024 · LC 214/2025 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Nvidia: pivô do escândalo teve contato com agente chinês, diz o NYT",
+    "body": "Fato — 22/11 e 23/11/2026. Segundo o New York Times, citado por G1/Reuters e pelo Valor, Alice Huang manteve contato com um funcionário do Ministério da Segurança do Estado da China da primavera de 2025 ao outono deste ano, durante o relacionamento com o então CEO da Nvidia. Ela comandou a Megaspeed, cliente importante da empresa, investigada desde 2024 por suspeita de contrabando de chips para a China. O governo dos EUA diz não ter concluído que ela fosse espiã — o procurador-geral Todd Blanche e o diretor de Inteligência Nacional, Jay Clayton, repetiram isso. A revelação de 29/10 precedeu a renúncia de Jensen Huang, em 11/11. G1/Reuters · Valor · Documento da Nvidia à SEC .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Indústria e varejo cortam investimento, e 2027 herda o baixo patamar",
+    "body": "Fato — 23/11/2026. Levantamento do Valor com balanços de 2026 mostra que a maioria das grandes indústrias de bens de consumo e varejistas de capital aberto reduziu investimentos, com queda citada de 31% ; o mercado projeta manutenção do baixo patamar em 2027. A FecomercioSP aponta a reforma tributária e o fim da escala 6x1 como fatores que seguram investimentos. Limite: só o lead estava acessível, sem explicar se a queda é do agregado ou de um subconjunto. Valor, 05h00 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Febraban chama o pacote de \"Plano Moretti\" e pede que não seja desidratado",
+    "body": "Fato — 23/11/2026. Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o \"Plano Moretti\" é \"um bom começo\" para o ajuste fiscal, desde que as medidas não sejam desidratadas, e prevê que \"pelo menos o primeiro semestre [de 2027] ainda vai ser desafiador em termos de inadimplência\". Acesso parcial: apenas o primeiro parágrafo estava legível nesta captura. Valor, 05h00 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Dólar a 1,1% de R$ 6: a cotação mais recente é de 19/11",
+    "body": "Contexto — 23/11/2026. Em coluna publicada hoje, Sergio Lamucci escreve que o dólar subiu 18,9%, de R$ 4,9930 para R$ 5,9344, desde o segundo turno, por incerteza fiscal e expectativa de juros altos nos EUA. A cotação é a de 19/11 , último fechamento disponível (a B3 não operou em 20/11, feriado da Consciência Negra); não há fechamento novo nesta captura. O segundo turno foi em 25/10/2026, com Lula reeleito. Coincidência não é causa: o colunista é argumentativo e a alta tem duas explicações declaradas. Valor, 23/11 · G1, fechamento de 19/11 · TSE, resultado .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "O boom de IA em São Francisco e o medo da correção",
+    "body": "Contexto — 23/11/2026. A BBC mostra que a cidade vive novo ciclo de alta — aluguéis e imóveis subindo, escritórios vazios voltando a ocupar, contratações caras na OpenAI e na Anthropic — e que cresce o temor de uma \"correção significativa\" nos preços das ações de IA; o FMI, no mês passado, entrou na lista de instituições que alertam para essa possibilidade. Limite: o relatório do FMI não foi consultado; o alerta é sobre possibilidade, não previsão. BBC, 23/11 · BBC, correção de 20/11 .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "Falha crítica no Java e a onda de apagões: sem ligação demonstrada",
+    "body": "Fato — 17/11 a 23/11/2026. A Calif achou com IA uma falha de memória no Java; a Oracle corrigiu em 17/11. Na mesma semana, o diretor de cibersegurança da Casa Branca foi demitido (20/11) e o FBI investigava uma aparente invasão do NCIC. Nada indica que os episódios estejam conectados, e o G1 trata a onda de apagões como efeito de atualizações pendentes, IA ou ataques, sem conclusão. G1, apagões · BBC, demissão · G1, Java .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "UE deixa a plenária e a COP31 encerra sem acordo",
+    "body": "Fato — 22/11/2026. A COP31, em Antália (Turquia), terminou sem texto adotado depois que a União Europeia, países insulares do Pacífico e outros rejeitaram o rascunho apresentado na madrugada de domingo, que não trazia a expressão \"combustíveis fósseis\" e só citava o acordo da COP28 de 2023 pelo compromisso de \"transição para longe\" dos fósseis nos sistemas de energia. Líderes e delegados europeus deixaram a plenária em protesto. O comissário europeu do Clima, Wopke Hoekstra, disse que o texto desviava o foco da redução de petróleo, gás e carvão ao apostar na captura e armazenamento de carbono. O secretário-geral da ONU, António Guterres, em sua última COP, falou em \"profunda decepção\" e acusou interesses fósseis de usar \"o manual da Big Tobacco\". A conferência se tornou a mais longa da história e é o primeiro colapso do acordo político central de uma COP desde Copenhague, em 2009. G1, 10h14 · BBC News, atualizado 18h18 UTC · BBC, o que vem depois .",
+    "topic": "mundo",
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#mundo"
   },
   {
     "title": "COP31 termina sem acordo: a primeira vez desde 2009",
     "body": "Fato — 22/11/2026. As presidências turca e australiana apresentaram na noite de 21/11 um texto que citava a decisão da COP28 de Dubai apenas por remissão, sem repetir o compromisso sobre combustíveis fósseis nem prazos, e descartava o mapa do caminho da COP30 de Belém; o presidente turco da conferência, Murat Kurum, disse que não haveria novo texto. A Rússia defendeu a exclusão do compromisso, e a UE acusou países produtores de petróleo de sequestrar a negociação. Países pobres criticaram a ausência de compromissos financeiros claros dos ricos. G1, 09h00 · G1, reação do Brasil · Valor · BBC News .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#mundo"
   },
   {
     "title": "Democratas conquistam a maior bancada na Câmara dos EUA desde 1992",
     "body": "Fato — 22/11/2026. Com a recontagem no 5º distrito da Carolina do Norte, Chuck Hubbard derrotou Virginia Foxx por 330 votos com 99% apurado, e ela reconheceu a derrota. Os democratas somam ao menos 258 cadeiras contra ao menos 173 dos republicanos, com quatro distritos ainda sem resultado; em 1992, também chegaram a 258. Hubbard perdera para Foxx em 2024 por nove pontos. BBC, 20h26 UTC · G1 .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#mundo"
   },
   {
     "title": "Ponte da Crimeia, retaliação em Kiev e míssil russo na Polônia",
     "body": "Fato — 16/11 a 22/11/2026. A Ucrânia atacou a Ponte da Crimeia em 16/11 e voltou a atingi-la em 17/11, causando queda de um vão rodoviário. Em 20/11, a Rússia retaliou com um dos maiores ataques da guerra: a Ucrânia relata mais de 110 mísseis e 400 drones, pontes de Kiev fechadas e ao menos nove mortos. Na madrugada de 21/11, um míssil de cruzeiro Kh-101 caiu em Nowy Lipowiec, no sudeste da Polônia, a 50 km da fronteira; ninguém se feriu e Varsóvia falou em \"provocação\". Um navio russo com destino à Rússia foi atacado por drones no Golfo da Finlândia e rebocado, e o governo do leste da Líbia atribuiu a explosão de um navio russo em Benghazi a um drone. BBC, Kiev · BBC, Polônia · BBC, Golfo da Finlândia · BBC, Benghazi .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#mundo"
   },
   {
     "title": "STF marca para dezembro o julgamento da Lei da Dosimetria",
     "body": "Fato — 17/11 a 22/11/2026. A Lei da Dosimetria (Lei 15.402/2026), promulgada em 8/5/2026, pode reduzir a pena de Jair Bolsonaro, que cumpre 27 anos e 3 meses desde novembro de 2025. Em 9/5/2026, o ministro Alexandre de Moraes suspendeu a aplicação da lei às execuções penais dos condenados pelos atos de 8 de janeiro. Em 17/11, os presidentes da Câmara, Hugo Motta, e do Senado, Davi Alcolumbre, pediram a pauta; em 19/11 o relator liberou os processos, e o plenário virtual julga de 4 a 15 de dezembro. Ainda não há votos. STF, 09/05/2026 · Senado, 17/11/2026 · Valor .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#politica"
   },
   {
     "title": "Bolsonaro segue clinicamente estável na UTI, sem previsão de alta",
     "body": "Fato — 22/11/2026. O Hospital DF Star informou na tarde deste domingo que Jair Bolsonaro está clinicamente estável, na UTI, com \"abdômen agudo obstrutivo\", em tratamento clínico, jejum e suporte nutricional, sem previsão de alta. Ele está em prisão domiciliar humanitária desde 24/3/2026, autorizada por Moraes. No sábado, o ministro autorizou visitas diárias dos filhos, vedados celulares e câmeras. G1, 13h54 · Valor · Valor, visitas .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#politica"
   },
   {
     "title": "A PEC da Segurança e a guarda que pode virar polícia",
     "body": "Fato — 22/11/2026. A PEC da Segurança Pública foi aprovada em definitivo pelo Congresso em 3/11/2026 e permite que prefeitos criem polícias municipais, do zero ou a partir de guardas civis já existentes, mas a mudança não é automática e nenhuma prefeitura pode concluí-la antes de a emenda entrar em vigor — o que ainda não ocorreu, sem data de promulgação marcada. O texto inclui na Constituição o Susp, criado em 2018. Segundo o G1, com dados da Rais, há 1.417 municípios com guardas civis ativas, cerca de 107 mil agentes. Em abril de 2026, o STF havia proibido cidades de rebatizar guardas como polícia municipal. G1 · G1, exigências · CNM, orientação a municípios .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#politica"
   },
   {
     "title": "Câmara vota o ajuste fiscal nesta segunda, com R$ 50 bi projetados para 2027",
     "body": "Fato — 22/11/2026. O relator Mauro Benevides (União Brasil-CE) manteve o texto aprovado pelo Senado, e o presidente da Câmara, Hugo Motta, marcou a votação do PLP 299/2026 para segunda-feira (23), dia atípico. O impacto projetado nas contas públicas é de R$ 50 bilhões em 2027, segundo o relator do Senado, Eduardo Braga. Entre as medidas: limitar créditos tributários cruzados usados para compensar impostos — na prática, parte dos tributos hoje pagos com crédito passaria a ser paga em dinheiro. Empresas usaram R$ 200,1 bilhões em créditos para pagar tributos federais de janeiro a setembro de 2026, segundo o G1 com dados da Receita. CNI, Fiesp e Fiemg dizem que os grandes empresários arcarão com a maior parte do custo. G1 · Senado Notícias · Nota técnica do Senado · Valor, agenda .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#economia"
   },
   {
     "title": "Bolsas chinesas cortam exigência de margem de 100% para 80%",
     "body": "Fato — 22/11/2026. Xangai e Shenzhen reduzem a exigência mínima de margem de 100% para 80%, com efeito a partir de 30 de novembro, para permitir comprar mais ações com a mesma garantia, e cortam taxas de negociação; Shenzhen propôs criar formadores de mercado no ChiNext. É estímulo à alavancagem, não injeção de capital público. Reuters/UOL . Não verificado em comunicado primário das bolsas.",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#economia"
   },
   {
     "title": "O câmbio e o custo do impasse fiscal",
     "body": "Contexto — 19/11/2026, desdobramento em 22/11/2026. Em 19/11 o Banco Central vendeu US$ 1 bilhão à vista e o dólar comercial fechou em alta, a R$ 5,9344 (+1,15%), com o Ibovespa a 166.376 pontos (−0,69%). São as cotações que a capa do Valor ainda exibia nesta captura, referentes a 19/11 — não são valores de hoje nem previsão. A intervenção em dia de votação fiscal tem precedente em 19/12/2024, mas as condições eram outras, e coincidência não estabelece causa. G1, fechamento de 19/11 · Agência Brasil, 19/12/2024 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#economia"
   },
   {
     "title": "Falha crítica no Java: a Oracle corrigiu na terça-feira",
     "body": "Fato — 17/11 e 22/11/2026. A empresa de cibersegurança Calif usou IA para encontrar uma falha crítica nas funções de memória do Java, linguagem usada por bancos, governos e hospitais; a Oracle publicou correção em 17/11. A Calif já havia achado uma vulnerabilidade no PHP que afetou cerca de 30 milhões de sites antes da correção. Na mesma semana, o FBI investiga uma aparente invasão da base NCIC, usada por polícias para mandados e antecedentes, e o diretor de cibersegurança da Casa Branca foi demitido. A NSA afirmou que sua paralisação veio de \"manutenção de rotina\", e as autoridades negaram ataque nos apagões recentes: não há conexão demonstrada entre os três episódios . G1 · BBC, NCIC · BBC, demissão .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#tecnologia"
   },
   {
     "title": "GTA VI arrecada US$ 3,79 bilhões em um dia",
     "body": "Fato — 19/11/2026. Lançado em 19/11, o GTA VI arrecadou US$ 3,79 bilhões no primeiro dia, segundo a Take-Two/Rockstar, com 32,5 milhões de cópias pré-vendidas; a empresa não divulgou unidades vendidas no dia. A BBC, independente, arredonda para US$ 3,8 bilhões e chama o lançamento de o maior do entretenimento. O GTA V, de 2013, virou plataforma de receita recorrente por uma década. Comunicado da Take-Two · BBC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#tecnologia"
   },
   {
     "title": "Coreia do Sul perde o ministro da Educação por fraude com IA no exame",
     "body": "Fato — 22/11/2026. O ministro da Educação, Choi Kyo-jin, renunciou depois que o Suneung, exame de admissão universitária feito na quinta-feira (19/11), teve 111 candidatos flagrados com dispositivos inteligentes não autorizados entre cerca de 500 mil inscritos. O gatilho foi a confissão de Han Won-seok, 34 anos, que admitiu ter usado minicâmera, celular e IA para acertar 159 de 160 questões no exame de contabilidade fiscal em abril. O presidente Lee Jae Myung aceitou a renúncia. O Suneung dura até nove horas e concentra o acesso às melhores universidades. BBC, 09h20 UTC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#tecnologia"
   },
   {
     "title": "Nvidia e Anthropic puxam a correção nas ações de IA",
     "body": "Fato — 20/11/2026. A Anthropic estreou na Nasdaq em 19/11 a US$ 97, alta de 17%, com valor de mercado de US$ 1,75 trilhão, e caiu 8,5% no fechamento de sexta. No mesmo dia, o S&P 500 caiu 3,7%, o Dow Jones 1,9% e o Nasdaq 5,3%. A Nvidia fechou em queda de 13,8%, a US$ 125,84, sétima perda seguida, quase 48% abaixo da máxima de 6/10. A crise da Nvidia começou com a saída do CEO Jensen Huang em 11/11, após admissão de um caso extraconjugal e uma investigação interna; em 20/11 a Reuters informou que a SEC apurava questões contábeis. A BBC nota que os índices ainda estavam acima do nível de um ano antes. G1, estreia · BBC, sell-off · Valor · Documento da Nvidia à SEC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#tecnologia"
   },
   {
     "title": "Washington restringe chips e ameaça frear centros de dados no exterior",
     "body": "Fato — 16/11 e 20/11/2026. Trump ameaçou proibir empresas americanas de construir centros de dados de IA fora dos EUA, sem detalhar a aplicação, e Washington anunciou na segunda-feira (16/11) exigência de licença para compra de chips avançados, para monitorar uso por empresas chinesas. A medida afeta países do Sudeste Asiático que investiram em centros de dados. São anúncios de intenção. BBC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "22/11/2026 às 20:00",
+    "url": "edicoes/2026-11-22-2000.html#tecnologia"
   },
   {
     "title": "COP31 termina sem acordo: a primeira vez desde 2009",

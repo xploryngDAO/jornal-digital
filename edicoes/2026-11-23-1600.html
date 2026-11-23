@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161c47">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.skip-link{position:fixed;top:.75rem;left:.75rem;z-index:20;background:#fff;color:var(--txt);padding:.6rem 1rem;border-radius:.4rem;transform:translateY(-200%)}
+.skip-link:focus{transform:none}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:focus-visible,.lead a:focus-visible{outline-color:#b25409}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.card.is-new{border-left:4px solid var(--acc)}
+.new-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:var(--acc);color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.card.is-updated{border-left:4px solid #b25409}
+.upd-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:#b25409;color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:2rem;color:#c7e0df;font-size:.9rem}
+#locais-noticias{list-style:none;display:grid;gap:.35rem;margin:1rem 0}
+#locais-noticias li button{font:inherit;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:.5rem;padding:.55rem .75rem;width:100%;cursor:pointer}
+#locais-noticias li button:hover{border-color:var(--acc)}
+.archive-search details{background:var(--panel);border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;margin-bottom:.6rem}
+.archive-search summary{font-weight:700;cursor:pointer}
+.archive-search ul{list-style:none;margin-top:.5rem;display:grid;gap:.3rem}
+.archive-search label{display:block;margin:.6rem 0}
+.archive-search input,.archive-search select{font:inherit;padding:.4rem .5rem;border:1px solid var(--line);border-radius:.4rem;background:var(--paper)}
+#arquivo-resultados{list-style:none;display:grid;gap:.5rem;margin-top:.75rem}
+#arquivo-resultados li{background:var(--card,#fff);border:1px solid var(--line);border-radius:.5rem;padding:.6rem .75rem}
+.desk-section[hidden]{display:none}
+#filtro-editorias{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+#filtro-editorias button{font:inherit;font-size:.85rem;padding:.35rem .8rem;border:1px solid var(--line);border-radius:2rem;background:var(--panel);cursor:pointer}
+#filtro-editorias button[aria-pressed="true"]{background:var(--acc);color:var(--paper);border-color:var(--acc)}
+footer{padding:2rem 0;border-top:1px solid var(--line);margin-top:3rem}
+@media (max-width:52rem){.lead{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header>
+  <div class="masthead">
+    <strong>Jornal Digital</strong>
+    <p>Edição de 23 de novembro de 2026 · 16h (Brasília) · atualizada 16h40</p>
+  </div>
+</header>
+<nav aria-label="Seções da edição">
+  <a href="#manchete">Manchete</a>
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#saude">Saúde</a>
+  <a href="#ciencia">Ciência</a>
+  <a href="#esporte">Esporte</a>
+  <a href="#cultura">Cultura</a>
+  <a href="#historico">O que veio antes</a>
+  <a href="#globo">Globo</a>
+  <a href="#grafo">Grafo</a>
+  <a href="#correlacoes">Impactos</a>
+  <a href="#edicoes">Arquivo</a>
+</nav>
+
+<main id="conteudo" class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div class="lead-main">
+    <p class="lead-label">Edição das 16h · cinco editorias novas em Saúde, Ciência, Esporte e Cultura</p>
+    <h1 id="manchete">O conselho da Nvidia reconduz Jensen Huang em onze dias, e a ação sobe 34%</h1>
+    <p>A recondução foi por unanimidade, com efeito imediato, e a empresa diz ter ouvido "altos funcionários do governo dos Estados Unidos". Trump afirmou à CNBC que "convenci" os diretores. Horas antes, o conselho dizia que não o recontrataria. No mesmo dia, o dólar tocou R$ 6 pela primeira vez desde abril de 2025.</p>
+    <div class="lead-actions">
+      <a class="lead-read" href="#tecnologia" data-open-story="nvidia-volta">Ler matéria</a>
+      <a href="#historico">Ver linha do tempo</a>
+    </div>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Também nesta edição</h2>
+    <ul>
+      <li><span>Saúde</span><a href="#saude" data-open-story="anvisa-mama">Anvisa registra biossimilar para câncer de mama e amplia uso contra câncer de bexiga</a></li>
+      <li><span>Saúde</span><a href="#saude" data-open-story="ela-nobre">Carlos Nobre revela diagnóstico de ELA e diz que segue trabalhando</a></li>
+      <li><span>Saúde</span><a href="#saude" data-open-story="ia-mamografia">Reino Unido recruta 700 mil mulheres para o maior teste de IA no rastreio de mama</a></li>
+      <li><span>Esporte</span><a href="#esporte" data-open-story="brasileirao-36">Rodada 36 tem três jogos decisivos contra o rebaixamento hoje à noite</a></li>
+      <li><span>Cultura</span><a href="#cultura" data-open-story="fury-saude">Tyson Fury revela diagnóstico de esquizofrenia</a></li>
+      <li><span>Ciência</span><a href="#ciencia" data-open-story="calvicie-ia">Pente testado em ratos supera minoxidil; não há teste em humanos</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="dolar-6">Dólar toca R$ 6 no dia da votação do ajuste fiscal na Câmara</a></li>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="libia-escalada">Kremlin fala em "escalada" e a Vantor mostra a corveta emborcada</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="guimaraes">Lula exonera o articulador político para ter mais um voto hoje</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="barroso">A vaga de Barroso chega à mesa com a cúpula do Congresso e do STF</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="focus">Focus eleva a inflação e projeta Selic a 13% em 2027</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="crowdstrike">CrowdStrike compra a Zscaler por US$ 43,9 bilhões</a></li>
+    </ul>
+  </aside>
+</section>
+
+<h2 class="desk-heading">Notícias por editoria</h2>
+
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+  <button type="button" data-editoria="saude" aria-pressed="false">Saúde</button>
+  <button type="button" data-editoria="ciencia" aria-pressed="false">Ciência</button>
+  <button type="button" data-editoria="esporte" aria-pressed="false">Esporte</button>
+  <button type="button" data-editoria="cultura" aria-pressed="false">Cultura</button>
+</div>
+
+<section id="mundo" class="desk-section">
+  <h2>Mundo</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-libia-escalada"><span class="new-tag">Novo · 14h</span><h3>Kremlin fala em "escalada" e a Vantor mostra a corveta emborcada</h3><p><strong>Fato — 23/11/2026.</strong> O porta-voz Dmitri Peskov chamou a "expansão da atividade terrorista no Báltico" de "tendência perigosa" e disse que ela "leva a uma escalada de tensões na região", mas <strong>não comentou diretamente</strong> os ataques na Líbia, remetendo ao Ministério da Defesa. A empresa de inteligência <strong>Vantor</strong> divulgou imagens que mostram, segundo ela, a corveta <em>Merkury</em> atracada no sábado e, no domingo, emborcada e afundada, com apenas a proa visível — primeiro registro visual do afundamento, ainda que seja análise de empresa privada. O governo do leste da Líbia diz que o navio usava o porto sob "acordo marítimo existente" e acusa Trípoli de hospedar militares ucranianos; o governo reconhecido pela ONU nega. <strong>Sete drones, o helicóptero Ka-27 e o navio MV Angara são alegações ucranianas</strong>, sem confirmação russa. <a href="https://www.bbc.com/news/articles/cr894gjz0j0yo">BBC, 23/11</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/23/zelensky-reivindica-ataque-navio-de-guerra-russo-libia-video.ghtml">G1, 23/11</a>.</p></article>
+    <article class="card is-new" id="pauta-iowa-adiado"><span class="new-tag">Novo · 14h</span><h3>Exército dos EUA adia para quarta a detonação em Iowa</h3><p><strong>Fato — 23/11/2026.</strong> A detonação das cinco toneladas de explosivos degradados na fábrica de Middletown, Iowa, passou de "até 24/11" para <strong>quarta-feira, 25/11</strong>, segundo o Exército, para ter "condições meteorológicas mais favoráveis" e instalar todas as medidas de mitigação. A ordem judicial que suspendeu a operação continua em vigor. <strong>O adiamento enfraquece o argumento de urgência</strong>: se era possível esperar dois dias, a ação não era de horas. <a href="https://www.army.mil/article-amp/296990/army_update_on_iowa_army_ammunition_plant">Comunicado do Exército</a> · <a href="https://www.bbc.com/news/articles/cmze750zg0jeo">BBC, 23/11</a>.</p></article>
+    <article class="card is-new" id="pauta-democratas"><span class="new-tag">Novo · 14h</span><h3>Democratas chegam a 258 cadeiras, a maior bancada desde 1992</h3><p><strong>Fato — 23/11/2026.</strong> Com a virada de uma cadeira na Carolina do Norte, os democratas chegaram a 258 cadeiras na Câmara dos EUA e preparam uma agenda de 100 dias focada em custo de vida e em investigações sobre o governo. Quatro disputas ainda estavam indefinidas. <strong>Nexo:</strong> é o Congresso que assume em janeiro, com a senadora Elizabeth Warren na Comissão Bancária prometendo leis de controle de exportação. <a href="https://www.bbc.com/news/articles/c6vg29g7dlyno">BBC</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/23/democratas-terao-maior-bancada-na-camara-desde-1992.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-cop31-legado"><span class="upd-tag">Contexto</span><h3>COP31: a Arábia Saudita na linha de frente da resistência</h3><p><strong>Contexto — 23/11/2026.</strong> Segundo o Valor, Riad teve "grande peso" no colapso do acordo, liderando a resistência a referências à redução da dependência de combustíveis fósseis. A BBC registra que a COP31, a mais longa da história, terminou sem o "Pacto de Antália" e que o primeiro-ministro da Austrália, país co-anfitrião, atribuiu a falha a "tempos geopolíticos difíceis". O desfecho já foi publicado na edição das 20h de 22/11. <a href="https://www.bbc.com/news/articles/cqwy06zrd26lo">BBC, encerramento</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/22/todos-perdem-com-a-falta-de-rumo-da-cop31-mas-jovens-e-pobres-perdem-mais.ghtml">Valor, análise</a>.</p></article>
+  </div>
+</section>
+
+<section id="politica" class="desk-section">
+  <h2>Política</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-guimaraes"><span class="new-tag">Novo · 14h</span><h3>Lula exonera o articulador político para ele votar o ajuste</h3><p><strong>Fato — 23/11/2026.</strong> Lula exonerou temporariamente <strong>José Guimarães</strong> da Secretaria de Relações Institucionais; a exoneração foi assinada em 19/11 e publicada nesta segunda no Diário Oficial. Com isso, Guimarães reassume o mandato de deputado e participa das discussões sobre emendas e da votação do PLP 299/2026, e deve voltar ao ministério depois. O plenário votava em dia atípico, e <strong>não havia resultado ao fim desta captura</strong> — antes do mérito, é preciso aprovar o requerimento de urgência. <a href="https://g1.globo.com/politica/noticia/2026/11/23/lula-exonera-ministro-da-articulacao-para-votacao-do-projeto-de-ajuste-na-camara-medida-e-temporaria.ghtml">G1, 23/11</a> · <a href="https://www.camara.leg.br/noticias/1321186-camara-deve-votar-ajuste-fiscal-proposta-do-governo-pretende-economizar-r-70-bilhoes">Câmara</a>.</p></article>
+    <article class="card is-new" id="pauta-braga-pec"><span class="new-tag">Novo · 14h</span><h3>Braga diz que o governo precisa enviar uma PEC de ajuste nesta semana</h3><p><strong>Fato — 23/11/2026.</strong> O líder do MDB no Senado e relator do Orçamento, <strong>Eduardo Braga</strong>, afirma que uma PEC com novas medidas de ajuste é necessária para acomodar as promessas de campanha de Lula no Orçamento de 2027, e diz que o envio cabe ao Executivo. <strong>Leitura:</strong> é o reconhecimento, por quem relatou o PLP, de que o projeto votado hoje não fecha a conta. <a href="https://valor.globo.com/politica/noticia/2026/11/23/governo-precisa-enviar-pec-com-novo-ajuste-fiscal-diz-braga.ghtml">Valor, 05h00</a>.</p></article>
+    <article class="card is-new" id="pauta-barroso"><span class="new-tag">Novo · 14h</span><h3>A vaga de Barroso chega à mesa com a cúpula do Congresso e do STF</h3><p><strong>Fato — 23/11/2026.</strong> Segundo o blog do Valdo Cruz, Lula reuniu no sábado (21) os presidentes do Senado, Davi Alcolumbre, e da Câmara, Hugo Motta, e os ministros Gilmar Mendes, Cristiano Zanin e Alexandre de Moraes para definir o substituto de <strong>Luís Roberto Barroso</strong>, aposentado em outubro de 2025 — vaga ainda sem ocupante. Lula disse que gostaria de reenviar o nome de <strong>Jorge Messias</strong>, mas entende se for inviável; houve reação em favor do ex-senador Rodrigo Pacheco. <strong>Antecedente:</strong> o Senado rejeitou Messias em <strong>29/4/2026, por 42 a 34</strong> — primeira rejeição de um indicado ao STF em 132 anos. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/23/lula-se-reune-com-cupula-do-congresso-e-ministros-do-stf-para-definir-substituto-de-barroso.ghtml">G1, 23/11</a> · <a href="https://noticias.stf.jus.br/postsnoticias/publicado-decreto-de-aposentadoria-do-ministro-luis-roberto-barroso/">STF, aposentadoria</a>.</p></article>
+    <article class="card" id="pauta-dosimetria"><h3>STF julga a Lei da Dosimetria de 4 a 15 de dezembro</h3><p><strong>Fato — segue em pauta.</strong> A Lei 15.402/2026 pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. <a href="https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/">STF, 09/05/2026</a> · <a href="https://www12.senado.leg.br/noticias/materias/2026/11/17/davi-e-motta-pedem-julgamento-das-acoes-da-lei-da-dosimetria">Senado, 17/11/2026</a>.</p></article>
+    <article class="card" id="pauta-escala"><span class="upd-tag">Atualizado</span><h3>Escala 5x2: a AGU pede ao STF que reconheça perda de objeto</h3><p><strong>Fato — 23/11/2026.</strong> A Advocacia-Geral da União sustenta que a liminar de Dino não é mais necessária após a regulamentação do governo, porque mantê-la criaria <strong>duas regras sobre a mesma norma</strong>; a ação que contesta o período de transição ainda será julgada pelo plenário. Separadamente, o Instituto Doméstica Legal estima que o fim da escala 6x1 afete <strong>mais de 100 mil trabalhadores domésticos</strong>, com redistribuição de horas, alteração de contratos e atualização no eSocial. <a href="https://g1.globo.com/politica/noticia/2026/11/23/escala-5x2-agu-diz-ao-stf-que-decisao-provisoria-de-dino-nao-e-mais-necessaria-apos-regulamentacao-do-governo.ghtml">G1, AGU</a> · <a href="https://g1.globo.com/economia/noticia/2026/11/23/fim-da-escala-6x1-deve-beneficiar-mais-de-100-mil-trabalhadores-domesticos-estima-instituto.ghtml">G1, domésticos</a>.</p></article>
+  </div>
+</section>
+
+<section id="economia" class="desk-section">
+  <h2>Economia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-dolar-6"><span class="new-tag">Novo · 14h</span><h3>Dólar toca R$ 6 pela primeira vez desde abril de 2025</h3><p><strong>Fato — 23/11/2026.</strong> O dólar comercial operava a <strong>R$ 5,9857</strong> perto das 14h (+0,86%), após máxima de <strong>R$ 6,0055</strong>. O último fechamento acima de R$ 6 foi em <strong>21/1/2025</strong> (R$ 6,0302) e a última passagem intraday havia sido em <strong>9/4/2025</strong> (R$ 6,0961). O Ibovespa caía 0,79%, a 165.066 pontos. O Valor atribui a alta a <strong>duas causas</strong>: expectativa sobre as contas públicas brasileiras e juros americanos mais altos. O diretor do BC Nilton David disse que o "greed virou fear" após a eleição e vê <strong>indícios de exagero</strong>: em três semanas, a Selic implícita passou de cerca de 200 pontos-base abaixo para 200 pontos-base acima do esperado. <strong>Valor intradiário, sem fechamento nesta captura.</strong> <a href="https://g1.globo.com/economia/noticia/2026/11/23/dolar-ibovespa.ghtml">G1</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/23/o-que-explica-dlar-saltar-de-r-5-para-quase-r-6-em-um-ms.ghtml">Valor</a>.</p></article>
+    <article class="card is-new" id="pauta-nvidia-volta"><span class="new-tag">Novo · 14h</span><h3>Nvidia reconduz Jensen Huang e a ação sobe 34%</h3><p><strong>Fato — 23/11/2026.</strong> O conselho reconduziu <strong>Jensen Huang</strong> a presidente, CEO e membro do conselho, com efeito imediato, por unanimidade. O comunicado de Harvey Jones diz que o conselho ouviu "altos funcionários do governo dos Estados Unidos" e está "confiante de que o retorno não representa riscos à segurança nacional". Trump disse à CNBC que falou com os diretores e que <strong>"convenci"</strong>; o deputado republicano Don Bacon criticou, e a senadora Elizabeth Warren chamou a decisão de "irresponsável". Nvidia +34,45%; Nasdaq +7,25%. Em 17/11, o mesmo conselho dissera que <strong>não</strong> recontrataria o fundador. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/23/nvidia-anuncia-volta-de-jensen-huang-ao-comando-da-empresa.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cq5y1k8ez407o">BBC</a> · <a href="https://valor.globo.com/empresas/noticia/2026/11/23/conselho-da-nvidia-reconduz-jensen-huang-aos-cargos-de-presidente-ceo-e-membro-do-conselho-aes-sobem-31-pontos-percentuais.ghtml">Valor</a>.</p></article>
+    <article class="card is-new" id="pauta-focus"><span class="new-tag">Novo · 14h</span><h3>Focus eleva a inflação e passa a esperar Selic a 13% em 2027</h3><p><strong>Fato — 23/11/2026.</strong> Economistas consultados no boletim Focus elevaram as projeções de inflação para 2026 e 2027 e passaram a projetar <strong>corte menor dos juros</strong> no ano que vem, com Selic em <strong>13%</strong> em 2027. <strong>Limite:</strong> os números são os das manchetes de G1 e Valor; não li o Focus integral. <a href="https://valor.globo.com/brasil/noticia/2026/11/23/mercado-eleva-projecoes-de-inflacao-e-espera-selic-em-13percent-em-2027-aponta-focus.ghtml">Valor</a> · <a href="https://g1.globo.com/economia/noticia/2026/11/23/mercado-financeiro-eleva-estimativa-de-inflacao-em-2026-e-2027-e-projeta-corte-menor-dos-juros-no-ano-que-vem.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-braskem"><span class="new-tag">Preliminar · 14h</span><h3>Braskem fecha acordo com credores de US$ 4,9 bi, com aporte da Petrobras</h3><p><strong>Preliminar — 23/11/2026.</strong> Segundo o Valor, com base em <strong>fontes</strong>, a Braskem fechou acordo com credores no valor de US$ 4,9 bilhões, com aporte de US$ 1,3 bilhão da Petrobras. <strong>Não é comunicado das empresas</strong>, e o corpo da matéria está sob assinatura. <a href="https://valor.globo.com/empresas/noticia/2026/11/23/exclusivo-braskem-fecha-acordo-com-credores-de-us-49-bilhoes-com-aporte-de-us-13-bi-da-petrobras-dizem-fontes.ghtml">Valor, 23/11</a>.</p></article>
+    <article class="card" id="pauta-dta"><span class="upd-tag">Segue em pauta</span><h3>Crédito fiscal dos bancos: R$ 163 bi e uma discussão que vem de 2013</h3><p><strong>Segue em pauta.</strong> O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a <strong>R$ 163 bilhões</strong> e, pela legislação, precisa começar a cair neste ano, segundo o Valor. Parte do setor diz que a lei não tem como ser cumprida sem afetar capital; o BC, segundo o jornal, vê abertura ao diálogo. O ponto entrou no PLP votado hoje, com o limite à compensação de créditos cruzados. <strong>Inferência do setor, não fato observado:</strong> menos crédito fiscal, menos capital regulatório, possivelmente menos oferta de crédito. <a href="https://valor.globo.com/financas/noticia/2026/11/23/debate-sobre-ativos-fiscais-divide-bancos-e-pode-prejudicar-o-credito.ghtml">Valor</a> · <a href="https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/lei/l15078.htm">Lei 15.078/2024</a>.</p></article>
+    <article class="card" id="pauta-febraban"><span class="upd-tag">Contexto</span><h3>Febraban chama o pacote de "Plano Moretti"</h3><p><strong>Contexto — 23/11/2026.</strong> Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o "Plano Moretti" é "um bom começo", desde que não seja desidratado, e prevê inadimplência difícil ao menos no primeiro semestre de 2027. <strong>Acesso parcial:</strong> só o primeiro parágrafo estava legível. <a href="https://valor.globo.com/financas/noticia/2026/11/23/plano-moretti-e-um-bom-comeco-para-ajuste-fiscal-diz-presidente-da-febraban.ghtml">Valor, 05h00</a>.</p></article>
+  </div>
+</section>
+
+<section id="tecnologia" class="desk-section">
+  <h2>Tecnologia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-nvidia-atores"><span class="new-tag">Análise · 14h</span><h3>Quem decidiu a volta de Huang: empresa, governo ou mercado?</h3><p><strong>Análise — 23/11/2026.</strong> Há três versões no mesmo dia. <strong>Empresa:</strong> o conselho "recebeu informações de altos funcionários do governo" e concluiu que não há risco. <strong>Governo:</strong> Trump diz que "convenci" os diretores e que eles "pediram garantia"; segundo a BBC, ele tem posição declarada em ações da empresa (compra de US$ 265 mil, venda de até US$ 15 mil em setembro). <strong>Mercado:</strong> a Nvidia vinha de sete quedas seguidas, e o Nasdaq subiu 7,25% no mesmo dia — o repique foi de todo o setor. <strong>O que é fato:</strong> a única fonte sobre a intervenção do governo é a fala do próprio presidente e o comunicado da empresa; não há documento público do conselho. <a href="https://www.bbc.com/news/articles/cq5y1k8ez407o">BBC</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/23/trump-celebra-retorno-de-jensen-huang-ao-comando-da-nvidia-e-diz-que-nao-ha-risco-de-seguranca-nacional.ghtml">G1/CNBC</a>.</p></article>
+    <article class="card is-new" id="pauta-crowdstrike"><span class="new-tag">Novo · 14h</span><h3>CrowdStrike compra a Zscaler por US$ 43,9 bilhões em ações</h3><p><strong>Fato — 23/11/2026.</strong> A transação é totalmente em ações e, segundo as empresas, cria uma das maiores fornecedoras especializadas em segurança cibernética do mundo, unindo proteção de dispositivos à segurança de rede. <strong>Nexo:</strong> é a consolidação de um setor que, na semana passada, teve falha crítica no Java, demissão do diretor de cibersegurança da Casa Branca e suspeita de invasão do NCIC. <a href="https://valor.globo.com/empresas/noticia/2026/11/23/crowdstrike-compra-zscaler-por-us-439-bi-em-aposta-em-seguranca-de-redes.ghtml">Valor</a> · <a href="https://ir.crowdstrike.com/news-releases/news-release-details/crowdstrike-acquire-zscaler-bringing-network-security-and-zero">Comunicado da CrowdStrike</a>.</p></article>
+    <article class="card" id="pauta-ia-risco"><span class="upd-tag">Contexto</span><h3>O boom de IA em São Francisco e o medo da correção</h3><p><strong>Contexto — 23/11/2026.</strong> A BBC mostra São Francisco em novo ciclo de alta, com aluguéis e imóveis subindo e contratações caras na OpenAI e na Anthropic, e o temor crescente de uma "correção significativa" nos preços das ações de IA. O FMI alertou no mês passado sobre essa possibilidade. <strong>A alta de hoje não resolve o alerta; ela o aumenta</strong>, porque concentra mais valor em menos empresas. <a href="https://www.bbc.com/news/articles/cqe9k09j9jv4o">BBC, 23/11</a>.</p></article>
+    <article class="card" id="pauta-java"><h3>Falha crítica no Java e a onda de apagões: sem ligação demonstrada</h3><p><strong>Fato — 17/11 a 23/11/2026.</strong> Uma falha de memória no Java foi encontrada com ajuda de IA e corrigida pela Oracle em 17/11. Na mesma semana, o diretor de cibersegurança da Casa Branca foi demitido (20/11) e o FBI investigava uma aparente invasão do NCIC. Nada indica conexão entre os episódios. <a href="https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/21/ataques-ciberneticos-ia-ou-atualizacoes-pendentes-o-que-ha-por-tras-da-onda-de-apagoes-dos-ultimos-dias.ghtml">G1, apagões</a> · <a href="https://www.bbc.com/news/articles/cwz0k3nn5p5mo">BBC, demissão</a>.</p></article>
+  </div>
+</section>
+
+<section id="saude" class="desk-section">
+  <h2>Saúde</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-anvisa-mama"><span class="new-tag">Novo · 16h</span><h3>Anvisa registra um biossimilar do Perjeta e amplia o uso de Imfinzi</h3><p><strong>Fato — 23/11/2026.</strong> A Anvisa concedeu nesta segunda o registro do <strong>Hertuzo (pertuzumabe)</strong> como <strong>produto biossimilar</strong> do Perjeta, pela Via de Desenvolvimento por Comparabilidade da <strong>RDC 55/2010</strong> — a aprovação se apoia na demonstração de similaridade em qualidade, segurança, eficácia e imunogenicidade, não em ensaios clínicos próprios. Indicações: câncer de mama metastático HER2-positivo em combinação com trastuzumabe e docetaxel, e câncer de mama inicial, antes ou depois da cirurgia, em casos de alto risco de recorrência. Na mesma data, foi publicada a <strong>ampliação de uso do Imfinzi (durvalumabe)</strong> para câncer de bexiga músculo-invasivo em quem não pode ou recusa quimioterapia à base de cisplatina, em associação com enfortumabe vedotina antes da cirurgia e em monoterapia depois da cistectomia radical. A agência estima <strong>13.110 novos casos anuais</strong> de câncer de bexiga no Brasil no triênio 2026-2028, e diz que 25% a 30% dos casos são diagnosticados já em estágio músculo-invasivo. <strong>Registro não é incorporação:</strong> não há, nesta captura, decisão da Conitec sobre oferta no SUS. <a href="https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-aprova-registro-de-medicamento-para-cancer-de-mama">Anvisa, 23/11, 11h</a> · <a href="https://g1.globo.com/saude/">G1 Saúde</a>.</p></article>
+    <article class="card is-new" id="pauta-ela-nobre"><span class="new-tag">Novo · 16h</span><h3>Carlos Nobre revela diagnóstico de ELA e diz que segue trabalhando</h3><p><strong>Fato — 23/11/2026.</strong> O climatologista <strong>Carlos Nobre</strong>, de 75 anos, revelou ser portador de <strong>esclerose lateral amiotrófica (ELA)</strong>, doença neurodegenerativa que compromete os neurônios motores. Segundo o G1, ele relatou ter descoberto o quadro após a COP30 e descreveu projetos em curso. <strong>Lacuna:</strong> o diagnóstico foi anunciado publicamente em novembro, e datas e prognóstico não foram confirmados em fonte primária nesta captura; a informação publicada é a declaração do próprio cientista à imprensa. <a href="https://g1.globo.com/saude/">G1 Saúde, 23/11</a>.</p></article>
+    <article class="card is-new" id="pauta-ia-mamografia"><span class="new-tag">Novo · 16h</span><h3>Reino Unido recruta 700 mil mulheres para o maior teste de IA no rastreio de mama</h3><p><strong>Fato — 23/11/2026.</strong> O <strong>ensaio EDITH</strong> vai convidar cerca de <strong>700 mil mulheres</strong> do Reino Unido a participar do maior teste já feito de uso de inteligência artificial na leitura de mamografias, com o objetivo de detectar câncer mais cedo e reduzir a carga de trabalho de radiologistas sem aumentar o sobrediagnóstico. O recrutamento começou no <em>Cambridge University Hospitals</em>, primeira de 30 unidades. A faixa convidada é de <strong>50 a 71 anos</strong>, com rastreio a cada três anos; mais de 2 milhões de mulheres fazem mamografia anual ou trienal no país. <strong>Limite:</strong> é um ensaio, não um resultado — a eficácia clínica da leitura por IA é justamente o que será medido. <a href="https://www.bbc.com/news/articles/cmpdwnw3nvzjo">BBC, 23/11</a>.</p></article>
+    <article class="card" id="pauta-bolsonaro-quadro"><span class="upd-tag">Atualizado</span><h3>O quadro abdominal de Bolsonaro e a facada de 2018</h3><p><strong>Fato — segue em pauta.</strong> O ex-presidente está clinicamente estável, mas segue na UTI e sem previsão de alta; o G1 explica o abdômen agudo obstrutivo e a série de cirurgias abdominais e complicações intestinais desde a facada de 2018. <strong>Nexo:</strong> o mesmo paciente, o mesmo antecedente cirúrgico, um quadro novo — não há indicação, nesta captura, de causa diferente da obstrução. <a href="https://g1.globo.com/saude/">G1 Saúde, 23/11</a> · <a href="https://g1.globo.com/politica/">G1 Política</a>.</p></article>
+  </div>
+</section>
+
+<section id="ciencia" class="desk-section">
+  <h2>Ciência</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-cop31-anticipacao"><span class="new-tag">Novo · 16h</span><h3>Ciência do clima sem acordo: o que a COP31 deixa para a pesquisa</h3><p><strong>Análise — 23/11/2026.</strong> O desfecho sem texto adotado (já publicado nas edições das 20h de 22/11 e das 8h e 14h de hoje) tem um efeito concreto para a ciência: cada COP decide se encomenda e se acolhe os relatórios do <strong>IPCC</strong>, e uma conferência que termina sem decisão não renova mandato nem calendário. <strong>O que é fato:</strong> Riad liderou a resistência (Valor) e não houve Pacto de Antália (BBC). <strong>O que é inferência:</strong> o custo para o próximo ciclo de avaliação depende de decisões que não estavam nesta captura. <strong>Lacuna:</strong> não verifiquei o calendário oficial do IPCC para o AR7 nesta captura. <a href="https://www.bbc.com/news/articles/cqwy06zrd26lo">BBC</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/22/todos-perdem-com-a-falta-de-rumo-da-cop31-mas-jovens-e-pobres-perdem-mais.ghtml">Valor</a>.</p></article>
+    <article class="card is-new" id="pauta-calvicie-ia"><span class="new-tag">Novo · 16h</span><h3>Pente chinês supera minoxidil e finasterida em ratos — e só em ratos</h3><p><strong>Fato — 23/11/2026.</strong> Um dispositivo desenvolvido na China combina estímulos elétricos e moléculas terapêuticas e alcançou, segundo a divulgação, <strong>até 97,85% de recrescimento capilar</strong> em testes com ratos, superando minoxidil e finasterida no modelo animal. <strong>A tecnologia não foi testada em humanos.</strong> <strong>Por que aparece no jornal:</strong> resultado em roedor é o começo da cadeia de evidência, não o fim; a manchete pode ser lida como se houvesse tratamento disponível. <a href="https://g1.globo.com/saude/">G1 Saúde, 23/11</a>.</p></article>
+    <article class="card" id="pauta-el-nino"><span class="upd-tag">Antecedente</span><h3>A COP30 de Belém e o mapa do caminho que a COP31 não adotou</h3><p><strong>Antecedente.</strong> A COP30, em Belém, aprovou um mapa do caminho para sair dos combustíveis fósseis e trouxe o tema das florestas tropicais ao centro — contexto já registrado nas edições de 22/11. A COP31 encerrou sem acolher esse encadeamento, e o que sobrou foi a remissão à decisão de Dubai de 2023. <a href="https://unfccc.int/cop30">UNFCCC, COP30</a> · <a href="https://www.bbc.com/news/articles/cqwy06zrd26lo">BBC</a>.</p></article>
+  </div>
+</section>
+
+<section id="esporte" class="desk-section">
+  <h2>Esporte</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-brasileirao-36"><span class="new-tag">Novo · 16h</span><h3>Rodada 36 tem duelos diretos contra o rebaixamento, com jogos a partir das 19h30</h3><p><strong>Fato — 23/11/2026.</strong> A 36ª rodada do Brasileirão tem nesta segunda três partidas decisivas na parte de baixo da tabela: <strong>Internacional x Vitória</strong>, às 19h30, <strong>Botafogo x São Paulo</strong>, às 20h, e <strong>Santos x Grêmio</strong>, às 21h. Após 35 rodadas, o G1/ge lista Flamengo com 80 pontos, Palmeiras com 74, Cruzeiro com 66 e Fluminense com 63 na parte alta. <strong>Nexo:</strong> os mesmos três confrontos definem posições na parte de cima e na de baixo — não são jogos isolados de uma rodada comum. <a href="https://ge.globo.com/futebol/brasileirao-serie-a/">ge, classificação e rodada</a> · <a href="https://ge.globo.com/rs/futebol/brasileirao-serie-a/noticia/2026/11/23/internacional-x-vitoria-onde-assistir-ao-vivo-horario-e-escalacoes.ghtml">ge, Internacional x Vitória</a>.</p></article>
+    <article class="card is-new" id="pauta-copa-brasil-final"><span class="new-tag">Novo · 16h</span><h3>Final da Copa do Brasil será Grêmio x Palmeiras, em jogo único</h3><p><strong>Fato — 23/11/2026.</strong> A decisão será entre <strong>Grêmio e Palmeiras</strong>, e será a <strong>primeira final em jogo único</strong> — formato novo, não repetição do modelo de ida e volta que vigorou por décadas. <strong>Nexo:</strong> jogo único muda o cálculo de risco: não há margem para corrigir um resultado ruim no segundo jogo, o que altera a preparação dos dois clubes. <a href="https://ge.globo.com/rs/futebol/copa-do-brasil/noticia/2026/11/23/gremio-x-palmeiras-veja-data-e-horario-da-final-da-copa-do-brasil.ghtml">ge, 23/11</a>.</p></article>
+    <article class="card" id="pauta-calote"><span class="upd-tag">Contexto</span><h3>Cuiabá acusa Corinthians e Santos de não pagarem por contratações</h3><p><strong>Contexto — 23/11/2026.</strong> O presidente do Cuiabá declarou que Corinthians e Santos são "os dois maiores caloteiros do Brasil" em dívidas por contratações, e o clube cobra punições. O Sport também reúne comitê nesta segunda para definir o futuro de reforços para 2027. <strong>Leitura:</strong> restrições de caixa nos clubes deixam de ser tema de bastidor e viram disputa pública na véspera da última rodada. <a href="https://ge.globo.com/mt/futebol/times/cuiaba/noticia/2026/11/23/cuiaba-cobra-punicoes-a-corinthians-e-santos-os-dois-maiores-caloteiros-do-brasil.ghtml">ge, 23/11</a>.</p></article>
+  </div>
+</section>
+
+<section id="cultura" class="desk-section">
+  <h2>Cultura</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-guggenheim"><span class="new-tag">Novo · 16h</span><h3>Peggy Guggenheim, a herdeira que escandalizou a alta sociedade e mudou a arte moderna</h3><p><strong>Leitura — 23/11/2026.</strong> A BBC reconsidera a colecionadora, que resgatou obras e financiou artistas hoje centrais no modernismo. <strong>Nexo:</strong> a coleção que ela formou se tornou instituição em Veneza e sustenta boa parte do que se ensina como arte do século 20 — o gosto de uma pessoa virou cânone. <a href="https://www.bbc.com/culture/article/20261120-the-scandalous-heiress-who-changed-modern-art">BBC Culture, 20/11</a>.</p></article>
+    <article class="card is-new" id="pauta-fury-saude"><span class="new-tag">Novo · 16h</span><h3>Tyson Fury revela diagnóstico de esquizofrenia</h3><p><strong>Fato — 23/11/2026.</strong> O pugilista britânico <strong>Tyson Fury</strong> revelou diagnóstico de esquizofrenia e relatou ouvir vozes, segundo a BBC Sport. <strong>Por que importa aqui:</strong> é um atleta profissional em atividade que fala publicamente sobre saúde mental, no mesmo ano em que o tema entrou na cobertura de saúde do portal. <a href="https://www.bbc.com/sport/boxing/articles/c6y80n3dn15yo">BBC Sport, 23/11</a>.</p></article>
+    <article class="card is-new" id="pauta-o2-evacuado"><span class="new-tag">Novo · 16h</span><h3>Rapper Don Toliver adia show na O2 Arena após evacuação em Manchester</h3><p><strong>Fato — 23/11/2026.</strong> O show de domingo do rapper americano em Manchester foi evacuado e a apresentação foi adiada. <strong>Lacuna:</strong> nesta captura a BBC não explica o motivo da evacuação; não publico causa sem confirmação. <a href="https://www.bbc.com/news/articles/ck3rgp4gv9pxo">BBC, 23/11</a>.</p></article>
+    <article class="card is-new" id="pauta-chevalier"><span class="new-tag">Novo · 16h</span><h3>Paisagem de Chevalier perdida aparece num brechó na Austrália</h3><p><strong>Fato — 23/11/2026.</strong> Uma obra do pintor britânico-americano <strong>Nicholas Chevalier</strong> — <em>Cape Schanck</em>, Victoria — foi encontrada numa loja de caridade. <strong>Nexo:</strong> circulação de arte sem registro é uma porta de entrada frequente de objetos procurados em leilão e museus, e o caso torna o achado verificável. <a href="https://www.bbc.com/news/articles/c32l5z88z15jo">BBC, 23/11</a>.</p></article>
+  </div>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation"><h3>O governo americano e o conselho da Nvidia: da posse passiva na Intel ao telefone de domingo</h3><ol class="timeline"><li><time datetime="1816-04-10">1816</time>o Congresso autoriza o presidente a nomear cinco dos 25 diretores do Segundo Banco dos EUA — interferência em empresa privada criada por lei, não por gesto presidencial. <a href="https://www.gao.gov/assets/gao-01-179sp.pdf">GAO</a>.</li><li><time datetime="1952-04-08">1952</time>Truman manda o secretário do Comércio tomar e operar as siderúrgicas para evitar greve; a Suprema Corte invalida a medida em <em>Youngstown Sheet &amp; Tube v. Sawyer</em>, por falta de autorização constitucional ou legal. <a href="https://www.law.cornell.edu/supremecourt/text/343/579">Suprema Corte dos EUA</a>.</li><li><time datetime="2025-08-22">22/08/2025</time>o governo Trump adquire cerca de 9,9% da Intel, em acordo que a própria empresa descreve como investimento passivo, sem assento no conselho nem direitos de governança. <a href="https://d1io3yog0oux5.cloudfront.net/_bfef62b2bffb520062b861149f40e4fa/intel/news/2025-08-22_Intel_and_Trump_Administration_Reach_Historic_1748.pdf">Comunicado da Intel</a>.</li><li><time datetime="2026-11-12">12/11/2026</time>Huang renuncia após suspeita de vínculo da mulher com a inteligência chinesa e um segundo relacionamento. <a href="https://www.sec.gov/Archives/edgar/data/1045810/000104581026000082/nvda-20261111.htm">Documento à SEC</a>.</li><li><time datetime="2026-11-17">17/11/2026</time>o conselho diz que não recontrataria o fundador e contrata uma consultoria de recrutamento. <a href="https://g1.globo.com/mundo/noticia/2026/11/23/trump-celebra-retorno-de-jensen-huang-ao-comando-da-nvidia-e-diz-que-nao-ha-risco-de-seguranca-nacional.ghtml">G1</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>Trump pede a recondução nas redes; o secretário do Tesouro, Scott Bessent, defende "mudança drástica" na liderança. <a href="https://g1.globo.com/mundo/noticia/2026/11/23/trump-celebra-retorno-de-jensen-huang-ao-comando-da-nvidia-e-diz-que-nao-ha-risco-de-seguranca-nacional.ghtml">G1</a>.</li><li><time datetime="2026-11-23">23/11/2026</time>o conselho reconduz Huang por unanimidade; Trump diz que "convenci" os diretores; a ação sobe 34%. <a href="https://www.bbc.com/news/articles/cq5y1k8ez407o">BBC</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O que liga 1816, 1952, 2025 e 2026 é o mesmo conflito: quando o Executivo toma parte na vida de uma empresa privada, o problema não é comercial, é de <em>autorização</em>. Nos dois primeiros casos, havia lei (1816) ou faltou base legal (1952); em 2025, foi feito um investimento em ações apresentado como passivo; em 2026, foram telefonemas presidenciais e uma declaração pública de ausência de risco. <strong>Contraponto:</strong> no caso da Nvidia não houve nenhum ato do Estado — nenhum decreto, nenhuma ação, nenhuma requisição. A empresa afirma ter perguntado ao governo; o governo afirma ter respondido. Isso é <strong>pressão informal</strong>, não intervenção formal, e as analogias servem para medir risco institucional, não para afirmar equivalência. <strong>Lacuna:</strong> não existe, nesta captura, registro público do que foi dito ao conselho.</p></article>
+  <article class="correlation"><h3>R$ 6: o que se repetiu em dezembro de 2024, abril de 2025 e novembro de 2026</h3><ol class="timeline"><li><time datetime="2024-12-18">18/12/2024</time>o dólar fecha em recorde nominal de R$ 6,267, com o mercado duvidando de que o pacote fiscal de corte de gastos fosse suficiente. <a href="https://www1.folha.uol.com.br/mercado/2024/12/dolar-abre-em-alta-apos-aprovacao-de-projeto-de-corte-de-gastos-e-da-reforma-tributaria.shtml">Folha</a>.</li><li><time datetime="2024-12-19">19 e 20/12/2024</time>com leilões do BC e avanço da votação no Congresso, recua a R$ 6,1237 (−2,27%) e depois a R$ 6,07. <a href="https://economia.uol.com.br/noticias/estadao-conteudo/2024/12/19/dolar-cai-227-e-fecha-em-61237-apos-atuacao-historica-do-bc.amp.htm">UOL/Estadão</a> · <a href="https://agenciabrasil.ebc.com.br/economia/noticia/2024-12/banco-central-leiloa-us-3-bi-na-quinta-feira-para-segurar-dolar">Agência Brasil</a>.</li><li><time datetime="2025-04-09">09/04/2025</time>a moeda toca R$ 6,0961 com a escalada tarifária EUA-China; o anúncio de pausa de 90 dias nas tarifas a derruba para cerca de R$ 5,84 no mesmo dia. <a href="https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-9-abril-2025/">CNN Brasil</a> · <a href="https://www1.folha.uol.com.br/mercado/2025/04/dolar-sobe-apos-anuncio-de-tarifas-da-china-sobre-eua.shtml">Folha</a>.</li><li><time datetime="2025-06-09">09/06/2025</time>fecha a R$ 5,48, menor do ano, com dólar fraco no mundo e juro brasileiro alto. <a href="https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-9-junho-2025/">CNN Brasil</a>.</li><li><time datetime="2026-11-19">19/11/2026</time>fecha a R$ 5,9344, maior desde janeiro de 2025. <a href="https://g1.globo.com/economia/noticia/2026/11/23/dolar-ibovespa.ghtml">G1</a>.</li><li><time datetime="2026-11-23">23/11/2026</time>toca R$ 6,0055 no dia da votação do ajuste fiscal. <a href="https://g1.globo.com/economia/noticia/2026/11/23/dolar-ibovespa.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O real vai a R$ 6 quando o investidor paga mais para carregá-lo: é o <em>prêmio de risco</em>. Duas coisas o elevam — a dúvida sobre se o ajuste estabiliza a dívida e a alta do dólar no exterior —, e uma coisa o reduz: juro alto e intervenção do BC. Em 2024, a dúvida fiscal e o leilão do BC agiram juntos; em 2025, foi o exterior; em 2026, as duas voltaram, com a diferença de que agora o próprio relator do ajuste pede uma PEC. <strong>Contraponto e limite:</strong> em 2025 a moeda caiu 16% até junho sem que a dívida mudasse de trajetória, e o diretor do BC vê hoje "indícios de exagero" do mercado — ou seja, a trajetória fiscal não é a única variável, e parte do movimento pode ser desmonte de posições. <strong>Lacuna:</strong> não há fechamento de hoje nesta captura.</p></article>
+  <article class="correlation"><h3>A vaga do STF e um Senado que já disse não uma vez</h3><ol class="timeline"><li><time datetime="2025-10-18">18/10/2025</time>Luís Roberto Barroso se aposenta do STF. <a href="https://noticias.stf.jus.br/postsnoticias/publicado-decreto-de-aposentadoria-do-ministro-luis-roberto-barroso/">STF</a>.</li><li><time datetime="2025-11-20">20/11/2025</time>Lula comunica a escolha de Jorge Messias sem acordo prévio com o presidente do Senado. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/23/lula-se-reune-com-cupula-do-congresso-e-ministros-do-stf-para-definir-substituto-de-barroso.ghtml">G1</a>.</li><li><time datetime="2026-04-29">29/04/2026</time>o Senado rejeita Messias por 42 a 34 — primeira rejeição em 132 anos. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/23/lula-se-reune-com-cupula-do-congresso-e-ministros-do-stf-para-definir-substituto-de-barroso.ghtml">G1</a>.</li><li><time datetime="2026-11-21">21/11/2026</time>Lula reúne a cúpula do Congresso e ministros do STF para destravar o nome. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/23/lula-se-reune-com-cupula-do-congresso-e-ministros-do-stf-para-definir-substituto-de-barroso.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O artigo que define a nomeação tem dois titulares: o presidente escolhe e o Senado aprova. Uma rejeição transforma a segunda tentativa em negociação — e a negociação acontece no mesmo plenário que vota o ajuste hoje. <strong>Contraponto:</strong> a exigência de uma jurista mulher e negra é demanda de entidades, citada na reportagem, não compromisso do governo. <strong>Lacuna:</strong> não há indicação formalizada; os nomes são de bastidor.</p></article>
+  <article class="correlation"><h3>Drones navais: do Mar Negro ao Mediterrâneo, por uma costa já usada em março</h3><ol class="timeline"><li><time datetime="2022-10-29">29/10/2022</time>primeiro grande ataque ucraniano com drones navais, em Sevastopol. <a href="https://www.navalnews.com/naval-news/2022/10/analysis-ukraine-strikes-with-kamikaze-usvs-russian-bases-are-not-safe-anymore/">Naval News</a>.</li><li><time datetime="2026-03-15">Março de 2026</time>a Rússia acusa a Ucrânia de atingir o petroleiro Arctic Metagaz no Mediterrâneo com drones lançados da costa líbia. <a href="https://www.bbc.com/news/articles/cr894gjz0j0yo">BBC</a>.</li><li><time datetime="2026-11-21">21/11/2026</time>cargueiro Sparta II atingido no Golfo da Finlândia. <a href="https://www.bbc.com/news/articles/cj752ddve27ko">BBC</a>.</li><li><time datetime="2026-11-22">22/11/2026</time>corveta Merkury incendiada em Benghazi; Planet Labs registra fogo às 05h47 GMT. <a href="https://www.bbc.com/news/articles/cr894gjz0j0yo">BBC</a>.</li><li><time datetime="2026-11-23">23/11/2026</time>Vantor mostra o casco emborcado; Peskov fala em escalada e remete ao Ministério da Defesa. <a href="https://www.bbc.com/news/articles/cr894gjz0j0yo">BBC</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O drone naval barateia o ataque: sem tripulação, chega de madrugada, pela superfície, em porto. O que muda de 2022 para 2026 é a geografia — e o padrão de março de 2026 mostra que a costa líbia <strong>já era rota</strong> antes de domingo. <strong>Contraponto:</strong> o incêndio e o casco emborcado estão documentados; o número de drones, o Ka-27 e a condição de base russa permanente não estão. <strong>Cenário:</strong> uma resposta de Haftar, apontada como provável por analista do RUSI, mudaria o cálculo — é hipótese, não fato.</p></article>
+</section>
+
+<!-- MAPA 3D -->
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <p>Este globo mostra a edição das 14h de 23/11. Veja também o <a href="edicoes/2026-11-23-0800.html#globo">globo da edição das 8h</a> e o <a href="edicoes/2026-11-22-2000.html#globo">da edição das 20h de 22/11</a>.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <p>Este grafo mostra a edição das 14h de 23/11. Veja também o <a href="edicoes/2026-11-23-0800.html#grafo">grafo da edição das 8h</a>.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> a recondução de Huang não muda o preço do pão, mas o dólar a R$ 6 encarece importado, viagem e insumo, e a Focus já projeta Selic de 13% em 2027 — crédito caro por mais tempo. Quem tem dívida atrelada a juros sente antes de qualquer aprovação no Congresso.</li><li><strong>Macroeconomia:</strong> hoje o mercado deu recado em duas direções — subiu com a Nvidia e vendeu real mesmo com Wall Street em alta, o que indica risco doméstico, não externo. Sem o resultado da votação, o espaço fiscal de 2027 depende do RARDP de terça e, se Braga for ouvido, de uma PEC.</li><li><strong>Finanças:</strong> US$ 43,9 bilhões em ações na fusão CrowdStrike-Zscaler e 34% de alta na Nvidia mostram que a onda de IA segue comprando consolidação — com concentração de risco. R$ 163 bilhões em DTAs continuam sendo a ponte entre arrecadação e oferta de crédito.</li><li><strong>Cenário global:</strong> Benghazi virou caso de segurança nacional em três países — Ucrânia, Rússia e Líbia —, e o Kremlin só reconheceu "escalada". Nos EUA, um Executivo que declara ausência de risco de segurança para destravar uma empresa privada e um Congresso democrata que promete investigar chegam ao mesmo janeiro.</li></ul></article></section>
+
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Arquivo de edições</h2>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>23 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/noticias-2026-11-23-1400.md" download>14h — Relatório</a> (edição vigente na capa)</li>
+    <li><a href="edicoes/2026-11-23-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-23-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>22 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-22-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-22-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-22-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-22-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>20 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-20-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-20-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-19-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-19-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-18-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-18-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, dólar, Nvidia"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="saude">Saúde</option><option value="ciencia">Ciência</option><option value="esporte">Esporte</option><option value="cultura">Cultura</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados" tabindex="0" aria-label="Resultados da busca"></ul>
+  </div>
+</section>
+</main>
+
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog" style="text-align:right"><button type="submit" aria-label="Fechar janela de leitura">Fechar ✕</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
+
+<footer class="container">
+  <p class="meta">Jornal Digital · edição de 23/11/2026, 14h (Brasília). Conteúdo editorial próprio, com links para as fontes originais. Nenhuma imagem de terceiros foi reproduzida.</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+  {"lat":37.37,"lng":-121.92,"name":"Santa Clara, EUA","title":"Conselho da Nvidia reconduz Jensen Huang; ação sobe 34%","story":"nvidia-volta","color":"#ff6b6b","size":1},
+  {"lat":38.90,"lng":-77.04,"name":"Washington, EUA","title":"Trump diz que \"convenci\" o conselho da Nvidia","story":"nvidia-atores","color":"#ff6b6b","size":1},
+  {"lat":-15.79,"lng":-47.88,"name":"Brasília, DF","title":"Dólar toca R$ 6 no dia da votação do ajuste fiscal","story":"dolar-6","color":"#ff6b6b","size":1},
+  {"lat":-23.55,"lng":-46.63,"name":"São Paulo, Brasil","title":"Ibovespa cai 0,79% e Focus projeta Selic a 13% em 2027","story":"focus","color":"#ff6b6b","size":1},
+  {"lat":32.12,"lng":20.07,"name":"Benghazi, Líbia","title":"Vantor mostra a corveta Merkury emborcada","story":"libia-escalada","color":"#ff6b6b","size":1},
+  {"lat":55.75,"lng":37.62,"name":"Moscou, Rússia","title":"Peskov fala em escalada e não comenta a Líbia","story":"libia-escalada","color":"#ffcf99","size":0.9},
+  {"lat":41.60,"lng":-93.53,"name":"Middletown, Iowa","title":"Exército adia para 25/11 a detonação nos EUA","story":"iowa-adiado","color":"#ff6b6b","size":0.9},
+  {"lat":38.90,"lng":-94.30,"name":"Estados Unidos (Câmara)","title":"Democratas chegam a 258 cadeiras, maior bancada desde 1992","story":"democratas","color":"#ffcf99","size":0.9},
+  {"lat":28.97,"lng":48.20,"name":"Riad, Arábia Saudita","title":"Resistência saudita teve grande peso no colapso da COP31","story":"cop31-legado","color":"#ffd166","size":0.8},
+  {"lat":-15.79,"lng":-47.88,"name":"Brasília, DF","title":"Anvisa registra Hertuzo e amplia uso de Imfinzi","story":"anvisa-mama","color":"#a3e635","size":0.9},
+  {"lat":52.20,"lng":0.12,"name":"Cambridge, Reino Unido","title":"Ensaio EDITH testa IA no rastreio de câncer de mama","story":"ia-mamografia","color":"#a3e635","size":0.8},
+  {"lat":-23.55,"lng":-46.63,"name":"São Paulo, Brasil","title":"Rodada 36 e final da Copa do Brasil em jogo único","story":"brasileirao-36","color":"#818cf8","size":0.8}
+];
+
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || typeof reader.showModal !== 'function') return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  const body = [...card.querySelectorAll('p')].map(p => p.cloneNode(true));
+  document.getElementById('leitura-conteudo').replaceChildren(...body);
+  if (!reader.open) reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+for (const link of document.querySelectorAll('[data-open-story]')) {
+  const card = document.getElementById(`pauta-${link.dataset.openStory}`);
+  if (!card || typeof reader.showModal !== 'function') continue;
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    readStory(card);
+  });
+}
+function readLocation(place) {
+  readStory(document.getElementById(`pauta-${place.story}`));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: 20, lng: -40, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+  {"id":"tecnologia","name":"Tecnologia","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"nvidia-volta","name":"Nvidia reconduz Jensen Huang; ação sobe 34%","type":"news","desc":"Fato — 23/11/2026. Recondução por unanimidade, com efeito imediato; a empresa diz ter ouvido altos funcionários do governo dos EUA.","color":"#ff6b6b","size":6,"url":"https://g1.globo.com/tecnologia/noticia/2026/11/23/nvidia-anuncia-volta-de-jensen-huang-ao-comando-da-empresa.ghtml"},
+  {"id":"nvidia-atores","name":"Trump: \"convenci\" o conselho da Nvidia","type":"news","desc":"Fato — 23/11/2026. Trump à CNBC; o conselho pediu garantias sobre segurança nacional. Bacon criticou; Warren chamou de irresponsável.","color":"#ff6b6b","size":5,"url":"https://www.bbc.com/news/articles/cq5y1k8ez407o"},
+  {"id":"nvidia-h1","name":"22/08/2025 — governo dos EUA adquire 9,9% da Intel","type":"history","desc":"Acordo descrito pela Intel como investimento passivo, sem assento no conselho nem direitos de governança.","color":"#61dfd3","size":4,"url":"https://d1io3yog0oux5.cloudfront.net/_bfef62b2bffb520062b861149f40e4fa/intel/news/2025-08-22_Intel_and_Trump_Administration_Reach_Historic_1748.pdf"},
+  {"id":"nvidia-h2","name":"1952 — a Suprema Corte barra a tomada das siderúrgicas por Truman","type":"history","desc":"Youngstown Sheet & Tube v. Sawyer: sem autorização constitucional ou legal, o presidente não pode tomar empresas privadas.","color":"#61dfd3","size":4,"url":"https://www.law.cornell.edu/supremecourt/text/343/579"},
+  {"id":"nvidia-h3","name":"17/11/2026 — o conselho diz que não recontrataria Huang","type":"history","desc":"Seis dias antes da recondução, o conselho contratou consultoria de recrutamento para buscar um novo CEO.","color":"#61dfd3","size":4,"url":"https://g1.globo.com/mundo/noticia/2026/11/23/trump-celebra-retorno-de-jensen-huang-ao-comando-da-nvidia-e-diz-que-nao-ha-risco-de-seguranca-nacional.ghtml"},
+  {"id":"crowdstrike","name":"CrowdStrike compra Zscaler por US$ 43,9 bi","type":"news","desc":"Fato — 23/11/2026. Pagamento em ações; consolidação em segurança cibernética.","color":"#ff6b6b","size":4,"url":"https://valor.globo.com/empresas/noticia/2026/11/23/crowdstrike-compra-zscaler-por-us-439-bi-em-aposta-em-seguranca-de-redes.ghtml"},
+  {"id":"java","name":"Falha no Java e apagões: sem ligação demonstrada","type":"news","desc":"Fato — 17/11 a 23/11/2026. Correção da Oracle, demissão na Casa Branca e NCIC na mesma semana; nenhuma fonte liga os episódios.","color":"#ff6b6b","size":3,"url":"https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/21/ataques-ciberneticos-ia-ou-atualizacoes-pendentes-o-que-ha-por-tras-da-onda-de-apagoes-dos-ultimos-dias.ghtml"},
+
+  {"id":"economia","name":"Economia","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"dolar-6","name":"Dólar toca R$ 6,0055 no dia da votação do ajuste","type":"news","desc":"Fato — 23/11/2026. Intradiário: R$ 5,9857 às 14h; última passagem por R$ 6 em 09/04/2025.","color":"#ff6b6b","size":6,"url":"https://g1.globo.com/economia/noticia/2026/11/23/dolar-ibovespa.ghtml"},
+  {"id":"dolar-h1","name":"18/12/2024 — recorde nominal de R$ 6,267","type":"history","desc":"Receio de que o pacote fiscal fosse insuficiente; recuo nos dois dias seguintes com leilões do BC e avanço no Congresso.","color":"#61dfd3","size":4,"url":"https://www1.folha.uol.com.br/mercado/2024/12/dolar-abre-em-alta-apos-aprovacao-de-projeto-de-corte-de-gastos-e-da-reforma-tributaria.shtml"},
+  {"id":"dolar-h2","name":"09/04/2025 — R$ 6,0961 com o tarifaço; recuo no mesmo dia","type":"history","desc":"O anúncio de pausa de 90 dias nas tarifas derrubou o dólar para cerca de R$ 5,84.","color":"#61dfd3","size":4,"url":"https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-9-abril-2025/"},
+  {"id":"dolar-h3","name":"09/06/2025 — R$ 5,48, menor do ano","type":"history","desc":"Dólar fraco no mundo e juro brasileiro alto, sem mudança na trajetória da dívida.","color":"#61dfd3","size":4,"url":"https://www.cnnbrasil.com.br/economia/money/mercado/mercado-financeiro-ibovespa-dolar-9-junho-2025/"},
+  {"id":"focus","name":"Focus projeta Selic a 13% em 2027","type":"news","desc":"Fato — 23/11/2026. Inflação projetada sobe para 2026 e 2027 e o corte de juros esperado diminui.","color":"#ff6b6b","size":4,"url":"https://valor.globo.com/brasil/noticia/2026/11/23/mercado-eleva-projecoes-de-inflacao-e-espera-selic-em-13percent-em-2027-aponta-focus.ghtml"},
+  {"id":"braskem","name":"Braskem: acordo de US$ 4,9 bi (preliminar)","type":"news","desc":"Preliminar — 23/11/2026. Reportagem baseada em fontes; sem comunicado das empresas.","color":"#ff6b6b","size":3,"url":"https://valor.globo.com/empresas/noticia/2026/11/23/exclusivo-braskem-fecha-acordo-com-credores-de-us-49-bilhoes-com-aporte-de-us-13-bi-da-petrobras-dizem-fontes.ghtml"},
+  {"id":"dta","name":"Crédito fiscal dos bancos: R$ 163 bilhões","type":"news","desc":"Segue em pauta. Limite à compensação de créditos entrou no PLP votado hoje.","color":"#ff6b6b","size":3,"url":"https://valor.globo.com/financas/noticia/2026/11/23/debate-sobre-ativos-fiscais-divide-bancos-e-pode-prejudicar-o-credito.ghtml"},
+
+  {"id":"politica","name":"Política","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"guimaraes","name":"Lula exonera o articulador para ele votar o ajuste","type":"news","desc":"Fato — 23/11/2026. Exoneração assinada em 19/11 e publicada hoje; votação sem resultado até o fim da captura.","color":"#ff6b6b","size":5,"url":"https://g1.globo.com/politica/noticia/2026/11/23/lula-exonera-ministro-da-articulacao-para-votacao-do-projeto-de-ajuste-na-camara-medida-e-temporaria.ghtml"},
+  {"id":"braga-pec","name":"Braga: governo precisa enviar PEC de ajuste nesta semana","type":"news","desc":"Fato — 23/11/2026. O relator do Orçamento diz que a PEC é necessária para acomodar promessas de campanha em 2027.","color":"#ff6b6b","size":4,"url":"https://valor.globo.com/politica/noticia/2026/11/23/governo-precisa-enviar-pec-com-novo-ajuste-fiscal-diz-braga.ghtml"},
+  {"id":"barroso","name":"A vaga de Barroso na mesa do Planalto","type":"news","desc":"Fato — 23/11/2026. Reunião de 21/11 com a cúpula do Congresso e do STF; indicação ainda não formalizada.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/23/lula-se-reune-com-cupula-do-congresso-e-ministros-do-stf-para-definir-substituto-de-barroso.ghtml"},
+  {"id":"barroso-h1","name":"29/04/2026 — o Senado rejeita Messias, 42 a 34","type":"history","desc":"Primeira rejeição de um indicado ao STF em 132 anos; a vaga aberta em 18/10/2025 segue sem ocupante.","color":"#61dfd3","size":4,"url":"https://noticias.stf.jus.br/postsnoticias/publicado-decreto-de-aposentadoria-do-ministro-luis-roberto-barroso/"},
+  {"id":"escala","name":"Escala 5x2: AGU pede perda de objeto no STF","type":"news","desc":"Fato — 23/11/2026. Fim da 6x1 pode afetar mais de 100 mil domésticos, estima instituto.","color":"#ff6b6b","size":3,"url":"https://g1.globo.com/politica/noticia/2026/11/23/escala-5x2-agu-diz-ao-stf-que-decisao-provisoria-de-dino-nao-e-mais-necessaria-apos-regulamentacao-do-governo.ghtml"},
+  {"id":"dosimetria","name":"STF julga a Lei da Dosimetria em dezembro","type":"news","desc":"Segue em pauta. Plenário virtual de 4 a 15/12; sem votos nesta captura.","color":"#ff6b6b","size":3,"url":"https://noticias.stf.jus.br/postsnoticias/relator-suspende-aplicacao-da-lei-da-dosimetria-a-execucoes-penais-no-stf/"},
+
+  {"id":"saude","name":"Saúde","type":"hub","desc":"","color":"#a3e635","size":5},
+  {"id":"anvisa-mama","name":"Anvisa registra biossimilar e amplia uso de Imfinzi","type":"news","desc":"Fato — 23/11/2026. Hertuzo (pertuzumabe) biossimilar do Perjeta pela RDC 55/2010; durvalumabe para câncer de bexiga músculo-invasivo. Registro não é incorporação no SUS.","color":"#ff6b6b","size":5,"url":"https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2026/anvisa-aprova-registro-de-medicamento-para-cancer-de-mama"},
+  {"id":"ela-nobre","name":"Carlos Nobre revela diagnóstico de ELA","type":"news","desc":"Fato — 23/11/2026. Declaração do próprio cientista à imprensa; datas e prognóstico não confirmados em fonte primária.","color":"#ff6b6b","size":4,"url":"https://g1.globo.com/saude/"},
+  {"id":"ia-mamografia","name":"Ensaio EDITH: IA no rastreio de mama com 700 mil mulheres","type":"news","desc":"Fato — 23/11/2026. 30 unidades no Reino Unido; eficácia clínica é o que o ensaio vai medir.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/cmpdwnw3nvzjo"},
+  {"id":"ciencia","name":"Ciência","type":"hub","desc":"","color":"#a3e635","size":5},
+  {"id":"calvicie-ia","name":"Pente com estímulo elétrico supera minoxidil em ratos","type":"news","desc":"Fato — 23/11/2026. Até 97,85% de recrescimento em ratos; não testado em humanos.","color":"#ff6b6b","size":3,"url":"https://g1.globo.com/saude/"},
+  {"id":"cop31-anticipacao","name":"COP31 sem decisão e o calendário do IPCC","type":"news","desc":"Análise — 23/11/2026. Uma COP sem texto não renova mandato nem calendário; efeito para a pesquisa depende de decisões não capturadas.","color":"#ff6b6b","size":3,"url":"https://www.bbc.com/news/articles/cqwy06zrd26lo"},
+  {"id":"esporte","name":"Esporte","type":"hub","desc":"","color":"#a3e635","size":5},
+  {"id":"brasileirao-36","name":"Rodada 36: três jogos decisivos contra o rebaixamento","type":"news","desc":"Fato — 23/11/2026. Internacional x Vitória (19h30), Botafogo x São Paulo (20h), Santos x Grêmio (21h).","color":"#ff6b6b","size":4,"url":"https://ge.globo.com/futebol/brasileirao-serie-a/"},
+  {"id":"copa-brasil-final","name":"Copa do Brasil: Grêmio x Palmeiras na primeira final em jogo único","type":"news","desc":"Fato — 23/11/2026. Formato novo, sem jogo de volta.","color":"#ff6b6b","size":3,"url":"https://ge.globo.com/rs/futebol/copa-do-brasil/noticia/2026/11/23/gremio-x-palmeiras-veja-data-e-horario-da-final-da-copa-do-brasil.ghtml"},
+  {"id":"cultura","name":"Cultura","type":"hub","desc":"","color":"#a3e635","size":5},
+  {"id":"guggenheim","name":"Peggy Guggenheim e a coleção que virou cânone","type":"news","desc":"Leitura — 20/11/2026. BBC Culture reconsidera a colecionadora.","color":"#ff6b6b","size":3,"url":"https://www.bbc.com/culture/article/20261120-the-scandalous-heiress-who-changed-modern-art"},
+  {"id":"fury-saude","name":"Tyson Fury revela diagnóstico de esquizofrenia","type":"news","desc":"Fato — 23/11/2026. Relato do atleta à BBC Sport.","color":"#ff6b6b","size":3,"url":"https://www.bbc.com/sport/boxing/articles/c6y80n3dn15yo"},
+  {"id":"chevalier","name":"Obra de Chevalier achada em brechó na Austrália","type":"news","desc":"Fato — 23/11/2026. Cape Schanck, Victoria, encontrada em loja de caridade.","color":"#ff6b6b","size":3,"url":"https://www.bbc.com/news/articles/c32l5z88z15jo"},
+
+  {"id":"mundo","name":"Mundo","type":"hub","desc":"","color":"#ffd166","size":5},
+  {"id":"libia-escalada","name":"Kremlin fala em escalada; Vantor mostra a corveta emborcada","type":"news","desc":"Fato — 23/11/2026. Peskov não comenta a Líbia; número de drones e Ka-27 são alegações ucranianas.","color":"#ff6b6b","size":5,"url":"https://www.bbc.com/news/articles/cr894gjz0j0yo"},
+  {"id":"libia-h1","name":"Março de 2026 — Rússia acusa drones lançados da costa líbia","type":"history","desc":"Petroleiro Arctic Metagaz atingido no Mediterrâneo entre a Líbia e Malta.","color":"#61dfd3","size":4,"url":"https://www.bbc.com/news/articles/cr894gjz0j0yo"},
+  {"id":"libia-h2","name":"29/10/2022 — drones navais em Sevastopol","type":"history","desc":"Mesma assimetria de custo; o que muda em 2026 é a geografia.","color":"#61dfd3","size":4,"url":"https://www.navalnews.com/naval-news/2022/10/analysis-ukraine-strikes-with-kamikaze-usvs-russian-bases-are-not-safe-anymore/"},
+  {"id":"iowa-adiado","name":"Exército dos EUA adia para 25/11 a detonação em Iowa","type":"news","desc":"Fato — 23/11/2026. Motivo: clima e mitigação; a ordem judicial segue em vigor.","color":"#ff6b6b","size":4,"url":"https://www.army.mil/article-amp/296990/army_update_on_iowa_army_ammunition_plant"},
+  {"id":"democratas","name":"Democratas chegam a 258 cadeiras na Câmara dos EUA","type":"news","desc":"Fato — 23/11/2026. Maior bancada desde 1992; quatro distritos ainda indefinidos.","color":"#ff6b6b","size":4,"url":"https://www.bbc.com/news/articles/c6vg29g7dlyno"},
+  {"id":"cop31-legado","name":"COP31: Riad na linha de frente da resistência","type":"news","desc":"Contexto — 23/11/2026. A COP mais longa da história terminou sem o Pacto de Antália.","color":"#ff6b6b","size":3,"url":"https://valor.globo.com/mundo/noticia/2026/11/22/todos-perdem-com-a-falta-de-rumo-da-cop31-mas-jovens-e-pobres-perdem-mais.ghtml"}
+];
+
+const graphLinks = [
+  {"source":"tecnologia","target":"nvidia-volta","label":"Editoria"},
+  {"source":"tecnologia","target":"nvidia-atores","label":"Editoria"},
+  {"source":"tecnologia","target":"crowdstrike","label":"Editoria"},
+  {"source":"tecnologia","target":"java","label":"Editoria"},
+  {"source":"nvidia-h1","target":"nvidia-atores","label":"Mesmo mecanismo: Executivo dentro da governança da empresa"},
+  {"source":"nvidia-h2","target":"nvidia-atores","label":"Limite institucional à intervenção presidencial","weak":true},
+  {"source":"nvidia-h3","target":"nvidia-volta","label":"Seis dias entre a recusa e a recondução"},
+  {"source":"nvidia-atores","target":"nvidia-volta","label":"A empresa diz ter ouvido o governo"},
+  {"source":"nvidia-volta","target":"dolar-6","label":"Mesma sessão em direções opostas","weak":true},
+  {"source":"democratas","target":"nvidia-volta","label":"Congresso que assume em janeiro promete investigar","weak":true},
+  {"source":"crowdstrike","target":"java","label":"Consolidação após semana de incidentes","weak":true},
+
+  {"source":"economia","target":"dolar-6","label":"Editoria"},
+  {"source":"economia","target":"focus","label":"Editoria"},
+  {"source":"economia","target":"braskem","label":"Editoria"},
+  {"source":"economia","target":"dta","label":"Editoria"},
+  {"source":"dolar-h1","target":"dolar-6","label":"Mesmo gatilho: dúvida sobre a suficiência do ajuste"},
+  {"source":"dolar-h2","target":"dolar-6","label":"Explica o recorde intraday anterior"},
+  {"source":"dolar-h3","target":"dolar-6","label":"Contraponto: caiu sem mudança na dívida","weak":true},
+  {"source":"dolar-6","target":"guimaraes","label":"Cotação no dia da votação, sem causalidade"},
+  {"source":"braga-pec","target":"dolar-6","label":"Ajuste em etapas e prêmio de risco","weak":true},
+  {"source":"focus","target":"dolar-6","label":"Juro esperado e câmbio"},
+
+  {"source":"politica","target":"guimaraes","label":"Editoria"},
+  {"source":"politica","target":"braga-pec","label":"Editoria"},
+  {"source":"politica","target":"barroso","label":"Editoria"},
+  {"source":"politica","target":"escala","label":"Editoria"},
+  {"source":"politica","target":"dosimetria","label":"Editoria"},
+  {"source":"barroso-h1","target":"barroso","label":"Rejeição de 29/04 condiciona a nova indicação"},
+  {"source":"guimaraes","target":"braga-pec","label":"Mesmo processo orçamentário"},
+  {"source":"guimaraes","target":"dta","label":"Mesma votação: limite à compensação de créditos"},
+
+  {"source":"saude","target":"anvisa-mama","label":"Editoria"},
+  {"source":"saude","target":"ela-nobre","label":"Editoria"},
+  {"source":"saude","target":"ia-mamografia","label":"Editoria"},
+  {"source":"ciencia","target":"calvicie-ia","label":"Editoria"},
+  {"source":"ciencia","target":"cop31-anticipacao","label":"Editoria"},
+  {"source":"esporte","target":"brasileirao-36","label":"Editoria"},
+  {"source":"esporte","target":"copa-brasil-final","label":"Editoria"},
+  {"source":"cultura","target":"guggenheim","label":"Editoria"},
+  {"source":"cultura","target":"fury-saude","label":"Editoria"},
+  {"source":"cultura","target":"chevalier","label":"Editoria"},
+  {"source":"cop31-legado","target":"cop31-anticipacao","label":"Mesmo desfecho, outra pergunta: o que fica para a pesquisa"},
+  {"source":"ia-mamografia","target":"calvicie-ia","label":"Mesmo denominador: evidência em teste, não em uso","weak":true},
+  {"source":"brasileirao-36","target":"copa-brasil-final","label":"Mesma semana de decisões no futebol brasileiro","weak":true},
+  {"source":"ela-nobre","target":"cop31-anticipacao","label":"Diagnóstico revelado após a COP30","weak":true},
+  {"source":"mundo","target":"libia-escalada","label":"Editoria"},
+  {"source":"mundo","target":"iowa-adiado","label":"Editoria"},
+  {"source":"mundo","target":"democratas","label":"Editoria"},
+  {"source":"mundo","target":"cop31-legado","label":"Editoria"},
+  {"source":"libia-h1","target":"libia-escalada","label":"Mesma costa, mesma acusação em oito meses"},
+  {"source":"libia-h2","target":"libia-escalada","label":"Mesmo método, outra geografia"},
+  {"source":"libia-escalada","target":"cop31-legado","label":"Sem relação demonstrada","weak":true}
+];
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { const section = document.getElementById(id); if (section) section.hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', event => { if (!event.defaultPrevented) select(topic); });
+  });
+  filter.hidden = false;
+})();
+</script>
+<script src="arquivo-dados.js" defer></script>
+<script src="arquivo.js" defer></script>
+</body>
+</html>

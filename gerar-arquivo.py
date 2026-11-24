@@ -38,11 +38,15 @@ if db.exists():
     finally:
         con.close()
 
+capa_html = editions.get('__capa__', '').strip()
 for eid in sorted(editions, reverse=True):
     if eid == '__capa__':
         capa = editions.pop('__capa__')
         for title, body, topic in extract(capa):
             stories.append(dict(title=title, body=body, topic=topic, date='capa vigente', url=f'#{topic}'))
+        continue
+    if capa_html and editions[eid].strip() == capa_html:
+        # a edição já está na capa; evita pauta duplicada na busca
         continue
     year, month, day, hour = eid.split('-')
     date = f'{day}/{month}/{year} às {hour[:2]}:{hour[2:]}'

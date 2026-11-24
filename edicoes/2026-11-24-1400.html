@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161c47">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.skip-link{position:fixed;top:.75rem;left:.75rem;z-index:20;background:#fff;color:var(--txt);padding:.6rem 1rem;border-radius:.4rem;transform:translateY(-200%)}
+.skip-link:focus{transform:none}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:focus-visible,.lead a:focus-visible{outline-color:#b25409}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.card.is-new{border-left:4px solid var(--acc)}
+.new-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:var(--acc);color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.card.is-updated{border-left:4px solid #b25409}
+.upd-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:#b25409;color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:2rem;color:#c7e0df;font-size:.9rem}
+#locais-noticias{list-style:none;display:grid;gap:.35rem;margin:1rem 0}
+#locais-noticias li button{font:inherit;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:.5rem;padding:.55rem .75rem;width:100%;cursor:pointer}
+#locais-noticias li button:hover{border-color:var(--acc)}
+.archive-search details{background:var(--panel);border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;margin-bottom:.6rem}
+.archive-search summary{font-weight:700;cursor:pointer}
+.archive-search ul{list-style:none;margin-top:.5rem;display:grid;gap:.3rem}
+.archive-search label{display:block;margin:.6rem 0}
+.archive-search input,.archive-search select{font:inherit;padding:.4rem .5rem;border:1px solid var(--line);border-radius:.4rem;background:var(--paper)}
+#arquivo-resultados{list-style:none;display:grid;gap:.5rem;margin-top:.75rem}
+#arquivo-resultados li{background:var(--card,#fff);border:1px solid var(--line);border-radius:.5rem;padding:.6rem .75rem}
+.desk-section[hidden]{display:none}
+#filtro-editorias{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+#filtro-editorias button{font:inherit;font-size:.85rem;padding:.35rem .8rem;border:1px solid var(--line);border-radius:2rem;background:var(--panel);cursor:pointer}
+#filtro-editorias button[aria-pressed="true"]{background:var(--acc);color:var(--paper);border-color:var(--acc)}
+footer{padding:2rem 0;border-top:1px solid var(--line);margin-top:3rem}
+@media (max-width:52rem){.lead{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header>
+  <div class="masthead">
+    <strong>Jornal Digital</strong>
+    <p>Edição de 24 de novembro de 2026 · 14h (Brasília) · atualizada 14h45 · captura de 14h00 a 14h35</p>
+  </div>
+</header>
+<nav aria-label="Seções da edição">
+  <a href="#manchete">Manchete</a>
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#saude">Saúde</a>
+  <a href="#ciencia">Ciência</a>
+  <a href="#esporte">Esporte</a>
+  <a href="#cultura">Cultura</a>
+  <a href="#historico">O que veio antes</a>
+  <a href="#globo">Globo</a>
+  <a href="#grafo">Grafo</a>
+  <a href="#correlacoes">Impactos</a>
+  <a href="#edicoes">Arquivo</a>
+</nav>
+
+<main id="conteudo" class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div class="lead-main">
+    <p class="lead-label">Edição das 14h — o pacote aprovado foi considerado insuficiente, e Lula autorizou uma PEC</p>
+    <h1 id="manchete">Lula autoriza PEC para limitar despesas obrigatórias, e o dólar recua de R$ 6 para R$ 5,80</h1>
+    <p>A autorização, divulgada por CNN Brasil e O Globo e confirmada à Reuters por uma fonte, saiu um dia depois de a Câmara aprovar o PLP 299/2026 por 353 a 128. A PEC, conduzida por Dario Durigan, pode mexer nos pisos de saúde e educação e nas emendas parlamentares. O mercado reagiu ao anúncio, não ao texto aprovado: às 13h53 o Ibovespa subia 0,32%, a 165.340 pontos, o Prefixado 2029 caía 28 pontos-base, a 14,87%, e o dólar voltava para a casa de R$ 5,90 depois de tocar R$ 5,80.</p>
+    <div class="lead-actions">
+      <a class="lead-read" href="#politica" data-open-story="pec-obrigatorias">Ler matéria</a>
+      <a href="#historico">Ver linha do tempo</a>
+    </div>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Também nesta edição</h2>
+    <ul>
+      <li><span>Economia</span><a href="#economia" data-open-story="arrecadacao">Arrecadação bate R$ 294 bi em outubro, recorde para o mês</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="mercado-14h">Dólar toca R$ 5,80 e volta a R$ 5,90; juros futuros recuam 28 pontos-base</a></li>
+      <li><span>Saúde</span><a href="#saude" data-open-story="gripe-aviaria">OMS: três casos de gripe aviária em humanos nos EUA, com uma morte</a></li>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="villavicencio">Carro-bomba em Villavicencio fere 23 e atinge sede do governo regional</a></li>
+      <li><span>Ciência</span><a href="#ciencia" data-open-story="quasar">Quasar de 630 milhões de anos após o Big Bang é o objeto mais antigo já visto</a></li>
+      <li><span>Saúde</span><a href="#saude" data-open-story="daraxonrasib">Comprimido deixa o câncer de pâncreas indetectável em 1 de 12 pacientes</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="nvidia-politica">Nvidia cai na reabertura, e políticos questionam o papel de Trump</a></li>
+      <li><span>Economia</span><a href="#economia" data-open-story="tarifas-eua">EUA preparam tarifas contra China, UE e mais de uma dúzia de economias</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="ajuste-plp">Câmara aprova o PLP 299 por 353 a 128; texto vai à sanção</a></li>
+      <li><span>Esporte</span><a href="#esporte" data-open-story="senegal-afcon">Justiça desportiva devolve ao Senegal o título da Copa Africana de 2025</a></li>
+      <li><span>Cultura</span><a href="#cultura" data-open-story="papa-diario">Diário do papa Francisco diz que ele viu o diabo três vezes</a></li>
+      <li><span>Esporte</span><a href="#esporte" data-open-story="inter-z4">Inter tem 9% de chance de seguir na Série A</a></li>
+    </ul>
+  </aside>
+</section>
+
+<h2 class="desk-heading">Notícias por editoria</h2>
+
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+  <button type="button" data-editoria="saude" aria-pressed="false">Saúde</button>
+  <button type="button" data-editoria="ciencia" aria-pressed="false">Ciência</button>
+  <button type="button" data-editoria="esporte" aria-pressed="false">Esporte</button>
+  <button type="button" data-editoria="cultura" aria-pressed="false">Cultura</button>
+</div>
+
+<section id="mundo" class="desk-section">
+  <h2>Mundo</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-villavicencio"><span class="new-tag">Novo — 14h</span><h3>Carro-bomba em Villavicencio fere 23 e atinge sede do governo regional</h3><p><strong>Fato — 24/11/2026.</strong> Um carro-bomba explodiu no centro de <strong>Villavicencio</strong>, no centro da Colômbia, em frente às sedes do governo departamental, danificando vários prédios e ferindo ao menos <strong>23 pessoas</strong>, segundo a BBC. Nenhum grupo reivindicou o ataque. O presidente <strong>Abelardo de la Espriella</strong> falou em "narcoterrorismo" e prometeu resposta "contundente"; grupos armados têm intensificado ataques desde a ofensiva que ele ordenou. <strong>Divergência registrada:</strong> a manchete do G1 atribui o atentado a dissidentes das Farc, enquanto a BBC diz que o governo não apontou grupo — o texto do G1 não abriu nesta captura. <a href="https://www.bbc.co.uk/news/articles/cjqlq2n4np7do">BBC</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/24/presidente-da-colombia-acusa-dissidentes-das-farc-de-atentado-que-devastou-cidade.ghtml">G1</a>.</p></article>
+    <article class="card is-updated" id="pauta-cop31"><span class="upd-tag">Atualizado — 14h</span><h3>COP31 termina em Antália sem acordo, com produtores de petróleo no centro do impasse</h3><p><strong>Fato — encerramento em 22/11/2026.</strong> A conferência do clima terminou no domingo (22) em <strong>Antália, Turquia</strong>, sem acordo político sobre como acelerar o combate ao aquecimento global. <strong>Arábia Saudita</strong> e outros grandes produtores resistiram a compromissos mais claros de redução da dependência de combustíveis fósseis, e houve divergência sobre quem financia a transição. A conferência deveria ter terminado em 20/11 e avançou pelo fim de semana. <strong>O que mudou:</strong> na edição das 8h o impasse era o enquadramento; agora há a confirmação do encerramento sem texto. <a href="https://g1.globo.com/meio-ambiente/noticia/2026/11/24/cop31-impasse-consequencias.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-william-invasao"><span class="new-tag">Novo — 14h</span><h3>Dois presos após invasão à casa de campo do príncipe William e de Kate</h3><p><strong>Fato — 24/11/2026.</strong> A polícia britânica prendeu dois homens sob suspeita de arrombamento na residência de campo do príncipe William e de Kate, em <strong>Norfolk</strong>, segundo a BBC e o G1. O caso reacende a discussão sobre segurança da família real fora dos palácios. <a href="https://www.bbc.com/news/articles/cr9d7qdg24vno">BBC</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/24/duas-pessoas-sao-presas-apos-invasao-na-casa-de-campo-do-principe-william-diz-policia-britanica.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-otan-espaco"><span class="new-tag">Novo — 14h</span><h3>Chefe da Otan promete defesa contra ameaça espacial após relatos sobre satélite nuclear russo</h3><p><strong>Fato — 24/11/2026.</strong> O secretário-geral da Otan prometeu resposta à ameaça no espaço depois que a imprensa alemã noticiou um plano russo de lançar um satélite com carga nuclear. <strong>Limite:</strong> a informação vem de relatos de imprensa, sem confirmação oficial russa; a BBC não publicou detalhes técnicos verificáveis. <a href="https://www.bbc.com/news/articles/c9x2er1ry2mzo">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-zambelli-extradicao"><span class="new-tag">Novo — 14h</span><h3>Justiça italiana adia para fevereiro a reavaliação do pedido de extradição de Zambelli</h3><p><strong>Fato — 24/11/2026.</strong> A Justiça da Itália adiou para fevereiro a análise do pedido de extradição da deputada <strong>Carla Zambelli</strong>, que está no país. O pedido brasileiro segue sem decisão de mérito. <a href="https://g1.globo.com/politica/noticia/2026/11/24/justica-italiana-adia-para-fevereiro-reavaliacao-do-pedido-de-extradicao-de-carla-zambelli.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="politica" class="desk-section">
+  <h2>Política</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-pec-obrigatorias"><span class="new-tag">Novo — 14h</span><h3>Lula autoriza PEC para limitar despesas obrigatórias de saúde, educação e emendas</h3><p><strong>Fato — 24/11/2026, divulgado às 9h52.</strong> O presidente Lula autorizou a equipe econômica a preparar uma <strong>PEC</strong> para limitar o crescimento das despesas obrigatórias da União, informaram CNN Brasil e O Globo; a Reuters confirmou a informação com uma fonte. A proposta é conduzida pelo ministro da Fazenda, <strong>Dario Durigan</strong>, e pode alterar regras de <strong>saúde, educação e emendas parlamentares</strong>. O formato e o momento do envio ao Congresso ainda são discutidos com a área política. <strong>Por que importa:</strong> a equipe econômica avalia que o pacote aprovado na véspera, mesmo com efeito de até <strong>R$ 56,1 bilhões</strong> em 2027, não basta para estabilizar a dívida. <strong>Limite explícito:</strong> autorização para preparar não é texto enviado nem aprovação — não há minuta pública. <a href="https://www.infomoney.com.br/politica/lula-autoriza-nova-pec-para-conter-gastos-com-saude-educacao-e-emendas/">InfoMoney, 9h52</a>.</p></article>
+    <article class="card is-updated" id="pauta-ajuste-plp"><span class="upd-tag">Atualizado — 14h</span><h3>Câmara aprova o PLP 299/2026 por 353 a 128; texto vai à sanção</h3><p><strong>Fato — 23/11/2026, à noite.</strong> A Câmara aprovou o projeto de ajuste fiscal vindo do Senado sem mudanças, por <strong>353 votos a 128</strong>. O texto, que ficou conhecido como <strong>Plano Moretti</strong>, reduz o teto de crescimento real da despesa de 2,5% para <strong>2%</strong> quando for necessário bloquear gastos e abre espaço para superávit primário de <strong>0,5% do PIB em 2027</strong>. A estimativa de economia em 2027 fica entre <strong>R$ 50 bi e R$ 60 bi</strong>. <a href="https://g1.globo.com/economia/noticia/2026/11/24/entenda-o-plano-moretti-o-ajuste-fiscal-aprovado-pela-camara.ghtml">G1, 8h21</a>.</p></article>
+    <article class="card is-new" id="pauta-votos-esquerda"><span class="new-tag">Novo — 14h</span><h3>Nenhum deputado do PSOL votou a favor do ajuste; dois do PT se abstiveram</h3><p><strong>Fato — 24/11/2026.</strong> O levantamento do G1 mostra que toda a bancada do PSOL votou contra o PLP 299/2026 e que dois deputados do PT criticaram o projeto e se abstiveram. A aprovação teve apoio majoritário da base, mas com fissuras à esquerda — o que ajuda a explicar a cautela da ala política do governo com a nova PEC. <a href="https://g1.globo.com/politica/noticia/2026/11/24/esquerda-votos-ajuste-fiscal-camara.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-pf-vorcaro"><span class="new-tag">Novo — 14h</span><h3>Relatórios da PF citam Moraes, Nunes e Toffoli, mas omitem material que ligaria casos a Vorcaro</h3><p><strong>Fato — 24/11/2026.</strong> Relatórios da Polícia Federal citam os ministros do STF <strong>Alexandre de Moraes</strong>, <strong>Luiz Fux</strong> (no texto, Nunes) e <strong>Dias Toffoli</strong>, mas deixam de fora diálogos e documentos que poderiam indicar conexão com o banqueiro <strong>Flávio Vorcaro</strong>, segundo o G1. <strong>Cuidado:</strong> citação em relatório não implica investigação contra o citado; o material é peça de inquérito, não decisão. <a href="https://g1.globo.com/politica/noticia/2026/11/24/relatorios-da-pf-tem-citacoes-a-moraes-nunes-e-tofolli-mas-deixam-de-fora-dialogos-e-documentos-que-poderiam-indicar-conexao-com-vorcaro.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-quaest-eleitorado"><span class="new-tag">Novo — 14h</span><h3>Conservadores cristãos e classes D e E somam quase metade do eleitorado, aponta Quaest</h3><p><strong>Fato — 24/11/2026.</strong> Pesquisa <strong>Quaest</strong> sobre segmentos identitários indica que conservadores cristãos e eleitores das classes D e E somam quase metade do eleitorado brasileiro. <strong>Limite:</strong> é retrato de um momento, com margem de erro e recorte próprios; não projeta resultado eleitoral. <a href="https://g1.globo.com/politica/noticia/2026/11/24/segmentos-identitarios-quaest-2026.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-stf-barroso"><span class="new-tag">Novo — 14h</span><h3>Para a vaga de Barroso, Lula estuda Tebet e ministras do STM e do STJ</h3><p><strong>Fato — 24/11/2026, blog do Valdo Cruz.</strong> Sem nome fechado para o STF, o presidente Lula passou a analisar a ministra do Planejamento, <strong>Simone Tebet</strong>, e nomes de ministras do STM e do STJ. <strong>Limite:</strong> é notícia de bastidor, sem anúncio oficial. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/24/em-busca-de-alternativas-para-o-stf-lula-pode-analisar-tebet-e-nomes-de-ministras-do-stm-e-do-stj-para-vaga-de-barroso.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="economia" class="desk-section">
+  <h2>Economia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-arrecadacao"><span class="new-tag">Novo — 14h</span><h3>Arrecadação federal chega a R$ 294 bi em outubro, recorde para o mês em 32 anos</h3><p><strong>Fato — 24/11/2026, 11h.</strong> A Receita Federal informou arrecadação de <strong>R$ 294 bilhões</strong> em outubro, alta real de <strong>7,3%</strong> sobre os R$ 274 bi de outubro de 2025 (valores corrigidos) e o maior resultado para o mês desde 1995. A Receita atribui o recorde ao crescimento da economia, aos aumentos de impostos dos últimos anos e à alta do petróleo. <strong>Leitura:</strong> receita forte melhora o resultado primário, mas não altera a trajetória da despesa obrigatória — que é o alvo da PEC. <a href="https://g1.globo.com/economia/noticia/2026/11/24/arrecadacao-federal-avanca-para-r-294-bilhoes-em-outubro-novo-recorde-para-o-mes.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-mercado-14h"><span class="new-tag">Novo — 14h</span><h3>Dólar toca R$ 5,80 com a PEC e volta a R$ 5,90; juros futuros recuam até 28 pontos-base</h3><p><strong>Fato — 24/11/2026, até 13h53.</strong> O dólar virou para baixo ainda na manhã, com a notícia da PEC das despesas obrigatórias, e chegou à faixa de <strong>R$ 5,80</strong>; à tarde voltou para a casa de <strong>R$ 5,90</strong>, também por causa do ambiente externo. O <strong>Ibovespa</strong> subia <strong>0,32%</strong>, a <strong>165.340 pontos</strong>, pressionado por <strong>Vale</strong>, que caía 5,32%. No Tesouro Direto, o Prefixado 2029 recuava <strong>28 pontos-base</strong>, a 14,87%, e o Prefixado 2032, 26 pontos-base, a 15,22%; a plataforma chegou a suspender a negociação de prefixados pela manhã. <strong>Limite:</strong> números intradiários, com mercado aberto. <a href="https://www.infomoney.com.br/mercados/dolar-hoje-abertura-fechamento-comercial-turismo-24112026/">InfoMoney, 13h40</a> · <a href="https://www.infomoney.com.br/onde-investir/tesouro-direto-abertura-fechamento-24112026/">Tesouro</a>.</p></article>
+    <article class="card is-new" id="pauta-tarifas-eua"><span class="new-tag">Novo — 14h</span><h3>EUA preparam nova rodada de tarifas contra China, União Europeia e mais de uma dúzia de economias</h3><p><strong>Preliminar — 24/11/2026, reportagem da Bloomberg.</strong> Segundo a agência, citada pelo InfoMoney, o governo Trump prepara o anúncio de aumento de tarifas sobre produtos da <strong>China</strong>, da <strong>União Europeia</strong> e de mais de uma dúzia de economias, para substituir tarifas derrubadas pela Suprema Corte. Os novos níveis não ultrapassariam os acordos comerciais já negociados e seriam aplicados país a país. <strong>Status:</strong> não há ato publicado; a informação é de fonte não identificada. <a href="https://www.infomoney.com.br/mercados/ibovespa-sobe-com-expectativa-de-novas-medidas-de-contencao-de-gastos/">InfoMoney</a>.</p></article>
+    <article class="card is-updated" id="pauta-inss-calendario"><span class="upd-tag">Atualizado — 14h</span><h3>INSS começa a pagar novembro e o 13º de novos beneficiários</h3><p><strong>Fato — calendário divulgado em 24/11/2026.</strong> O INSS inicia os pagamentos de novembro e libera o 13º para quem passou a receber benefício neste ano. O calendário segue o número final do benefício. <a href="https://g1.globo.com/economia/noticia/2026/11/24/inss-inicia-pagamento-de-novembro-e-do-13o-de-novos-beneficiarios-veja-calendario.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-escala-6x1"><span class="new-tag">Novo — 14h</span><h3>"Ninguém vai morrer se fechar um dia", diz ministro sobre o fim da escala 6x1</h3><p><strong>Fato — 24/11/2026.</strong> Ao comentar a proposta que acaba com a escala 6x1, um ministro do governo disse que "ninguém vai morrer se fechar um dia" e defendeu o debate sobre a jornada. <strong>Limite:</strong> declaração política; não há texto aprovado nem estimativa oficial de impacto. <a href="https://g1.globo.com/economia/noticia/2026/11/24/ninguem-vai-morrer-se-fechar-um-dia-diz-ministro-sobre-fim-da-escala-6x1.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="tecnologia" class="desk-section">
+  <h2>Tecnologia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-nvidia-politica"><span class="new-tag">Novo — 14h</span><h3>Ações da Nvidia caem na reabertura, e políticos dos EUA questionam o papel de Trump na volta de Huang</h3><p><strong>Fato — 24/11/2026.</strong> As ações da Nvidia recuaram na reabertura dos mercados americanos, devolvendo parte dos ganhos do dia anterior, quando a volta de <strong>Jensen Huang</strong> ao comando foi anunciada. O movimento veio junto com críticas de políticos dos dois partidos ao envolvimento do presidente <strong>Donald Trump</strong> na decisão do conselho: Trump diz que "fez o acordo", e um democrata afirmou à BBC que um presidente não deve interferir no conselho de uma empresa. <a href="https://www.bbc.com/news/live/crd61y5dwqgpt">BBC, ao vivo</a>.</p></article>
+    <article class="card is-new" id="pauta-anthropic-ipo"><span class="new-tag">Novo — 14h</span><h3>Anthropic cai abaixo do preço do IPO cinco dias após estreia recorde</h3><p><strong>Fato — 24/11/2026.</strong> As ações da <strong>Anthropic</strong> passaram a operar abaixo do preço de abertura de capital, cinco dias depois de uma estreia descrita como recorde. <strong>Leitura:</strong> o episódio reforça o padrão de euforia curta em torno de empresas de IA, o mesmo movimento visto na Nvidia. <a href="https://g1.globo.com/economia/noticia/2026/11/24/acoes-da-anthropic.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-tesla-spacex"><span class="new-tag">Novo — 14h</span><h3>Tesla e SpaceX discutem fusão avaliada em R$ 20,8 trilhões, diz jornal</h3><p><strong>Relatado — 24/11/2026.</strong> Tesla e SpaceX discutem uma fusão que, segundo o jornal citado pelo G1, seria a maior da história, avaliada em <strong>R$ 20,8 trilhões</strong>. <strong>Status:</strong> nenhuma das empresas confirmou; valores de reportagem não auditados. <a href="https://g1.globo.com/economia/noticia/2026/11/24/tesla-e-spacex-negociam-fusao-ate-o-fim-do-ano.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-whatsapp-figurinhas"><span class="new-tag">Novo — 14h</span><h3>WhatsApp começa a liberar figurinhas com som</h3><p><strong>Fato — 24/11/2026.</strong> O WhatsApp iniciou a liberação gradual de figurinhas com áudio para usuários. <strong>Limite:</strong> liberação por etapas; não há data única para todos os aparelhos. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/24/whatsapp-comeca-a-liberar-figurinhas-com-som.ghtml">G1</a>.</p></article>
+    <article class="card is-updated" id="pauta-megaspeed"><span class="upd-tag">Atualizado — 14h</span><h3>EUA vão incluir a Megaspeed em lista de entidades banidas após o caso Nvidia</h3><p><strong>Fato — 23/11/2026.</strong> O Departamento de Comércio anunciou a intenção de incluir a <strong>Megaspeed</strong>, sediada em Singapura, em sua lista de entidades, o que restringe o acesso da empresa a tecnologia americana. A investigação é anterior ao escândalo da Nvidia. <a href="https://www.bbc.com/news/articles/cv98xpg5dg5zo">BBC</a>.</p></article>
+  </div>
+</section>
+
+<section id="saude" class="desk-section">
+  <h2>Saúde</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-gripe-aviaria"><span class="new-tag">Novo — 14h</span><h3>OMS: EUA notificam três casos de gripe aviária em humanos, com uma morte</h3><p><strong>Fato — 24/11/2026, 10h05.</strong> A <strong>OMS</strong> informou que os Estados Unidos notificaram <strong>três casos confirmados</strong> de gripe aviária em humanos no estado de <strong>Washington</strong>, incluindo <strong>uma morte</strong>. Os três eram adultos que trabalhavam em fazendas leiteiras no condado de <strong>Yakima</strong>, onde o vírus foi detectado recentemente em gado. A OMS afirma que, pelas informações disponíveis, <strong>não há evidência de transmissão entre humanos</strong>; o primeiro paciente teve sintomas leves (irritação nos olhos e coriza) e não foi hospitalizado. <a href="https://g1.globo.com/saude/noticia/2026/11/24/eua-gripe-aviaria-oms.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-daraxonrasib"><span class="new-tag">Novo — 14h</span><h3>Comprimido diário deixa o câncer de pâncreas indetectável em 1 de cada 12 pacientes</h3><p><strong>Fato — 24/11/2026, BBC.</strong> Nos testes iniciais, o <strong>daraxonrasib</strong> tomado com quimioterapia tornou o câncer indetectável nos exames de <strong>1 em cada 12</strong> pacientes; os tumores pararam de crescer em quase todos os <strong>61 participantes</strong> com câncer avançado já espalhado. Os médicos ressaltam que não se sabe por quanto tempo o efeito dura e que <strong>não é cura</strong>. <a href="https://www.bbc.com/news/articles/cqrmgjnzz9l0o">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-anvisa-agua"><span class="new-tag">Novo — 14h</span><h3>Anvisa apreende e proíbe a venda da água mineral Pura</h3><p><strong>Fato — 24/11/2026.</strong> A Anvisa determinou a apreensão e proibiu a comercialização da água mineral da marca <strong>Pura</strong>. <strong>Limite:</strong> o motivo sanitário detalhado não consta na manchete capturada. <a href="https://g1.globo.com/saude/noticia/2026/11/24/anvisa-apreende-e-proibe-venda-de-agua-mineral-pura.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-autoexame-mama"><span class="new-tag">Novo — 14h</span><h3>Autoexame das mamas não exige mais movimentos específicos e não substitui a mamografia</h3><p><strong>Fato — 24/11/2026.</strong> Nova orientação dispensa a sequência rígida de movimentos no autoexame e reforça que ele não substitui a mamografia de rastreamento. <a href="https://g1.globo.com/saude/noticia/2026/11/24/autoexame-das-mamas-nao-precisa-mais-seguir-movimentos-especificos-e-nao-substitui-a-mamografia-veja-orientacoes.ghtml">G1</a>.</p></article>
+    <article class="card is-updated" id="pauta-vacina-cancer"><span class="upd-tag">Atualizado — 14h</span><h3>Ministério da Saúde prevê testes de vacina terapêutica contra o câncer em 2027</h3><p><strong>Fato — 23/11/2026.</strong> O Ministério da Saúde anunciou previsão de iniciar em <strong>2027</strong> os testes de uma vacina terapêutica contra o câncer, em parceria com <strong>Oxford</strong>. <strong>Limite:</strong> é cronograma, não resultado; vacina terapêutica trata quem já tem a doença e ainda está em pesquisa. <a href="https://g1.globo.com/saude/noticia/2026/11/23/brasil-preve-iniciar-testes-de-vacina-terapeutica-contra-o-cancer-em-2027-anuncia-ministerio-da-saude.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="ciencia" class="desk-section">
+  <h2>Ciência</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-quasar"><span class="new-tag">Novo — 14h</span><h3>Quasar formado 630 milhões de anos após o Big Bang é o objeto mais antigo já observado</h3><p><strong>Fato — 24/11/2026.</strong> Uma equipe liderada por pesquisadores alemães identificou o <strong>quasar mais distante</strong> já registrado, formado apenas <strong>630 milhões de anos após o Big Bang</strong>, num universo estimado em 13,8 bilhões de anos. O achado saiu da análise de milhões de observações do telescópio <strong>Euclid</strong>, da ESA, lançado em 2023 para mapear galáxias e investigar matéria e energia escuras. <strong>Limite:</strong> o texto não traz o redshift do objeto nem revisão por pares. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/cientistas-descobrem-objeto-formado-apenas-630-milhoes-de-anos-apos-o-big-bang-e-se-torna-objeto-astronomico-mais-antigo-descoberto-no-universo.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-superlua"><span class="new-tag">Novo — 14h</span><h3>Superlua acontece nesta terça-feira (24); veja como observar</h3><p><strong>Fato — 24/11/2026.</strong> A Lua cheia desta terça ocorre próxima do perigeu, o ponto mais próximo da Terra, o que a deixa maior e mais brilhante no céu — o fenômeno chamado de superlua. A observação não exige equipamento. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/superlua-como-observar-o-fenomeno.ghtml">G1</a>.</p></article>
+    <article class="card is-updated" id="pauta-partenon"><span class="upd-tag">Atualizado — 14h</span><h3>Arqueólogos desvendam mistério de esculturas do Partenon após mais de 40 anos</h3><p><strong>Fato — 24/11/2026.</strong> Depois de mais de 40 anos de pesquisa, arqueólogos propuseram uma explicação para detalhes das esculturas do <strong>Partenon</strong>, em Atenas, com apoio de imagens feitas com iPhone. <strong>Limite:</strong> é hipótese publicada por equipe de pesquisa, não consenso fechado. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/arqueologos-desvendam-misterio-de-esculturas-do-partenon-apos-mais-de-40-anos-de-pesquisa.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-planta-unicornio"><span class="new-tag">Novo — 14h</span><h3>Planta "unicórnio" é devolvida à Mata Atlântica cinco anos após apreensão</h3><p><strong>Fato — 24/11/2026.</strong> Uma planta cobiçada por colecionadores e avaliada em milhares de dólares foi devolvida à <strong>Mata Atlântica</strong> cinco anos depois de ser apreendida. O caso ilustra a pressão do tráfico de espécies sobre a flora brasileira. <a href="https://g1.globo.com/fantastico/noticia/2026/11/24/cobicada-e-avaliada-em-milhares-de-dolares-planta-unicornio-e-devolvida-a-mata-atlantica-cinco-anos-apos-apreensao.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="esporte" class="desk-section">
+  <h2>Esporte</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-inter-z4"><span class="new-tag">Novo — 14h</span><h3>Inter tem 9% de chance de seguir na Série A; levou cinco gols no Beira-Rio pela primeira vez</h3><p><strong>Fato — 24/11/2026.</strong> O modelo do ge aponta o <strong>Internacional</strong> com apenas <strong>9% de chance de permanência</strong> na Série A, enquanto Grêmio e Mirassol aparecem com 59% e o G-4 está quase fechado. O clube levou <strong>cinco gols</strong> em casa pela primeira vez no <strong>Beira-Rio</strong>. <a href="https://ge.globo.com/gato-mestre/noticia/2026/11/24/inter-tem-apenas-9percent-de-chances-de-permanencia-gremio-e-mirassol-estao-com-59percent-g-4-quase-fechado.ghtml">ge</a> · <a href="https://ge.globo.com/rs/futebol/times/internacional/noticia/2026/11/24/vexame-historico-inter-leva-cinco-gols-pela-primeira-vez-no-beira-rio.ghtml">Beira-Rio</a>.</p></article>
+    <article class="card is-new" id="pauta-senegal-afcon"><span class="new-tag">Novo — 14h</span><h3>Justiça desportiva devolve ao Senegal o título da Copa Africana de 2025</h3><p><strong>Fato — 24/11/2026.</strong> O <strong>TAS</strong> restituiu o Senegal como campeão da Copa Africana de Nações de 2025, dez meses depois da final contra o Marrocos, em Rabat. A decisão anterior havia retirado o título conquistado em campo, numa final caótica: com o jogo sem gols, o Senegal deixou o campo nos acréscimos em protesto contra um pênalti, a partida ficou mais de 15 minutos parada e a cobrança de Brahim Diaz foi defendida. <a href="https://www.bbc.com/sport/football/articles/crn80y2l1404o">BBC Sport</a>.</p></article>
+    <article class="card is-new" id="pauta-copa-america-2028"><span class="new-tag">Novo — 14h</span><h3>Conmebol confirma Copa América de 2028 nos Estados Unidos</h3><p><strong>Fato — 24/11/2026.</strong> A Conmebol anunciou que a Copa América de <strong>2028</strong> será disputada nos <strong>Estados Unidos</strong>, repetindo o modelo de 2024, com o torneio usado para ampliar receita e mercado. <a href="https://ge.globo.com/futebol/futebol-internacional/noticia/2026/11/24/conmebol-confirma-copa-america-de-2028-nos-estados-unidos.ghtml">ge</a>.</p></article>
+    <article class="card is-new" id="pauta-marquez-titulo"><span class="new-tag">Novo — 14h</span><h3>Marc Marquez conquista o oitavo título da MotoGP</h3><p><strong>Fato — 24/11/2026.</strong> Marc Marquez garantiu o <strong>oitavo título</strong> mundial na MotoGP, consolidando a recuperação depois de anos de lesões. <a href="https://www.bbc.com/sport/motorsport/videos/cr930y14v3n4o">BBC Sport</a>.</p></article>
+    <article class="card is-new" id="pauta-sooryavanshi"><span class="new-tag">Novo — 14h</span><h3>Aos 15 anos, indiano faz 204 em 53 bolas e quebra recorde de seis no críquete</h3><p><strong>Fato — 24/11/2026.</strong> O indiano <strong>Sooryavanshi</strong>, de 15 anos, marcou 204 corridas em 53 bolas e estabeleceu novo recorde de seis, segundo a BBC Sport. <a href="https://www.bbc.com/sport/cricket/articles/c6y9709xx4qwo">BBC Sport</a>.</p></article>
+  </div>
+</section>
+
+<section id="cultura" class="desk-section">
+  <h2>Cultura</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-papa-diario"><span class="new-tag">Novo — 14h</span><h3>Diário do papa Francisco diz que ele viu o diabo três vezes</h3><p><strong>Fato — 24/11/2026.</strong> Trechos publicados do diário do papa Francisco, morto em 2025, afirmam que ele relatou ter visto o diabo em três ocasiões, com frases como "sedução pagã", "voz do demônio" e "a Virgem me salvou". O material foi editado postumamente pela Santa Sé e repercutiu em G1 e BBC. <strong>Limite:</strong> é texto devocional publicado, não documento doutrinário novo. <a href="https://g1.globo.com/mundo/noticia/2026/11/24/tentacao-paga-voz-do-demonio-virgem-me-salvou-veja-frases-escritas-pelo-papa-francisco-no-diario-em-que-relatou-ter-visto-o-diabo.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cm78270l4z7no">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-pelicot"><span class="new-tag">Novo — 14h</span><h3>Gisèle Pelicot diz-se humilhada após fotos nuas irem à imprensa para promover livro</h3><p><strong>Fato — 24/11/2026.</strong> <strong>Gisèle Pelicot</strong> afirmou se sentir "humilhada" depois que fotos nuas foram enviadas a veículos de imprensa para divulgar um livro sobre violência sexual e controle coercitivo. A editora pediu desculpas publicamente. <a href="https://www.bbc.com/news/articles/cm3eg502nxw2o">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-cbeebies-netflix"><span class="new-tag">Novo — 14h</span><h3>BBC e Netflix fecham parceria para levar o CBeebies ao streaming</h3><p><strong>Fato — 24/11/2026.</strong> A BBC e a Netflix anunciaram um teste limitado que levará um hub do <strong>CBeebies</strong>, a faixa infantil britânica, ao catálogo do serviço de streaming — a primeira vez que o conteúdo aparece por lá. <a href="https://www.bbc.com/news/articles/c9zr585dxkgzo">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-booker-infantil"><span class="new-tag">Novo — 14h</span><h3>Primeiro Booker infantil revela lista curta escolhida também por crianças</h3><p><strong>Fato — 24/11/2026.</strong> A primeira edição do prêmio Booker voltado ao público infantil divulgou sua lista curta, com jurados adultos e crianças na avaliação. <a href="https://www.bbc.com/news/articles/c65y18gl23gko">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-patrick-stewart"><span class="new-tag">Novo — 14h</span><h3>Campanha quer placa azul para Patrick Stewart em sua cidade natal</h3><p><strong>Fato — 24/11/2026.</strong> Moradores e fãs pedem uma <strong>blue plaque</strong> — a placa comemorativa britânica — em homenagem a <strong>Sir Patrick Stewart</strong> na cidade onde ele nasceu. <a href="https://www.bbc.com/news/articles/cx30g86nmdz6o">BBC</a>.</p></article>
+  </div>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <article class="correlation"><h3>A PEC das despesas obrigatórias é a terceira tentativa em dez anos de domar o gasto que cresce por regra, não por escolha</h3><ol class="timeline"><li><time datetime="1988-10-05">05/10/1988</time>a Constituição, no art. 212, obriga a União a aplicar ao menos 18% da receita de impostos em educação e estados e municípios, 25%. <a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm">Planalto, CF</a>.</li><li><time datetime="2000-09-13">13/09/2000</time>a <strong>EC 29/2000</strong> cria pisos de gasto em saúde — 15% da arrecadação de impostos nos municípios e 12% nos estados, com transição até 2004. <a href="https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc29.htm">Planalto, EC 29</a>.</li><li><time datetime="2016-12-15">15/12/2016</time>a <strong>EC 95/2016</strong> congela o gasto primário por 20 anos, corrigido só pela inflação: primeira tentativa de tirar a despesa da trajetória da receita. <a href="https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc95.htm">Planalto, EC 95</a>.</li><li><time datetime="2023-08-30">30/08/2023</time>a <strong>LC 200/2023</strong> substitui o teto pelo arcabouço: a despesa cresce 70% (ou 50%) do crescimento real da receita, dentro de uma faixa de 0,6% a 2,5% ao ano. <a href="https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp200.htm">Planalto, LC 200</a>.</li><li><time datetime="2026-11-23T20:00">23/11/2026</time>a Câmara aprova o <strong>PLP 299/2026</strong> por 353 a 128 e reduz o teto de 2,5% para <strong>2%</strong> quando for preciso bloquear despesas. <a href="https://g1.globo.com/economia/noticia/2026/11/24/entenda-o-plano-moretti-o-ajuste-fiscal-aprovado-pela-camara.ghtml">G1</a>.</li><li><time datetime="2026-11-24T09:52">24/11/2026, 9h52</time>Lula autoriza a equipe econômica a preparar uma <strong>PEC</strong> para limitar o crescimento das despesas obrigatórias, inclusive pisos de saúde e educação e emendas. <a href="https://www.infomoney.com.br/politica/lula-autoriza-nova-pec-para-conter-gastos-com-saude-educacao-e-emendas/">InfoMoney</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Pisos de saúde e educação e emendas são despesa <em>obrigatória</em>: crescem por regra constitucional ou legal, junto com a receita, sem passar por escolha anual do Orçamento. O limite do arcabouço incide sobre o total da despesa, então, quando a receita sobe, a obrigatória ocupa o espaço e o corte recai sobre o investimento e o custeio discricionário. A PEC tenta mudar isso na origem — a regra de crescimento da própria obrigatória —, que é o mesmo movimento do teto de 2016 (travar em termos reais) e do arcabouço de 2023 (indexar à receita). <strong>Evidência contrária e limites.</strong> (1) O bloqueio de discricionárias não altera a trajetória da dívida; foi por isso que o mercado tratou o PLP como insuficiente ainda na véspera. (2) A ala política do governo teme o desgaste de uma segunda rodada, depois de o PSOL votar inteiro contra e dois petistas se absterem. (3) PEC exige 308 votos em dois turnos nas duas Casas, e não existe minuta: <strong>autorização para preparar não é envio nem aprovação</strong>. <strong>O que acompanhar:</strong> o texto, a lista de pisos afetados e o prazo de envio.</p></article>
+  <article class="correlation"><h3>O dólar de R$ 6 e a volta a R$ 5,80 repetem dezembro de 2024: o mercado não cobra o pacote, cobra o próximo</h3><ol class="timeline"><li><time datetime="2024-12-18">18/12/2024</time>o dólar bate cerca de R$ 6,30 no intradia e fecha a <strong>R$ 6,26</strong>, recorde de fechamento, depois de um pacote fiscal visto como insuficiente e de intervenções do Banco Central. <a href="https://www.reuters.com/markets/currencies/brazilian-real-slides-record-low-after-central-bank-intervention-2024-12-18/">Reuters</a>.</li><li><time datetime="2026-11-23T20:00">23/11/2026</time>mesmo com o PLP aprovado, o dólar toca <strong>R$ 6,0055</strong> e fecha a R$ 5,9262 — o mercado já precificava a insuficiência do texto. <a href="#economia">edição das 20h</a>.</li><li><time datetime="2026-11-24T10:00">24/11/2026, manhã</time>com a PEC na imprensa, o dólar cede até a faixa de <strong>R$ 5,80</strong>. <a href="https://www.infomoney.com.br/mercados/dolar-hoje-abertura-fechamento-comercial-turismo-24112026/">InfoMoney</a>.</li><li><time datetime="2026-11-24T13:53">24/11/2026, 13h53</time>a moeda volta a R$ 5,90 com o ambiente externo, e os juros futuros acumulam queda de até 28 pontos-base no dia. <a href="https://www.infomoney.com.br/onde-investir/tesouro-direto-abertura-fechamento-24112026/">InfoMoney</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Nos dois episódios o alívio veio de um <em>anúncio de medida futura</em>, não da execução do que já foi votado: o prêmio de risco fiscal embutido no câmbio e na curva de juros responde à expectativa de contenção, e não ao tamanho do pacote na véspera. É o mesmo canal — risco de rolagem da dívida e credibilidade da regra —, com dois anos e meio de intervalo. <strong>Evidência contrária.</strong> Parte do movimento de hoje é externa: a moeda americana cedeu ante vários emergentes e há a expectativa de novas tarifas dos EUA, que puxam o dólar de volta; a queda forte dos prefixados também é correção técnica, depois de as taxas renovarem máximas do ano na segunda. <strong>Não provado:</strong> que a PEC, se enviada, sustente o alívio — a curva já devolveu parte do ganho no mesmo dia.</p></article>
+  <article class="correlation"><h3>“O objeto mais antigo do universo” é um recorde de instrumento, não um evento novo</h3><ol class="timeline"><li><time datetime="2021-01-12">12/01/2021</time>o quasar <strong>J0313−1806</strong>, com redshift 7,64, é anunciado como o mais distante conhecido, a cerca de 670 milhões de anos do Big Bang. <a href="https://www.nasa.gov/universe/newfound-quasar-is-the-most-distant-yet/">NASA</a>.</li><li><time datetime="2023-07-01">07/2023</time>o telescópio <strong>Euclid</strong>, da ESA, é lançado para mapear bilhões de galáxias e investigar matéria e energia escuras. <a href="https://www.esa.int/Science_Exploration/Space_Science/Euclid">ESA</a>.</li><li><time datetime="2026-11-24">24/11/2026</time>equipe alemã anuncia um quasar a <strong>630 milhões de anos</strong> após o Big Bang, encontrado em milhões de observações do Euclid. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/cientistas-descobrem-objeto-formado-apenas-630-milhoes-de-anos-apos-o-big-bang-e-se-torna-objeto-astronomico-mais-antigo-descoberto-no-universo.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Cada recorde desses é sobretudo uma medida de alcance do instrumento: quasares tão cedo no universo são raros e brilhantes, e uma varredura ampla como a do Euclid aumenta a chance de encontrar um. O interesse físico está em outro lugar — buracos negros supermassivos crescidos rápido demais para os modelos, o que pressiona teorias de formação. <strong>Limite:</strong> o texto não informa o redshift nem o período de revisão por pares; comparar “mais antigo” entre levantamentos diferentes exige o mesmo critério.</p></article>
+</section>
+
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <p>Este globo mostra a edição das 14h de 24/11. Veja também o <a href="2026-11-23-2000.html#globo">globo da edição das 20h de 23/11</a> e o <a href="2026-11-23-0800.html#globo">da edição das 8h</a>.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <p>Este grafo mostra a edição das 14h de 24/11. Veja também o <a href="2026-11-23-2000.html#grafo">grafo da edição das 20h de 23/11</a>.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> a PEC não muda o bolso deste mês; o que muda, se aprovada, é o piso de saúde e de educação a partir de 2027. Já o calendário do INSS começou a pagar novembro e o 13º de quem entrou neste ano. Na gripe aviária, a OMS avalia o risco à população geral como baixo — mas o vírus em rebanhos leiteiros mexe com vigilância sanitária e com preço de leite e derivados.</li><li><strong>Macroeconomia:</strong> o canal rápido é o prêmio de risco. Juros futuros caíram até 28 pontos-base com o anúncio, antes de qualquer texto existir; se a PEC não for enviada, o alívio tende a se desfazer. Arrecadação recorde (R$ 294 bi em outubro) dá folga de caixa, mas receita extraordinária não corrige despesa que cresce por regra.</li><li><strong>Finanças:</strong> Prefixado 2029 voltou a pagar menos de 15% (14,87%) e o Tesouro chegou a suspender negociação de prefixados pela manhã — sinal de movimento brusco na curva. Na bolsa, o Ibovespa só subiu 0,32% porque a Vale caiu 5,32%; e a Nvidia devolveu parte do rali num pregão, lembrando que a concentração em tecnologia transforma decisão política em risco de carteira.</li><li><strong>Cenário global:</strong> a nova rodada de tarifas dos EUA contra China, UE e mais de uma dúzia de economias, se confirmada, reacende inflação e juros altos — e é o principal contra-argumento a ler a queda do dólar de hoje como melhora estrutural. A COP31 terminou sem acordo em Antália, mantendo a trajetória fóssil e o financiamento climático em aberto.</li></ul></article></section>
+
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Arquivo de edições</h2>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>24 de novembro de 2026</summary><ul>
+    <li>14h — Edição · <a href="noticias-2026-11-24-1400.md" download>Relatório</a> (era a capa)</li>
+    <li><a href="noticias-2026-11-24-0800.md" download>08h — Relatório</a> (captura sem publicação)</li>
+  </ul></details>
+  <details open><summary>23 de novembro de 2026</summary><ul>
+    <li><a href="2026-11-23-2000.html">20h — Edição</a> · <a href="noticias-2026-11-23-2000.md" download>Relatório</a></li>
+    <li><a href="2026-11-23-1600.html">16h — Edição</a> · <a href="noticias-2026-11-23-1600.md" download>Relatório</a></li>
+    <li><a href="2026-11-23-1400.html">14h — Edição</a> · <a href="noticias-2026-11-23-1400.md" download>Relatório</a></li>
+    <li><a href="2026-11-23-0800.html">08h — Edição</a> · <a href="noticias-2026-11-23-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>22 de novembro de 2026</summary><ul>
+    <li><a href="2026-11-22-2000.html">20h — Edição</a> · <a href="noticias-2026-11-22-2000.md" download>Relatório</a></li>
+    <li><a href="2026-11-22-1400.html">14h — Edição</a> · <a href="noticias-2026-11-22-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>20 de novembro de 2026</summary><ul>
+    <li><a href="2026-11-20-0800.html">08h — Edição</a> · <a href="noticias-2026-11-20-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="2026-11-19-1400.html">14h — Edição</a> · <a href="noticias-2026-11-19-1400.md" download>Relatório</a></li>
+    <li><a href="2026-11-19-0800.html">08h — Edição</a> · <a href="noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="2026-11-18-2000.html">20h — Edição</a> · <a href="noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="2026-11-18-1400.html">14h — Edição</a> · <a href="noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, dólar, Nvidia"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="saude">Saúde</option><option value="ciencia">Ciência</option><option value="esporte">Esporte</option><option value="cultura">Cultura</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados" tabindex="0" aria-label="Resultados da busca"></ul>
+  </div>
+</section>
+</main>
+
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog" style="text-align:right"><button type="submit" aria-label="Fechar janela de leitura">Fechar ✕</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
+
+<footer class="container">
+  <p class="meta">Jornal Digital · edição de 23/11/2026, 20h (Brasília). Conteúdo editorial próprio, com links para as fontes originais. Nenhuma imagem de terceiros foi reproduzida.</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+{"lat": -15.79, "lng": -47.88, "name": "Brasília, DF", "title": "Lula autoriza PEC para limitar despesas obrigatórias", "story": "pec-obrigatorias", "color": "#ff6b6b", "size": 1},
+{"lat": -15.79, "lng": -47.88, "name": "Brasília, DF", "title": "Câmara aprova o PLP 299 por 353 a 128", "story": "ajuste-plp", "color": "#ff6b6b", "size": 0.9},
+{"lat": -15.79, "lng": -47.88, "name": "Brasília, DF", "title": "Arrecadação federal bate recorde de R$ 294 bi", "story": "arrecadacao", "color": "#ffcf99", "size": 0.8},
+{"lat": -23.55, "lng": -46.63, "name": "São Paulo, Brasil", "title": "Dólar toca R$ 5,80 e juros futuros recuam 28 pontos-base", "story": "mercado-14h", "color": "#ffcf99", "size": 1},
+{"lat": 4.14, "lng": -73.63, "name": "Villavicencio, Colômbia", "title": "Carro-bomba fere 23 e atinge sede do governo regional", "story": "villavicencio", "color": "#ff6b6b", "size": 1},
+{"lat": 36.89, "lng": 30.7, "name": "Antália, Turquia", "title": "COP31 termina sem acordo político", "story": "cop31", "color": "#ffcf99", "size": 0.8},
+{"lat": 46.6, "lng": -120.5, "name": "Yakima, EUA", "title": "Três casos de gripe aviária em humanos, com uma morte", "story": "gripe-aviaria", "color": "#a3e635", "size": 0.9},
+{"lat": 38.9, "lng": -77.04, "name": "Washington, EUA", "title": "Nova rodada de tarifas contra China, UE e outras economias", "story": "tarifas-eua", "color": "#ff6b6b", "size": 0.9},
+{"lat": 41.9, "lng": 12.5, "name": "Roma, Itália", "title": "Justiça italiana adia extradição de Zambelli para fevereiro", "story": "zambelli-extradicao", "color": "#ffcf99", "size": 0.8},
+{"lat": 14.72, "lng": -17.47, "name": "Dacar, Senegal", "title": "TAS devolve ao Senegal o título da Copa Africana de 2025", "story": "senegal-afcon", "color": "#818cf8", "size": 0.9},
+{"lat": 52.83, "lng": 0.51, "name": "Sandringham, Reino Unido", "title": "Dois presos após invasão à casa de campo de William e Kate", "story": "william-invasao", "color": "#ff6b6b", "size": 0.8},
+{"lat": 37.97, "lng": 23.72, "name": "Atenas, Grécia", "title": "Mistério das esculturas do Partenon é desvendado", "story": "partenon", "color": "#a3e635", "size": 0.8}
+];
+
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || typeof reader.showModal !== 'function') return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  const body = [...card.querySelectorAll('p')].map(p => p.cloneNode(true));
+  document.getElementById('leitura-conteudo').replaceChildren(...body);
+  if (!reader.open) reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+for (const link of document.querySelectorAll('[data-open-story]')) {
+  const card = document.getElementById(`pauta-${link.dataset.openStory}`);
+  if (!card || typeof reader.showModal !== 'function') continue;
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    readStory(card);
+  });
+}
+function readLocation(place) {
+  readStory(document.getElementById(`pauta-${place.story}`));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: 20, lng: -40, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+{"id": "mundo", "name": "Mundo", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "politica", "name": "Política", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "economia", "name": "Economia", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "tecnologia", "name": "Tecnologia", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "saude", "name": "Saúde", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "ciencia", "name": "Ciência", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "esporte", "name": "Esporte", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "cultura", "name": "Cultura", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "pec-obrigatorias", "name": "PEC para limitar despesas obrigatórias é autorizada", "type": "news", "desc": "Fato — 24/11/2026, 9h52. Saúde, educação e emendas podem ser afetadas; sem minuta pública.", "color": "#ff6b6b", "size": 6, "url": "https://www.infomoney.com.br/politica/lula-autoriza-nova-pec-para-conter-gastos-com-saude-educacao-e-emendas/"},
+{"id": "ajuste-plp", "name": "PLP 299/2026 aprovado por 353 a 128", "type": "news", "desc": "Fato — 23/11/2026. Teto cai de 2,5% para 2%; economia estimada de R$ 50 bi a R$ 60 bi em 2027.", "color": "#ff6b6b", "size": 5, "url": "https://g1.globo.com/economia/noticia/2026/11/24/entenda-o-plano-moretti-o-ajuste-fiscal-aprovado-pela-camara.ghtml"},
+{"id": "mercado-14h", "name": "Dólar a R$ 5,80 e juros futuros em queda", "type": "news", "desc": "Fato — 24/11/2026, até 13h53. Ibovespa +0,32%; Prefixado 2029 -28 pb; Vale -5,32%.", "color": "#ff6b6b", "size": 5, "url": "https://www.infomoney.com.br/mercados/dolar-hoje-abertura-fechamento-comercial-turismo-24112026/"},
+{"id": "arrecadacao", "name": "Arrecadação de R$ 294 bi em outubro", "type": "news", "desc": "Fato — 24/11/2026. Alta real de 7,3%; recorde para o mês desde 1995.", "color": "#ff6b6b", "size": 4, "url": "https://g1.globo.com/economia/noticia/2026/11/24/arrecadacao-federal-avanca-para-r-294-bilhoes-em-outubro-novo-recorde-para-o-mes.ghtml"},
+{"id": "tarifas-eua", "name": "EUA preparam tarifas contra China, UE e outras economias", "type": "news", "desc": "Preliminar — 24/11/2026, Bloomberg. Sem ato publicado.", "color": "#ff6b6b", "size": 4, "url": "https://www.infomoney.com.br/mercados/ibovespa-sobe-com-expectativa-de-novas-medidas-de-contencao-de-gastos/"},
+{"id": "villavicencio", "name": "Carro-bomba em Villavicencio fere 23", "type": "news", "desc": "Fato — 24/11/2026. Atingiu sede do governo regional; atribuição divergente entre G1 e BBC.", "color": "#ff6b6b", "size": 5, "url": "https://www.bbc.co.uk/news/articles/cjqlq2n4np7do"},
+{"id": "gripe-aviaria", "name": "Três casos de gripe aviária em humanos nos EUA", "type": "news", "desc": "Fato — 24/11/2026. Uma morte; trabalhadores de fazendas leiteiras em Yakima; sem transmissão entre humanos.", "color": "#ff6b6b", "size": 5, "url": "https://g1.globo.com/saude/noticia/2026/11/24/eua-gripe-aviaria-oms.ghtml"},
+{"id": "daraxonrasib", "name": "Daraxonrasib torna tumor indetectável em 1 de 12", "type": "news", "desc": "Fato — 24/11/2026. 61 participantes; não é cura e a duração do efeito é desconhecida.", "color": "#ff6b6b", "size": 4, "url": "https://www.bbc.com/news/articles/cqrmgjnzz9l0o"},
+{"id": "nvidia-politica", "name": "Nvidia cai e políticos questionam Trump", "type": "news", "desc": "Fato — 24/11/2026. Congressistas dos dois partidos criticam a interferência no conselho.", "color": "#ff6b6b", "size": 5, "url": "https://www.bbc.com/news/live/crd61y5dwqgpt"},
+{"id": "quasar", "name": "Quasar a 630 milhões de anos do Big Bang", "type": "news", "desc": "Fato — 24/11/2026. Achado em observações do Euclid (ESA); redshift não divulgado.", "color": "#ff6b6b", "size": 5, "url": "https://g1.globo.com/ciencia/noticia/2026/11/24/cientistas-descobrem-objeto-formado-apenas-630-milhoes-de-anos-apos-o-big-bang-e-se-torna-objeto-astronomico-mais-antigo-descoberto-no-universo.ghtml"},
+{"id": "cop31", "name": "COP31 termina sem acordo em Antália", "type": "news", "desc": "Fato — 22/11/2026. Produtores de petróleo resistiram a metas sobre fósseis.", "color": "#ff6b6b", "size": 4, "url": "https://g1.globo.com/meio-ambiente/noticia/2026/11/24/cop31-impasse-consequencias.ghtml"},
+{"id": "senegal-afcon", "name": "TAS devolve o título africano ao Senegal", "type": "news", "desc": "Fato — 24/11/2026. Decisão reverte punição da final de janeiro contra o Marrocos.", "color": "#ff6b6b", "size": 4, "url": "https://www.bbc.com/sport/football/articles/crn80y2l1404o"},
+{"id": "inter-z4", "name": "Inter com 9% de chance de permanência", "type": "news", "desc": "Fato — 24/11/2026. Levou cinco gols no Beira-Rio pela primeira vez.", "color": "#ff6b6b", "size": 4, "url": "https://ge.globo.com/gato-mestre/noticia/2026/11/24/inter-tem-apenas-9percent-de-chances-de-permanencia-gremio-e-mirassol-estao-com-59percent-g-4-quase-fechado.ghtml"},
+{"id": "papa-diario", "name": "Diário do papa Francisco relata visões do diabo", "type": "news", "desc": "Fato — 24/11/2026. Trechos publicados postumamente.", "color": "#ff6b6b", "size": 3, "url": "https://www.bbc.com/news/articles/cm78270l4z7no"},
+{"id": "h-lc200", "name": "30/08/2023 — LC 200/2023 cria o arcabouço fiscal", "type": "history", "desc": "Despesa cresce 70% (ou 50%) da receita, entre 0,6% e 2,5% ao ano.", "color": "#61dfd3", "size": 4, "url": "https://www.planalto.gov.br/ccivil_03/leis/lcp/Lcp200.htm"},
+{"id": "h-ec95", "name": "15/12/2016 — EC 95/2016 congela o gasto por 20 anos", "type": "history", "desc": "Teto corrigido só pela inflação; substituído em 2023.", "color": "#61dfd3", "size": 4, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc95.htm"},
+{"id": "h-ec29", "name": "13/09/2000 — EC 29/2000 cria os pisos da saúde", "type": "history", "desc": "15% nos municípios e 12% nos estados, com transição até 2004.", "color": "#61dfd3", "size": 4, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc29.htm"},
+{"id": "h-cf212", "name": "05/10/1988 — art. 212 vincula receita à educação", "type": "history", "desc": "18% para a União; 25% para estados e municípios.", "color": "#61dfd3", "size": 4, "url": "https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm"},
+{"id": "h-dolar-2024", "name": "18/12/2024 — dólar fecha a R$ 6,26, recorde", "type": "history", "desc": "Pacote fiscal visto como insuficiente; BC interveio no mercado.", "color": "#61dfd3", "size": 4, "url": "https://www.reuters.com/markets/currencies/brazilian-real-slides-record-low-after-central-bank-intervention-2024-12-18/"},
+{"id": "h-h5n1", "name": "2024 — H5N1 se espalha em rebanhos leiteiros dos EUA", "type": "history", "desc": "Trabalhadores expostos adoecem; CDC avalia risco baixo para a população geral.", "color": "#61dfd3", "size": 4, "url": "https://www.cdc.gov/bird-flu/situation-summary/index.html"},
+{"id": "h-j0313", "name": "12/01/2021 — J0313−1806 é o quasar mais distante então", "type": "history", "desc": "Redshift 7,64, cerca de 670 milhões de anos após o Big Bang.", "color": "#61dfd3", "size": 4, "url": "https://www.nasa.gov/universe/newfound-quasar-is-the-most-distant-yet/"}
+];
+
+const graphLinks = [
+{"source": "politica", "target": "pec-obrigatorias", "label": "Editoria"},
+{"source": "politica", "target": "ajuste-plp", "label": "Editoria"},
+{"source": "economia", "target": "mercado-14h", "label": "Editoria"},
+{"source": "economia", "target": "arrecadacao", "label": "Editoria"},
+{"source": "economia", "target": "tarifas-eua", "label": "Editoria"},
+{"source": "mundo", "target": "villavicencio", "label": "Editoria"},
+{"source": "mundo", "target": "cop31", "label": "Editoria"},
+{"source": "saude", "target": "gripe-aviaria", "label": "Editoria"},
+{"source": "saude", "target": "daraxonrasib", "label": "Editoria"},
+{"source": "tecnologia", "target": "nvidia-politica", "label": "Editoria"},
+{"source": "ciencia", "target": "quasar", "label": "Editoria"},
+{"source": "esporte", "target": "senegal-afcon", "label": "Editoria"},
+{"source": "esporte", "target": "inter-z4", "label": "Editoria"},
+{"source": "cultura", "target": "papa-diario", "label": "Editoria"},
+{"source": "pec-obrigatorias", "target": "h-lc200", "label": "Aperta regra de"},
+{"source": "h-lc200", "target": "h-ec95", "label": "Substituiu"},
+{"source": "h-ec95", "target": "h-ec29", "label": "Antecedido por"},
+{"source": "h-ec29", "target": "h-cf212", "label": "Deriva do art. 212"},
+{"source": "ajuste-plp", "target": "h-lc200", "label": "Aplica"},
+{"source": "mercado-14h", "target": "h-dolar-2024", "label": "Repete padrão de"},
+{"source": "gripe-aviaria", "target": "h-h5n1", "label": "Continua surto de"},
+{"source": "quasar", "target": "h-j0313", "label": "Supera recorde de"},
+{"source": "pec-obrigatorias", "target": "mercado-14h", "label": "Muda preço de"}
+];
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { const section = document.getElementById(id); if (section) section.hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', event => { if (!event.defaultPrevented) select(topic); });
+  });
+  filter.hidden = false;
+})();
+</script>
+<script src="../arquivo-dados.js" defer></script>
+<script src="../arquivo.js" defer></script>
+</body>
+</html>

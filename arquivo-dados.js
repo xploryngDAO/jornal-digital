@@ -1,311 +1,591 @@
 window.pautasArquivadas = [
   {
-    "title": "Ataque russo a prédio em Dymer mata 11; resgate acha um menino vivo",
-    "body": "Fato — 23/11/2026. Um drone atingiu antes do amanhecer de domingo (22) um prédio de cinco andares em Dymer , perto de Kiev; 11 vizinhos morreram, entre eles um adolescente. Toda uma seção do edifício desabou. No domingo à noite, os bombeiros acharam Davyd, de 7 anos , vivo e capaz de indicar onde estava; uma mulher de 79 anos foi resgatada quase um dia depois, presa entre lajes. Duas pessoas seguem oficialmente desaparecidas. Fonte: relato da BBC no local ; os números são os divulgados no texto. BBC, 14h11 .",
+    "title": "Carro-bomba em Villavicencio fere 23 e atinge sede do governo regional",
+    "body": "Fato — 24/11/2026. Um carro-bomba explodiu no centro de Villavicencio , no centro da Colômbia, em frente às sedes do governo departamental, danificando vários prédios e ferindo ao menos 23 pessoas , segundo a BBC. Nenhum grupo reivindicou o ataque. O presidente Abelardo de la Espriella falou em \"narcoterrorismo\" e prometeu resposta \"contundente\"; grupos armados têm intensificado ataques desde a ofensiva que ele ordenou. Divergência registrada: a manchete do G1 atribui o atentado a dissidentes das Farc, enquanto a BBC diz que o governo não apontou grupo — o texto do G1 não abriu nesta captura. BBC · G1 .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
+  },
+  {
+    "title": "COP31 termina em Antália sem acordo, com produtores de petróleo no centro do impasse",
+    "body": "Fato — encerramento em 22/11/2026. A conferência do clima terminou no domingo (22) em Antália, Turquia , sem acordo político sobre como acelerar o combate ao aquecimento global. Arábia Saudita e outros grandes produtores resistiram a compromissos mais claros de redução da dependência de combustíveis fósseis, e houve divergência sobre quem financia a transição. A conferência deveria ter terminado em 20/11 e avançou pelo fim de semana. O que mudou: na edição das 8h o impasse era o enquadramento; agora há a confirmação do encerramento sem texto. G1 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Dois presos após invasão à casa de campo do príncipe William e de Kate",
+    "body": "Fato — 24/11/2026. A polícia britânica prendeu dois homens sob suspeita de arrombamento na residência de campo do príncipe William e de Kate, em Norfolk , segundo a BBC e o G1. O caso reacende a discussão sobre segurança da família real fora dos palácios. BBC · G1 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Chefe da Otan promete defesa contra ameaça espacial após relatos sobre satélite nuclear russo",
+    "body": "Fato — 24/11/2026. O secretário-geral da Otan prometeu resposta à ameaça no espaço depois que a imprensa alemã noticiou um plano russo de lançar um satélite com carga nuclear. Limite: a informação vem de relatos de imprensa, sem confirmação oficial russa; a BBC não publicou detalhes técnicos verificáveis. BBC .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Justiça italiana adia para fevereiro a reavaliação do pedido de extradição de Zambelli",
+    "body": "Fato — 24/11/2026. A Justiça da Itália adiou para fevereiro a análise do pedido de extradição da deputada Carla Zambelli , que está no país. O pedido brasileiro segue sem decisão de mérito. G1 .",
+    "topic": "mundo",
+    "date": "capa vigente",
+    "url": "#mundo"
+  },
+  {
+    "title": "Lula autoriza PEC para limitar despesas obrigatórias de saúde, educação e emendas",
+    "body": "Fato — 24/11/2026, divulgado às 9h52. O presidente Lula autorizou a equipe econômica a preparar uma PEC para limitar o crescimento das despesas obrigatórias da União, informaram CNN Brasil e O Globo; a Reuters confirmou a informação com uma fonte. A proposta é conduzida pelo ministro da Fazenda, Dario Durigan , e pode alterar regras de saúde, educação e emendas parlamentares . O formato e o momento do envio ao Congresso ainda são discutidos com a área política. Por que importa: a equipe econômica avalia que o pacote aprovado na véspera, mesmo com efeito de até R$ 56,1 bilhões em 2027, não basta para estabilizar a dívida. Limite explícito: autorização para preparar não é texto enviado nem aprovação — não há minuta pública. InfoMoney, 9h52 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Câmara aprova o PLP 299/2026 por 353 a 128; texto vai à sanção",
+    "body": "Fato — 23/11/2026, à noite. A Câmara aprovou o projeto de ajuste fiscal vindo do Senado sem mudanças, por 353 votos a 128 . O texto, que ficou conhecido como Plano Moretti , reduz o teto de crescimento real da despesa de 2,5% para 2% quando for necessário bloquear gastos e abre espaço para superávit primário de 0,5% do PIB em 2027 . A estimativa de economia em 2027 fica entre R$ 50 bi e R$ 60 bi . G1, 8h21 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Nenhum deputado do PSOL votou a favor do ajuste; dois do PT se abstiveram",
+    "body": "Fato — 24/11/2026. O levantamento do G1 mostra que toda a bancada do PSOL votou contra o PLP 299/2026 e que dois deputados do PT criticaram o projeto e se abstiveram. A aprovação teve apoio majoritário da base, mas com fissuras à esquerda — o que ajuda a explicar a cautela da ala política do governo com a nova PEC. G1 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Relatórios da PF citam Moraes, Nunes e Toffoli, mas omitem material que ligaria casos a Vorcaro",
+    "body": "Fato — 24/11/2026. Relatórios da Polícia Federal citam os ministros do STF Alexandre de Moraes , Luiz Fux (no texto, Nunes) e Dias Toffoli , mas deixam de fora diálogos e documentos que poderiam indicar conexão com o banqueiro Flávio Vorcaro , segundo o G1. Cuidado: citação em relatório não implica investigação contra o citado; o material é peça de inquérito, não decisão. G1 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Conservadores cristãos e classes D e E somam quase metade do eleitorado, aponta Quaest",
+    "body": "Fato — 24/11/2026. Pesquisa Quaest sobre segmentos identitários indica que conservadores cristãos e eleitores das classes D e E somam quase metade do eleitorado brasileiro. Limite: é retrato de um momento, com margem de erro e recorte próprios; não projeta resultado eleitoral. G1 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Para a vaga de Barroso, Lula estuda Tebet e ministras do STM e do STJ",
+    "body": "Fato — 24/11/2026, blog do Valdo Cruz. Sem nome fechado para o STF, o presidente Lula passou a analisar a ministra do Planejamento, Simone Tebet , e nomes de ministras do STM e do STJ. Limite: é notícia de bastidor, sem anúncio oficial. G1 .",
+    "topic": "politica",
+    "date": "capa vigente",
+    "url": "#politica"
+  },
+  {
+    "title": "Arrecadação federal chega a R$ 294 bi em outubro, recorde para o mês em 32 anos",
+    "body": "Fato — 24/11/2026, 11h. A Receita Federal informou arrecadação de R$ 294 bilhões em outubro, alta real de 7,3% sobre os R$ 274 bi de outubro de 2025 (valores corrigidos) e o maior resultado para o mês desde 1995. A Receita atribui o recorde ao crescimento da economia, aos aumentos de impostos dos últimos anos e à alta do petróleo. Leitura: receita forte melhora o resultado primário, mas não altera a trajetória da despesa obrigatória — que é o alvo da PEC. G1 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Dólar toca R$ 5,80 com a PEC e volta a R$ 5,90; juros futuros recuam até 28 pontos-base",
+    "body": "Fato — 24/11/2026, até 13h53. O dólar virou para baixo ainda na manhã, com a notícia da PEC das despesas obrigatórias, e chegou à faixa de R$ 5,80 ; à tarde voltou para a casa de R$ 5,90 , também por causa do ambiente externo. O Ibovespa subia 0,32% , a 165.340 pontos , pressionado por Vale , que caía 5,32%. No Tesouro Direto, o Prefixado 2029 recuava 28 pontos-base , a 14,87%, e o Prefixado 2032, 26 pontos-base, a 15,22%; a plataforma chegou a suspender a negociação de prefixados pela manhã. Limite: números intradiários, com mercado aberto. InfoMoney, 13h40 · Tesouro .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "EUA preparam nova rodada de tarifas contra China, União Europeia e mais de uma dúzia de economias",
+    "body": "Preliminar — 24/11/2026, reportagem da Bloomberg. Segundo a agência, citada pelo InfoMoney, o governo Trump prepara o anúncio de aumento de tarifas sobre produtos da China , da União Europeia e de mais de uma dúzia de economias, para substituir tarifas derrubadas pela Suprema Corte. Os novos níveis não ultrapassariam os acordos comerciais já negociados e seriam aplicados país a país. Status: não há ato publicado; a informação é de fonte não identificada. InfoMoney .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "INSS começa a pagar novembro e o 13º de novos beneficiários",
+    "body": "Fato — calendário divulgado em 24/11/2026. O INSS inicia os pagamentos de novembro e libera o 13º para quem passou a receber benefício neste ano. O calendário segue o número final do benefício. G1 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "\"Ninguém vai morrer se fechar um dia\", diz ministro sobre o fim da escala 6x1",
+    "body": "Fato — 24/11/2026. Ao comentar a proposta que acaba com a escala 6x1, um ministro do governo disse que \"ninguém vai morrer se fechar um dia\" e defendeu o debate sobre a jornada. Limite: declaração política; não há texto aprovado nem estimativa oficial de impacto. G1 .",
+    "topic": "economia",
+    "date": "capa vigente",
+    "url": "#economia"
+  },
+  {
+    "title": "Ações da Nvidia caem na reabertura, e políticos dos EUA questionam o papel de Trump na volta de Huang",
+    "body": "Fato — 24/11/2026. As ações da Nvidia recuaram na reabertura dos mercados americanos, devolvendo parte dos ganhos do dia anterior, quando a volta de Jensen Huang ao comando foi anunciada. O movimento veio junto com críticas de políticos dos dois partidos ao envolvimento do presidente Donald Trump na decisão do conselho: Trump diz que \"fez o acordo\", e um democrata afirmou à BBC que um presidente não deve interferir no conselho de uma empresa. BBC, ao vivo .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "Anthropic cai abaixo do preço do IPO cinco dias após estreia recorde",
+    "body": "Fato — 24/11/2026. As ações da Anthropic passaram a operar abaixo do preço de abertura de capital, cinco dias depois de uma estreia descrita como recorde. Leitura: o episódio reforça o padrão de euforia curta em torno de empresas de IA, o mesmo movimento visto na Nvidia. G1 .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "Tesla e SpaceX discutem fusão avaliada em R$ 20,8 trilhões, diz jornal",
+    "body": "Relatado — 24/11/2026. Tesla e SpaceX discutem uma fusão que, segundo o jornal citado pelo G1, seria a maior da história, avaliada em R$ 20,8 trilhões . Status: nenhuma das empresas confirmou; valores de reportagem não auditados. G1 .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "WhatsApp começa a liberar figurinhas com som",
+    "body": "Fato — 24/11/2026. O WhatsApp iniciou a liberação gradual de figurinhas com áudio para usuários. Limite: liberação por etapas; não há data única para todos os aparelhos. G1 .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "EUA vão incluir a Megaspeed em lista de entidades banidas após o caso Nvidia",
+    "body": "Fato — 23/11/2026. O Departamento de Comércio anunciou a intenção de incluir a Megaspeed , sediada em Singapura, em sua lista de entidades, o que restringe o acesso da empresa a tecnologia americana. A investigação é anterior ao escândalo da Nvidia. BBC .",
+    "topic": "tecnologia",
+    "date": "capa vigente",
+    "url": "#tecnologia"
+  },
+  {
+    "title": "OMS: EUA notificam três casos de gripe aviária em humanos, com uma morte",
+    "body": "Fato — 24/11/2026, 10h05. A OMS informou que os Estados Unidos notificaram três casos confirmados de gripe aviária em humanos no estado de Washington , incluindo uma morte . Os três eram adultos que trabalhavam em fazendas leiteiras no condado de Yakima , onde o vírus foi detectado recentemente em gado. A OMS afirma que, pelas informações disponíveis, não há evidência de transmissão entre humanos ; o primeiro paciente teve sintomas leves (irritação nos olhos e coriza) e não foi hospitalizado. G1 .",
+    "topic": "saude",
+    "date": "capa vigente",
+    "url": "#saude"
+  },
+  {
+    "title": "Comprimido diário deixa o câncer de pâncreas indetectável em 1 de cada 12 pacientes",
+    "body": "Fato — 24/11/2026, BBC. Nos testes iniciais, o daraxonrasib tomado com quimioterapia tornou o câncer indetectável nos exames de 1 em cada 12 pacientes; os tumores pararam de crescer em quase todos os 61 participantes com câncer avançado já espalhado. Os médicos ressaltam que não se sabe por quanto tempo o efeito dura e que não é cura . BBC .",
+    "topic": "saude",
+    "date": "capa vigente",
+    "url": "#saude"
+  },
+  {
+    "title": "Anvisa apreende e proíbe a venda da água mineral Pura",
+    "body": "Fato — 24/11/2026. A Anvisa determinou a apreensão e proibiu a comercialização da água mineral da marca Pura . Limite: o motivo sanitário detalhado não consta na manchete capturada. G1 .",
+    "topic": "saude",
+    "date": "capa vigente",
+    "url": "#saude"
+  },
+  {
+    "title": "Autoexame das mamas não exige mais movimentos específicos e não substitui a mamografia",
+    "body": "Fato — 24/11/2026. Nova orientação dispensa a sequência rígida de movimentos no autoexame e reforça que ele não substitui a mamografia de rastreamento. G1 .",
+    "topic": "saude",
+    "date": "capa vigente",
+    "url": "#saude"
+  },
+  {
+    "title": "Ministério da Saúde prevê testes de vacina terapêutica contra o câncer em 2027",
+    "body": "Fato — 23/11/2026. O Ministério da Saúde anunciou previsão de iniciar em 2027 os testes de uma vacina terapêutica contra o câncer, em parceria com Oxford . Limite: é cronograma, não resultado; vacina terapêutica trata quem já tem a doença e ainda está em pesquisa. G1 .",
+    "topic": "saude",
+    "date": "capa vigente",
+    "url": "#saude"
+  },
+  {
+    "title": "Quasar formado 630 milhões de anos após o Big Bang é o objeto mais antigo já observado",
+    "body": "Fato — 24/11/2026. Uma equipe liderada por pesquisadores alemães identificou o quasar mais distante já registrado, formado apenas 630 milhões de anos após o Big Bang , num universo estimado em 13,8 bilhões de anos. O achado saiu da análise de milhões de observações do telescópio Euclid , da ESA, lançado em 2023 para mapear galáxias e investigar matéria e energia escuras. Limite: o texto não traz o redshift do objeto nem revisão por pares. G1 .",
+    "topic": "ciencia",
+    "date": "capa vigente",
+    "url": "#ciencia"
+  },
+  {
+    "title": "Superlua acontece nesta terça-feira (24); veja como observar",
+    "body": "Fato — 24/11/2026. A Lua cheia desta terça ocorre próxima do perigeu, o ponto mais próximo da Terra, o que a deixa maior e mais brilhante no céu — o fenômeno chamado de superlua. A observação não exige equipamento. G1 .",
+    "topic": "ciencia",
+    "date": "capa vigente",
+    "url": "#ciencia"
+  },
+  {
+    "title": "Arqueólogos desvendam mistério de esculturas do Partenon após mais de 40 anos",
+    "body": "Fato — 24/11/2026. Depois de mais de 40 anos de pesquisa, arqueólogos propuseram uma explicação para detalhes das esculturas do Partenon , em Atenas, com apoio de imagens feitas com iPhone. Limite: é hipótese publicada por equipe de pesquisa, não consenso fechado. G1 .",
+    "topic": "ciencia",
+    "date": "capa vigente",
+    "url": "#ciencia"
+  },
+  {
+    "title": "Planta \"unicórnio\" é devolvida à Mata Atlântica cinco anos após apreensão",
+    "body": "Fato — 24/11/2026. Uma planta cobiçada por colecionadores e avaliada em milhares de dólares foi devolvida à Mata Atlântica cinco anos depois de ser apreendida. O caso ilustra a pressão do tráfico de espécies sobre a flora brasileira. G1 .",
+    "topic": "ciencia",
+    "date": "capa vigente",
+    "url": "#ciencia"
+  },
+  {
+    "title": "Inter tem 9% de chance de seguir na Série A; levou cinco gols no Beira-Rio pela primeira vez",
+    "body": "Fato — 24/11/2026. O modelo do ge aponta o Internacional com apenas 9% de chance de permanência na Série A, enquanto Grêmio e Mirassol aparecem com 59% e o G-4 está quase fechado. O clube levou cinco gols em casa pela primeira vez no Beira-Rio . ge · Beira-Rio .",
+    "topic": "esporte",
+    "date": "capa vigente",
+    "url": "#esporte"
+  },
+  {
+    "title": "Justiça desportiva devolve ao Senegal o título da Copa Africana de 2025",
+    "body": "Fato — 24/11/2026. O TAS restituiu o Senegal como campeão da Copa Africana de Nações de 2025, dez meses depois da final contra o Marrocos, em Rabat. A decisão anterior havia retirado o título conquistado em campo, numa final caótica: com o jogo sem gols, o Senegal deixou o campo nos acréscimos em protesto contra um pênalti, a partida ficou mais de 15 minutos parada e a cobrança de Brahim Diaz foi defendida. BBC Sport .",
+    "topic": "esporte",
+    "date": "capa vigente",
+    "url": "#esporte"
+  },
+  {
+    "title": "Conmebol confirma Copa América de 2028 nos Estados Unidos",
+    "body": "Fato — 24/11/2026. A Conmebol anunciou que a Copa América de 2028 será disputada nos Estados Unidos , repetindo o modelo de 2024, com o torneio usado para ampliar receita e mercado. ge .",
+    "topic": "esporte",
+    "date": "capa vigente",
+    "url": "#esporte"
+  },
+  {
+    "title": "Marc Marquez conquista o oitavo título da MotoGP",
+    "body": "Fato — 24/11/2026. Marc Marquez garantiu o oitavo título mundial na MotoGP, consolidando a recuperação depois de anos de lesões. BBC Sport .",
+    "topic": "esporte",
+    "date": "capa vigente",
+    "url": "#esporte"
+  },
+  {
+    "title": "Aos 15 anos, indiano faz 204 em 53 bolas e quebra recorde de seis no críquete",
+    "body": "Fato — 24/11/2026. O indiano Sooryavanshi , de 15 anos, marcou 204 corridas em 53 bolas e estabeleceu novo recorde de seis, segundo a BBC Sport. BBC Sport .",
+    "topic": "esporte",
+    "date": "capa vigente",
+    "url": "#esporte"
+  },
+  {
+    "title": "Diário do papa Francisco diz que ele viu o diabo três vezes",
+    "body": "Fato — 24/11/2026. Trechos publicados do diário do papa Francisco, morto em 2025, afirmam que ele relatou ter visto o diabo em três ocasiões, com frases como \"sedução pagã\", \"voz do demônio\" e \"a Virgem me salvou\". O material foi editado postumamente pela Santa Sé e repercutiu em G1 e BBC. Limite: é texto devocional publicado, não documento doutrinário novo. G1 · BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Gisèle Pelicot diz-se humilhada após fotos nuas irem à imprensa para promover livro",
+    "body": "Fato — 24/11/2026. Gisèle Pelicot afirmou se sentir \"humilhada\" depois que fotos nuas foram enviadas a veículos de imprensa para divulgar um livro sobre violência sexual e controle coercitivo. A editora pediu desculpas publicamente. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "BBC e Netflix fecham parceria para levar o CBeebies ao streaming",
+    "body": "Fato — 24/11/2026. A BBC e a Netflix anunciaram um teste limitado que levará um hub do CBeebies , a faixa infantil britânica, ao catálogo do serviço de streaming — a primeira vez que o conteúdo aparece por lá. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Primeiro Booker infantil revela lista curta escolhida também por crianças",
+    "body": "Fato — 24/11/2026. A primeira edição do prêmio Booker voltado ao público infantil divulgou sua lista curta, com jurados adultos e crianças na avaliação. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Campanha quer placa azul para Patrick Stewart em sua cidade natal",
+    "body": "Fato — 24/11/2026. Moradores e fãs pedem uma blue plaque — a placa comemorativa britânica — em homenagem a Sir Patrick Stewart na cidade onde ele nasceu. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Ataque russo a prédio em Dymer mata 11; resgate acha um menino vivo",
+    "body": "Fato — 23/11/2026. Um drone atingiu antes do amanhecer de domingo (22) um prédio de cinco andares em Dymer , perto de Kiev; 11 vizinhos morreram, entre eles um adolescente. Toda uma seção do edifício desabou. No domingo à noite, os bombeiros acharam Davyd, de 7 anos , vivo e capaz de indicar onde estava; uma mulher de 79 anos foi resgatada quase um dia depois, presa entre lajes. Duas pessoas seguem oficialmente desaparecidas. Fonte: relato da BBC no local ; os números são os divulgados no texto. BBC, 14h11 .",
+    "topic": "mundo",
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "Trump diz que ordenou ao Exército esperar a Justiça antes de detonar explosivos em Iowa",
     "body": "Fato — 23/11/2026. Segundo a BBC e o G1, o presidente afirmou ter mandado o Exército não detonar as cinco toneladas de explosivos degradados de Middletown sem autorização judicial — antes, o Exército havia justificado o adiamento para 25/11 com \"condições meteorológicas\". O que mudou em relação à edição das 14h: o adiamento agora é atribuído a uma ordem presidencial, não só ao clima. Limite: a ordem não foi lida em documento; a descrição é a do próprio presidente, reportada pela imprensa. G1 · BBC .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "Justiça da Espanha concede anistia definitiva a Puigdemont",
     "body": "Fato — 23/11/2026, 13h35. O Tribunal Supremo aplicou a lei de anistia ao líder independentista catalão Carles Puigdemont e encerrou o processo pela tentativa de secessão de 2017, o que lhe permite voltar ao país depois de nove anos. A decisão sai a menos de uma semana da eleição geral de 29/11 . O Supremo resistia a aplicar a lei a investigados por desvio de fundos; o Tribunal Constitucional a validou em outubro e o Supremo revogou as ordens de prisão. A lei foi o preço pago por Pedro Sánchez para se reeleger em 2023. G1, 13h35 .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "China condena funcionário à morte por espionagem; país não é identificado",
     "body": "Fato divulgado por fonte oficial — 23/11/2026, 19h56. A Gold Wall Press , editora ligada à administração de segredos de Estado da China, informou que um funcionário identificado apenas pelo sobrenome Ma foi condenado por espionar para um serviço estrangeiro: 35 informações classificadas e mais de 1 milhão de yuans (US$ 150 mil) recebidos. Lacunas: o país envolvido não é identificado, não se sabe quando foi a condenação nem se houve execução, e não há confirmação independente. G1, 19h56 .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "Oxfam diz que Gaza virou \"deserto tóxico\"; Israel contesta",
     "body": "Relatório de ONG — 23/11/2026, 17h07. O relatório da Oxfam com o Conflict and Environment Observatory , feito com imagens de satélite e sensoriamento remoto, afirma que mais de 99% do território de Gaza mostra indicadores de contaminação ambiental: metais pesados, resíduos de explosivos, amianto de prédios destruídos e dioxinas. A embaixada de Israel no Reino Unido diz que o texto \"não atende a padrões profissionais\"; Israel nega o genocídio e alega legítima defesa. Os números são da ONG; as acusações, das partes. BBC, 17h07 .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "Kremlin fala em \"escalada\" e a Vantor mostra a corveta emborcada",
     "body": "Contexto — 23/11/2026. O porta-voz Dmitri Peskov chamou a \"expansão da atividade terrorista no Báltico\" de \"tendência perigosa\" e disse que ela \"leva a uma escalada de tensões na região\", mas não comentou diretamente os ataques na Líbia, remetendo ao Ministério da Defesa. A empresa de inteligência Vantor divulgou imagens que mostram, segundo ela, a corveta Merkury atracada no sábado e, no domingo, emborcada e afundada. A BBC publicou análise sobre a guerra que se espalha, no dia em que 11 pessoas morreram em Dymer. Sete drones, o helicóptero Ka-27 e o navio MV Angara são alegações ucranianas , sem confirmação russa. BBC · BBC, análise · G1 .",
     "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#mundo"
   },
   {
     "title": "Câmara aprova a urgência do ajuste e passa a votar o mérito do PLP 299",
     "body": "Fato — 23/11/2026, 19h52. A Câmara aprovou o requerimento de urgência do PLP 299/2026 e passou a analisar o mérito, que não estava concluído ao fim desta captura . O relator, Mauro Benevides , manteve o texto do Senado para evitar que a proposta volte à outra Casa. Meta de 2027: superávit primário de R$ 18,7 bilhões , depois de deduções de R$ 64,7 bilhões permitidas pelo arcabouço sobre uma meta de 0,5% do PIB (R$ 83,4 bi nominais). Comparado a 2026, o governo precisa de R$ 70,6 bilhões para sair de um déficit de R$ 52 bilhões. O texto permite bloquear mais despesas que a LRF exige e limita o crescimento real da despesa a 2% quando isso ocorrer. A oposição (Carlos Jordy) chamou de \"band-aid\"; o líder do governo (Paulo Pimenta) vinculou a medida ao Pé-de-Meia e ao Bolsa Família. Agência Câmara, 19h57 · urgência, 19h52 · G1, vídeo .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Bolsonaro segue na UTI com pneumonia, e cirurgia está descartada no momento",
     "body": "Fato — 23/11/2026, 17h21. Segundo a equipe médica, o ex-presidente continuará na UTI do Hospital DF Star, em Brasília, em tratamento clínico. A internação de 20/11 identificou obstrução parcial do intestino delgado com aderências das cirurgias desde a facada de 2018; no domingo (22) ele teve piora das dores, queda de saturação após vômito e o exame apontou pneumonia bilateral por broncoaspiração . A sonda entupiu, e a endoscopia retirou material fibroso do estômago e do duodeno, com \"melhora significativa\" da distensão. Fonte: declaração da equipe médica ao G1 ; não houve leitura de boletim hospitalar nesta captura. G1, 17h21 .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Ministros do STF defendem o diretor da PF em jantar com Lula",
     "body": "Relatos de bastidor — 23/11/2026, 16h58. Segundo o blog da Andréia Sadi, ministros do STF próximos a Lula defenderam Andrei Rodrigues no jantar de sábado (21) e disseram acreditar que André Mendonça queria prendê-lo . Em setembro, Mendonça, relator do caso Master, afastou Andrei da direção da PF; a decisão foi revertida por Flávio Dino. O tema se cruza com a criação do ministério da Segurança Pública, que passaria a abrigar a PF. A reunião também tratou da vaga de Barroso. Não há declaração oficial: tudo o que se sabe vem de relatos. G1/Sadi, 16h58 .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Tarcísio diz que o ajuste não ataca a raiz do problema fiscal",
     "body": "Fato — 23/11/2026, 15h54. O governador de São Paulo afirmou que a proposta do governo não resolve o desequilíbrio fiscal e apenas garante o Orçamento de 2027, apontando decisões interpretativas do Judiciário como causa central do problema. Acesso parcial: o Valor devolveu só o primeiro parágrafo; o restante da argumentação não foi lido. Valor, 15h54 .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Lula pede indicação de mulheres enquanto busca alternativa a Messias",
     "body": "Reportado — 23/11/2026, 16h56. O Valor informa que, diante da resistência a Jorge Messias, o presidente passou a procurar outro nome para a vaga de Barroso e pediu sugestões de mulheres. Mais cedo, o blog do Valdo Cruz já registrava que Lula gostaria de reenviar Messias, mas vê cenário desfavorável. Limite: o corpo da matéria do Valor não abriu; publico só o que título e linha-fina afirmam. Valor, 16h56 · G1/Valdo Cruz .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Lula exonera o articulador político para ele votar o ajuste",
     "body": "Fato — 23/11/2026. Lula exonerou temporariamente José Guimarães da Secretaria de Relações Institucionais; a exoneração foi assinada em 19/11 e publicada nesta segunda no Diário Oficial. Com isso, Guimarães reassumiu o mandato de deputado e votou o PLP 299/2026, e deve voltar ao ministério depois. À noite, ele disse que o compromisso de Hugo Motta é votar o PLP e eventuais destaques hoje. G1 · Valor .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "A vaga de Barroso chega à mesa com a cúpula do Congresso e do STF",
     "body": "Fato — 23/11/2026. Lula reuniu no sábado (21) os presidentes do Senado, Davi Alcolumbre, e da Câmara, Hugo Motta, e ministros do STF para destravar a vaga aberta com a aposentadoria de Luís Roberto Barroso em 18/10/2025. Antecedente: o Senado rejeitou Jorge Messias em 29/4/2026, por 42 a 34 — primeira rejeição de um indicado ao STF em 132 anos. G1, 23/11 · STF .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "STF julga a Lei da Dosimetria de 4 a 15 de dezembro",
     "body": "Fato — segue em pauta. A Lei 15.402/2026 pode reduzir a pena de Jair Bolsonaro; Moraes suspendeu sua aplicação às execuções penais dos condenados de 8 de janeiro em 9/5/2026, e o plenário virtual decide em dezembro. Não há votos nem pauta nova nesta captura. STF, 09/05/2026 · Câmara, 17/11/2026 .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Escala 5x2: a AGU pede ao STF que reconheça perda de objeto",
     "body": "Fato — 23/11/2026. A Advocacia-Geral da União sustenta que a liminar de Dino não é mais necessária após a regulamentação do governo, porque mantê-la criaria duas regras sobre a mesma norma . No mesmo dia, o Ministério do Trabalho publicou a portaria que regulamenta os descansos da escala 5x2. Separadamente, o Instituto Doméstica Legal estima que o fim da escala 6x1 afete mais de 100 mil trabalhadores domésticos . G1, AGU · G1, portaria .",
     "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#politica"
   },
   {
     "title": "Dólar bate R$ 6,0055 e fecha em queda, a R$ 5,9262",
     "body": "Fato — 23/11/2026, fechamento. O dólar inverteu o sinal ao longo do dia e fechou em queda de 0,14%, a R$ 5,9262 , depois de tocar R$ 6,0055 na máxima — primeira passagem pela marca desde 09/04/2025 (R$ 6,0961). O último fechamento acima de R$ 6 foi em 21/01/2025. O Ibovespa caiu 0,95%, a 164.796 pontos . O presidente do BC, Gabriel Galípolo, disse que a prioridade da instituição é o controle de preços; o ministro da Fazenda, Dario Durigan, chamou o pacote de \"primeiro passo\". Fechamento confirmado , ao contrário da edição das 14h. G1, atualizado .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Fazenda corta a previsão de crescimento para 1,9% em 2026 e 1,8% em 2027",
     "body": "Fato — 23/11/2026, 15h08. No Boletim Macrofiscal, a pasta revisou o PIB de 2% para 1,9% neste ano e de 2,3% para 1,8% em 2027. Indústria caiu de 1,7% para 1,4% e serviços de 1,8% para 1,7%; a agropecuária subiu de 2,8% para 3,1%. O motivo declarado é o crédito caro e a incerteza eleitoral, com queda da Selic mais gradual. Limite: os números são os reportados pelo G1 — o PDF do boletim não foi lido nesta captura. G1, 15h08 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "CVM suspende o registro do BRB, e o banco não pode negociar ações",
     "body": "Fato — 23/11/2026, 13h19. A Comissão de Valores Mobiliários suspendeu o registro de companhia aberta do Banco de Brasília , que está há um ano sem divulgar balanço desde a Operação Compliance Zero, ligada ao caso Master. Até regularizar, o BRB não negocia ações na B3 (BSLI3 e BSLI4) nem faz outras operações de mercado. As ações caíram cerca de 75% em um ano , e o empréstimo anunciado em maio para recompor o patrimônio, com o governo do DF como controlador, não se concretizou. G1, 13h19 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Petrobras aprova US$ 122 bilhões em cinco anos e R$ 15,6 bi de dividendos",
     "body": "Fato — 23/11/2026, 19h38. O plano 2027-2031 prevê US$ 122 bilhões de investimento, alta de 11,9% sobre o anterior: US$ 86 bi em exploração e produção (mais de 70%), US$ 10 bi em exploração com cerca de 50 poços na Margem Equatorial e outras bacias, e produção de 2,9 milhões de barris por dia de petróleo e LGN. O conselho também aprovou R$ 15,6 bilhões de dividendos intercalares, pagos em 23/12. Base: fato relevante e Reuters, conforme o G1 — o documento não foi aberto nesta captura. G1, 19h38 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Da máxima de R$ 6,0055 ao fechamento em queda: o dia do dólar",
     "body": "Fato — 23/11/2026. A cotação subiu com a expectativa sobre o ajuste e recuou no fim do dia. O Valor atribuiu a alta a duas causas : contas públicas brasileiras e juros americanos mais altos. O diretor do BC Nilton David disse que o \"greed virou fear\" após a eleição e vê indícios de exagero . Valor · G1 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Focus eleva a inflação e passa a esperar Selic a 13% em 2027",
     "body": "Fato — 23/11/2026. Economistas consultados no boletim Focus elevaram as projeções de inflação para 2026 e 2027 e passaram a projetar corte menor dos juros no ano que vem, com Selic em 13% em 2027. Limite: os números são os das manchetes de G1 e Valor; não li o Focus integral. Valor · G1 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Crédito fiscal dos bancos: R$ 163 bi e uma discussão que vem de 2013",
     "body": "Segue em pauta. O estoque de ativos fiscais diferidos (DTA) dos seis maiores bancos chegou a R$ 163 bilhões e, pela legislação, precisa começar a cair neste ano, segundo o Valor. O ponto entrou no PLP votado hoje: empresas declararam ter usado R$ 200,1 bilhões em créditos para pagar tributos federais entre janeiro e setembro de 2026, segundo levantamento do G1 com dados da Receita Federal. Inferência do setor, não fato observado: menos crédito fiscal, menos capital regulatório, possivelmente menos oferta de crédito. Valor · Lei 15.078/2024 .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "Febraban chama o pacote de \"Plano Moretti\"",
     "body": "Contexto — 23/11/2026. Na primeira entrevista como presidente da Febraban, Leandro Vilain diz que o \"Plano Moretti\" é \"um bom começo\", desde que não seja desidratado, e prevê inadimplência difícil ao menos no primeiro semestre de 2027. Acesso parcial: só o primeiro parágrafo estava legível. Valor .",
     "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#economia"
   },
   {
     "title": "EUA vão incluir a Megaspeed em lista de entidades banidas",
     "body": "Fato — 23/11/2026, 19h45 (Brasília). O Departamento de Comércio anunciou a intenção de incluir a Megaspeed Ltd , empresa de data centers de Singapura, entre as entidades impedidas de comprar ou vender bens nos EUA. A acusação é a de repassar chips avançados de IA da Nvidia à China. Alice Huang , ex-executiva da empresa e ex-parceira de Jensen Huang, é suspeita de espionagem para Pequim. O Comércio diz investigar a Megaspeed há quase dois anos — antes, portanto, do escândalo. A data de vigência não foi informada. A China nega e fala em \"pretexto para bloqueio tecnológico\". Anúncio de intenção, não sanção em vigor. BBC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#tecnologia"
   },
   {
     "title": "EUA vão à Justiça para recuperar mais de US$ 1 bi roubados da Binance",
     "body": "Fato — 23/11/2026, 16h18. O Departamento de Justiça dos EUA entrou com ação para recuperar mais de US$ 1 bilhão em criptomoedas levadas em ataque à Binance em 30/10 , que movimentou US$ 6,3 bilhões. A TRM Labs e a Chainalysis atribuem o roubo a hackers ligados à Coreia do Norte ; a corretora cobriu os clientes em 13/11. Atribuição de empresas privadas de análise , não decisão judicial. G1, 16h18 .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#tecnologia"
   },
   {
     "title": "Nvidia fecha +31,48%: US$ 953 bilhões a mais em um pregão",
     "body": "Fato — 23/11/2026, fechamento. A ação fechou a US$ 165,05 , alta de 31,48%; o Nasdaq subiu 6,51%, o S&P 500 4,71% e o Dow Jones 3,01%. Segundo a Elos Ayta, a empresa recuperou US$ 953 bilhões de valor de mercado, de US$ 3,025 tri para US$ 3,978 tri — mais que o valor de todas as empresas da B3 (US$ 798 bi). Ainda assim, está perto de US$ 520 bi abaixo do pico de 29/10 (US$ 5,149 tri) e teve na semana passada a maior queda semanal desde 2008. Não confundir: a alta de um pregão não apaga as perdas das semanas anteriores. G1, 11h20 · BBC · G1/Elos Ayta .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#tecnologia"
   },
   {
     "title": "A crise da Nvidia, de outubro a hoje: dez dias entre a renúncia e a volta",
     "body": "Fato — 23/11/2026. Fim de outubro: autoridades dos EUA investigam a suspeita de espionagem envolvendo Alice Huang; segundo o NYT, a Megaspeed comprou mais de US$ 4,8 bilhões em chips da Nvidia em dois anos. 1ª semana de novembro: a Nvidia abre investigação independente. 08/11: Huang confirma o caso extraconjugal em mensagem a funcionários. 12/11: renuncia. 17/11: o conselho diz que não recontrataria. 22/11: Trump pede a volta nas redes. 23/11: recondução por unanimidade, e Trump diz à CNBC que \"convenci\" os diretores. G1, cronologia · BBC/CNBC .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#tecnologia"
   },
   {
     "title": "Quem decidiu a volta de Huang: empresa, governo ou mercado?",
     "body": "Análise — 23/11/2026. Há três versões no mesmo dia. Empresa: o conselho diz que consultou autoridades e concluiu que não há risco à segurança nacional; a investigação independente continua. Governo: Trump diz que deu \"garantias\" e que \"convenci\" os diretores; segundo a BBC, o presidente tem posição declarada em ações da empresa. Mercado: parte da alta começou no pré-mercado, antes do anúncio, e contaminou todo o setor — Micron +19%, AMD cerca de +7%, Tesla cerca de +11,5%. O que é fato: não há documento público do conselho sobre a conversa com o governo. BBC/CNBC · G1 .",
     "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#tecnologia"
   },
   {
     "title": "Brasil prevê começar testes de vacina terapêutica contra o câncer em 2027",
     "body": "Fato — 23/11/2026, 18h23. O ministro da Saúde, Alexandre Padilha , anunciou em Londres que o país deve iniciar no primeiro semestre de 2027 testes clínicos de uma vacina terapêutica contra o câncer, em parceria com a Universidade de Oxford , com Fiocruz, A.C.Camargo e a Aliança Brasileira de Pesquisa em Câncer. Vacinas terapêuticas não previnem: tratam quem já tem câncer, ensinando o sistema imunológico a atacar as células tumorais. Lacunas declaradas pelo próprio G1: não se informou o tipo de câncer, o número de participantes, a tecnologia da formulação nem a fase clínica. Anúncio não é eficácia comprovada. G1, 18h23 .",
     "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#saude"
   },
   {
     "title": "Comprimido para câncer de pâncreas deixa tumores indetectáveis em 1 de cada 12",
     "body": "Ensaio inicial — publicado em 20/11/2026 pela BBC. Pacientes recém-diagnosticados com câncer de pâncreas avançado receberam o comprimido diário daraxonrasib com quimioterapia: em 1 de cada 12 o câncer ficou indetectável nos exames, e em quase todos os 61 participantes os tumores pararam de crescer. O Cancer Research UK chamou de \"maior salto em décadas\". Limites: os médicos dizem que não se sabe por quanto tempo o efeito se mantém e que não é cura; é um ensaio pequeno, e o resultado não é tratamento disponível. BBC, 20/11 .",
     "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#saude"
   },
   {
     "title": "Anvisa registra um biossimilar do Perjeta e amplia o uso de Imfinzi",
     "body": "Fato — 23/11/2026, 11h. A Anvisa concedeu o registro do Hertuzo (pertuzumabe) como produto biossimilar do Perjeta pela Via de Desenvolvimento por Comparabilidade da RDC 55/2010 — a aprovação se apoia na demonstração de similaridade em qualidade, segurança, eficácia e imunogenicidade, não em ensaios clínicos próprios. Na mesma data, publicou a ampliação de uso do Imfinzi (durvalumabe) para câncer de bexiga músculo-invasivo em quem não pode ou recusa quimioterapia à base de cisplatina. A agência estima 13.110 casos novos por ano de câncer de bexiga no Brasil em 2026-2028. Registro não é incorporação: não há, nesta captura, decisão da Conitec sobre oferta no SUS. Anvisa, 23/11, 11h .",
     "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#saude"
   },
   {
     "title": "Reino Unido recruta 700 mil mulheres para o maior teste de IA no rastreio de mama",
     "body": "Fato — 23/11/2026. O ensaio EDITH vai convidar cerca de 700 mil mulheres do Reino Unido para o maior teste já feito de uso de inteligência artificial na leitura de mamografias. O recrutamento começou no Cambridge University Hospitals , primeira de 30 unidades; a faixa convidada é de 50 a 71 anos . Limite: é um ensaio, não um resultado — a eficácia clínica da leitura por IA é justamente o que será medido. BBC .",
     "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#saude"
   },
   {
     "title": "Carlos Nobre revela diagnóstico de ELA e diz que segue trabalhando",
     "body": "Fato — 23/11/2026. O climatologista Carlos Nobre , de 75 anos, revelou ser portador de esclerose lateral amiotrófica (ELA) , doença neurodegenerativa que compromete os neurônios motores. Lacuna: datas e prognóstico não foram confirmados em fonte primária nesta captura; a informação publicada é a declaração do próprio cientista à imprensa. G1 Saúde .",
     "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#saude"
   },
   {
     "title": "COP31 sem decisão: o que fica para a pesquisa do clima",
     "body": "Análise — 23/11/2026. O desfecho sem texto adotado (já publicado nas edições de 22/11 e de hoje) tem efeito concreto para a ciência: cada COP decide se encomenda e se acolhe os relatórios do IPCC , e uma conferência que termina sem decisão não renova mandato nem calendário. O que é fato: Riad liderou a resistência (Valor) e não houve Pacto de Antália (BBC). O que é inferência: o custo para o próximo ciclo de avaliação depende de decisões que não estavam nesta captura. Lacuna: não verifiquei o calendário oficial do IPCC para o AR7. BBC .",
     "topic": "ciencia",
-    "date": "capa vigente",
-    "url": "#ciencia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#ciencia"
   },
   {
     "title": "Pente chinês supera minoxidil e finasterida em ratos — e só em ratos",
     "body": "Contexto — 23/11/2026. Um dispositivo que combina estímulos elétricos e moléculas terapêuticas alcançou, segundo a divulgação, até 97,85% de recrescimento capilar em ratos, superando minoxidil e finasterida no modelo animal. A tecnologia não foi testada em humanos. G1 .",
     "topic": "ciencia",
-    "date": "capa vigente",
-    "url": "#ciencia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#ciencia"
   },
   {
     "title": "A COP30 de Belém e o mapa do caminho que a COP31 não adotou",
     "body": "Antecedente. A COP30, em Belém, aprovou um mapa do caminho para sair dos combustíveis fósseis e trouxe as florestas tropicais ao centro. A COP31 encerrou sem acolher esse encadeamento, e o que sobrou foi a remissão à decisão de Dubai de 2023. UNFCCC, COP30 .",
     "topic": "ciencia",
-    "date": "capa vigente",
-    "url": "#ciencia"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#ciencia"
   },
   {
     "title": "Vitória vence o Internacional por 2 a 0 no Beira-Rio",
     "body": "Fato — 23/11/2026, 36ª rodada. O Internacional perdeu por 2 a 0 para o Vitória em pleno Beira-Rio, na noite desta segunda. Renê fez o gol mais rápido da atual edição do campeonato. Botafogo x São Paulo (20h, Engenhão) estava em pré-jogo e Santos x Grêmio (21h, Morumbis) aparecia como ao vivo sem placar exibido no ge — nenhum dos dois tinha resultado final ao fim da captura . ge, rodada e classificação · ge, o gol mais rápido .",
     "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#esporte"
   },
   {
     "title": "Copa América de 2028 deve ser nos Estados Unidos",
     "body": "Reportado — 23/11/2026, 17h42. A Conmebol comunicou de forma extraoficial às federações que a Copa América de 2028 deve ser realizada nos Estados Unidos . O Equador queria sediar, mas os EUA ficaram à frente. Em 2024, o torneio nos EUA teve 16 equipes, com convidadas da Concacaf. Não há anúncio oficial ; a confirmação depende da Conmebol. ge, 17h42 .",
     "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#esporte"
   },
   {
     "title": "Fifa confirma o Reino Unido como sede da Copa do Mundo Feminina de 2035",
     "body": "Fato — 22/11/2026, 21h44. Inglaterra, Irlanda do Norte, Escócia e Gales foram ratificados como co-anfitriões em reunião virtual do Congresso da Fifa. Serão 104 jogos e 48 seleções em 39 dias , com 19 estádios (14 na Inglaterra, 2 na Escócia, 2 no País de Gales, 1 na Irlanda do Norte) — a primeira Copa no Reino Unido desde o Mundial masculino de 1966 . A mesma reunião confirmou EUA, México, Costa Rica e Jamaica em 2031. BBC Sport, 22/11 .",
     "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#esporte"
   },
   {
     "title": "Final da Copa do Brasil será Grêmio x Palmeiras, em jogo único",
     "body": "Fato — 23/11/2026. A decisão será entre Grêmio e Palmeiras , e será a primeira final em jogo único — formato novo, não repetição do modelo de ida e volta que vigorou por décadas. Nexo: jogo único muda o cálculo de risco: não há margem para corrigir um resultado ruim no segundo jogo. ge .",
     "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#esporte"
   },
   {
     "title": "Paolo Bulgari morre aos 89 anos em Roma",
     "body": "Fato — 23/11/2026. O joalheiro e empresário italiano Paolo Bulgari , presidente do grupo desde 1984, morreu em Roma aos 89 anos. A família o chamou de \"o maior joalheiro do nosso tempo\". A casa foi fundada no fim do século 19 pelo avô, o ourives grego Sotirios Voulgaris , e ficou conhecida pelas pedras grandes, o ouro amarelo e as combinações de cor incomuns — o caminho oposto ao da joalheria parisiense delicada. BBC Culture .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#cultura"
   },
   {
     "title": "Cantora iraniana e quatro colegas recebem 74 chibatadas",
     "body": "Fato relatado por advogados — 23/11/2026, 18h04. Segundo um membro da defesa, a cantora Parastoo Ahmadi , 29 anos, três músicos e um produtor receberam 74 chibatadas cada em Qom. A condenação de junho por \"ofensa ao pudor público\" foi confirmada em recurso no fim de setembro, junto com a proibição de atividades audiovisuais e de sair do país por dois anos. Ela cantou sem hijab em transmissão de dezembro de 2024. Lacuna: não há confirmação oficial iraniana na reportagem; a BBC atribui a informação aos advogados. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#cultura"
   },
   {
     "title": "Tyson Fury revela diagnóstico de esquizofrenia",
     "body": "Fato — 23/11/2026. O pugilista britânico Tyson Fury revelou diagnóstico de esquizofrenia e relatou ouvir vozes, segundo a BBC Sport. Nesta segunda, a BBC confirmou que ele luta com Deontay Wilder no card de Fury-Joshua. BBC Sport .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#cultura"
   },
   {
     "title": "Peggy Guggenheim, a herdeira que escandalizou a alta sociedade e mudou a arte moderna",
     "body": "Contexto — 20/11/2026. A BBC reconsidera a colecionadora, que resgatou obras e financiou artistas hoje centrais no modernismo. Nexo: a coleção que ela formou se tornou instituição em Veneza — o gosto de uma pessoa virou cânone. BBC Culture .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "23/11/2026 às 20:00",
+    "url": "edicoes/2026-11-23-2000.html#cultura"
   },
   {
     "title": "Kremlin fala em \"escalada\" e a Vantor mostra a corveta emborcada",

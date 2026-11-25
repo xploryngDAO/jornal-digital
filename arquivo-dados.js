@@ -1,507 +1,906 @@
 window.pautasArquivadas = [
   {
-    "title": "EUA preparam novas tarifas sobre China, UE, Japão e ao menos 14 jurisdições; anúncio pode sair hoje",
-    "body": "Apuração jornalística — 25/11/2026. A BBC apurou que o anúncio pode sair já nesta quarta-feira e que as alíquotas variam por país, conforme acordos já fechados com Trump. A base é uma investigação da Seção 301 aberta em março, depois de a Suprema Corte considerar ilegais as tarifas do \"Liberation Day\". O governo já devolveu cerca de US$ 100 bilhões às empresas. A China prorrogou até 27/01 a suspensão do embargo a gálio, germânio e antimônio, que venceria na sexta; Washington diz que Pequim não cumpriu compromissos de compras agrícolas e minerais críticos. O acordo interino entre as duas economias expira em 10/01 , apesar do encontro Trump–Xi em Shenzhen na semana passada. Não há ato publicado nem lista final de países. BBC .",
+    "title": "Cerca de 2.000 migrantes chegam em um único dia a uma ilha das Canárias",
+    "body": "Fato — 24 e 25/11/2026. O resgate ocorreu no cais de La Restinga, em El Hierro , entre a terça e a madrugada desta quarta. A ilha tem quase 12 mil habitantes e declarou \"emergência social\" no início de novembro. Entre 1º e 15/11 chegaram 11.037 pessoas ao arquipélago; no ano, são 24.364 , contra 14.690 no mesmo período de 2025. O presidente regional, Fernando Clavijo, disse que \"não é justo que respondamos sozinhos a um drama dessa magnitude\". G1/AFP .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Dados vazados do Rosstat mostram ao menos 490 mil soldados russos mortos na Ucrânia",
-    "body": "Fato publicado — 25/11/2026. A BBC Russian analisou mais de 11 milhões de registros de óbitos de 2021 a setembro de 2026, obtidos após invasão dos grupos Cyber Partisans BY e Silent Crow; o Rosstat admitiu o ataque e negou vazamento de informação protegida. O cruzamento com a lista do Mediazona encontrou correspondência em 90% dos registros. A lista confirmada soma 290.012 mortes; o total real é estimado entre 527 mil e 644 mil . 65% dos russos de 18 a 24 anos mortos em 2025 morreram na guerra. Cerca de 20 mil soldados morreram por 10 aldeias que somavam 12 mil habitantes. A idade média dos mortos subiu de 34 para 40 anos, e homens de Tuva, Buriátia e Zabaykalsky têm risco 20 a 25 vezes maior que os de Moscou e São Petersburgo. BBC .",
+    "title": "Reino Unido envia refugiado a Eswatini em acordo não divulgado ao Parlamento",
+    "body": "Fato — 25/11/2026. Kishanth Peramalya, 35 anos, srilankês, com histórico de doença mental grave, foi reassentado à força num país sem vínculo com ele e morreu por suicídio meses depois; o acordo previa custeio britânico por até três anos. Especialistas ouvidos pela BBC dizem ser o primeiro caso conhecido de reassentamento forçado permanente desse tipo. BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "\"Minha família morreu na Ucrânia\": a jornalista que investigou a versão que sua mãe repetia",
-    "body": "Reportagem — 25/11/2026. A jornalista da BBC Anastasiya Gribanova investiga quem matou o pai e os avós durante a ocupação e confronta a narrativa que culpava as tropas de Zelensky. BBC .",
+    "title": "Coreia do Norte: 570 desertores relatam vigilância, prisão e tortura por serem cristãos",
+    "body": "Fato — 25/11/2026. O relatório da ONG britânica Korea Future foi feito ao longo de cinco anos, com desertores de todo o país, e aponta violações à liberdade religiosa e episódios de tortura até o ano passado. Pyongyang afirma permitir liberdade religiosa; as igrejas da capital são controladas pelo Estado. BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Campanha anticorrupção de Xi derruba Chen Jining, estrela em ascensão do partido",
-    "body": "Fato — 25/11/2026. A queda do dirigente faz parte da maior purga do Politburo em várias décadas, segundo a BBC. BBC .",
+    "title": "Exército dos EUA detona 68 barris de azida de chumbo em Iowa, com aval da Justiça",
+    "body": "Fato — 25/11/2026. A substância é usada na fabricação de munições; a detonação só ocorreu após disputa sobre riscos à saúde e ao meio ambiente, e Trump — que no início da semana se opunha — disse que análises preliminares indicaram sucesso na \"mitigação de danos\". G1 · BBC, vídeo .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Ilhas Salomão encerram pacto de segurança com a China e assinam tratado com a Austrália",
-    "body": "Fato — 25/11/2026. O primeiro-ministro Matthew Wale disse que o país deixará de ser \"ponto de incerteza regional\". O pacto com Pequim era um dos mais controversos do Pacífico. BBC .",
+    "title": "Nigéria prende cinco mexicanos e um empresário por laboratório de US$ 227 milhões",
+    "body": "Fato — 25/11/2026. Mais de 1,5 tonelada de metanfetamina foi apreendida em Enugu; é o quarto laboratório industrial ligado a cartéis mexicanos descoberto no país em meses. Os cinco teriam entrado com passaportes argentinos, colombianos e chilenos falsos. BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Shenzhou-24 leva o primeiro astronauta paquistanês à estação Tiangong",
-    "body": "Fato — 25/11/2026. A missão chinesa leva três astronautas ao laboratório orbital; o lançamento foi registrado em vídeo. BBC .",
+    "title": "EUA deixam de lado acordos comerciais com a Rússia para tentar encerrar a guerra, diz jornal",
+    "body": "Reportado — 25/11/2026. A informação é de jornal e não foi confirmada pelo governo americano . Se confirmada, sinaliza que a Casa Branca abandonou a proposta de pacote econômico que oferecia a Moscou em troca de um cessar-fogo. G1 .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Queda de avião no litoral do Mississippi mata seis pessoas, entre elas duas crianças",
-    "body": "Fato — 25/11/2026. As causas não foram divulgadas; a investigação está em curso. BBC .",
+    "title": "Contexto: dados vazados do Rosstat mostram ao menos 490 mil soldados russos mortos",
+    "body": "Fato — 25/11/2026. Foram 11 milhões de registros de óbitos (2021 a setembro de 2026), com 90% de correspondência com a lista aberta do Mediazona; a estimativa real fica entre 527 mil e 644 mil . 65% dos russos de 18 a 24 anos mortos em 2025 morreram na guerra. BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Exército dos EUA prepara detonação controlada de cinco toneladas de explosivos em Iowa",
-    "body": "Fato — 25/11/2026. Moradores dizem temer o efeito da explosão desta quarta; outros querem que o material seja logo eliminado. BBC · Valor .",
+    "title": "Contexto: campanha anticorrupção de Xi derruba Chen Jining do Politburo",
+    "body": "Fato — 25/11/2026. É a maior purga do Politburo em várias décadas, segundo a BBC — e ocorre semanas antes de expirar o acordo interino comercial com Washington, em 10/01. BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Colômbia resgata todos os reféns de supermercado em Cartagena; um criminoso morre",
-    "body": "Fato — 25/11/2026. O sequestro durou cerca de 17 horas e terminou com a libertação dos reféns, segundo o presidente. G1 .",
+    "title": "Contexto: Ilhas Salomão encerram pacto de segurança com a China",
+    "body": "Fato — 25/11/2026. O primeiro-ministro Matthew Wale anunciou tratado com a Austrália e disse que o país deixará de ser \"ponto de incerteza regional\". BBC .",
     "topic": "mundo",
     "date": "capa vigente",
     "url": "#mundo"
   },
   {
-    "title": "Protestos contra apagões aumentam na Venezuela e pressionam o governo",
-    "body": "Fato — 25/11/2026. Os blecautes se repetem e as manifestações se espalham; o governo de Delcy Rodríguez tenta conter a insatisfação. Valor .",
-    "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
-  },
-  {
-    "title": "Camarões: dez anos de conflito deixam mais de meio milhão de deslocados",
-    "body": "Reportagem — 25/11/2026. Vítimas das regiões de língua inglesa relatam violência desde que grupos separatistas pediram independência. BBC .",
-    "topic": "mundo",
-    "date": "capa vigente",
-    "url": "#mundo"
-  },
-  {
-    "title": "Contenção no Orçamento cai de R$ 16,1 bi para R$ 12,6 bi, e déficit previsto sobe a R$ 89,3 bi",
-    "body": "Fato — 24/11/2026, 23h38. O relatório de receitas e despesas do 5º bimestre traz R$ 304,3 milhões bloqueados e R$ 12,3 bilhões contingenciados. A folga veio da lei sancionada no mesmo dia, que retira do cálculo da meta R$ 10,5 bilhões em subsídios ao diesel por causa da guerra no Oriente Médio. A projeção de déficit passou de R$ 80,9 bi para R$ 89,3 bi , dos quais R$ 76,9 bi ficam fora da apuração. A exclusão não elimina o gasto: só o esconde da meta. G1 · Valor .",
+    "title": "Haddad diz a Lula que não pretende integrar o novo governo",
+    "body": "Fato — 24 e 25/11/2026. Na reunião de terça, o ministro da Fazenda comunicou que quer voltar a dar aulas na USP e não pretende voltar a morar em Brasília. Não houve convite nem recusa formal : a decisão, segundo a reportagem, vinha sendo amadurecida havia cerca de 60 dias. Aliados dizem que ele não via encaixe no desenho do quarto mandato. G1/Andréia Sadi · Valor .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Governo tem ao menos oito projetos econômicos para aprovar antes do recesso, em 23 de dezembro",
-    "body": "Fato — 25/11/2026. Em menos de um mês, o Planalto tenta acelerar a LDO, a LOA de 2027 e a PEC do IPI , que precisa estar em vigor antes de o novo sistema de impostos começar a valer. Com as eleições, as discussões do Orçamento foram adiadas. G1 .",
+    "title": "Lula sondou Haddad sobre secretaria de Investimentos; ele desaconselhou e Trabuco ganha força na Fazenda",
+    "body": "Fato — 25/11/2026. A pasta extra teria status de ministério e ficaria vinculada à Presidência; Haddad argumentou que ela esvaziaria a Fazenda e a Casa Civil e defendeu que as duas atuem alinhadas — o que, na avaliação dele, não ocorreu no governo atual. G1/Julia Duailibi .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Governo articula com a cúpula do Congresso a PEC do ajuste fiscal",
-    "body": "Fato — 25/11/2026. A articulação ocorre um dia depois da sanção e do anúncio da PEC da \"potência fiscal\", ainda sem minuta nem prazo. Valor .",
+    "title": "Camilo Santana ganha força para a Casa Civil com a saída de Haddad",
+    "body": "Fato — 25/11/2026. Fontes do PT avaliam que a decisão de Haddad abriu caminho para Camilo, preferência que Lula já sinalizava desde a campanha. Parte do partido diz que Haddad queria a Casa Civil; aliados dele negam que tenha pleiteado a vaga. G1/Gerson Camarotti .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Lula decide que o embaixador brasileiro na Argentina não voltará a Buenos Aires",
-    "body": "Fato — 24/11/2026. A decisão aprofunda o atrito com o governo Milei, no mesmo dia em que o argentino ficou fora da lista de convidados da posse. G1 .",
+    "title": "Lula reúne ex-ministros da Justiça no Alvorada para desenhar o Ministério da Segurança Pública",
+    "body": "Fato — 25/11/2026. Estavam o ministro Wellington César Lima e Silva, a ministra da Casa Civil Miriam Belchior, Alckmin e os ex-ministros Flávio Dino, Ricardo Lewandowski e Tarso Genro . Todos levaram propostas e receberão \"tarefas\". Não há data nem nome definido. A pasta é promessa de campanha e ganhou força com a PEC da Segurança Pública aprovada pelo Senado em novembro , que cria o Sistema Único de Segurança Pública (Susp). G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Relatório da PF sobre Moraes não menciona o contrato do Master com Viviane",
-    "body": "Fato — 25/11/2026. O documento também deixa de fora parte das mensagens de Vorcaro, segundo o Valor. O caso Master voltou ao centro do debate no STF. Valor .",
+    "title": "Governo bloqueia 3.941 celulares usados por presos em 47 dias",
+    "body": "Fato — 09/10 a 25/11/2026. Desde o decreto que criou o Programa Nacional de Neutralização de Comunicações Ilícitas, o bloqueio administrativo passou a ser feito em cerca de 30 minutos após a identificação do IMEI pela Anatel — antes, o caminho era judicial. G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Master: relatoria de Nunes Marques sobre pedido de Vorcaro reabre debate sobre impedimento",
-    "body": "Fato — 24–25/11/2026. O ministro será relator do pedido de Vorcaro sobre as investigações do Master; colegas questionam se ele deveria atuar. G1 · Valor .",
+    "title": "Planejamento fala em \"conjunto de medidas\" e deixa de citar a PEC do ajuste",
+    "body": "Fato — 25/11/2026. Bruno Moretti disse que as propostas serão levadas a Lula \"em momento oportuno\" — mudança de tom em relação a 24/11, quando afirmara que o governo preparava uma PEC com novas medidas de ajuste. Leitura: o governo recua do anúncio sem apresentar o conteúdo. G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Centrão demonstra força com a aprovação do ajuste e busca espaço na Esplanada",
-    "body": "Análise — 25/11/2026. O bloco negocia cargos depois de entregar os votos que aprovaram o pacote fiscal. Valor .",
+    "title": "Alcolumbre recebe senadoras e promete pautas de presença feminina, em ano de reeleição",
+    "body": "Fato — 25/11/2026. O presidente do Senado busca apoio para a reeleição e se comprometeu com propostas de ampliação da participação feminina na política. G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Em nova Carta ao Povo, PT evita a palavra \"ajuste\" e reforça promessas de campanha",
-    "body": "Fato — 25/11/2026. O texto tenta responder às acusações de \"estelionato eleitoral\" após a votação do pacote e defende renovação dos quadros do partido. Valor .",
+    "title": "Contexto: contenção cai para R$ 12,6 bi e déficit projetado sobe a R$ 89,3 bi",
+    "body": "Fato — 24/11/2026, 23h38. O relatório do 5º bimestre reduziu o bloqueio e o contingenciamento porque o Congresso excluiu R$ 10,5 bilhões em subsídios ao diesel do cálculo da meta. G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Moraes rejeita pedido de Zambelli para descontar da pena o tempo presa na Itália",
-    "body": "Fato — 24/11/2026. A defesa da ex-deputada queria abater o período de detenção no exterior; o ministro negou. G1 .",
+    "title": "Contexto: oito projetos econômicos até o recesso de 23 de dezembro",
+    "body": "Fato — 25/11/2026. Entre eles a LDO, a LOA de 2027 e a PEC do IPI, que precisa estar em vigor antes de o novo sistema de impostos começar a valer. G1 .",
     "topic": "politica",
     "date": "capa vigente",
     "url": "#politica"
   },
   {
-    "title": "Contexto: o ajuste foi sancionado sem vetos e prevê economia de até R$ 56 bi em 2027",
-    "body": "Fato — 24/11/2026, 15h30. A sanção saiu em edição extra do Diário Oficial , horas depois de a Câmara concluir a votação na noite de 23/11. A estimativa é do relator Eduardo Braga (MDB-AM). O Senado havia concluído o texto em 19/11. G1 .",
-    "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
-  },
-  {
-    "title": "Contexto: Abin mapeia 31 organizações criminosas; PCC em 22 UFs e CV em 19",
-    "body": "Fato — 24/11/2026. Estudo inédito com o Fórum Brasileiro de Segurança Pública identifica 28 facções, 2 milícias e 1 grupo estrangeiro; Sergipe é a única UF sem organização que atenda a todos os critérios. G1 .",
-    "topic": "politica",
-    "date": "capa vigente",
-    "url": "#politica"
-  },
-  {
-    "title": "Dólar fecha a R$ 5,91 e Ibovespa recua 0,43%, aos 164.090 pontos",
-    "body": "Fato — 24/11/2026. O dólar comercial caiu 0,27% , a R$ 5,9101, e o Ibovespa fechou aos 164.090 pontos , com foco no ajuste fiscal. O euro subiu 0,31%, a R$ 6,4813. G1 · Valor .",
+    "title": "EUA propõem tarifa de 10% sobre aviões brasileiros e aumento do imposto sobre o açúcar",
+    "body": "Fato — 25/11/2026, 11h26. A proposta altera as medidas definidas após investigação do USTR que confirmou, em julho , tarifa adicional de 25% sobre produtos brasileiros — com exceções para aeronaves prontas e açúcar acima das cotas. O representante comercial Jamieson Greer afirmou que o Brasil não respondeu às reclamações em \"mais de um ano\" de negociações e que os EUA seguem abertos a um acordo. G1 · Valor .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Moody's: falta de avanço no ajuste fiscal pressiona a nota soberana do Brasil",
-    "body": "Análise — 25/11/2026. A agência avalia que o pacote aprovado é insuficiente para uma redução expressiva dos juros; a SulAmérica diz o mesmo. Valor .",
+    "title": "14 economias na mira: alíquotas de 15% a 35%, consulta até 5 de janeiro",
+    "body": "Fato — 25/11/2026. A investigação da Seção 301 começou em 11/03/2026 , analisou 16 economias e ouviu 140 testemunhas. Para a China , 20% como regra geral, 10% para uma lista e isenção para outra; Vietnã cairia a 20%, Índia a 17% e Singapura a 10% se fecharem acordos. México e Noruega ficaram fora. Os percentuais descontam tarifas já cobradas — não são aumento integral. Audiências a partir de 25/01/2027. G1 .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Reforma tributária e fim da escala 6x1 podem pressionar a inflação em 2027",
-    "body": "Fato — 25/11/2026. BC e equipe econômica monitoram os impactos das duas mudanças, que entram em vigor em um ano eleitoral. G1 .",
+    "title": "Embraer cai mais de 7% e lembra os 2.500 funcionários que mantém nos EUA",
+    "body": "Fato — 25/11/2026, 11h26. A fabricante defendeu a isenção tarifária para a indústria aeroespacial global e informou que atua no mercado americano há mais de 45 anos, com US$ 3,5 bilhões em ativos e mais de 2.500 funcionários . A tarifa ainda depende de consulta pública. G1 · G1, Vale do Paraíba .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Horas extras ficam mais caras com o fim da escala 6x1; calculadora mostra o que muda",
-    "body": "Serviço — 25/11/2026. A ferramenta do g1 compara o custo da hora extra no regime atual e no 5x2. G1 .",
+    "title": "Mercado às 14h: dólar a R$ 5,834 (−1,3%) e Ibovespa a 164.868 pontos (+0,47%)",
+    "body": "Preliminar — 25/11/2026. São dados intradiários de tela do g1, não fechamento. O dólar cai no dia em que o Brasil é alvo de nova ameaça tarifária — movimento que esta captura registra, mas não permite explicar . Não trate como leitura de mercado sem o fechamento. G1, indicadores .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Petróleo e Imposto de Renda sobre capital puxam a arrecadação",
-    "body": "Fato — 25/11/2026. A análise do Valor decompõe o recorde de outubro e mostra o peso das receitas ligadas ao petróleo e aos rendimentos de capital. Valor .",
+    "title": "Subsídios a combustíveis já somam cerca de R$ 75 bi em 2026; diesel é renovado por mais um mês",
+    "body": "Fato — 25/11/2026. O valor é sobretudo de diesel, com parte menor para conter alta de etanol e gasolina. A renovação por mais um mês deve acrescentar até R$ 10,5 bilhões — exatamente o valor que o Congresso autorizou abater da meta fiscal. O benefício é de R$ 2,12 por litro . G1 · Valor .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Receita Federal livra operações com stablecoins do IOF",
-    "body": "Fato — 25/11/2026. A interpretação reduz o custo tributário de operações com moedas digitais atreladas ao dólar e interessa ao mercado cripto. Valor .",
+    "title": "Nasdaq recua quase 4% e ações de IA caem de novo",
+    "body": "Fato — 25/11/2026. Nvidia e Anthropic tiveram quedas acentuadas; Amazon, Tesla, Microsoft e Meta também caíram. A BBC liga a volatilidade ao custo e à sustentabilidade dos investimentos em IA, às eleições de meio de mandato — com promessas democratas de regulação mais dura e moratória a novos data centers — e às revelações sobre a vida pessoal de Jensen Huang. BBC .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Indústria naval do Japão paralisa após os EUA rejeitarem regras para combustíveis sustentáveis",
-    "body": "Fato — 25/11/2026. A decisão americana trava encomendas e expõe a dependência do setor em relação à regulação de emissões. Valor .",
+    "title": "Carros minúsculos avançam na Europa — e os adolescentes já são um quarto das vendas",
+    "body": "Fato — 25/11/2026. As vendas passaram de 30 mil para 60 mil em cinco anos; na França, de 13 mil (2019) para cerca de 25 mil no ano passado. Podem ser conduzidos a partir dos 14 anos na França e na Itália, aos 15 na Alemanha e Espanha, aos 16 no Reino Unido. BBC .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Preços de apartamentos usados em Tóquio têm a primeira queda anual em 13 anos",
-    "body": "Fato — 25/11/2026. A reversão do mercado imobiliário da capital japonesa é um dos sinais de esfriamento da demanda. Valor .",
+    "title": "Contexto: Moody's diz que a falta de avanço no ajuste pressiona a nota soberana",
+    "body": "Análise — 25/11/2026. A agência condiciona perspectiva e nota a medidas de contenção de despesa obrigatória — as mesmas que o Planejamento agora chama de \"conjunto de medidas\". Valor .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Desigualdade define quem aproveita as ofertas da Black Friday",
-    "body": "Análise — 25/11/2026. O desconto chega de forma desigual às famílias, e o endividamento pesa mais para quem tem menos renda. Valor .",
+    "title": "Contexto: a dois dias da Black Friday, quase metade dos produtos monitorados está mais caro",
+    "body": "Fato — 25/11/2026. Levantamento do g1 com 74 itens encontrou alta de preço em quase metade deles. G1 .",
     "topic": "economia",
     "date": "capa vigente",
     "url": "#economia"
   },
   {
-    "title": "Com juros altos, cresce o número de falências entre empresas do agro",
-    "body": "Fato — 25/11/2026. O endividamento do setor e o custo do crédito pressionam produtores e empresas do agronegócio. Globo Rural/Valor .",
-    "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
-  },
-  {
-    "title": "Empresas incluem nos contratos garantia de adoção do split payment; impacto pode chegar a R$ 180 bi ao ano",
-    "body": "Fato — 25/11/2026. O mecanismo da reforma tributária separa o imposto no momento do pagamento; a Reach Capital estima o efeito sobre o caixa das companhias. Valor .",
-    "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
-  },
-  {
-    "title": "Inscrições do concurso do IBGE com 27 mil vagas terminam nesta quarta",
-    "body": "Serviço — 25/11/2026. O prazo se encerra hoje; o edital prevê vagas de nível médio e superior. G1 .",
-    "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
-  },
-  {
-    "title": "Contexto: economia da Argentina cai 1,2 ponto em setembro e reforça risco de recessão técnica",
-    "body": "Fato — 24/11/2026. O desempenho do principal parceiro do Brasil no Mercosul piora no mesmo dia em que o embaixador brasileiro é mantido fora de Buenos Aires. Valor .",
-    "topic": "economia",
-    "date": "capa vigente",
-    "url": "#economia"
-  },
-  {
-    "title": "Huawei é considerada culpada nos EUA por roubo de segredos comerciais e absolvida de racketeering",
-    "body": "Fato — 25/11/2026. O veredicto encerra um julgamento de mais de dois meses em Nova York, iniciado de um processo aberto em 2018, quando as autoridades americanas intensificaram as investigações sobre a empresa. A chinesa também respondia por negócios com o Irã. BBC · G1 .",
+    "title": "Austrália aprova o \"Dever de Cuidado Digital\", com multa de até 5% da receita global",
+    "body": "Fato — 25/11/2026, 09h38. A lei obriga as plataformas a identificar e remover proativamente conteúdos e recursos prejudiciais; entra em vigor em um ano e substitui um conjunto de códigos de conduta. Defensores da liberdade de expressão criticaram. Em 2025, o país já havia proibido redes sociais para menores de 16 anos. G1 .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
-    "title": "A volta de Huang à Nvidia cria risco político para Trump, diz análise da BBC",
-    "body": "Análise — 25/11/2026. A intervenção do presidente para reconduzir o CEO ligou o destino dos dois; a procuradora-geral dos EUA evitou responder sobre a investigação da empresa, e as ações caíram 7%. BBC · BBC .",
+    "title": "Análise: \"ninguém é insubstituível — exceto Jensen Huang\"",
+    "body": "Análise — 25/11/2026. A editora de tecnologia da BBC descreve como o CEO da Nvidia se tornou impossível de demitir depois de o governo americano interceder pela sua recondução — e por que isso transfere risco político para a empresa. BBC .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
-    "title": "Jensen Huang diz que não acredita em planejamento de sucessão na Nvidia",
-    "body": "Declaração — 25/11/2026. O CEO, de volta ao comando após a crise interna, descarta preparar um substituto — tema que investidores vêm cobrando. Valor .",
+    "title": "Contexto: Huang pede desculpas por \"traição\" e diz fazer terapia",
+    "body": "Fato — 24/11/2026. Em entrevista após voltar ao comando, o CEO da Nvidia falou sobre o episódio que o afastou por 11 dias. G1 .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
-    "title": "IA acelera a fabricação do \"carro voador\" da Embraer",
-    "body": "Fato — 25/11/2026. A empresa usa inteligência artificial no desenvolvimento do veículo elétrico de pouso e decolagem vertical. Valor .",
+    "title": "Contexto: Huawei é condenada nos EUA por roubo de segredos comerciais e absolvida de racketeering",
+    "body": "Fato — 24 e 25/11/2026. O veredicto encerra um julgamento de mais de dois meses em Nova York, originado de um processo de 2018. BBC · G1 .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
-    "title": "A febre da IA nos mercados perde força; ações nos EUA caminham para um dos piores anos em duas décadas",
-    "body": "Análise — 25/11/2026. A correção das empresas de inteligência artificial ajuda a explicar o desempenho fraco das bolsas americanas no ano. Valor .",
-    "topic": "tecnologia",
-    "date": "capa vigente",
-    "url": "#tecnologia"
-  },
-  {
-    "title": "Contexto: Austrália quer multar big techs em até 5% do faturamento global por conteúdo nocivo",
-    "body": "Fato — 24/11/2026. O projeto mira Google e Meta e permite que usuários processem as empresas. G1 .",
+    "title": "Contexto: CIA e outra agência de inteligência dos EUA sofrem ataque cibernético, diz NYT",
+    "body": "Reportado — 24/11/2026. A informação é do jornal e não foi confirmada oficialmente; ocorre na mesma semana de demissão do diretor de cibersegurança da Casa Branca e de falha crítica no Java. Nenhuma fonte liga os episódios. G1/NYT .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
     "title": "Contexto: WhatsApp começa a liberar figurinhas com som",
-    "body": "Fato — 24/11/2026. A liberação é gradual e a Meta não informou quando o recurso chega a todos. G1 .",
+    "body": "Fato — 24/11/2026. O recurso chega primeiro a usuários de alguns países. G1 .",
     "topic": "tecnologia",
     "date": "capa vigente",
     "url": "#tecnologia"
   },
   {
-    "title": "Anvisa proíbe anabolizantes sem registro, medicamentos falsificados e suplementos sem procedência",
-    "body": "Fato — 25/11/2026, 06h40. Duas resoluções publicadas no Diário Oficial determinam a apreensão e proíbem a venda de lotes do Dysport 500U (toxina botulínica), do oncológico Darzalex e do Imbruvica (ibrutinibe). Também proíbem uma linha de anabolizantes e hormônios sem registro e todos os suplementos das marcas Growup, Grouth Labs e FK , vendidos pela Vinicius Morais Advisor Empresarial Ltda. na loja Four Fitness Suplementos, na Shopee. G1 .",
+    "title": "Anvisa aprova o Hertuzo, biossimilar do Perjeta para câncer de mama HER-2 positivo",
+    "body": "Fato — 23 e 25/11/2026. O registro foi concedido na segunda; o princípio ativo é o pertuzumabe e o fabricante é a Bionovis. Não é molécula nova: por ser biossimilar, a expectativa é de redução de preço com o aumento da oferta. HER-2 positivo é um dos subtipos mais agressivos, porque a proteína em excesso favorece o crescimento das células cancerígenas. G1 .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
-    "title": "Covid volta a subir rápido: de 1.000 para 17.000 novos casos por semana em três meses",
-    "body": "Fato — 25/11/2026, 00h30. A positividade dos testes passou de 1% para 17% . A alta é atribuída à variante PJ.2.1 , mais transmissível, sem evidência de que cause doença mais grave. Os números estão muito distantes do pico da pandemia, mas preocupam especialistas; a mpox registra em novembro o maior número de casos do ano. O Assunto/g1 .",
+    "title": "Um em cada três britânicos de 16 a 24 anos nunca fez sexo; no Brasil, adolescentes também adiam",
+    "body": "Fato — 25/11/2026. A pesquisa britânica registra ao mesmo tempo aumento de sexting e de consumo de pornografia. No Brasil, o g1 relata o mesmo adiamento entre adolescentes. BBC · G1 .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
-    "title": "Vacina contra o câncer testada no Brasil terá duas tecnologias e mira linfomas e tumores de estômago",
-    "body": "Fato — 25/11/2026, 00h00. O A.C.Camargo (SP) lidera a pesquisa com a Universidade de Oxford usando duas plataformas: adenovírus geneticamente modificado e mRNA . O alvo é o vírus Epstein-Barr , associado a linfomas e tumores gástricos. A fase 1/2 deve incluir cerca de 30 pacientes , com início previsto para 2027, e mede segurança, tolerabilidade e resposta imune. É vacina terapêutica, não preventiva. G1 .",
+    "title": "Contexto: Covid salta de ~1.000 para ~17.000 casos por semana",
+    "body": "Fato — 25/11/2026. A positividade passou de 1% para 17% em três meses, com a variante PJ.2.1 , mais transmissível e sem evidência de maior gravidade. O Assunto/g1 .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
-    "title": "Fluoxetina, escitalopram e duloxetina: estudo mostra diferenças na ação dos antidepressivos",
-    "body": "Estudo — 25/11/2026. A pesquisa publicada na The Lancet Psychiatry analisou dados de mais de 30 mil participantes e identificou diferenças entre os medicamentos. G1 .",
+    "title": "Contexto: Anvisa proíbe anabolizantes sem registro, medicamentos falsificados e suplementos",
+    "body": "Fato — 25/11/2026, 06h40. Duas resoluções determinam apreensão e proíbem a venda de lotes do Dysport 500U, do Darzalex e do Imbruvica, além de suplementos de três marcas vendidos em marketplace. G1 .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
-    "title": "Por que as ondas de calor afetam mais as mulheres",
-    "body": "Reportagem — 25/11/2026. Especialistas pedem mais conscientização sobre os riscos do calor para as mulheres e esforços mais direcionados para protegê-las. G1 .",
-    "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
-  },
-  {
-    "title": "Contexto: roubos de canetas emagrecedoras somam quase R$ 70 milhões em 2026",
-    "body": "Fato — 24/11/2026. Mais de 59 mil unidades foram roubadas ou furtadas; a Abrafarma alerta para venda irregular na internet e o Ministério da Saúde diz não haver previsão de oferta no SUS. G1 .",
-    "topic": "saude",
-    "date": "capa vigente",
-    "url": "#saude"
-  },
-  {
-    "title": "Contexto: OMS registra três novos casos de gripe aviária em humanos nos EUA, com uma morte",
-    "body": "Fato — 24/11/2026. São três adultos de fazendas leiteiras de Yakima (Washington); não há evidência de transmissão entre pessoas. G1 .",
+    "title": "Contexto: vacina terapêutica contra o câncer será testada no Brasil a partir de 2027",
+    "body": "Fato — 25/11/2026. O A.C.Camargo lidera o estudo com Oxford, com duas plataformas — adenovírus e mRNA —, fase 1/2 com cerca de 30 pacientes e alvo em linfomas e tumores gástricos ligados ao vírus Epstein-Barr. Não é vacina preventiva. G1 .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
     "title": "Contexto: NHS lança o maior teste do mundo de IA na triagem do câncer de mama",
-    "body": "Fato — 24/11/2026. A pesquisa vai medir se a tecnologia melhora a detecção precoce no programa público britânico. BBC .",
+    "body": "Fato — 24/11/2026. O sistema será testado na triagem de rastreamento, onde hoje radiologistas leem dois exames por mamografia. BBC .",
     "topic": "saude",
     "date": "capa vigente",
     "url": "#saude"
   },
   {
-    "title": "Quasar formado 630 milhões de anos após o Big Bang é o objeto mais antigo já observado",
-    "body": "Fato — 24/11/2026. O objeto está a 13,1 bilhões de anos, quando o universo tinha menos de 5% da idade atual; o buraco negro central tem massa equivalente a 360 milhões de sóis . O recorde anterior, de 2021, era um quasar a cerca de 670 milhões de anos do Big Bang. G1 .",
+    "title": "Astronauta canadense acompanha o nascimento da filha da Estação Espacial Internacional",
+    "body": "Fato — 25/11/2026. Joshua Kutryk está em sua primeira missão, de seis meses, iniciada em outubro, e é o quarto astronauta da história a perder o nascimento de um filho estando na ISS. Ele tem outros dois filhos, de 5 e 7 anos. Agência Espacial Canadense/BBC .",
     "topic": "ciencia",
     "date": "capa vigente",
     "url": "#ciencia"
   },
   {
-    "title": "Imagens em close do asteroide atingido de propósito para testar a defesa da Terra serão divulgadas",
-    "body": "Fato — 25/11/2026. A missão estuda o asteroide que foi desviado pela colisão de uma nave — o teste de defesa planetária. BBC .",
+    "title": "Contexto: quasar de 630 milhões de anos após o Big Bang é o objeto mais antigo já observado",
+    "body": "Fato — 24/11/2026. Está a 13,1 bilhões de anos-luz, quando o universo tinha menos de 5% da idade atual; o buraco negro central tem massa equivalente a 360 milhões de sóis . G1 .",
     "topic": "ciencia",
     "date": "capa vigente",
     "url": "#ciencia"
   },
   {
-    "title": "Tempestade solar deve atingir a Terra nesta semana, prevê relatório",
-    "body": "Preliminar — 25/11/2026. O documento descreve o impacto esperado sobre satélites, comunicações e redes elétricas. A intensidade ainda pode mudar. Valor .",
+    "title": "Contexto: imagens em close do asteroide desviado por uma nave serão divulgadas",
+    "body": "Fato — 25/11/2026. A missão europeia estudou o asteroide atingido de propósito em 2022 para testar a defesa planetária; as imagens mostram a cratera e a deformação do corpo. BBC .",
     "topic": "ciencia",
     "date": "capa vigente",
     "url": "#ciencia"
   },
   {
     "title": "Contexto: superlua de novembro — fotos do fenômeno pelo mundo",
-    "body": "Fato — 24/11/2026. A lua cheia ocorreu às 11h53 de Brasília e pôde ser vista a olho nu após o pôr do Sol. G1 .",
+    "body": "Fato — 24/11/2026. A lua cheia ocorreu às 11h53 de Brasília, no ponto de maior aproximação do ano. G1 .",
     "topic": "ciencia",
     "date": "capa vigente",
     "url": "#ciencia"
   },
   {
-    "title": "Contexto: arqueólogos desvendam a disposição das esculturas do Partenon após 40 anos",
-    "body": "Fato — 24/11/2026. Com iPhone, scanners e impressoras 3D, a equipe reconstruiu a posição original das figuras que decoravam o templo há 2.500 anos. G1 .",
+    "title": "Contexto: arqueólogos reconstroem a disposição original das esculturas do Partenon",
+    "body": "Fato — 24/11/2026. O trabalho usou iPhone, scanners e impressoras 3D para testar hipóteses abertas há mais de 40 anos. G1 .",
     "topic": "ciencia",
     "date": "capa vigente",
     "url": "#ciencia"
   },
   {
-    "title": "Inter tem 91% de risco de rebaixamento e não pode mais ultrapassar o Vitória",
-    "body": "Fato — 24/11/2026. Com 38 pontos e 18º lugar, o Colorado só empataria em pontos com o Vitória, que leva vantagem no número de vitórias — primeiro critério de desempate. Chapecoense e Remo já estão rebaixados; o Vitória tem 99,99% de chance de ficar e só não está salvo porque o Corinthians ainda joga a 36ª rodada. Pelo menos um entre Inter, Corinthians, Grêmio e Botafogo vai para a Série B de 2027. ge/Gato Mestre .",
+    "title": "Palmeiras enfrenta o Estudiantes na final da Libertadores, sábado, às 17h, em Montevidéu",
+    "body": "Fato — 25/11/2026. A delegação embarca na tarde desta quarta; o time deixa o CT às 13h30, com festa da torcida em frente à Academia de Futebol, na Barra Funda, a partir das 12h30, e chegada prevista ao hotel por volta das 19h30. ge · ge, saída do CT .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Rodada 36 nesta quarta: Atlético-MG x Corinthians, às 20h, na Arena MRV",
-    "body": "Fato — 25/11/2026. O jogo define o tamanho do risco do Corinthians e pode salvar o Vitória do rebaixamento. O líder Flamengo tem 80 pontos; Palmeiras, 74. ge .",
+    "title": "Rodada 36 nesta quarta, 20h: Atlético-MG x Corinthians, na Arena MRV",
+    "body": "Fato — 25/11/2026. O jogo define o tamanho do risco do Corinthians e pode salvar o Vitória; o Grêmio torce pelo Timão, e o Inter \"seca\" o Corinthians. É a rodada em que o rebaixamento pode ficar desenhado antes da última. ge · ge, blog .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Champions: Real Madrid goleia o PSV com show de Bellingham, Mbappé e Vini Jr.",
-    "body": "Fato — 24/11/2026. O Real venceu por 5 a 1 , com golaço de Bellingham; Mourinho brincou sobre o papo no intervalo. O City empatou com o Napoli por 2 a 2. BBC · ge .",
+    "title": "Sterling é condenado a 12 meses de prisão, com pena suspensa, por direção perigosa",
+    "body": "Fato — 25/11/2026. O ex-atacante de Manchester City e Chelsea já havia se declarado culpado por dirigir sob efeito de droga na Inglaterra. BBC · ge .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Contexto: Chapecoense vence o Palmeiras por 3 a 0 na Arena Condá",
-    "body": "Fato — 24/11/2026. A Chape, já rebaixada, venceu o time alternativo de Abel Ferreira em noite de homenagens aos dez anos do acidente aéreo de 2016. ge .",
+    "title": "Cartão vermelho de Yoro é anulado, mas a polêmica continua",
+    "body": "Fato — 25/11/2026. A anulação não encerrou a discussão sobre arbitragem e critérios no campeonato inglês, segundo a BBC. BBC .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Contexto: Marc Marquez conquista o oitavo título da MotoGP",
-    "body": "Fato — 24/11/2026. O espanhol amplia a própria marca na categoria. BBC Sport .",
+    "title": "Aaron Rodgers, quatro vezes MVP, pode ter jogado a última partida na NFL",
+    "body": "Fato — 25/11/2026. A avaliação da BBC é que a temporada e o contrato apontam para o fim da carreira do quarterback. BBC .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Contexto: TAS devolve ao Senegal o título da Copa Africana de 2025",
-    "body": "Fato — 24/11/2026. A decisão reverte a punição aplicada depois de o time deixar o campo na final contra o Marrocos, em Rabat. BBC .",
+    "title": "Contexto: Inter tem 91% de risco de rebaixamento e não pode mais alcançar o Vitória",
+    "body": "Fato — 24/11/2026. Com 38 pontos e 18º lugar, o Colorado só empataria em pontos com o Vitória, que leva vantagem no número de vitórias. Pelo menos um entre Inter, Corinthians, Grêmio e Botafogo cai. ge/Gato Mestre .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Sinner passa por \"cirurgia menor\" no joelho a sete semanas do Aberto da Austrália",
-    "body": "Fato — 25/11/2026. O número 2 do mundo disse que sente falta da quadra e não fixou prazo de retorno. BBC .",
+    "title": "Contexto: Chapecoense 3 x 0 Palmeiras, com homenagem a Alan Ruschel",
+    "body": "Fato — 24/11/2026. O resultado manteve a Chape viva na luta e adiou a definição do título do Palmeiras, que já é campeão brasileiro. ge .",
     "topic": "esporte",
     "date": "capa vigente",
     "url": "#esporte"
   },
   {
-    "title": "Khawaja diz estar \"desapontado\" com o ataque pessoal de Cummins no caso sandpapergate",
-    "body": "Fato — 25/11/2026. O ex-batedor australiano afirmou que \"nunca foi eu contra Pat\" e que o episódio de 2018 segue em aberto. BBC .",
-    "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
-  },
-  {
-    "title": "Sterling é sentenciado por direção perigosa; ele já se declarou culpado",
-    "body": "Fato — 25/11/2026. O ex-jogador da Inglaterra admitiu ter dirigido a Lamborghini de forma perigosa antes de bater e de portar óxido nitroso. BBC .",
-    "topic": "esporte",
-    "date": "capa vigente",
-    "url": "#esporte"
-  },
-  {
-    "title": "Morre o ator nigeriano Pete Edochie, ícone do Nollywood, aos 79 anos",
-    "body": "Fato — 25/11/2026. Ele ficou conhecido em 1987 ao estrelar a adaptação televisiva de \"O Mundo se Despedaça\", de Chinua Achebe, e se tornou uma das faces mais reconhecíveis do cinema nigeriano. BBC .",
+    "title": "Don Toliver adia shows no O2 e em Wembley após evacuação em Manchester",
+    "body": "Fato — 22 a 25/11/2026. No show de domingo no Co-op Live, uma \"substância desconhecida\" foi liberada na plateia: uma pessoa foi hospitalizada e 89 apresentaram sintomas; fãs relataram pessoas engasgando e tossindo sangue. A produtora diz que os equipamentos de palco ficaram presos na cidade. O2 remarcado para 15/12 e Wembley para 14/12 . BBC .",
     "topic": "cultura",
     "date": "capa vigente",
     "url": "#cultura"
   },
   {
-    "title": "Miss Universo 2026: Jennifer Barreto, de Porto Rico, é a primeira mãe a vencer o concurso",
+    "title": "Museu dos Beatles é aprovado no número 3 de Savile Row, o prédio do último show no telhado",
+    "body": "Fato — 25/11/2026. O espaço será uma \"experiência cultural\" dedicada à banda no endereço da apresentação de 30/01/1969. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Chemical Brothers e Harry Styles vão chefiar festivais britânicos de 2027",
+    "body": "Fato — 25/11/2026. Glastonbury, Forwards Festival e Bristol Sounds anunciaram line-ups no mesmo dia; Latitude já havia confirmado o Jungle. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Contexto: morre o ator nigeriano Pete Edochie, ícone do Nollywood, aos 79 anos",
+    "body": "Fato — 25/11/2026. Ficou conhecido em 1987 ao estrelar a adaptação televisiva de \"O Mundo se Despedaça\", de Chinua Achebe. BBC .",
+    "topic": "cultura",
+    "date": "capa vigente",
+    "url": "#cultura"
+  },
+  {
+    "title": "Contexto: Jennifer Barreto, de Porto Rico, é a primeira mãe a vencer o Miss Universo",
     "body": "Fato — 25/11/2026. O Brasil ficou no top 30. A vitória quebra uma regra informal que afastava mães do título. G1 .",
     "topic": "cultura",
     "date": "capa vigente",
     "url": "#cultura"
   },
   {
-    "title": "\"A vida não é infinita\": Catherine fala de mortalidade em documentário da BBC",
-    "body": "Fato — 23/11/2026. Em trecho de \"Heal\", a princesa de Gales fala sobre o tratamento contra o câncer e a própria finitude. BBC .",
+    "title": "Contexto: Irã açoita a cantora Parastoo Ahmadi, que cantou sem hijab, dizem advogados",
+    "body": "Reportado — 23/11/2026. Ela, três músicos e um produtor teriam recebido 74 chibatadas em Qom, segundo a defesa. BBC .",
     "topic": "cultura",
     "date": "capa vigente",
     "url": "#cultura"
+  },
+  {
+    "title": "EUA preparam novas tarifas sobre China, UE, Japão e ao menos 14 jurisdições; anúncio pode sair hoje",
+    "body": "Apuração jornalística — 25/11/2026. A BBC apurou que o anúncio pode sair já nesta quarta-feira e que as alíquotas variam por país, conforme acordos já fechados com Trump. A base é uma investigação da Seção 301 aberta em março, depois de a Suprema Corte considerar ilegais as tarifas do \"Liberation Day\". O governo já devolveu cerca de US$ 100 bilhões às empresas. A China prorrogou até 27/01 a suspensão do embargo a gálio, germânio e antimônio, que venceria na sexta; Washington diz que Pequim não cumpriu compromissos de compras agrícolas e minerais críticos. O acordo interino entre as duas economias expira em 10/01 , apesar do encontro Trump–Xi em Shenzhen na semana passada. Não há ato publicado nem lista final de países. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Dados vazados do Rosstat mostram ao menos 490 mil soldados russos mortos na Ucrânia",
+    "body": "Fato publicado — 25/11/2026. A BBC Russian analisou mais de 11 milhões de registros de óbitos de 2021 a setembro de 2026, obtidos após invasão dos grupos Cyber Partisans BY e Silent Crow; o Rosstat admitiu o ataque e negou vazamento de informação protegida. O cruzamento com a lista do Mediazona encontrou correspondência em 90% dos registros. A lista confirmada soma 290.012 mortes; o total real é estimado entre 527 mil e 644 mil . 65% dos russos de 18 a 24 anos mortos em 2025 morreram na guerra. Cerca de 20 mil soldados morreram por 10 aldeias que somavam 12 mil habitantes. A idade média dos mortos subiu de 34 para 40 anos, e homens de Tuva, Buriátia e Zabaykalsky têm risco 20 a 25 vezes maior que os de Moscou e São Petersburgo. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "\"Minha família morreu na Ucrânia\": a jornalista que investigou a versão que sua mãe repetia",
+    "body": "Reportagem — 25/11/2026. A jornalista da BBC Anastasiya Gribanova investiga quem matou o pai e os avós durante a ocupação e confronta a narrativa que culpava as tropas de Zelensky. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Campanha anticorrupção de Xi derruba Chen Jining, estrela em ascensão do partido",
+    "body": "Fato — 25/11/2026. A queda do dirigente faz parte da maior purga do Politburo em várias décadas, segundo a BBC. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Ilhas Salomão encerram pacto de segurança com a China e assinam tratado com a Austrália",
+    "body": "Fato — 25/11/2026. O primeiro-ministro Matthew Wale disse que o país deixará de ser \"ponto de incerteza regional\". O pacto com Pequim era um dos mais controversos do Pacífico. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Shenzhou-24 leva o primeiro astronauta paquistanês à estação Tiangong",
+    "body": "Fato — 25/11/2026. A missão chinesa leva três astronautas ao laboratório orbital; o lançamento foi registrado em vídeo. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Queda de avião no litoral do Mississippi mata seis pessoas, entre elas duas crianças",
+    "body": "Fato — 25/11/2026. As causas não foram divulgadas; a investigação está em curso. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Exército dos EUA prepara detonação controlada de cinco toneladas de explosivos em Iowa",
+    "body": "Fato — 25/11/2026. Moradores dizem temer o efeito da explosão desta quarta; outros querem que o material seja logo eliminado. BBC · Valor .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Colômbia resgata todos os reféns de supermercado em Cartagena; um criminoso morre",
+    "body": "Fato — 25/11/2026. O sequestro durou cerca de 17 horas e terminou com a libertação dos reféns, segundo o presidente. G1 .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Protestos contra apagões aumentam na Venezuela e pressionam o governo",
+    "body": "Fato — 25/11/2026. Os blecautes se repetem e as manifestações se espalham; o governo de Delcy Rodríguez tenta conter a insatisfação. Valor .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Camarões: dez anos de conflito deixam mais de meio milhão de deslocados",
+    "body": "Reportagem — 25/11/2026. Vítimas das regiões de língua inglesa relatam violência desde que grupos separatistas pediram independência. BBC .",
+    "topic": "mundo",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#mundo"
+  },
+  {
+    "title": "Contenção no Orçamento cai de R$ 16,1 bi para R$ 12,6 bi, e déficit previsto sobe a R$ 89,3 bi",
+    "body": "Fato — 24/11/2026, 23h38. O relatório de receitas e despesas do 5º bimestre traz R$ 304,3 milhões bloqueados e R$ 12,3 bilhões contingenciados. A folga veio da lei sancionada no mesmo dia, que retira do cálculo da meta R$ 10,5 bilhões em subsídios ao diesel por causa da guerra no Oriente Médio. A projeção de déficit passou de R$ 80,9 bi para R$ 89,3 bi , dos quais R$ 76,9 bi ficam fora da apuração. A exclusão não elimina o gasto: só o esconde da meta. G1 · Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Governo tem ao menos oito projetos econômicos para aprovar antes do recesso, em 23 de dezembro",
+    "body": "Fato — 25/11/2026. Em menos de um mês, o Planalto tenta acelerar a LDO, a LOA de 2027 e a PEC do IPI , que precisa estar em vigor antes de o novo sistema de impostos começar a valer. Com as eleições, as discussões do Orçamento foram adiadas. G1 .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Governo articula com a cúpula do Congresso a PEC do ajuste fiscal",
+    "body": "Fato — 25/11/2026. A articulação ocorre um dia depois da sanção e do anúncio da PEC da \"potência fiscal\", ainda sem minuta nem prazo. Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Lula decide que o embaixador brasileiro na Argentina não voltará a Buenos Aires",
+    "body": "Fato — 24/11/2026. A decisão aprofunda o atrito com o governo Milei, no mesmo dia em que o argentino ficou fora da lista de convidados da posse. G1 .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Relatório da PF sobre Moraes não menciona o contrato do Master com Viviane",
+    "body": "Fato — 25/11/2026. O documento também deixa de fora parte das mensagens de Vorcaro, segundo o Valor. O caso Master voltou ao centro do debate no STF. Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Master: relatoria de Nunes Marques sobre pedido de Vorcaro reabre debate sobre impedimento",
+    "body": "Fato — 24–25/11/2026. O ministro será relator do pedido de Vorcaro sobre as investigações do Master; colegas questionam se ele deveria atuar. G1 · Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Centrão demonstra força com a aprovação do ajuste e busca espaço na Esplanada",
+    "body": "Análise — 25/11/2026. O bloco negocia cargos depois de entregar os votos que aprovaram o pacote fiscal. Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Em nova Carta ao Povo, PT evita a palavra \"ajuste\" e reforça promessas de campanha",
+    "body": "Fato — 25/11/2026. O texto tenta responder às acusações de \"estelionato eleitoral\" após a votação do pacote e defende renovação dos quadros do partido. Valor .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Moraes rejeita pedido de Zambelli para descontar da pena o tempo presa na Itália",
+    "body": "Fato — 24/11/2026. A defesa da ex-deputada queria abater o período de detenção no exterior; o ministro negou. G1 .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Contexto: o ajuste foi sancionado sem vetos e prevê economia de até R$ 56 bi em 2027",
+    "body": "Fato — 24/11/2026, 15h30. A sanção saiu em edição extra do Diário Oficial , horas depois de a Câmara concluir a votação na noite de 23/11. A estimativa é do relator Eduardo Braga (MDB-AM). O Senado havia concluído o texto em 19/11. G1 .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Contexto: Abin mapeia 31 organizações criminosas; PCC em 22 UFs e CV em 19",
+    "body": "Fato — 24/11/2026. Estudo inédito com o Fórum Brasileiro de Segurança Pública identifica 28 facções, 2 milícias e 1 grupo estrangeiro; Sergipe é a única UF sem organização que atenda a todos os critérios. G1 .",
+    "topic": "politica",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#politica"
+  },
+  {
+    "title": "Dólar fecha a R$ 5,91 e Ibovespa recua 0,43%, aos 164.090 pontos",
+    "body": "Fato — 24/11/2026. O dólar comercial caiu 0,27% , a R$ 5,9101, e o Ibovespa fechou aos 164.090 pontos , com foco no ajuste fiscal. O euro subiu 0,31%, a R$ 6,4813. G1 · Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Moody's: falta de avanço no ajuste fiscal pressiona a nota soberana do Brasil",
+    "body": "Análise — 25/11/2026. A agência avalia que o pacote aprovado é insuficiente para uma redução expressiva dos juros; a SulAmérica diz o mesmo. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Reforma tributária e fim da escala 6x1 podem pressionar a inflação em 2027",
+    "body": "Fato — 25/11/2026. BC e equipe econômica monitoram os impactos das duas mudanças, que entram em vigor em um ano eleitoral. G1 .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Horas extras ficam mais caras com o fim da escala 6x1; calculadora mostra o que muda",
+    "body": "Serviço — 25/11/2026. A ferramenta do g1 compara o custo da hora extra no regime atual e no 5x2. G1 .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Petróleo e Imposto de Renda sobre capital puxam a arrecadação",
+    "body": "Fato — 25/11/2026. A análise do Valor decompõe o recorde de outubro e mostra o peso das receitas ligadas ao petróleo e aos rendimentos de capital. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Receita Federal livra operações com stablecoins do IOF",
+    "body": "Fato — 25/11/2026. A interpretação reduz o custo tributário de operações com moedas digitais atreladas ao dólar e interessa ao mercado cripto. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Indústria naval do Japão paralisa após os EUA rejeitarem regras para combustíveis sustentáveis",
+    "body": "Fato — 25/11/2026. A decisão americana trava encomendas e expõe a dependência do setor em relação à regulação de emissões. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Preços de apartamentos usados em Tóquio têm a primeira queda anual em 13 anos",
+    "body": "Fato — 25/11/2026. A reversão do mercado imobiliário da capital japonesa é um dos sinais de esfriamento da demanda. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Desigualdade define quem aproveita as ofertas da Black Friday",
+    "body": "Análise — 25/11/2026. O desconto chega de forma desigual às famílias, e o endividamento pesa mais para quem tem menos renda. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Com juros altos, cresce o número de falências entre empresas do agro",
+    "body": "Fato — 25/11/2026. O endividamento do setor e o custo do crédito pressionam produtores e empresas do agronegócio. Globo Rural/Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Empresas incluem nos contratos garantia de adoção do split payment; impacto pode chegar a R$ 180 bi ao ano",
+    "body": "Fato — 25/11/2026. O mecanismo da reforma tributária separa o imposto no momento do pagamento; a Reach Capital estima o efeito sobre o caixa das companhias. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Inscrições do concurso do IBGE com 27 mil vagas terminam nesta quarta",
+    "body": "Serviço — 25/11/2026. O prazo se encerra hoje; o edital prevê vagas de nível médio e superior. G1 .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Contexto: economia da Argentina cai 1,2 ponto em setembro e reforça risco de recessão técnica",
+    "body": "Fato — 24/11/2026. O desempenho do principal parceiro do Brasil no Mercosul piora no mesmo dia em que o embaixador brasileiro é mantido fora de Buenos Aires. Valor .",
+    "topic": "economia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#economia"
+  },
+  {
+    "title": "Huawei é considerada culpada nos EUA por roubo de segredos comerciais e absolvida de racketeering",
+    "body": "Fato — 25/11/2026. O veredicto encerra um julgamento de mais de dois meses em Nova York, iniciado de um processo aberto em 2018, quando as autoridades americanas intensificaram as investigações sobre a empresa. A chinesa também respondia por negócios com o Irã. BBC · G1 .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "A volta de Huang à Nvidia cria risco político para Trump, diz análise da BBC",
+    "body": "Análise — 25/11/2026. A intervenção do presidente para reconduzir o CEO ligou o destino dos dois; a procuradora-geral dos EUA evitou responder sobre a investigação da empresa, e as ações caíram 7%. BBC · BBC .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "Jensen Huang diz que não acredita em planejamento de sucessão na Nvidia",
+    "body": "Declaração — 25/11/2026. O CEO, de volta ao comando após a crise interna, descarta preparar um substituto — tema que investidores vêm cobrando. Valor .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "IA acelera a fabricação do \"carro voador\" da Embraer",
+    "body": "Fato — 25/11/2026. A empresa usa inteligência artificial no desenvolvimento do veículo elétrico de pouso e decolagem vertical. Valor .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "A febre da IA nos mercados perde força; ações nos EUA caminham para um dos piores anos em duas décadas",
+    "body": "Análise — 25/11/2026. A correção das empresas de inteligência artificial ajuda a explicar o desempenho fraco das bolsas americanas no ano. Valor .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "Contexto: Austrália quer multar big techs em até 5% do faturamento global por conteúdo nocivo",
+    "body": "Fato — 24/11/2026. O projeto mira Google e Meta e permite que usuários processem as empresas. G1 .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "Contexto: WhatsApp começa a liberar figurinhas com som",
+    "body": "Fato — 24/11/2026. A liberação é gradual e a Meta não informou quando o recurso chega a todos. G1 .",
+    "topic": "tecnologia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#tecnologia"
+  },
+  {
+    "title": "Anvisa proíbe anabolizantes sem registro, medicamentos falsificados e suplementos sem procedência",
+    "body": "Fato — 25/11/2026, 06h40. Duas resoluções publicadas no Diário Oficial determinam a apreensão e proíbem a venda de lotes do Dysport 500U (toxina botulínica), do oncológico Darzalex e do Imbruvica (ibrutinibe). Também proíbem uma linha de anabolizantes e hormônios sem registro e todos os suplementos das marcas Growup, Grouth Labs e FK , vendidos pela Vinicius Morais Advisor Empresarial Ltda. na loja Four Fitness Suplementos, na Shopee. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Covid volta a subir rápido: de 1.000 para 17.000 novos casos por semana em três meses",
+    "body": "Fato — 25/11/2026, 00h30. A positividade dos testes passou de 1% para 17% . A alta é atribuída à variante PJ.2.1 , mais transmissível, sem evidência de que cause doença mais grave. Os números estão muito distantes do pico da pandemia, mas preocupam especialistas; a mpox registra em novembro o maior número de casos do ano. O Assunto/g1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Vacina contra o câncer testada no Brasil terá duas tecnologias e mira linfomas e tumores de estômago",
+    "body": "Fato — 25/11/2026, 00h00. O A.C.Camargo (SP) lidera a pesquisa com a Universidade de Oxford usando duas plataformas: adenovírus geneticamente modificado e mRNA . O alvo é o vírus Epstein-Barr , associado a linfomas e tumores gástricos. A fase 1/2 deve incluir cerca de 30 pacientes , com início previsto para 2027, e mede segurança, tolerabilidade e resposta imune. É vacina terapêutica, não preventiva. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Fluoxetina, escitalopram e duloxetina: estudo mostra diferenças na ação dos antidepressivos",
+    "body": "Estudo — 25/11/2026. A pesquisa publicada na The Lancet Psychiatry analisou dados de mais de 30 mil participantes e identificou diferenças entre os medicamentos. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Por que as ondas de calor afetam mais as mulheres",
+    "body": "Reportagem — 25/11/2026. Especialistas pedem mais conscientização sobre os riscos do calor para as mulheres e esforços mais direcionados para protegê-las. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Contexto: roubos de canetas emagrecedoras somam quase R$ 70 milhões em 2026",
+    "body": "Fato — 24/11/2026. Mais de 59 mil unidades foram roubadas ou furtadas; a Abrafarma alerta para venda irregular na internet e o Ministério da Saúde diz não haver previsão de oferta no SUS. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Contexto: OMS registra três novos casos de gripe aviária em humanos nos EUA, com uma morte",
+    "body": "Fato — 24/11/2026. São três adultos de fazendas leiteiras de Yakima (Washington); não há evidência de transmissão entre pessoas. G1 .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Contexto: NHS lança o maior teste do mundo de IA na triagem do câncer de mama",
+    "body": "Fato — 24/11/2026. A pesquisa vai medir se a tecnologia melhora a detecção precoce no programa público britânico. BBC .",
+    "topic": "saude",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#saude"
+  },
+  {
+    "title": "Quasar formado 630 milhões de anos após o Big Bang é o objeto mais antigo já observado",
+    "body": "Fato — 24/11/2026. O objeto está a 13,1 bilhões de anos, quando o universo tinha menos de 5% da idade atual; o buraco negro central tem massa equivalente a 360 milhões de sóis . O recorde anterior, de 2021, era um quasar a cerca de 670 milhões de anos do Big Bang. G1 .",
+    "topic": "ciencia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#ciencia"
+  },
+  {
+    "title": "Imagens em close do asteroide atingido de propósito para testar a defesa da Terra serão divulgadas",
+    "body": "Fato — 25/11/2026. A missão estuda o asteroide que foi desviado pela colisão de uma nave — o teste de defesa planetária. BBC .",
+    "topic": "ciencia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#ciencia"
+  },
+  {
+    "title": "Tempestade solar deve atingir a Terra nesta semana, prevê relatório",
+    "body": "Preliminar — 25/11/2026. O documento descreve o impacto esperado sobre satélites, comunicações e redes elétricas. A intensidade ainda pode mudar. Valor .",
+    "topic": "ciencia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#ciencia"
+  },
+  {
+    "title": "Contexto: superlua de novembro — fotos do fenômeno pelo mundo",
+    "body": "Fato — 24/11/2026. A lua cheia ocorreu às 11h53 de Brasília e pôde ser vista a olho nu após o pôr do Sol. G1 .",
+    "topic": "ciencia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#ciencia"
+  },
+  {
+    "title": "Contexto: arqueólogos desvendam a disposição das esculturas do Partenon após 40 anos",
+    "body": "Fato — 24/11/2026. Com iPhone, scanners e impressoras 3D, a equipe reconstruiu a posição original das figuras que decoravam o templo há 2.500 anos. G1 .",
+    "topic": "ciencia",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#ciencia"
+  },
+  {
+    "title": "Inter tem 91% de risco de rebaixamento e não pode mais ultrapassar o Vitória",
+    "body": "Fato — 24/11/2026. Com 38 pontos e 18º lugar, o Colorado só empataria em pontos com o Vitória, que leva vantagem no número de vitórias — primeiro critério de desempate. Chapecoense e Remo já estão rebaixados; o Vitória tem 99,99% de chance de ficar e só não está salvo porque o Corinthians ainda joga a 36ª rodada. Pelo menos um entre Inter, Corinthians, Grêmio e Botafogo vai para a Série B de 2027. ge/Gato Mestre .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Rodada 36 nesta quarta: Atlético-MG x Corinthians, às 20h, na Arena MRV",
+    "body": "Fato — 25/11/2026. O jogo define o tamanho do risco do Corinthians e pode salvar o Vitória do rebaixamento. O líder Flamengo tem 80 pontos; Palmeiras, 74. ge .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Champions: Real Madrid goleia o PSV com show de Bellingham, Mbappé e Vini Jr.",
+    "body": "Fato — 24/11/2026. O Real venceu por 5 a 1 , com golaço de Bellingham; Mourinho brincou sobre o papo no intervalo. O City empatou com o Napoli por 2 a 2. BBC · ge .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Contexto: Chapecoense vence o Palmeiras por 3 a 0 na Arena Condá",
+    "body": "Fato — 24/11/2026. A Chape, já rebaixada, venceu o time alternativo de Abel Ferreira em noite de homenagens aos dez anos do acidente aéreo de 2016. ge .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Contexto: Marc Marquez conquista o oitavo título da MotoGP",
+    "body": "Fato — 24/11/2026. O espanhol amplia a própria marca na categoria. BBC Sport .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Contexto: TAS devolve ao Senegal o título da Copa Africana de 2025",
+    "body": "Fato — 24/11/2026. A decisão reverte a punição aplicada depois de o time deixar o campo na final contra o Marrocos, em Rabat. BBC .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Sinner passa por \"cirurgia menor\" no joelho a sete semanas do Aberto da Austrália",
+    "body": "Fato — 25/11/2026. O número 2 do mundo disse que sente falta da quadra e não fixou prazo de retorno. BBC .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Khawaja diz estar \"desapontado\" com o ataque pessoal de Cummins no caso sandpapergate",
+    "body": "Fato — 25/11/2026. O ex-batedor australiano afirmou que \"nunca foi eu contra Pat\" e que o episódio de 2018 segue em aberto. BBC .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Sterling é sentenciado por direção perigosa; ele já se declarou culpado",
+    "body": "Fato — 25/11/2026. O ex-jogador da Inglaterra admitiu ter dirigido a Lamborghini de forma perigosa antes de bater e de portar óxido nitroso. BBC .",
+    "topic": "esporte",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#esporte"
+  },
+  {
+    "title": "Morre o ator nigeriano Pete Edochie, ícone do Nollywood, aos 79 anos",
+    "body": "Fato — 25/11/2026. Ele ficou conhecido em 1987 ao estrelar a adaptação televisiva de \"O Mundo se Despedaça\", de Chinua Achebe, e se tornou uma das faces mais reconhecíveis do cinema nigeriano. BBC .",
+    "topic": "cultura",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
+  },
+  {
+    "title": "Miss Universo 2026: Jennifer Barreto, de Porto Rico, é a primeira mãe a vencer o concurso",
+    "body": "Fato — 25/11/2026. O Brasil ficou no top 30. A vitória quebra uma regra informal que afastava mães do título. G1 .",
+    "topic": "cultura",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
+  },
+  {
+    "title": "\"A vida não é infinita\": Catherine fala de mortalidade em documentário da BBC",
+    "body": "Fato — 23/11/2026. Em trecho de \"Heal\", a princesa de Gales fala sobre o tratamento contra o câncer e a própria finitude. BBC .",
+    "topic": "cultura",
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "Irã açoita a cantora Parastoo Ahmadi, que cantou sem hijab, dizem advogados",
     "body": "Fato reportado — 23/11/2026. Ela, três músicos e um produtor teriam recebido 74 chibatadas em Qom, segundo a defesa. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "\"Blade Runner 2099\" não é só sobre IA, dizem Hunter Schafer e o criador da série",
     "body": "Entrevista — 25/11/2026. A atriz e os produtores dizem que a série explora mais do que consciência robótica. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "Contexto: Gisèle Pelicot diz se sentir humilhada após fotos nuas irem à imprensa",
     "body": "Fato — 23/11/2026. A editora pediu desculpas por \"uma comunicação infeliz e inadequada\" na divulgação do livro sobre controle coercitivo. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "Contexto: diário do papa Francisco relata três visões do diabo",
     "body": "Fato — 24/11/2026. Trechos publicados postumamente descrevem uma \"sedução pagã\", uma \"voz do demônio\" e uma visão \"no coro\" durante a missa. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "Contexto: primeiro Children's Booker Prize revela finalistas — e jurados crianças",
     "body": "Fato — 24/11/2026. Oito livros concorrem, entre eles \"War\", de Eoin Colfer e Andrew Donkin. BBC .",
     "topic": "cultura",
-    "date": "capa vigente",
-    "url": "#cultura"
+    "date": "25/11/2026 às 08:00",
+    "url": "edicoes/2026-11-25-0800.html#cultura"
   },
   {
     "title": "Rússia se prepara para lançar satélite com arma nuclear, diz imprensa alemã; Otan promete defesa",

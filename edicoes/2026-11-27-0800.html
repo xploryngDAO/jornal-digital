@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#161c47">
+<title>Jornal Digital — Notícias em perspectiva</title>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/3d-force-graph@1"></script>
+<style>
+:root{--bg:#e9eef0;--panel:#f8faf9;--line:#c7d2d5;--txt:#132d36;--mut:#49616a;--acc:#075d64;--night:#10262e;--paper:#fff;--serif:Georgia,'Times New Roman',serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:5rem}
+body{background:var(--bg);color:var(--txt);font:1rem/1.6 system-ui,'Segoe UI',sans-serif}
+a{color:var(--acc);text-underline-offset:.2em}
+:focus-visible{outline:3px solid #b25409;outline-offset:4px}
+.skip-link{position:fixed;top:.75rem;left:.75rem;z-index:20;background:#fff;color:var(--txt);padding:.6rem 1rem;border-radius:.4rem;transform:translateY(-200%)}
+.skip-link:focus{transform:none}
+.container,.masthead{width:min(100% - 2rem,72rem);margin-inline:auto}
+header{background:var(--night);color:var(--paper);padding:1.2rem 0}
+.masthead{display:flex;align-items:baseline;justify-content:space-between;gap:.5rem 2rem;flex-wrap:wrap}
+.masthead strong{font:700 1.9rem/1 var(--serif)}
+.masthead p{color:#c7e0df;font-size:.9rem}
+nav{position:sticky;top:0;z-index:10;display:flex;gap:.35rem 1.35rem;overflow-x:auto;white-space:nowrap;padding:.75rem max(1rem,calc((100% - 72rem)/2));background:var(--panel);border-bottom:1px solid var(--line)}
+nav a{font-size:.9rem;font-weight:650;text-decoration:none}
+nav a:focus-visible,.lead a:focus-visible{outline-color:#b25409}
+section{margin:clamp(2.25rem,5vw,4.5rem) 0}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;text-wrap:balance}
+section h2{font-size:clamp(1.65rem,4vw,2.5rem);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:1px solid var(--line)}
+.lead{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(1.2rem,4vw,4rem);align-items:start}
+.lead h1{font-size:clamp(2.6rem,6vw,5rem);letter-spacing:-.045em;margin:.55rem 0 .8rem}
+.lead p{max-width:62ch}
+.meta,.source,.section-note{color:var(--mut);font-size:.9rem}
+.brief{background:var(--acc);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);border-radius:1.1rem 1.1rem 1.1rem .25rem}
+.brief h2{border:0;padding:0;font-size:1.65rem}
+.brief ol{padding-left:1.3rem;display:grid;gap:.6rem}
+.brief ul{list-style:none;display:grid;gap:.75rem}
+.brief li span{display:block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.78;margin-bottom:.1rem}
+.brief a{color:inherit}
+.edition-note{margin-top:1.25rem;border-left:3px solid var(--acc);padding-left:.75rem;font-size:.9rem;color:var(--mut)}
+.card,.correlation{background:var(--panel);border:1px solid var(--line);border-radius:.75rem;padding:clamp(1rem,2vw,1.45rem);min-width:0}
+.card h3,.correlation h3{font-size:1.3rem;margin-bottom:.45rem}
+.card .source{margin-bottom:.55rem}
+.card .impact{border-top:1px solid var(--line);padding-top:.55rem;margin-top:.65rem;font-size:.9rem;color:var(--mut)}
+.card.is-new{border-left:4px solid var(--acc)}
+.new-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:var(--acc);color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.card.is-updated{border-left:4px solid #b25409}
+.upd-tag{display:inline-block;padding:.1rem .45rem;border-radius:.25rem;background:#b25409;color:var(--paper);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;margin-bottom:.45rem}
+.tag{display:inline-block;padding:.12rem .5rem;border-radius:.25rem;background:#dceaea;color:#16444a;font-size:.75rem;margin-bottom:.55rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,19rem),1fr));gap:1rem}
+.timeline{list-style:none;display:grid;gap:1rem;margin:1.2rem 0;border-left:2px solid var(--acc);padding-left:1rem}
+.timeline li{background:var(--panel);padding:.85rem 1rem;border-radius:.5rem}
+.timeline time{display:block;font-weight:750;color:var(--acc);font-size:.88rem}
+.correlation{margin-bottom:.75rem}
+#globe-container,#graph-container{width:100%;height:clamp(330px,55vw,500px);border-radius:.8rem;overflow:hidden;background:var(--night);color:var(--paper);margin:1rem 0}
+.viz-fallback{padding:2rem;color:#c7e0df;font-size:.9rem}
+#locais-noticias{list-style:none;display:grid;gap:.35rem;margin:1rem 0}
+#locais-noticias li button{font:inherit;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:.5rem;padding:.55rem .75rem;width:100%;cursor:pointer}
+#locais-noticias li button:hover{border-color:var(--acc)}
+.archive-search details{background:var(--panel);border:1px solid var(--line);border-radius:.6rem;padding:.85rem 1rem;margin-bottom:.6rem}
+.archive-search summary{font-weight:700;cursor:pointer}
+.archive-search ul{list-style:none;margin-top:.5rem;display:grid;gap:.3rem}
+.archive-search label{display:block;margin:.6rem 0}
+.archive-search input,.archive-search select{font:inherit;padding:.4rem .5rem;border:1px solid var(--line);border-radius:.4rem;background:var(--paper)}
+#arquivo-resultados{list-style:none;display:grid;gap:.5rem;margin-top:.75rem}
+#arquivo-resultados li{background:var(--card,#fff);border:1px solid var(--line);border-radius:.5rem;padding:.6rem .75rem}
+.desk-section[hidden]{display:none}
+#filtro-editorias{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:1.25rem}
+#filtro-editorias button{font:inherit;font-size:.85rem;padding:.35rem .8rem;border:1px solid var(--line);border-radius:2rem;background:var(--panel);cursor:pointer}
+#filtro-editorias button[aria-pressed="true"]{background:var(--acc);color:var(--paper);border-color:var(--acc)}
+footer{padding:2rem 0;border-top:1px solid var(--line);margin-top:3rem}
+@media (max-width:52rem){.lead{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+<header>
+  <div class="masthead">
+    <strong>Jornal Digital</strong>
+    <p>Edição de 26 de novembro de 2026 · 14h (Brasília) · captura de 14h00 a 14h30</p>
+  </div>
+</header>
+<nav aria-label="Seções da edição">
+  <a href="#manchete">Manchete</a>
+  <a href="#mundo">Mundo</a>
+  <a href="#politica">Política</a>
+  <a href="#economia">Economia</a>
+  <a href="#tecnologia">Tecnologia</a>
+  <a href="#saude">Saúde</a>
+  <a href="#ciencia">Ciência</a>
+  <a href="#esporte">Esporte</a>
+  <a href="#cultura">Cultura</a>
+  <a href="#historico">O que veio antes</a>
+  <a href="#globo">Globo</a>
+  <a href="#grafo">Grafo</a>
+  <a href="#correlacoes">Impactos</a>
+  <a href="#edicoes">Arquivo</a>
+</nav>
+
+<main id="conteudo" class="container">
+<section class="lead" aria-labelledby="manchete">
+  <div class="lead-main">
+    <p class="lead-label">Edição das 8h — Trabuco é confirmado, e a auditoria da UE desdiz Macron</p>
+    <h1 id="manchete">Trabuco é confirmado na Fazenda e bolsa fecha em alta de 5,27%; dólar cai a R$ 5,74</h1>
+    <p>O ex-presidente do Bradesco <strong>Luiz Carlos Trabuco</strong> aceitou o convite e será ministro da Fazenda a partir de 2027 — o <strong>primeiro nome confirmado do governo Lula 4</strong>. O Planalto anunciou às <strong>20h04 de quinta</strong>, após duas horas de reunião na Alvorada, e o Bradesco emitiu fato relevante à CVM. Com o fato consumado, o Ibovespa fechou em <strong>+5,27%, a 175.467 pontos</strong> (intradiário chegou a +6,07%, 176.800), o dólar em <strong>R$ 5,7441 (−1,25%)</strong> e o EWZ subiu mais de 9%. Na mesma manhã, <strong>auditoria da própria União Europeia contraria a fala de Macron</strong> sobre a carne brasileira "dopada": o relatório de 28/09 aprovou os controles de frango e mel, e a decisão de reabertura está marcada para 8 e 9/12. No esporte, <strong>Márquez anuncia aposentadoria no auge</strong>, cinco dias após o octacampeonato.</p>
+    <div class="lead-actions">
+      <a class="lead-read" href="#politica" data-open-story="trabuco-confirmado">Ler matéria</a>
+      <a href="#historico">Ver linha do tempo</a>
+    </div>
+  </div>
+  <aside class="brief" aria-labelledby="resumo-edicao">
+    <h2 id="resumo-edicao">Também nesta edição</h2>
+    <ul>
+      <li><span>Economia</span><a href="#economia" data-open-story="ue-auditoria-carne">Auditoria da UE contraria Macron sobre carne "dopada"</a></li>
+      <li><span>Política</span><a href="#politica" data-open-story="alcolumbre-stf">Alcolumbre deve decidir com Lula o nome do STF</a></li>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="espanha-eleicao">Espanha fecha campanha; eleição é domingo</a></li>
+      <li><span>Mundo</span><a href="#mundo" data-open-story="guine-bissau-2028">Guiné-Bissau adia eleições para 2028</a></li>
+      <li><span>Saúde</span><a href="#saude" data-open-story="covid-23estados">Covid avança em 23 estados com 1/3 das doses aplicadas</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="nvidia-serve-asiatico">Nvidia barra servidores ao Sudeste Asiático</a></li>
+      <li><span>Tecnologia</span><a href="#tecnologia" data-open-story="uk-pension-cyber">Reino Unido tira serviços do ar após ataque</a></li>
+      <li><span>Ciência</span><a href="#ciencia" data-open-story="hera-cratera">Hera revela cratera do tamanho de um estádio</a></li>
+      <li><span>Esporte</span><a href="#esporte" data-open-story="marquez-aposenta">Márquez anuncia aposentadoria no auge</a></li>
+      <li><span>Cultura</span><a href="#cultura" data-open-story="belchior-doc">Documentário sobre Belchior chega aos cinemas</a></li>
+    </ul>
+  </aside>
+</section>
+
+<h2 class="desk-heading">Notícias por editoria</h2>
+
+<div id="filtro-editorias" hidden role="group" aria-label="Filtrar notícias por tema">
+  <button type="button" data-editoria="todos" aria-pressed="true">Todas</button>
+  <button type="button" data-editoria="mundo" aria-pressed="false">Mundo</button>
+  <button type="button" data-editoria="politica" aria-pressed="false">Política</button>
+  <button type="button" data-editoria="economia" aria-pressed="false">Economia</button>
+  <button type="button" data-editoria="tecnologia" aria-pressed="false">Tecnologia</button>
+  <button type="button" data-editoria="saude" aria-pressed="false">Saúde</button>
+  <button type="button" data-editoria="ciencia" aria-pressed="false">Ciência</button>
+  <button type="button" data-editoria="esporte" aria-pressed="false">Esporte</button>
+  <button type="button" data-editoria="cultura" aria-pressed="false">Cultura</button>
+</div>
+
+<section id="mundo" class="desk-section">
+  <h2>Mundo</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-zelensky-entrevista"><span class="new-tag">Novo — 8h</span><h3>Zelensky critica à BBC a amizade "estranha" entre Trump e Putin</h3><p><strong>Fato — 27/11/2026.</strong> Em entrevista à BBC, o presidente ucraniano diz que os EUA <strong>não pressionam a Rússia</strong> nas conversas de paz para encerrar a guerra. <a href="https://www.bbc.com/news/articles/c820q9wgrpyyo">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-espanha-eleicao"><span class="new-tag">Novo — 8h</span><h3>Espanha encerra campanha; eleição antecipada é no domingo, com moradia no centro</h3><p><strong>Fato — 27/11/2026.</strong> No último debate, o custo da habitação dominou a disputa. <strong>Antecedente:</strong> Sánchez antecipou o pleito em <strong>05/10</strong>, depois de o Congresso derrubar dois decretos habitacionais (178x172 e 184x166) no rastro do despejo de Maricarmen Abascal, 87, em Madri — aluguel que ia de €500 a €2.650/mês e levou multidões às ruas. A eleição estava marcada para 2027. <a href="https://g1.globo.com/mundo/noticia/2026/11/27/espanha-encerra-campanha-eleitoral-sanchez-tenta-frear-direita-e-extrema-direita.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/ckr5gr4g8gn5o">BBC</a> · <a href="https://www.bbc.com/portuguese/articles/crz65w49ddxzo">BBC, 05/10</a>.</p></article>
+    <article class="card is-new" id="pauta-guine-bissau-2028"><span class="new-tag">Novo — 8h</span><h3>Guiné-Bissau: junta adia eleições de 6/12 para 26/11/2028</h3><p><strong>Fato — 27/11/2026.</strong> O decreto do presidente de transição, general Horta Inta-a, alegou condições "técnicas, materiais e financeiras" insuficientes. <strong>Antecedente:</strong> o golpe é de <strong>26/11/2025</strong>, três dias depois de eleições cujos resultados nunca foram divulgados; a promessa era de transição de 12 meses. <a href="https://www.bbc.com/news/articles/cm879e5yxjq5o">BBC</a> · <a href="https://observador.pt/2026/11/22/democracia-na-guine-bissau-continua-suspensa-um-ano-depois-do-golpe-militar/">Observador</a>.</p></article>
+    <article class="card is-new" id="pauta-iraque-tropas"><span class="new-tag">Novo — 8h</span><h3>Trump declara apoio à decisão do Iraque de enviar tropas para fora do país</h3><p><strong>Fato — 27/11/2026.</strong> O alcance e os destinos do desdobramento não constam na captura. <a href="https://g1.globo.com/mundo/noticia/2026/11/27/trump-declara-apoio-a-decisao-do-iraque-de-enviar-de-tropas-para-fora-do-pais.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-venezuela-revoga"><span class="new-tag">Novo — 8h</span><h3>Venezuela vai revogar lei que tornava opositores inelegíveis e previa até 30 anos de prisão</h3><p><strong>Reportado — 26/11/2026.</strong> A declaração é do chefe do Parlamento, controlado pelo chavismo; a lei de dois anos atrás era apontada como instrumento de perseguição política. <a href="https://g1.globo.com/mundo/noticia/2026/11/26/venezuela-revogara-lei-que-torna-opositores-inelegiveis-pelo-resto-da-vida-diz-chefe-do-parlamento.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/c58j4pw9xjrlo">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-canada-quebec"><span class="new-tag">Novo — 8h</span><h3>Canadá: Suprema decide nesta sexta a lei do Quebec sobre símbolos religiosos</h3><p><strong>Pendente na captura — 27/11/2026.</strong> O veredito sobre a lei de secularismo terá efeito nacional; o resultado não estava publicado quando a captura rodou. <a href="https://www.bbc.com/news/articles/c78j8vk3r50o">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-thanksgiving-energia"><span class="new-tag">Novo — 8h</span><h3>Tempestades de Ação de Graças deixam centenas de milhares sem energia nos EUA</h3><p><strong>Fato — 27/11/2026.</strong> Pensilvânia e estados vizinhos seguem afetados, um dia depois dos voos cancelados nas duas costas. <a href="https://www.bbc.com/news/articles/cre3dj5n7dpwo">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-eu-orcamento"><span class="new-tag">Novo — 8h</span><h3>Orcamento da UE trava: líderes não fecham acordo; ajuda à Ucrânia entre as disputas</h3><p><strong>Fato — 27/11/2026.</strong> Os países esperam concluir as conversas até o fim do ano. <a href="https://www.bbc.com/news/articles/cw4gnm3m9deno">BBC</a>.</p></article>
+    <article class="card is-new" id="pauta-uganda-rdc"><span class="new-tag">Novo — 8h</span><h3>Uganda anuncia retirada de tropas de cidade na RDC em meio a crise diplomática</h3><p><strong>Fato — 27/11/2026.</strong> O exército ugandês apoiava o congelês contra grupo islamista no leste do país. <a href="https://www.bbc.com/news/articles/cq4gnj2ldkyzo">BBC</a>.</p></article>
+
+    <article class="card" id="pauta-macron-carne"><h3>Macron diz que carne brasileira é "dopada" e comemora veto da União Europeia</h3><p><strong>Fato — 26/11/2026.</strong> As vendas de produtos de origem animal do Brasil para a UE estão <strong>suspensas desde 3 de setembro</strong>. Exportadores rebateram que a fala "reforça que o veto é político"; <strong>desdobramento em 27/11:</strong> auditoria da própria UE contraria a fala — veja em Economia. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/macron-diz-que-carne-brasileira-e-dopada-e-comemora-veto-da-ue-ao-produto.ghtml">G1</a> · <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/exportadores-de-carne-rebatem-fala-de-macron.ghtml">G1, exportadores</a>.</p></article>
+    <article class="card" id="pauta-trump-putin-recuo"><h3>Trump pede a Putin que recue com ataques "por toda a Europa"</h3><p><strong>Fato — 26/11/2026.</strong> O pedido foi feito na véspera do aniversário de quase quatro anos da invasão em grande escala da Ucrânia. <a href="https://g1.globo.com/mundo/noticia/2026/11/26/trump-pede-a-putin-que-pare-banho-de-sangue-com-ataques-pela-europa.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-brasileiros-russia"><h3>Brasileiros foram atraídos para lutar pela Rússia e roubados pelos recrutadores, relata NYT</h3><p><strong>Reportado — 26/11/2026.</strong> Repasse de reportagem do <strong>New York Times</strong> feita pelo g1; <strong>sem confirmação independente na captura</strong>. <a href="https://g1.globo.com/mundo/noticia/2026/11/26/brasileiros-foram-atraidos-para-lutar-pela-russia-e-roubados-pelos-proprios-recrutadores-relata-nyt.ghtml">G1/NYT</a>.</p></article>
+    <article class="card" id="pauta-migracao-uk"><h3>Migração líquida no Reino Unido é a menor desde 1997; pedidos de asilo também caem</h3><p><strong>Fato — 26/11/2026.</strong> O dado cobre o período de 12 meses e é a menor migração líquida anual desde <strong>1997</strong>. <a href="https://www.bbc.com/news/articles/cq36gj12n0l3o">BBC</a>.</p></article>
+    <article class="card" id="pauta-kuwait-ataque"><h3>Itália diz que dois cidadãos morreram em ataque iraniano no Kuwait</h3><p><strong>Reportado — 26/11/2026.</strong> A informação é do governo italiano; o ataque é atribuído ao Irã. <strong>A versão iraniana não consta na captura.</strong> <a href="https://www.bbc.com/news/articles/c39w9y5dx4k5o">BBC</a>.</p></article>
+    <article class="card" id="pauta-ira-penademorte"><h3>Mulheres são condenadas à morte no Irã em números inéditos há décadas, diz grupo de direitos</h3><p><strong>Reportado — 26/11/2026.</strong> Protestantes e dissidentes estão entre as sentenciadas após os protestos; o dado é de uma organização de direitos humanos. <a href="https://www.bbc.com/news/articles/cm8x0ve4yd7wo">BBC</a>.</p></article>
+    <article class="card" id="pauta-thanksgiving-voos"><h3>Centenas de voos cancelados nos EUA na véspera do Ação de Graças</h3><p><strong>Fato — 26/11/2026.</strong> Tempestades atingem as costas leste e oeste; mais de <strong>80 milhões de pessoas</strong> devem viajar no feriado. Na edição de ontem, a Macy's já havia adiado pela primeira vez o desfile por clima. <a href="https://www.bbc.com/news/articles/ckm2mz3prq77o">BBC</a>.</p></article>
+
+    <article class="card" id="pauta-coreia-kim"><h3>Kim Jong-un diz que o status nuclear é "absolutamente inviolável" e ameaça tratar contestação como guerra</h3><p><strong>Fato — 25/11/2026, 18h57.</strong> A agência estatal KCNA divulgou as declarações, feitas em visita a instalações de produção e pesquisa de armas. Kim afirmou que o país vai ampliar "sistematicamente" a produção de materiais nucleares e priorizar a implantação de <strong>armas nucleares táticas</strong> em diferentes áreas. Disse também que os esforços de "forças hostis" contra o regime devem crescer conforme o país avança. <a href="https://g1.globo.com/mundo/noticia/2026/11/25/kim-jong-un-diz-que-status-nuclear-da-coreia-do-norte-e-inviolavel-e-faz-ameaca-com-guerra.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-egito-caminhao"><h3>Caminhão-tanque tomba e pega fogo na região metropolitana do Cairo: ao menos 30 mortos</h3><p><strong>Preliminar — 25/11/2026, 15h34.</strong> O veículo transportava derivados de petróleo e tombou na Rodovia Circular, em Al-Warraq, província de Gizé. O Ministério da Saúde egípcio informou <strong>15 feridos</strong>, nove com queimaduras graves e um com intoxicação por fumaça; 23 ambulâncias foram mobilizadas e o fogo foi controlado. <strong>Os números divergem:</strong> a BBC fala em 31 mortos e 21 feridos. <a href="https://g1.globo.com/mundo/noticia/2026/11/25/caminhao-tanque-pega-fogo-e-deixa-ao-emnos-21-mortos-no-egito.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cqy7rn30v314o">BBC</a>.</p></article>
+    <article class="card" id="pauta-netanyahu-juizes"><h3>Juízes israelenses recomendam arquivar a acusação mais grave contra Netanyahu</h3><p><strong>Fato — 25/11/2026.</strong> Os magistrados disseram ao procurador-geral que há pouca chance de condenação no primeiro dos três casos — suborno em troca de cobertura favorável. Questionaram se o segundo configura crime e sugeriram acordo no terceiro. Netanyahu pediu o fim imediato do julgamento: "dez anos de sofrimento terrível". Ele foi denunciado em <strong>2019</strong>; o processo se arrastou em parte pela guerra em Gaza. <a href="https://www.bbc.com/news/articles/cxj05mv723r2o">BBC</a>.</p></article>
+    <article class="card" id="pauta-macys-desfile"><h3>Macy's adia o 100º desfile de Ação de Graças para sábado por causa de um nor'easter</h3><p><strong>Fato — 25/11/2026.</strong> É a <strong>primeira vez que o desfile é adiado por clima</strong>; a única suspensão anterior foi na Segunda Guerra Mundial. Em 1971 os balões foram aterrados por mau tempo. A previsão de chuva forte e vento levou o atraso, com 100 infláveis previstos para o centenário. <a href="https://www.bbc.com/news/articles/cwkgr38l2g9yo">BBC</a>.</p></article>
+    <article class="card" id="pauta-colombia-refens"><h3>Colômbia: polícia liberta 76 reféns após 17 horas em supermercado; dois policiais mortos em emboscada</h3><p><strong>Fato — 25/11/2026.</strong> Um homem armado morreu na operação, descrita pelo presidente como assalto a um carro-forte. No norte do país, dois policiais foram mortos em emboscada — episódios tratados como parte da crise de segurança. <a href="https://www.bbc.com/news/articles/ckp80mjr9emyo">BBC</a> · <a href="https://g1.globo.com/mundo/noticia/2026/11/25/crise-na-colombia-dois-policiais-morrem-em-emboscada-de-homens-armados-no-norte-do-pais.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-ucrania-jatos"><h3>Ucrânia diz ter atingido cinco caças russos em ataque a aeródromo</h3><p><strong>Reportado — 25/11/2026.</strong> A informação é da parte ucraniana e <strong>não foi confirmada por fonte independente</strong> nesta captura. <a href="https://www.bbc.com/news/articles/ck9q8xp5r5pgo">BBC</a>.</p></article>
+    <article class="card" id="pauta-canarias"><h3>Contexto: cerca de 2.000 migrantes chegam em um único dia a El Hierro, nas Canárias</h3><p><strong>Fato — 24 e 25/11/2026.</strong> O resgate ocorreu no cais de La Restinga; a ilha tem quase <strong>12 mil habitantes</strong> e declarou emergência social no início de novembro. No ano, são <strong>24.364</strong> chegadas ao arquipélago, contra <strong>14.690</strong> em igual período de 2025. <a href="https://g1.globo.com/mundo/noticia/2026/11/25/cerca-de-2000-migrantes-chegam-a-uma-ilha-das-canarias-em-um-unico-dia.ghtml">G1/AFP</a>.</p></article>
+    <article class="card" id="pauta-russia-perdas"><h3>Contexto: dados vazados do Rosstat indicam ao menos 490 mil soldados russos mortos</h3><p><strong>Fato — 25/11/2026.</strong> São 11 milhões de registros de óbitos (2021 a setembro de 2026), com 90% de correspondência com a lista do Mediazona; a estimativa real fica entre <strong>527 mil e 644 mil</strong>. <a href="https://www.bbc.com/news/articles/cmx27g533zwyo">BBC</a>.</p></article>
+    <article class="card" id="pauta-iowa-explosao"><h3>Contexto: Exército dos EUA detona 68 barris de azida de chumbo em Iowa</h3><p><strong>Fato — 25/11/2026.</strong> A substância é usada na fabricação de munições; a detonação só ocorreu após disputa judicial sobre riscos à saúde e ao meio ambiente. O Exército chamou a operação de "grande sucesso". <a href="https://www.bbc.com/news/articles/cwg7l5ve251ko">BBC</a>.</p></article>
+    <article class="card" id="pauta-coreia-cristaos"><h3>Contexto: 570 desertores norte-coreanos relatam vigilância, prisão e tortura por serem cristãos</h3><p><strong>Fato — 25/11/2026.</strong> O relatório da ONG britânica Korea Future foi feito ao longo de cinco anos; Pyongyang afirma permitir liberdade religiosa. <a href="https://www.bbc.com/news/articles/cqgkv8kp7145o">BBC</a>.</p></article>
+  </div>
+</section>
+
+<section id="politica" class="desk-section">
+  <h2>Política</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-trabuco-confirmado"><span class="new-tag">Novo — 8h</span><h3>Trabuco é confirmado como ministro da Fazenda a partir de 2027</h3><p><strong>Fato — 26/11/2026, 20h04.</strong> O Planalto confirmou o aceite em nota, após reunião de cerca de duas horas na Alvorada; o Bradesco emitiu fato relevante à CVM na mesma noite. É o <strong>primeiro nome oficializado do governo Lula 4</strong>; ele assume em janeiro, no lugar de Durigan. Desdobramentos do dia: <strong>resistência de setores do PT</strong>, leitura de que o nome facilita a 2ª etapa do ajuste fiscal (Valdo Cruz) e blindagem da Fazenda (Sadi). <strong>Antecedente:</strong> em 2014 ele recusou o mesmo convite de Dilma e apoiou Joaquim Levy. <a href="https://g1.globo.com/politica/noticia/2026/11/26/governo-lula-anuncia-luiz-trabuco-para-ministerio-da-fazenda.ghtml">G1</a> · <a href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/notas-oficiais/nota-a-imprensa">Planalto</a> · <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/27/trabuco-na-fazenda-facilita-aprovacao-de-2a-etapa-do-ajuste-fiscal-e-trara-mais-tranquilidade-para-inicio-do-lula-4.ghtml">G1, Valdo Cruz</a> · <a href="https://g1.globo.com/politica/blog/andreia-sadi/post/2026/11/27/lula-escolha-trabuco-blinda-ministerio-fazenda.ghtml">G1, Sadi</a>.</p></article>
+    <article class="card is-new" id="pauta-alcolumbre-stf"><span class="new-tag">Novo — 8h</span><h3>Alcolumbre deve se reunir com Lula para decidir a indicação ao STF</h3><p><strong>Relato de fontes — 27/11/2026.</strong> O presidente do Senado aparece como intermediário do martelo; <strong>sem nome decidido</strong> na captura. <a href="https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/27/alcolumbre-deve-se-reunir-com-lula-para-bater-martelo-sobre-ministro-do-stf.ghtml">G1, Valdo Cruz</a>.</p></article>
+    <article class="card is-new" id="pauta-senado-estatais"><span class="new-tag">Novo — 8h</span><h3>Relatório do Senado retira redução de prazo para dirigentes de partidos assumirem estatais</h3><p><strong>Fato — 27/11/2026.</strong> A emenda é retirada do texto em análise; o restante do projeto não está detalhado na captura. <a href="https://g1.globo.com/politica/noticia/2026/11/27/relatorio-do-senado-retira-reducao-de-prazo-para-dirigentes-de-partidos-assumirem-estatais.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-durigan-futuro"><span class="new-tag">Novo — 8h</span><h3>Com Trabuco confirmado, futuro de Durigan no novo governo fica incerto</h3><p><strong>Reportado — 27/11/2026.</strong> O atual ministro atuou como porta-voz da economia na campanha; quem o substituirá na condução da transição não está definido na captura. <a href="https://g1.globo.com/economia/noticia/2026/11/27/apos-atuar-como-porta-voz-da-economia-na-campanha-futuro-de-durigan-no-governo-lula-4-e-incerto.ghtml">G1</a>.</p></article>
+
+    <article class="card" id="pauta-haddad-decisao"><h3>Haddad diz a Lula que deve ficar fora do governo</h3><p><strong>Fato — 26/11/2026.</strong> O ministro da Fazenda havia comunicado a decisão na terça (24); a USP já confirmou o retorno dele à pós-graduação em Ciência Política em 2027. <strong>Não houve convite formal de outro cargo nem recusa a ele.</strong> <a href="https://valor.globo.com/politica/noticia/2026/11/26/haddad-diz-a-presidente-que-deve-ficar-fora-do-governo.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-trabuco-meirelles"><h3>Lula aposta em Trabuco para ter um "novo Meirelles", escreve Ana Flor</h3><p><strong>Relato de fontes — 26/11/2026.</strong> A coluna detalha a estratégia de atrair o ex-presidente do Bradesco para a Fazenda repetindo o efeito da chegada de Meirelles ao BC em 2003. <strong>Nada foi anunciado</strong>; a análise do Valor estima baixa a probabilidade de aceitação. <a href="https://g1.globo.com/economia/blog/ana-flor/post/2026/11/26/em-busca-de-um-novo-meirelles-lula-tenta-atrair-trabuco.ghtml">G1/Ana Flor</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/26/analise-quem-e-luiz-carlos-trabuco-e-por-que-a-probabilidade-de-ele-aceitar-o-pior-emprego-do-mundo-e-baixa.ghtml">Valor, análise</a>.</p></article>
+    <article class="card" id="pauta-alckmin-seguranca"><h3>Alckmin é cotado para comandar o Ministério da Segurança Pública no 4º mandato</h3><p><strong>Relato de fontes — 26/11/2026.</strong> A pasta é promessa de campanha e ganhou força com a PEC da Segurança Pública aprovada pelo Senado em novembro; reunião com ex-ministros da Justiça já havia sido feita na véspera. <strong>Sem nome definido.</strong> <a href="https://g1.globo.com/politica/blog/andreia-sadi/post/2026/11/26/alckmin-seguranca-publica.ghtml">G1/Sadi</a> · <a href="https://valor.globo.com/politica/noticia/2026/11/26/alckmin-cotado-para-comandar-o-ministrio-da-segurana-pblica-no-quarto-mandato-de-lula.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-heranca-idoso"><h3>Câmara aprova perda da herança para quem tentar tomar bens de idoso</h3><p><strong>Fato — 26/11/2026.</strong> O texto trata da deserdação em casos de tentativa de apropriação de bens de pessoas idosas; segue para o Senado. <a href="https://g1.globo.com/politica/noticia/2026/11/26/heranca-deserdacao-curatela-idosos-camara.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-tornozeleira-alerta"><h3>Aprovado projeto que prevê alertas sonoros em tornozeleiras de agressores de mulheres</h3><p><strong>Fato — 26/11/2026.</strong> A Câmara aprovou o texto; os detalhes de operacionalização não constam na captura. <a href="https://g1.globo.com/politica/noticia/2026/11/26/camara-projeto-alerta-tornozeleira-feminicidios.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-fiscal-lula"><h3>Lula prepara novas medidas fiscais com foco em despesas obrigatórias; Durigan discute na quinta</h3><p><strong>Reportado — 26/11/2026.</strong> O líder do PT na Câmara defende gatilho para reduzir a meta fiscal. <strong>Manchetes do Valor</strong> — corpos sob assinatura, sem detalhamento capturado. <a href="https://valor.globo.com/politica/noticia/2026/11/26/lider-do-pt-na-camara-defende-gatilho-para-reduzir-meta-fiscal.ghtml">Valor</a> · <a href="https://valor.globo.com/brasil/noticia/2026/11/26/durigan-diz-que-discutir-medidas-fiscais-com-lula-nesta-quinta-feira.ghtml">Valor, Durigan</a>.</p></article>
+    <article class="card" id="pauta-gayer-pgr"><h3>PGR denuncia Gustavo Gayer por suposto desvio</h3><p><strong>Reportado — 26/11/2026.</strong> <strong>Manchete apenas</strong>: o corpo está atrás da assinatura no Valor; o tipo de desvio não é detalhado na captura. <a href="https://valor.globo.com/politica/noticia/2026/11/26/pgr-denuncia-gustavo-gayer-por-suposto-desvio.ghtml">Valor</a>.</p></article>
+
+    <article class="card" id="pauta-educacao-integral"><h3>Câmara aprova o Marco Nacional da Educação em Tempo Integral: no mínimo 7 horas por dia</h3><p><strong>Fato — 25/11/2026, 18h57.</strong> O piso é de <strong>7 horas diárias ou 35 semanais</strong>. A adesão será progressiva, com cronograma de cada sistema de ensino; a coordenação e o monitoramento ficam com a União, o apoio aos municípios com os estados e a oferta com municípios e DF. O projeto é de João Daniel (PT-SE), tramita desde <strong>2015</strong> e foi analisado com mais de 60 propostas apensadas. Segue para o Senado. <a href="https://g1.globo.com/politica/noticia/2026/11/25/camara-aprova-criacao-de-marco-nacional-da-educacao-em-tempo-integral.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-tse-crime"><h3>TSE cria grupo para mapear a atuação do crime organizado nas eleições</h3><p><strong>Fato — 25/11/2026, 18h30.</strong> A resolução de Nunes Marques dá <strong>quatro meses</strong> para estudar infiltração em estruturas políticas, financiamento ilícito de campanhas, coação de eleitores e intimidação de candidatos. Neste ano, o Ministério Público Eleitoral questionou <strong>42 candidaturas em 10 estados</strong>; 22 foram barradas ou renunciaram. <a href="https://g1.globo.com/politica/noticia/2026/11/25/tse-vai-mapear-atuacao-do-crime-organizado-nas-eleicoes-para-ampliar-combate.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-trabuco-fazenda"><h3>Quem é Luiz Trabuco, o executivo do Bradesco cotado para a Fazenda</h3><p><strong>Relato de fontes — 25/11/2026.</strong> O g1 publicou o perfil do nome que ganhou força depois do encontro com Lula. Aliados tratam a conversa como "aconselhamento", mas não descartam convite; <strong>nada foi anunciado</strong>. Camilo Santana segue como favorito para a Casa Civil. <a href="https://g1.globo.com/politica/noticia/2026/11/25/luiz-trabuco-quem-e-o-executivo-cotado-para-ser-ministro-da-fazenda.ghtml">G1, perfil</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/25/encontro-de-lula-com-trabuco-pode-ter-sido-de-aconselhamento-mas-aliados-nao-descartam-convite-para-a-fazenda.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-haddad-fora"><h3>USP confirma que Haddad volta a dar aulas na pós-graduação em Ciência Política em 2027</h3><p><strong>Fato — 25/11/2026.</strong> A universidade confirma o plano que o ministro da Fazenda comunicou a Lula na terça (24): voltar à USP e não morar em Brasília. Não houve convite nem recusa formal; a decisão vinha sendo amadurecida havia cerca de 60 dias. <a href="https://g1.globo.com/politica/noticia/2026/11/25/usp-haddad-pos-graduacao-2027.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-paulinho-dosimetria"><h3>Paulinho da Força diz que se reuniu com Moraes e espera apoio unânime do STF à lei que reduz penas do 8/1</h3><p><strong>Reportado — 25/11/2026.</strong> O relator da proposta no Congresso afirma que todo o STF deve apoiar o texto. A declaração é dele; <strong>não há confirmação de posição do tribunal</strong> nesta captura. <a href="https://g1.globo.com/politica/blog/andreia-sadi/post/2026/11/25/paulinho-da-forca-dosimetria-moraes.ghtml">G1/Andréia Sadi</a>.</p></article>
+    <article class="card" id="pauta-moraes-mpu"><h3>Moraes rejeita pedido para o STF indicar como custear R$ 324 milhões em "penduricalhos" no MPU</h3><p><strong>Fato — 25/11/2026.</strong> O pedido queria que o tribunal definisse a fonte de custeio dos valores; o ministro recusou. <a href="https://g1.globo.com/politica/noticia/2026/11/25/moraes-rejeita-pedido-para-stf-indicar-como-devem-ser-custeados-r-324-milhoes-em-penduricalhos-no-mpu.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-seguranca-ministerio"><h3>Contexto: Lula desenha o Ministério da Segurança Pública com ex-ministros da Justiça</h3><p><strong>Fato — 25/11/2026.</strong> Estavam Flávio Dino, Ricardo Lewandowski e Tarso Genro, além do atual ministro e de Alckmin. <strong>Sem data nem nome definido.</strong> A pasta é promessa de campanha e ganhou força com a PEC da Segurança Pública aprovada pelo Senado em novembro. <a href="https://g1.globo.com/politica/noticia/2026/11/25/lula-reune-ex-ministros-da-justica-para-discutir-nova-pasta-da-seguranca-publica.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-celulares-presidios"><h3>Contexto: governo bloqueia 3.941 celulares usados por presos em 47 dias</h3><p><strong>Fato — 09/10 a 25/11/2026.</strong> Com o Programa Nacional de Neutralização de Comunicações Ilícitas, o bloqueio administrativo passou a ser feito em cerca de 30 minutos após a identificação do IMEI pela Anatel. <a href="https://g1.globo.com/politica/noticia/2026/11/25/governo-diz-que-bloqueou-quase-quatro-mil-celulares-usados-por-presos-em-menos-de-50-dias.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-orcamento-contencao"><h3>Contexto: contenção cai para R$ 12,6 bi e déficit projetado sobe a R$ 89,3 bi</h3><p><strong>Fato — 24/11/2026, 23h38.</strong> O relatório do 5º bimestre reduziu o bloqueio porque o Congresso excluiu R$ 10,5 bilhões em subsídios ao diesel do cálculo da meta. <a href="https://g1.globo.com/politica/noticia/2026/11/24/governo-reduz-contencao-no-orcamento-para-r-126-bilhoes.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="economia" class="desk-section">
+  <h2>Economia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-ibovespa-fechamento"><span class="new-tag">Novo — 8h</span><h3>Com Trabuco confirmado, bolsa fecha em alta de 5,27% (175.467 pontos) e dólar a R$ 5,74</h3><p><strong>Fato — fechamento de 26/11/2026.</strong> O painel do g1 registra Ibovespa <strong>+5,27%, a 175.467</strong> (o intradiário chegou a +6,07%, 176.800) e dólar comercial <strong>R$ 5,7441 (−1,25%)</strong>. Na sexta, o EWZ (fundo de ações brasileiras nos EUA) subiu <strong>mais de 9%</strong>, e operadores ouvidos pelo Valor veem espaço para o dólar cair "ao menos 3,5%". <strong>Obs:</strong> o fechamento vem do painel do g1, sem matéria específica de fechamento aberta na captura. <a href="https://g1.globo.com/politica/noticia/2026/11/26/governo-lula-anuncia-luiz-trabuco-para-ministerio-da-fazenda.ghtml">G1</a> · <a href="https://g1.globo.com/economia/noticia/2026/11/27/ewz-sobe-apos-confirmacao-de-trabuco-na-fazenda.ghtml">G1, EWZ</a> · <a href="https://www.bbc.com/portuguese/articles/c3n0lrq5kgd1o">BBC Brasil</a> · <a href="https://valor.globo.com/financas/intraday/post/2026/11/mercado-ve-espaco-para-queda-de-ao-menos-35percent-no-dolar-apos-confirmacao-de-trabuco.ghtml">Valor</a>.</p></article>
+    <article class="card is-new" id="pauta-ue-auditoria-carne"><span class="new-tag">Novo — 8h</span><h3>Auditoria da própria UE contraria Macron: controles de frango e mel do Brasil atendem às exigências</h3><p><strong>Fato — 27/11/2026.</strong> A suspensão (em vigor desde <strong>03/09</strong>) não foi motivada por irregularidade na carne, mas pela avaliação de que os controles de antimicrobianos eram insuficientes; o relatório de <strong>28/09</strong>, da missão que esteve no Brasil entre 24/08 e 04/09, aprovou frango e mel. A <strong>carne bovina ainda não foi inspecionada</strong> — a exigência de "vida inteira sem antimicrobianos" é mais dura. A reunião que pode reautorizar as exportações está marcada para <strong>8 e 9/12</strong> (uma chamada de 26/11 citava 7 e 8). O Mapa rebate Macron: "desinformação". <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml">G1</a> · <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/governo-lula-acusa-franca-de-disseminar-desinformacao.ghtml">G1, Mapa</a>.</p></article>
+    <article class="card is-new" id="pauta-vieira-embraer"><span class="new-tag">Novo — 8h</span><h3>Após proposta de taxar aviões, Mauro Vieira oferece apoio à Embraer para buscar novos mercados</h3><p><strong>Fato — 27/11/2026.</strong> Desdobramento da reação do governo à proposta de 10% sobre aeronaves apresentada pelo USTR na véspera; o Itamaraty entra na articulação junto ao esforço já anunciado pela Embraer. <a href="https://g1.globo.com/politica/noticia/2026/11/27/apos-eua-proporem-taxar-avioes-brasileiros-mauro-vieira-oferece-apoio-a-embraer-para-buscar-novos-mercados.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-reforma-adiamento"><span class="new-tag">Novo — 8h</span><h3>Setores industriais e de infraestrutura pedem adiamento da reforma tributária</h3><p><strong>Reportado — 27/11/2026.</strong> <strong>Manchete do Valor</strong> — corpos sob assinatura; os termos do pedido e quem assina não constam na captura. <a href="https://valor.globo.com/empresas/noticia/2026/11/27/setores-industriais-e-de-infraestrutura-pedem-adiamento-da-reforma-tributaria.ghtml">Valor</a>.</p></article>
+    <article class="card is-new" id="pauta-blackfriday-dia"><span class="new-tag">Novo — 8h</span><h3>No dia da Black Friday, 58% dos itens checados têm desconto real; 33% estão mais caros</h3><p><strong>Fato — 27/11/2026.</strong> Monitoramento do g1 em tempo real. O Valor aponta que a data será o <strong>primeiro teste das novas regras do SAC</strong>. <a href="https://g1.globo.com/guia/guia-de-compras/no-dia-da-black-friday-58percent-dos-itens-pesquisados-tem-descontos-33percent-estao-mais-caros.ghtml">G1</a> · <a href="https://valor.globo.com/legislacao/noticia/2026/11/27/black-friday-sera-teste-para-novas-regras-do-servico-de-atendimento-ao-consumidor.ghtml">Valor</a>.</p></article>
+
+    <article class="card" id="pauta-mercado-trabuco"><h3>Bolsa dispara mais de 3,6% e dólar se aproxima de R$ 5,70 com chance de Trabuco na Fazenda</h3><p><strong>Preliminar — 26/11/2026, ~14h, pregão aberto.</strong> Ibovespa +3,62%, a 172.714 pontos; dólar R$ 5,733–5,739. <strong>Confirmado depois:</strong> o aceite saiu às 20h04 e o fechamento foi em alta de 5,27% — veja o card no topo desta editoria. <a href="https://g1.globo.com/economia/noticia/2026/11/26/dolar-ibovespa.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-alckmin-avioes"><h3>Alckmin chama tarifaço de Trump sobre aviões de "completamente descabido"; Embraer vai articular nos EUA</h3><p><strong>Fato — 26/11/2026.</strong> O vice-presidente disse que o Brasil tentará reverter a proposta de 10% sobre aeronaves, apresentada na véspera pelo USTR. A Embraer disse que vai se articular nos EUA e que confia no "bom senso", lembrando seus ativos e funcionários no país. <a href="https://g1.globo.com/economia/noticia/2026/11/26/alckimin-eua-tarias.ghtml">G1</a> · <a href="https://valor.globo.com/brasil/noticia/2026/11/26/alckmin-classifica-como-descabida-proposta-de-taxar-aeronaves-brasileiras-e-diz-que-brasil-tentar-reverter-medida.ghtml">Valor</a> · <a href="https://valor.globo.com/empresas/noticia/2026/11/26/embraer-vai-se-articular-nos-eua-para-evitar-novas-tarifas-e-diz-confiar-no-bom-senso.ghtml">Valor, Embraer</a>.</p></article>
+    <article class="card" id="pauta-acucar-impacto"><h3>Taxa extra sobre o açúcar deve ter impacto "praticamente nulo", diz analista; avião pode encarecer passagens nos EUA</h3><p><strong>Declaração — 26/11/2026.</strong> A cota brasileira de açúcar é de <strong>100 mil toneladas por ano</strong> e a proposta taxa o excedente — com a cota intocada, o efeito tende a ser pequeno. No caso das aeronaves, o g1 aponta risco de repasse ao preço das passagens nos EUA. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/tarifaco-de-trump-nova-taxa-sobre-acucar-brasileiro-deve-ter-impacto-praticamente-nulo-diz-analista.ghtml">G1, açúcar</a> · <a href="https://g1.globo.com/economia/noticia/2026/11/26/embraer-aeronaves-eua.ghtml">G1, passagens</a>.</p></article>
+    <article class="card" id="pauta-ipca15"><h3>IPCA-15 sobe 0,22% em novembro e acumula 4,64% em 12 meses</h3><p><strong>Fato — 26/11/2026.</strong> Prévia oficial da inflação; o resultado segue acima do centro do regime de metas. <strong>Manchete do Valor</strong> — o detalhamento por grupos está sob assinatura. <a href="https://valor.globo.com/brasil/noticia/2026/11/26/ipca-15-aumenta-022percent-em-novembro-e-acumula-alta-de-464percent-em-12-meses.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-bc-20mi"><h3>Medidas do BC para cartão e crédito sem garantias atingem 20 milhões de clientes</h3><p><strong>Fato — 26/11/2026.</strong> O diretor do BC detalha o alcance do pacote anunciado ontem pelo CMN, que manda reduzir o limite de quem reincide no rotativo. <strong>Manchete do Valor</strong> — o número cobre também modalidades sem garantias, não só o rotativo. <a href="https://valor.globo.com/financas/noticia/2026/11/26/medidas-do-bc-para-carto-de-crdito-e-modalidades-sem-garantias-atingem-20-milhes-de-clientes-diz-vivan.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-fictor-bloqueio"><h3>Justiça bloqueia até R$ 4,3 bilhões do grupo Fictor, que tentou comprar o Banco Master</h3><p><strong>Fato — 26/11/2026.</strong> Operação da Polícia de São Paulo contra o grupo, suspeito de pirâmide e em recuperação judicial; a Faria Lima vive sucessivas operações policiais desde o ano passado. <a href="https://valor.globo.com/financas/noticia/2026/11/26/policia-faz-operacao-contra-grupo-que-tentou-comprar-banco-master-justica-determina-bloqueio-de-ate-r-43-bilhoes.ghtml">Valor</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/26/suspeita-de-pirmide-crise-de-credibilidade-e-recuperao-judicial-quem-o-grupo-fictor-alvo-de-ao-da-polcia-de-sp.ghtml">Valor, perfil</a>.</p></article>
+    <article class="card" id="pauta-blackfriday-viispera"><h3>Véspera da Black Friday: 60% dos produtos monitorados já estão mais baratos; 39% já caíram em golpes</h3><p><strong>Fato — 26/11/2026.</strong> O monitoramento é do g1 (celulares lideram os descontos no PIX); a pesquisa sobre golpes foi citada pelo Valor. <a href="https://g1.globo.com/guia/guia-de-compras/casa/na-vespera-da-black-friday-60percent-dos-produtos-pesquisados-pelo-g1-ja-estao-mais-baratos.ghtml">G1</a> · <a href="https://valor.globo.com/empresas/marketing/noticia/2026/11/26/o-barato-que-sai-caro-39percent-dos-brasileiros-ja-cairam-em-golpes-na-black-friday-diz-pesquisa.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-coreia-juros"><h3>Banco da Coreia sobe juros 0,25 ponto, para 3,25% ao ano</h3><p><strong>Fato — 25/11/2026.</strong> Primeiro movimento do tipo no ciclo; o comunicado detalhado não consta na captura (manchete do Valor). <a href="https://valor.globo.com/financas/noticia/2026/11/25/banco-da-coreia-sobe-juros-em-025-ponto-percentual-para-325-pontos-percentuais-ao-ano.ghtml">Valor</a>.</p></article>
+
+    <article class="card" id="pauta-governo-indignacao"><h3>Governo diz que decisão do USTR é "inaceitável" e que não cederá a "ameaça"</h3><p><strong>Fato — 25/11/2026, 18h10.</strong> A nota do Planalto "expressa indignação" com a recomendação de taxar aeronaves e açúcar. Afirma que o Brasil negocia de boa-fé há mais de um ano, que os EUA ficaram de enviar uma proposta e não o fizeram antes da recomendação, e que a decisão "constitui uma ação inaceitável dentro do processo negociador bilateral em curso". <a href="https://g1.globo.com/economia/noticia/2026/11/25/governo-lula-diz-estar-indignado-com-nova-proposta-de-tarifa-dos-eua-contra-o-brasil-e-que-nao-cedera-a-esse-tipo-de-ameaca.ghtml">G1</a> · <a href="https://valor.globo.com/brasil/noticia/2026/11/25/governo-expressa-indignacao-com-ameaca-de-tarifas-dos-eua-e-cita-pressao-sobre-o-pix.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-pix-mira"><h3>Por que o PIX está na mira dos EUA na investigação que embasa as tarifas</h3><p><strong>Fato — 25/11/2026, 18h11.</strong> A investigação comercial aberta em <strong>julho de 2025</strong> abrange comércio digital e serviços de pagamentos; Washington questiona as condições de concorrência entre o sistema público do Banco Central e empresas privadas estrangeiras do setor. O comunicado desta quarta justificou as tarifas pelo volume de exportações de aviões e açúcar e <strong>não citou o PIX</strong>. O governo rejeita as acusações e diz que as regras do PIX são regulação nacional. <a href="https://g1.globo.com/economia/noticia/2026/11/25/brasil-protesta-contra-recomendacao-dos-eua-de-novas-tarifas-sobre-avioes-e-acucar.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-rollins-acucar"><h3>Secretária de Agricultura dos EUA defende as tarifas e acusa o Brasil de "práticas desleais"</h3><p><strong>Fato — 25/11/2026, 18h35.</strong> Brooke Rollins, aliada histórica de Trump e chefe do Departamento de Agricultura, disse que a medida protege agricultores americanos do "excesso de importações". A cota brasileira de açúcar é de <strong>100 mil toneladas por ano</strong>; a proposta taxa o que exceder a cota, bruto e refinado. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/25/secretaria-de-agricultura-de-trump-defende-novas-tarifas-e-acusa-brasil-de-praticas-desleais-contra-agricultores-dos-eua.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-cmn-cartao"><h3>CMN manda bancos reduzirem o limite do cartão de quem vive no rotativo</h3><p><strong>Fato — 25/11/2026, 19h10.</strong> A regra obriga as emissores a <strong>reduzir gradualmente o limite</strong> de clientes que, em seis meses, deixaram de pagar o total de três ou mais faturas em meses diferentes e financiaram o saldo. Os critérios devem estar em contrato e o cliente ser comunicado; a restrição cai após seis faturas integrais seguidas ou quitação. <strong>A maior parte vale em 1º/07/2027</strong>; a regra sobre negociação de direitos creditórios, a partir de "1º de novembro do ano que vem" (o texto não converte a data). O endividamento atinge <strong>81,6% das famílias</strong>, com recuo pelo 2º mês seguido. <a href="https://g1.globo.com/economia/noticia/2026/11/25/cmn-anuncia-medidas-para-conter-o-endividamento-das-familias.ghtml">G1</a> · <a href="https://valor.globo.com/financas/noticia/2026/11/25/bc-determina-reduo-do-limite-do-carto-de-quem-usa-crdito-rotativo-com-frequncia.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-tarifas-brasil"><h3>EUA propõem 10% sobre aviões brasileiros e taxa extra sobre o açúcar; decisão fica para janeiro</h3><p><strong>Fato — 25/11/2026, 11h26.</strong> A proposta altera as medidas de <strong>julho</strong>, quando Washington confirmou tarifa de <strong>25%</strong> sobre produtos brasileiros com exceções para aeronaves prontas e açúcar acima das cotas. O representante comercial Jamieson Greer disse que o Brasil não respondeu às reclamações em mais de um ano e que os EUA seguem abertos a acordo. Consulta pública até <strong>05/01/2027</strong>; audiências a partir de <strong>25/01/2027</strong>. <a href="https://g1.globo.com/economia/noticia/2026/11/25/eua-propoem-tarifas-mais-altas-sobre-importacoes-do-brasil.ghtml">G1</a> · <a href="https://valor.globo.com/mundo/noticia/2026/11/25/eua-propem-novas-tarifas-sobre-produtos-do-brasil.ghtml">Valor, manchete</a>.</p></article>
+    <article class="card" id="pauta-mercado-fechamento"><h3>Dólar fecha a R$ 5,8167 (−1,58%) e Ibovespa sobe 1,58%, a 166.675 pontos</h3><p><strong>Fato — 25/11/2026, fechamento.</strong> A moeda virou para queda depois de chegar a R$ 5,9703 na máxima. Pesaram a expectativa de medidas fiscais do governo e os dados americanos: o PCE de outubro subiu 0,3%, em linha com o esperado, e o PIB do 3º trimestre cresceu 4,3% anualizado. <a href="https://g1.globo.com/economia/noticia/2026/11/25/dolar-ibovespa.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-embraer-queda"><h3>Embraer fecha em queda de 4%, a R$ 103,20, depois de cair 9,6% no pregão</h3><p><strong>Fato — 25/11/2026.</strong> No pior momento, o papel foi a R$ 97,15. Ainda assim, acumula mais de <strong>16% de alta em 2026</strong>. A empresa pediu manutenção da isenção para a indústria aeroespacial global e lembrou os 45 anos de operação nos EUA, com <strong>US$ 3,5 bi em ativos e 2.500 funcionários</strong>. <a href="https://g1.globo.com/economia/noticia/2026/11/25/acoes-embraer-eua.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-tarifas-14"><h3>Contexto: tarifas de 15% a 35% sobre 14 economias; China com três faixas</h3><p><strong>Fato — 25/11/2026.</strong> Para a China, 20% como regra geral, 10% para uma lista e isenção para outra; <strong>Vietnã</strong> (20%), <strong>Índia</strong> (17%) e <strong>Singapura</strong> (10%) teriam desconto com acordo. <strong>México e Noruega</strong> ficaram fora. Os percentuais descontam tarifas já cobradas. <a href="https://g1.globo.com/economia/noticia/2026/11/25/eua-propoem-novas-tarifas-sobre-14-parceiros-comerciais-para-combater-excesso-de-capacidade-industrial.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-combustiveis-subsidio"><h3>Contexto: subsídios a combustíveis somam cerca de R$ 75 bi em 2026</h3><p><strong>Fato — 25/11/2026.</strong> O valor é sobretudo de diesel; a renovação por mais um mês deve acrescentar até R$ 10,5 bilhões — o mesmo valor que o Congresso autorizou abater da meta. O benefício é de R$ 2,12 por litro. <a href="https://g1.globo.com/economia/noticia/2026/11/25/subsidios-aos-combustiveis-somam-cerca-de-r-75-bilhoes-em-2026-diz-equipe-economica.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-ia-acoes"><h3>Contexto: Nasdaq cai quase 4% com o medo da IA</h3><p><strong>Fato — 25/11/2026.</strong> Nvidia e Anthropic recuaram com força; a leitura da BBC liga a volatilidade ao custo dos investimentos em IA e às promessas eleitorais de regulação mais dura. <a href="https://www.bbc.com/news/articles/cq0md8g14zryo">BBC</a>.</p></article>
+    <article class="card" id="pauta-appy-inflacao"><h3>Contexto: Appy diz que a reforma tributária tende a gerar inflação em 2027, com efeito temporário</h3><p><strong>Declaração — 25/11/2026.</strong> O secretário extraordinário da reforma falou também que a alíquota da CBS tem "grau de incerteza razoável". <strong>Manchete apenas</strong>: o corpo está atrás da assinatura no Valor. <a href="https://valor.globo.com/brasil/noticia/2026/11/25/reforma-tributaria-tende-a-gerar-inflacao-em-2027-mas-efeito-e-temporario-avalia-appy.ghtml">Valor</a>.</p></article>
+  </div>
+</section>
+
+<section id="tecnologia" class="desk-section">
+  <h2>Tecnologia</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-uk-pension-cyber"><span class="new-tag">Novo — 8h</span><h3>Reino Unido tira serviços do ar após "incidente cibernético" no órgão que paga aposentadorias</h3><p><strong>Reportado — 27/11/2026.</strong> O alcance do problema e a autoria do ataque não constam na captura; quem paga aposentadorias fica sem serviço digital. <a href="https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/27/reino-unido-tira-servicos-do-ar-apos-incidente-cibernetico-em-orgao-que-paga-aposentadorias.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-nvidia-serve-asiatico"><span class="new-tag">Novo — 8h</span><h3>Nvidia barra envio de servidores ao Sudeste Asiático em meio à suspeita de espionagem e desvio de chips</h3><p><strong>Reportado — 26/11/2026.</strong> Desdobramento da crise de governança: Jensen Huang renunciou em <strong>12/11</strong> após relatos de caso com executiva suspeita de espionagem chinesa via Megaspeed, foi <strong>reintegrado em 23/11</strong> (ações +31,5%, maior alta diária em 23 anos) e depõe no Congresso em <strong>03/12</strong>. No intervalo, o Commerce Department ampliou controles de exportação para Cingapura, Tailândia, Indonésia, Malásia <strong>e Brasil</strong>. O Valor aponta <strong>outro executivo</strong> em romance e suspeita de desvio (WSJ). <a href="https://g1.globo.com/tecnologia/noticia/2026/11/26/escandalo-de-espionagem-leva-eua-a-endurecer-regras-e-nvidia-barra-servidores-no-sudeste-asiatico.ghtml">G1</a> · <a href="https://valor.globo.com/empresas/noticia/2026/11/26/nvidia-tem-outro-executivo-envolvido-em-romance-e-suspeita-de-desvio-de-chips-para-a-china-diz-wsj.ghtml">Valor</a> · <a href="https://fortune.com/2026/11/24/tsmc-gains-158-billion-in-value-in-one-day-as-jensen-huang-returns-as-nvidia-ceo/">Fortune, contexto</a>.</p></article>
+    <article class="card is-new" id="pauta-google-multas"><span class="new-tag">Novo — 8h</span><h3>Governo dá 10 dias para o Google ampliar informações sobre anúncios, com multa de R$ 200 mil/dia</h3><p><strong>Fato — 26/11/2026.</strong> A exigência vale a partir da notificação; o objeto exato da prestação de contas não está detalhado na captura. <a href="https://g1.globo.com/economia/noticia/2026/11/26/governo-da-10-dias-para-que-google-amplie-informacoes-sobre-anuncios-e-fixa-multa-diaria-de-r-200-mil-em-caso-de-descumprimento.ghtml">G1</a>.</p></article>
+
+    <article class="card" id="pauta-musk-acoes"><h3>Musk promete duas ações da SpaceX para cada criança dos EUA, em iniciativa de US$ 18 bilhões</h3><p><strong>Reportado — 26/11/2026.</strong> <strong>Manchete do Valor</strong> — corpo sob assinatura; a estrutura da promessa e suas condições não são detalhadas na captura. Vem um dia depois da FCC autorizar o projeto Starmind, de 1 milhão de satélites para data centers. <a href="https://valor.globo.com/empresas/noticia/2026/11/26/musk-promete-duas-aes-da-spacex-para-cada-criana-dos-eua-em-iniciativa-de-us-18-bilhes.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-fifa-ciberataque"><h3>Fifa confirma que dados internos foram roubados em ataque cibernético</h3><p><strong>Fato — 26/11/2026.</strong> A entidade admite o roubo de informações pessoais e de negócios; o autor do ataque não foi informado na captura. <a href="https://www.bbc.com/sport/football/articles/crd61nvg4d84o">BBC</a>.</p></article>
+    <article class="card" id="pauta-fincen-ataque"><h3>FinCEN, órgão do Tesouro dos EUA que monitora crimes financeiros, retira sistemas do ar</h3><p><strong>Fato — 25/11/2026.</strong> A unidade detectou acesso não autorizado e tirou os sistemas do ar; vem na mesma semana de relatos de ataque a agências de inteligência americanas — <strong>nenhuma fonte liga os episódios</strong>. <a href="https://valor.globo.com/financas/noticia/2026/11/25/orgao-do-tesouro-dos-eua-que-monitora-crimes-financeiros-e-alvo-de-ataque-cibernetico.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-chips-brasil"><h3>Acesso restrito a chips de IA: regra americana passa a exigir relatórios sobre clientes de data centers</h3><p><strong>Reportado — 26/11/2026.</strong> A análise do Valor examina os efeitos sobre o Brasil. <strong>Manchete</strong> — corpo sob assinatura; os detalhes da exigência não constam na captura. <a href="https://valor.globo.com/empresas/noticia/2026/11/26/como-o-acesso-restrito-a-chips-de-ia-afeta-o-brasil.ghtml">Valor</a>.</p></article>
+    <article class="card" id="pauta-japan-chips"><h3>Japão planeja exigir diversificação de cadeias de suprimentos para chips e bens críticos</h3><p><strong>Reportado — 26/11/2026.</strong> <strong>Manchete do Valor</strong> — detalhes sob assinatura. <a href="https://valor.globo.com/mundo/noticia/2026/11/26/japo-planeja-exigir-diversificao-de-cadeias-de-suprimentos-para-chips-e-outros-bens-crticos.ghtml">Valor</a>.</p></article>
+
+    <article class="card" id="pauta-spacex-fcc"><h3>FCC autoriza a SpaceX a lançar até 1 milhão de satélites para data centers no espaço</h3><p><strong>Fato — 25/11/2026, 18h17.</strong> A licença vale até <strong>2040</strong> e cobre o projeto <strong>Starmind</strong>, que prevê satélites em órbita formando centros de dados. A empresa tem foguetes próprios; Musk prometeu o primeiro lançamento no 4º trimestre de <strong>2027</strong> e acelerar a implantação em 2028. Há acordo com a Nvidia para processadores <strong>Vera Rubin</strong> desenvolvidos para operar no espaço. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/25/fcc-autoriza-spacex-a-lancar-1-milhao-de-satelites-para-criar-data-centers-no-espaco.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-trump-nvidia"><h3>Contas de Trump negociaram ações da Nvidia 44 vezes em 2026, mostram declarações</h3><p><strong>Fato — 25/11/2026.</strong> Entre janeiro e setembro, os portfólios compraram de <strong>US$ 5,2 mi a US$ 17 mi</strong> e venderam de <strong>US$ 4,4 mi a US$ 12 mi</strong>; no fim de 2025, tinham de US$ 12,5 mi a US$ 58 mi em papéis. <strong>O período da crise de governança da Nvidia (12 a 23/11) não está coberto</strong> pelas declarações. A Casa Branca diz que o portfólio é gerido por terceiros, sem interferência dele ou da família. <a href="https://www.bbc.com/news/articles/cq772vk664yvo">BBC</a>.</p></article>
+    <article class="card" id="pauta-australia-lei"><h3>Contexto: Austrália aprova o "Dever de Cuidado Digital", com multa de até 5% da receita global</h3><p><strong>Fato — 25/11/2026.</strong> A lei obriga plataformas a identificar e remover proativamente conteúdos prejudiciais; entra em vigor em um ano e substitui códigos de conduta. Em 2025, o país já havia proibido redes sociais para menores de 16 anos. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/25/australia-aprova-lei-que-preve-multas-bilionarias-para-big-techs-por-conteudo-prejudicial.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-huang-desculpas"><h3>Contexto: Huang pede desculpas por "traição" e diz fazer terapia após voltar à Nvidia</h3><p><strong>Fato — 24/11/2026.</strong> Em entrevista, o CEO falou do episódio que o afastou por 11 dias e terminou com sua recondução por unanimidade. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/24/apos-voltar-ao-comando-da-nvidia-jensen-huang-pede-desculpas-por-traicao-e-diz-fazer-terapia.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-huawei-condenada"><h3>Contexto: Huawei é condenada nos EUA por negócios no Irã e roubo de segredos; absolvida de racketeering</h3><p><strong>Fato — 24 e 25/11/2026.</strong> O veredicto encerra um julgamento de mais de dois meses em Nova York, originado de um processo de 2018. <a href="https://www.bbc.com/news/articles/cmy49ngydqzpo">BBC</a> · <a href="https://g1.globo.com/tecnologia/noticia/2026/11/24/chinesa-huawei-e-condenada-nos-eua.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-cia-ataque"><h3>Contexto: CIA e outra agência dos EUA sofreram ataque cibernético, diz NYT</h3><p><strong>Reportado — 24/11/2026.</strong> Não confirmado oficialmente; ocorre na mesma semana da demissão do diretor de cibersegurança da Casa Branca. <strong>Nenhuma fonte liga os episódios.</strong> <a href="https://g1.globo.com/mundo/noticia/2026/11/24/cia-e-agencia-de-inteligencia-dos-eua-sofrem-ataque-cibernetico-e-tem-dados-expostos-diz-nyt.ghtml">G1/NYT</a>.</p></article>
+    <article class="card" id="pauta-whatsapp-som"><h3>Contexto: WhatsApp começa a liberar figurinhas com som</h3><p><strong>Fato — 24/11/2026.</strong> O recurso chega primeiro a usuários de alguns países. <a href="https://g1.globo.com/tecnologia/noticia/2026/11/24/whatsapp-comeca-a-liberar-figurinhas-com-som.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="saude" class="desk-section">
+  <h2>Saúde</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-covid-23estados"><span class="new-tag">Novo — 8h</span><h3>Covid avança em 23 estados e no DF, e o Brasil aplicou só um terço das 25,7 milhões de doses distribuídas</h3><p><strong>Fato — 27/11/2026 (boletim SE46, encerrada em 21/11).</strong> <strong>Seis semanas seguidas</strong> de crescimento; positividade RT-PCR na rede pública subiu para <strong>2,51%</strong> (1,5% na semana anterior); casos graves crescem em BA, DF, ES, MG, PR, RJ, RS, SC e SP; RJ e Pará em nível de alerta. O Ministério da Saúde passou a mandar mensagens por WhatsApp/GOV.BR e liberou 2,1 milhões de doses extras. <strong>Antecedente:</strong> em 2025, 21,9 milhões de doses distribuídas e só 8 milhões aplicadas (projeção: 15 milhões). Apesar da alta recente, os números anuais seguem bem abaixo de 2025 (−66,5% em síndrome gripal até a 1ª semana de novembro). <a href="https://g1.globo.com/saude/noticia/2026/11/27/covid-19-avanca-em-23-estados-e-no-df-e-brasil-aplica-apenas-um-terco-do-volume-de-vacinas-distribuidas-neste-ano.ghtml">G1</a> · <a href="https://www.gov.br/saude/pt-br/assuntos/noticias/2026/novembro/ministerio-da-saude-reforca-vacinacao-contra-covid-19-com-mensagens-a-populacao-e-envio-de-doses-aos-estados">Ministério da Saúde</a> · <a href="https://www.dw.com/pt-br/casos-de-covid-crescem-no-brasil-mesmo-com-vacina-sobrando/a-80004772">DW, 20/11</a>.</p></article>
+    <article class="card is-new" id="pauta-fda-mama"><span class="new-tag">Novo — 8h</span><h3>FDA aprova primeiro remédio novo em 20 anos para câncer de mama em fase inicial</h3><p><strong>Fato — 27/11/2026.</strong> O preço pode chegar a <strong>R$ 120 mil por mês</strong>; o nome comercial e a cobertura pelo SUS não constam na captura. <a href="https://g1.globo.com/saude/noticia/2026/11/27/fda-aprova-primeiro-remedio-novo-em-20-anos-para-cancer-de-mama-em-fase-inicial-preco-pode-chegar-a-r-120-mil-por-mes.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-anvisa-muwiz"><span class="new-tag">Novo — 8h</span><h3>Anvisa manda recolher sete suplementos da Muwiz por ingredientes não autorizados</h3><p><strong>Fato — 27/11/2026.</strong> A lista completa de lotes está na reportagem; proibições de suplementos sem procedência já vinham sendo publicadas pela agência desde o início da semana. <a href="https://g1.globo.com/saude/noticia/2026/11/27/anvisa-manda-recolher-sete-suplementos-da-muwiz-por-ingredientes-nao-autorizados-veja-lista.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-inca-atlas"><span class="new-tag">Novo — 8h</span><h3>INCA lança atlas genético inédito de tumores em brasileiros para orientar tratamentos</h3><p><strong>Fato — 26/11/2026.</strong> A base investiga por que o câncer é diferente entre brasileiros; a dimensão da amostra não consta na captura. <a href="https://g1.globo.com/saude/noticia/2026/11/26/por-que-o-cancer-pode-ser-diferente-entre-brasileiros-inca-lanca-atlas-genetico-inedito-para-investigar-tumores-e-orientar-tratamentos.ghtml">G1</a>.</p></article>
+
+    <article class="card" id="pauta-lenacapavir"><h3>Injetável contra HIV aplicado duas vezes ao ano e quase 100% eficaz chega à África por preço menor</h3><p><strong>Fato — 26/11/2026.</strong> É o <strong>lenacapavir</strong>, preventivo de longa duração; a expansão na África mira as populações de maior risco. <strong>Lacuna:</strong> a aprovação prévia nos EUA (2025) não pôde ser confirmada por busca na captura anterior — o dado sustenta-se na reportagem da BBC. <a href="https://www.bbc.com/news/articles/cmly7jve72r2o">BBC</a>.</p></article>
+    <article class="card" id="pauta-jovens-sexo"><h3>Um terço dos jovens britânicos nunca teve sexo — mas muitos praticam sexting e veem pornografia</h3><p><strong>Reportado — 26/11/2026.</strong> Dados autorreferidos da pesquisa destacada pela BBC Health; os números exatos não constam na captura (página de features). <a href="https://www.bbc.com/health">BBC Health</a>.</p></article>
+
+    <article class="card" id="pauta-prostata-cura"><h3>Câncer de próstata tem mais de 90% de chance de cura quando descoberto cedo</h3><p><strong>Fato — 25/11/2026.</strong> A reportagem foi publicada depois da morte do guitarrista Andy Taylor, que tinha diagnóstico metastático desde 2018, e explica rastreamento, sintomas e quando procurar avaliação. <a href="https://g1.globo.com/saude/noticia/2026/11/25/cancer-de-prostata-doenca-que-matou-guitarrista-do-duran-duran-tem-mais-de-90percent-de-chance-de-cura-quando-descoberta-cedo.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-antidepressivos"><h3>Estudo mostra diferenças na ação de fluoxetina, escitalopram e duloxetina</h3><p><strong>Reportado — 25/11/2026.</strong> <strong>Manchete registrada sem leitura do corpo:</strong> o resultado específico do estudo não é afirmado aqui. <a href="https://g1.globo.com/saude/noticia/2026/11/25/fluoxetina-escitalopram-e-duloxetina-estudo-mostra-diferencas-na-acao-de-antidepressivos.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-calor-mulheres"><h3>Por que as ondas de calor afetam mais as mulheres</h3><p><strong>Reportado — 25/11/2026.</strong> Mesma ressalva: registrada como manchete, sem leitura do corpo. <a href="https://g1.globo.com/saude/noticia/2026/11/25/por-que-as-ondas-de-calor-afetam-mais-as-mulheres.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-hertuzo"><h3>Contexto: Anvisa aprova Hertuzo, biossimilar do Perjeta para câncer de mama HER-2 positivo</h3><p><strong>Fato — 23 e 25/11/2026.</strong> O princípio ativo é o pertuzumabe e o fabricante é a Bionovis. Por ser biossimilar, a expectativa é de redução de preço com o aumento da oferta. <a href="https://g1.globo.com/saude/noticia/2026/11/25/como-age-o-novo-medicamento-aprovado-pela-anvisa-para-tratar-cancer-de-mama.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-covid-alta"><h3>Contexto: Covid salta de ~1.000 para ~17.000 casos por semana em três meses</h3><p><strong>Fato — 25/11/2026.</strong> A positividade passou de 1% para 17%, com a variante <strong>PJ.2.1</strong>, mais transmissível e sem evidência de maior gravidade. <a href="https://g1.globo.com/podcast/o-assunto/noticia/2026/11/25/covid-o-crescimento-acelerado-no-numero-de-casos-o-assunto-1852.ghtml">O Assunto/g1</a>.</p></article>
+    <article class="card" id="pauta-anvisa-proibicoes"><h3>Contexto: Anvisa proíbe anabolizantes sem registro, medicamentos falsificados e suplementos</h3><p><strong>Fato — 25/11/2026, 06h40.</strong> Duas resoluções determinam apreensão e proíbem a venda de lotes do Dysport 500U, do Darzalex e do Imbruvica, além de suplementos de três marcas. <a href="https://g1.globo.com/saude/noticia/2026/11/25/anvisa-proibe-anabolizantes-sem-registro-medicamentos-falsificados-e-suplementos-sem-procedencia-veja-produtos.ghtml">G1</a>.</p></article>
+  </div>
+</section>
+
+<section id="ciencia" class="desk-section">
+  <h2>Ciência</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-hera-cratera"><span class="new-tag">Novo — 8h</span><h3>Hera revela: cratera do tamanho de um estádio, giro caótico e centenas de rochas ao redor de Dimorphos</h3><p><strong>Fato — 25-26/11/2026.</strong> As primeiras imagens da sonda europeia mostram o asteroide atingido pela DART em <strong>26/09/2022</strong> (primeiro teste de defesa planetária, impacto a ~22,5 mil km/h; órbita encurtada em ~33 min): a face atingida virou cratera que atravessa o corpo inteiro, e o asteroide passou a girar de forma caótica — antes, mostrava sempre a mesma face. A Hera, lançada em <strong>10/2024</strong>, aproxima-se a menos de 13 km em dezembro; CubeSats seguem em 01/2027. <a href="https://g1.globo.com/ciencia/noticia/2026/11/26/o-que-revelam-imagens-do-asteroide-atingido-deliberadamente-pela-nasa-para-testar-defesas-da-terra.ghtml">G1</a> · <a href="https://www.bbc.com/portuguese/articles/cmx29v1ekq9qo">BBC Brasil</a> · <a href="https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/hera-reveals-stadium-sized-asteroid-crater-left-after-spacecraft-impact">ESA</a>.</p></article>
+    <article class="card is-new" id="pauta-china-espaco"><span class="new-tag">Novo — 8h</span><h3>Estação espacial chinesa recebe o primeiro astronauta estrangeiro</h3><p><strong>Reportado — 26/11/2026.</strong> O país do astronauta e as condições da missão não ficam claros na captura. <a href="https://g1.globo.com/ciencia/noticia/2026/11/26/estacao-espacial-chinesa-recebe-o-primeiro-astronauta-estrangeiro.ghtml">G1</a>.</p></article>
+
+    <article class="card" id="pauta-nhs-mamografia"><h3>NHS lança o maior teste mundial de IA para detectar câncer de mama mais cedo</h3><p><strong>Fato — 26/11/2026.</strong> A tecnologia será testada no rastreamento por mamografia, com o objetivo declarado de antecipar diagnósticos e aliviar a pressão sobre o sistema britânico; prazo e dimensão do teste não constam na captura. <a href="https://www.bbc.com/news/articles/cmpdwnw3nvzjo">BBC</a>.</p></article>
+
+    <article class="card" id="pauta-minicerebros"><h3>"Minicérebros" enviados à Estação Espacial revelam novas pistas sobre o Alzheimer</h3><p><strong>Fato — 25/11/2026, 16h.</strong> Organoides cerebrais humanos ficaram <strong>40 dias</strong> na ISS. Na comparação com amostras mantidas na Terra, os pesquisadores viram alterações em proteínas e na atividade de milhares de genes, e que mutações diferentes ligadas à doença disparam processos distintos nas células. Estudo publicado na <strong>Science Advances</strong>, coordenado pelo neurocientista brasileiro <strong>Alysson Muotri</strong> (UC San Diego). <a href="https://g1.globo.com/saude/noticia/2026/11/25/minicerebros-espaco-alzheimer.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-quasar"><h3>Contexto: quasar de 630 milhões de anos após o Big Bang é o objeto mais antigo já observado</h3><p><strong>Fato — 24/11/2026.</strong> Está a 13,1 bilhões de anos-luz; o buraco negro central tem massa equivalente a 360 milhões de sóis. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/cientistas-descobrem-objeto-formado-apenas-630-milhoes-de-anos-apos-o-big-bang-e-se-torna-objeto-astronomico-mais-antigo-descoberto-no-universo.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-asteroide"><h3>Contexto: imagens em close do asteroide desviado por uma nave mostram cratera do tamanho de um estádio</h3><p><strong>Fato — 25/11/2026.</strong> A missão europeia estudou o asteroide atingido de propósito em 2022 para testar a defesa planetária; as imagens mostram a cratera e a deformação do corpo. <a href="https://www.bbc.com/news/articles/cw8dv112r5gmo">BBC</a>.</p></article>
+    <article class="card" id="pauta-superlua"><h3>Contexto: superlua de novembro — fotos do fenômeno pelo mundo</h3><p><strong>Fato — 24/11/2026.</strong> A lua cheia ocorreu às 11h53 de Brasília, no ponto de maior aproximação do ano. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/superlua-fotos-do-fenomeno.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-partenon"><h3>Contexto: arqueólogos reconstroem a disposição original das esculturas do Partenon</h3><p><strong>Fato — 24/11/2026.</strong> O trabalho usou iPhone, scanners e impressoras 3D para testar hipóteses abertas há mais de 40 anos. <a href="https://g1.globo.com/ciencia/noticia/2026/11/24/arqueologos-desvendam-misterio-de-esculturas-do-partenon-apos-mais-de-40-anos-de-pesquisa.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-planta-unicornio"><h3>Contexto: planta "unicórnio" é devolvida à Mata Atlântica cinco anos após apreensão</h3><p><strong>Fato — 24/11/2026.</strong> A espécie é cobiçada e avaliada em milhares de dólares no mercado ilegal; o retorno foi acompanhado por pesquisadores. <a href="https://g1.globo.com/fantastico/noticia/2026/11/24/cobicada-e-avaliada-em-milhares-de-dolares-planta-unicornio-e-devolvida-a-mata-atlantica-cinco-anos-apos-apreensao.ghtml">Fantástico/g1</a>.</p></article>
+  </div>
+</section>
+
+<section id="esporte" class="desk-section">
+  <h2>Esporte</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-marquez-aposenta"><span class="new-tag">Novo — 8h</span><h3>Márquez anuncia aposentadoria no auge: 8 títulos, recorde de Agostini igualado</h3><p><strong>Fato — 27/11/2026.</strong> O anúncio veio no FP1 do GP de Valência, cinco dias após o título em Portimão; ele tinha <strong>contrato com a Ducati até 2028</strong>, renovado em junho. A despedida é neste domingo (29). <strong>Antecedente:</strong> a fratura do úmero em <strong>2020</strong> quase encerrou a carreira; ele voltou a vencer em 2024 na Gresini, depois de 1.000+ dias sem vitórias, e ganhou o 7º título na Ducati em 2025. <a href="https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml">O Globo</a> · <a href="https://www.motogp.com/pt/news/2026/11/27/marc-marquez-announces-retirement-from-motogp/1268528">MotoGP.com</a> · <a href="https://motorsport.uol.com.br/motogp/news/marc-marquez-anuncia-aposentadoria-imediata-da-motogp-ao-final-de-2026/10878142/">UOL</a>.</p></article>
+    <article class="card is-new" id="pauta-dorival-saida"><span class="new-tag">Novo — 8h</span><h3>Dorival Júnior e Rafinha deixam o São Paulo no fim do Brasileirão</h3><p><strong>Fato — 26-27/11/2026.</strong> A saída vem na mesma noite da vitória por cima do Remo, em jogo marcado por protestos no Morumbis; a análise do ge aponta crise herdada. <a href="https://ge.globo.com/futebol/times/sao-paulo/noticia/2026/11/26/dorival-junior-avisa-que-deixara-o-sao-paulo-no-fim-do-brasileirao.ghtml">ge</a> · <a href="https://ge.globo.com/futebol/times/sao-paulo/noticia/2026/11/27/analise-rafinha-e-dorival-explicam-saida-por-uma-hora-mas-deixam-sao-paulo-cheio-de-problemas.ghtml">ge, análise</a>.</p></article>
+    <article class="card is-new" id="pauta-corinthians-justica"><span class="new-tag">Novo — 8h</span><h3>Justiça nega intervenção no Corinthians, mas impõe restrições à diretoria</h3><p><strong>Fato — 26-27/11/2026.</strong> No dia seguinte, Janikian (candidato) descarta a SAF, promete aporte financeiro e avalia a arena em R$ 1 bilhão. <a href="https://ge.globo.com/futebol/times/corinthians/noticia/2026/11/26/justica-nega-intervencao-no-corinthians-e-impoe-restricoes-a-diretoria.ghtml">ge</a> · <a href="https://ge.globo.com/futebol/times/corinthians/noticia/2026/11/27/eleicoes-corinthians-janikian-descarta-saf-promete-aporte-financeiro-e-avalia-arena-em-r-1-bi.ghtml">ge, eleições</a>.</p></article>
+    <article class="card is-new" id="pauta-rodada-37-cenarios"><span class="new-tag">Novo — 8h</span><h3>Rodada 37 define de tudo: da Libertadores ao rebaixamento; Fluminense x Cruzeiro hoje, 20h</h3><p><strong>Fato — 27/11/2026.</strong> A rodada fecha o G-4, o resto das vagas na Libertadores e a zona de rebaixamento; na Série B, os playoffs definem os últimos acessos à elite. <a href="https://ge.globo.com/sp/tem-esporte/futebol/brasileirao-serie-a/noticia/2026/11/27/brasileirao-da-libertadores-ao-rebaixamento-veja-o-que-a-37a-rodada-pode-definir.ghtml">ge</a> · <a href="https://ge.globo.com/ce/futebol/brasileirao-serie-b/noticia/2026/11/27/serie-b-define-ultimos-classificados-a-elite-veja-cenarios-dos-playoffs.ghtml">ge, Série B</a>.</p></article>
+    <article class="card is-new" id="pauta-libertadores-lema"><span class="new-tag">Novo — 8h</span><h3>Véspera da final: Palmeiras cria lema inspirado em Gómez; Leila promete "dançar até o chão"</h3><p><strong>Fato — 26/11/2026.</strong> A decisão é <strong>sábado, 17h de Brasília</strong>, em Montevidéu; o Estudiantes reapresenta o palco do primeiro título do Palmeiras (1968) e reivindica a própria tradição de três títulos. <a href="https://ge.globo.com/futebol/times/palmeiras/noticia/2026/11/26/palmeiras-cria-lema-inspirado-em-gustavo-gomez-para-final-da-libertadores-saiba-qual-e.ghtml">ge</a> · <a href="https://ge.globo.com/futebol/futebol-internacional/noticia/2026/11/26/estudiantes-reencontra-palmeiras-e-palco-do-primeiro-titulo-para-reafirmar-tradicao-na-libertadores.ghtml">ge, Estudiantes</a>.</p></article>
+
+    <article class="card" id="pauta-david-vasco"><h3>Atacante David, do Vasco, é preso no CT suspeito de tentativa de homicídio e tráfico; Hayner também é preso</h3><p><strong>Fato — 26/11/2026.</strong> David Corrêa (o DVD) começou a ser investigado em <strong>2024</strong>, por ligação com traficantes do ES; a decisão é da Justiça do Espírito Santo. O lateral <strong>Hayner</strong>, do Vila Nova, foi preso na mesma operação, com <strong>prisão preventiva decretada</strong>. O Vasco avalia rescindir o contrato por justa causa. <a href="https://g1.globo.com/rj/rio-de-janeiro/noticia/2026/11/26/diligencias-jogador-david-correa-do-vasco.ghtml">G1</a> · <a href="https://ge.globo.com/es/futebol/noticia/2026/11/26/entenda-a-decisao-da-justica-do-es-que-determinou-prisao-de-david-do-vasco-e-hayner-do-vila-nova.ghtml">ge, decisão</a>.</p></article>
+    <article class="card" id="pauta-rodada-37"><h3>Rodada 37: Fla 80 e Palmeiras 74; Inter já pode ser rebaixado na próxima rodada</h3><p><strong>Fato — 26/11/2026.</strong> Hoje, 20h: São Paulo x Remo. O Gato Mestre calcula <strong>95% de chance de queda de um clube gaúcho</strong>; o Inter pode ser matematicamente rebaixado na próxima rodada. <a href="https://ge.globo.com/rs/futebol/times/internacional/noticia/2026/11/26/inter-ja-pode-ser-rebaixado-na-proxima-rodada-do-brasileirao-veja-cenarios.ghtml">ge</a> · <a href="https://ge.globo.com/gato-mestre/noticia/2026/11/26/chance-de-queda-de-um-clube-gaucho-no-brasileirao-chega-a-95percent-veja-risco-da-dupla-gre-nal-cair.ghtml">ge/Gato Mestre</a>.</p></article>
+    <article class="card" id="pauta-sinner-open"><h3>Cirurgia no joelho tira Sinner do Australian Open</h3><p><strong>Fato — 26/11/2026.</strong> O tenista está fora do primeiro Grand Slam de 2027; detalhes da recuperação não constam na captura. <a href="https://www.bbc.com/sport/tennis/articles/c6x29q88r9v5o">BBC</a>.</p></article>
+    <article class="card" id="pauta-lammens-critica"><h3>Goleiro do United vive a maior pressão da carreira após falhas contra o Sporting</h3><p><strong>Reportado — 26/11/2026.</strong> Senne Lammens falhou duas vezes no 2 a 2 de ontem; a BBC avalia se Pochettino o retiraria do time. <a href="https://www.bbc.com/sport/football/articles/cmn4k7v93gvzo">BBC</a>.</p></article>
+
+    <article class="card" id="pauta-palmeiras-montevideu"><h3>Palmeiras chega a Montevidéu com elenco completo; Paulinho mancando acende alerta</h3><p><strong>Fato — 25/11/2026, 19h55.</strong> O voo decolou às 16h45 e pousou por volta das 19h; Abel Ferreira cumprimentou torcedores no hotel. A final contra o Estudiantes é <strong>sábado, 28/11, às 17h de Brasília, no Centenário</strong>. Um vídeo mostra <strong>Paulinho mancando</strong> ao deixar a Academia; o clube não informou lesão e ele aparece na lista de relacionados. <a href="https://ge.globo.com/futebol/times/palmeiras/noticia/2026/11/25/palmeiras-chega-a-montevideu-para-a-final-da-libertadores-veja-relacionados.ghtml">ge</a> · <a href="https://ge.globo.com/futebol/times/palmeiras/noticia/2026/11/25/video-de-paulinho-mancando-repercute-entre-torcedores-do-palmeiras-antes-de-viagem.ghtml">ge, vídeo</a>.</p></article>
+    <article class="card" id="pauta-estudiantes-festa"><h3>Torcida do Estudiantes faz festa no embarque do time para a final</h3><p><strong>Fato — 25/11/2026, 19h22.</strong> Milhares de torcedores esperaram a delegação do lado de fora do CT e cantaram durante a saída para o aeroporto; os jogadores retribuíram de dentro do ônibus. O time argentino eliminou o Flamengo nos pênaltis. <a href="https://ge.globo.com/futebol/futebol-internacional/noticia/2026/11/25/torcida-do-estudiantes-faz-festa-antes-de-embarque-do-time-para-a-final-da-libertadores.ghtml">ge</a>.</p></article>
+    <article class="card" id="pauta-champions-lille"><h3>Lille vira sobre o Bayern com gol contra e vence por 2 a 1 na Champions</h3><p><strong>Fato — 25/11/2026, encerrado.</strong> O Bayern abriu o placar, mas cedeu a virada com um gol contra. <a href="https://ge.globo.com/futebol/futebol-internacional/liga-dos-campeoes/jogo/25-11-2026/lille-bayerndemunique.ghtml">ge</a> · <a href="https://www.bbc.com/sport/football/live/crp3eye835g3t">BBC</a>.</p></article>
+    <article class="card" id="pauta-champions-united"><h3>United vira em dois minutos, mas goleiro falha e Sporting arranca o empate em 2 a 2</h3><p><strong>Fato — 25/11/2026, encerrado.</strong> Lammens falhou no lance do empate em Lisboa, numa noite de virada e reviravolta. <a href="https://ge.globo.com/futebol/futebol-internacional/jogo/25-11-2026/sporting-Manchesterunited.ghtml">ge</a> · <a href="https://www.bbc.com/sport/football/live/crkgv8v0gdwkt">BBC</a>.</p></article>
+    <article class="card" id="pauta-marquez-titulo"><h3>Marc Márquez conquista o oitavo título da MotoGP</h3><p><strong>Fato — 25/11/2026.</strong> O espanhol confirmou o título e chega ao oitavo campeonato na categoria rainha. <a href="https://www.bbc.com/sport/motorsport/videos/cr930y14v3n4o">BBC, vídeo</a>.</p></article>
+    <article class="card" id="pauta-williams-teto"><h3>Williams estourou o teto de custos da F1 em 627 mil libras</h3><p><strong>Fato — 25/11/2026.</strong> A equipe excedeu o limite permitido; o caso entra na fiscalização financeira da categoria. <a href="https://www.bbc.com/sport/formula1/articles/cxj05mv79zdo">BBC</a>.</p></article>
+    <article class="card" id="pauta-rodada-36"><h3>Contexto: rodada 36 começa com Atlético-MG x Corinthians, às 20h, na Arena MRV</h3><p><strong>Fato — 25/11/2026.</strong> O jogo define o tamanho do risco do Corinthians e pode salvar o Vitória. <strong>Estava em andamento na captura e o placar não pôde ser confirmado</strong> — a página do jogo estourou por tempo limite duas vezes. <a href="https://ge.globo.com/mg/futebol/brasileirao-serie-a/jogo/25-11-2026/atletico-mg-corinthians.ghtml">ge</a>.</p></article>
+    <article class="card" id="pauta-inter-vitoria"><h3>Contexto: Inter tem 91% de risco de rebaixamento e não alcança mais o Vitória</h3><p><strong>Fato — 24/11/2026.</strong> Com 38 pontos e 18º lugar, o Colorado só empataria em pontos com o Vitória, que leva vantagem no número de vitórias. Pelo menos um entre Inter, Corinthians, Grêmio e Botafogo cai. <a href="https://ge.globo.com/mg/futebol/noticia/2026/11/24/serie-a-tem-um-gigante-rebaixado-e-quase-50percent-de-chance-de-dobradinha-na-b.ghtml">ge/Gato Mestre</a>.</p></article>
+    <article class="card" id="pauta-coritiba"><h3>Contexto: provocações de Neymar e Gabigol motivaram o Coritiba na vitória decisiva</h3><p><strong>Fato — 25/11/2026.</strong> O time usou as provocações como combustível e segue vivo na luta pela permanência. <a href="https://ge.globo.com/pr/futebol/times/coritiba/noticia/2026/11/25/como-provocacoes-de-neymar-e-gabigol-motivaram-o-coritiba-em-vitoria-decisiva-pela-permanencia.ghtml">ge</a>.</p></article>
+  </div>
+</section>
+
+<section id="cultura" class="desk-section">
+  <h2>Cultura</h2>
+  <div class="grid">
+    <article class="card is-new" id="pauta-miss-universo"><span class="new-tag">Novo — 8h</span><h3>Nova Miss Universo tem dois mestrados e é a primeira mãe a vencer o concurso</h3><p><strong>Fato — 26/11/2026.</strong> O país da vencedora não consta na captura do g1. <a href="https://g1.globo.com/pop-arte/noticia/2026/11/26/nova-miss-universo-tem-dois-mestrados-e-e-a-primeira-mae-a-vencer-o-concurso.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-belchior-doc"><span class="new-tag">Novo — 8h</span><h3>Documentário "Alucinação Belchior" estreia nos cinemas nos 50 anos do disco clássico</h3><p><strong>Fato — 26/11/2026.</strong> O filme revisita a carreira do compositor de "Apenas um rapaz latino-americano". <a href="https://g1.globo.com/pop-arte/noticia/2026/11/26/documentario-alucinacao-belchior-estreia-nos-cinemas-nos-50-anos-do-classico-disco-do-cantor.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-cliff-booth"><span class="new-tag">Novo — 8h</span><h3>"As Novas Desventuras de Cliff Booth", com Brad Pitt, diverte do início ao fim, avalia o g1</h3><p><strong>Crítica — 27/11/2026.</strong> O personagem volta ao centro em filme derivado de "Era uma Vez em… Hollywood". <a href="https://g1.globo.com/pop-arte/cinema/noticia/2026/11/27/com-brad-pitt-carismatico-as-novas-desventuras-de-cliff-booth-diverte-do-inicio-ao-fim-g1-ja-viu.ghtml">G1</a>.</p></article>
+    <article class="card is-new" id="pauta-chico-buarque-serie"><span class="new-tag">Novo — 8h</span><h3>Série com voz de Péricles, Gaby Amarantos e Zeca Veloso homenageia Chico Buarque; estreia em dezembro</h3><p><strong>Fato — 26/11/2026.</strong> A lista de intérpretes inclui Don L, Zé Ibarra, Zé Manoel, Catto, Jaloo e Flor. <a href="https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/11/26/chico-buarque-e-cantado-por-pericles-gaby-amarantos-don-l-ze-ibarra-ze-manoel-zeca-veloso-catto-jaloo-e-flor-em-serie-que-estreia-em-dezembro.ghtml">G1</a>.</p></article>
+
+    <article class="card" id="pauta-depardieu-julgamento"><h3>Gérard Depardieu irá a julgamento por estupro de atriz em 2018, decide tribunal</h3><p><strong>Fato — 26/11/2026.</strong> A decisão judicial mantém a acusação; data do júri não consta na captura. <a href="https://www.bbc.com/news/articles/cmlyd76kyx44o">BBC</a>.</p></article>
+    <article class="card" id="pauta-veruschka-bbc"><h3>BBC publica homenagem em imagens a Veruschka, morta aos 87 anos</h3><p><strong>Fato — 26/11/2026.</strong> A morte da primeira supermodelo da Alemanha já havia sido noticiada pelo g1 na véspera; a BBC reúne retratos da carreira. <a href="https://www.bbc.com/news/articles/cmn50ezxdnewo">BBC</a> · <a href="https://g1.globo.com/pop-arte/noticia/2026/11/25/veruschka-a-primeira-supermodelo-da-alemanha-morre-aos-87-anos.ghtml">G1 (25/11)</a>.</p></article>
+    <article class="card" id="pauta-andy-taylor-homenagem"><h3>Homenagens a Andy Taylor: "um fogo e uma desenvoltura indeléveis"</h3><p><strong>Fato — 26/11/2026.</strong> Simon Le Bon e os companheiros do Duran Duran prestam tributo ao guitarrista morto na segunda (23), aos 65 anos, após câncer de próstata diagnosticado em 2018. <a href="https://www.bbc.com/news/articles/cmp3vk6vr44po">BBC</a>.</p></article>
+    <article class="card" id="pauta-guitar-wars"><h3>"Guerra das guitarras": Fender disputa com empresa alemã versões genéricas da Stratocaster</h3><p><strong>Reportado — 26/11/2026.</strong> A disputa transatlântica envolve o modelo mais copiado da história da guitarra elétrica; andamento processual não consta na captura. <a href="https://www.bbc.com/news/articles/cqd01l9x8k48o">BBC</a>.</p></article>
+
+    <article class="card" id="pauta-andy-taylor"><h3>Morre Andy Taylor, guitarrista do Duran Duran, aos 65 anos</h3><p><strong>Fato — 25/11/2026, 18h48.</strong> Ele morreu em casa na <strong>segunda-feira (23)</strong>, com a família, e lutava contra um câncer de próstata metastático diagnosticado em <strong>2018</strong>. Entrou na banda em <strong>1980</strong> e teve idas e vindas; o último trabalho com o grupo foi "Danse Macabre" (2023). Não compareceu à entrada do Duran Duran no Rock and Roll Hall of Fame, em 2022, por causa da saúde. <a href="https://g1.globo.com/pop-arte/musica/noticia/2026/11/25/andy-taylor-guitarrista-do-duran-duran-morre-aos-65-anos.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cmp3vk6vr44po">BBC</a>.</p></article>
+    <article class="card" id="pauta-jolie-pitt"><h3>Angelina Jolie e Brad Pitt fazem acordo sobre a vinícola Château Miraval</h3><p><strong>Fato — 25/11/2026, 18h46.</strong> O comunicado conjunto diz que o acordo atende "aos melhores interesses da família". Pitt processou Jolie em <strong>2022</strong> por causa da venda da parte dela na propriedade; o processo incluía acusações de "comportamento abusivo" em um voo de 2016. <a href="https://g1.globo.com/pop-arte/noticia/2026/11/25/angelina-jolie-e-brad-pitt-chegam-a-acordo-em-processo-que-apontava-comportamento-abusivo-do-ator.ghtml">G1</a> · <a href="https://www.bbc.com/news/articles/cmvg2989wv74o">BBC</a>.</p></article>
+    <article class="card" id="pauta-veruschka"><h3>Morre Veruschka, a primeira supermodelo da Alemanha, aos 87 anos</h3><p><strong>Fato — 25/11/2026.</strong> Ela foi ícone das capas e dos desfiles nos anos 1960 e virou personagem de cinema. <a href="https://g1.globo.com/pop-arte/noticia/2026/11/25/veruschka-a-primeira-supermodelo-da-alemanha-morre-aos-87-anos.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-ramsay-topgear"><h3>Gordon Ramsay vai apresentar o Top Gear, que volta após o acidente de Freddie Flintoff</h3><p><strong>Fato — 25/11/2026.</strong> A BBC anunciou Ramsay no comando, com coapresentadores ainda não divulgados; as gravações começam em 2027. O programa foi suspenso em 2022, depois do acidente que feriu Flintoff. <a href="https://www.bbc.com/news/articles/cjr4gw100d52o">BBC</a>.</p></article>
+    <article class="card" id="pauta-papa-diario"><h3>Extratos do diário do papa Francisco afirmam que ele viu o diabo três vezes</h3><p><strong>Reportado — 25/11/2026.</strong> É o que dizem trechos publicados do diário, segundo a BBC. <strong>Não há verificação independente</strong> além do material divulgado; o conteúdo é relato em primeira pessoa. <a href="https://www.bbc.com/news/articles/cm78270l4z7no">BBC</a>.</p></article>
+    <article class="card" id="pauta-mannequin-pussy"><h3>Mannequin Pussy cancela shows no Primavera Sound São Paulo</h3><p><strong>Fato — 25/11/2026.</strong> A banda não se apresenta no festival; a organização não detalhou a substituição. <a href="https://g1.globo.com/pop-arte/musica/noticia/2026/11/25/primavera-sound-sao-paulo-mannequin-pussy-cancela-shows-no-festival.ghtml">G1</a>.</p></article>
+    <article class="card" id="pauta-shows-2027"><h3>Contexto: Black Eyed Peas fará show gratuito em São Paulo em 2027; Roberto Carlos adia Porto Alegre</h3><p><strong>Fato — 25/11/2026.</strong> O grupo anunciou apresentação gratuita no próximo ano; Roberto Carlos transferiu o show na capital gaúcha para junho por causa das chuvas no RS. <a href="https://g1.globo.com/pop-arte/musica/noticia/2026/11/25/black-eyed-peas-fara-show-gratuito-em-sao-paulo-em-2027-entenda.ghtml">G1</a> · <a href="https://g1.globo.com/rs/rio-grande-do-sul/noticia/2026/11/25/apos-chuvas-no-rs-roberto-carlos-adia-show-em-porto-alegre-para-junho.ghtml">G1/RS</a>.</p></article>
+  </div>
+</section>
+
+<section id="historico" aria-labelledby="titulo-historico">
+  <h2 id="titulo-historico">O que veio antes</h2>
+  <p class="section-note">Quatro ligações entre o noticiário desta sexta e decisões anteriores. Cada item traz as datas, o mecanismo e a evidência contrária; relação sem fonte não entra.</p>
+  <article class="correlation"><h3>Trabuco: da recusa a Dilma em 2014 à confirmação de 2026</h3><ol class="timeline"><li><time datetime="1969-01-01">1969</time>entra no Bradesco como escriturário, aos 17 anos; presidência executiva 2009–2018, com a compra do HSBC Brasil em 2015. <a href="https://g1.globo.com/politica/noticia/2026/11/26/quem-e-luiz-trabuco-escolhido-como-ministro-da-fazenda-do-governo-lula-4.ghtml">G1</a>.</li><li><time datetime="2014-01-01">2014</time>Dilma/Lula o sondam para a Fazenda; ele recusa e apoia Joaquim Levy, ex-Bradesco Asset Management, que dura menos de um ano. <a href="https://noticias.uol.com.br/ultimas-noticias/reuters/2026/11/26/trabuco-aceita-convite-de-lula-para-ministerio-da-fazenda-diz-fonte.htm">Reuters/UOL</a>.</li><li><time datetime="2016-01-01">2016</time>vira réu na Operação Zelotes (Carf); a ação é trancada pelo TRF-1 em 06/2017 e pelo STJ em 08/2018, por falta de indícios. <a href="https://www.bbc.com/portuguese/articles/c3n0lrq5kgd1o">BBC Brasil</a>.</li><li><time datetime="2023-01-01">2023</time>entra no Conselhão e critica a Selic de 13,65% como "proibitiva". <a href="https://g1.globo.com/politica/noticia/2026/11/26/governo-lula-anuncia-luiz-trabuco-para-ministerio-da-fazenda.ghtml">G1</a>.</li><li><time datetime="2026-11-24">24/11/2026</time>Lula sanciona o plano de ajuste fiscal (impacto de até R$ 56 bi; meta de superávit de 0,5% do PIB em 2027). <a href="https://www.bbc.com/portuguese/articles/c3n0lrq5kgd1o">BBC Brasil</a>.</li><li><time datetime="2026-11-25">25/11/2026</time>encontro reservado com Lula; amigos e empresários articulam o aceite. <a href="https://g1.globo.com/politica/noticia/2026/11/25/luiz-trabuco-quem-e-o-executivo-cotado-para-ser-ministro-da-fazenda.ghtml">G1</a>.</li><li><time datetime="2026-11-26">26/11/2026, 20h04</time>nota do Planalto confirma o aceite; Bradesco emite fato relevante à CVM. <a href="https://www.gov.br/planalto/pt-br/acompanhe-o-planalto/notas-oficiais/nota-a-imprensa">Planalto</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> Em 2014 o convite foi resposta a uma crise de confiança fiscal — Trabuco recusou e o mercado recebeu Levy, que fracassou. Em 2026 a mesma lógica foi usada preventivamente: o dólar passou de R$ 6 na semana, a dívida está em ~83% do PIB (projeção de ~90% em 2030) e o governo repetiu a jogada antes da posse. O que era hipótese precificada na quarta virou fato na quinta — e o teste passa da reputação para a execução do ajuste.</p><p><strong>Evidência contrária.</strong> (1) O rali também reflete a expectativa de medidas fiscais e queda do dólar já em curso — as forças não estão separadas nos dados capturados; (2) setores do PT já reagem publicamente; (3) as avaliações de 8 economistas do Valor são lidas em manchetes, sem o corpo.</p></article>
+  <article class="correlation"><h3>Carne na UE: a auditoria do próprio bloco desdiz o chefe de Estado que celebra o veto</h3><ol class="timeline"><li><time datetime="2026-09-03">03/09/2026</time>a UE suspende as importações de produtos de origem animal do Brasil por avaliar que os controles de antimicrobianos eram insuficientes — não por irregularidade na carne; Brasil é o único do Mercosul atingido. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml">G1</a>.</li><li><time datetime="2026-09-28">28/09/2026</time>o relatório da missão que inspecionou o Brasil entre 24/08 e 04/09 aprova os controles de frango e mel. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/macron-diz-que-carne-brasileira-e-dopada-e-comemora-veto-da-ue-ao-produto.ghtml">G1</a>.</li><li><time datetime="2026-11-17">17/11/2026</time>a votação no comitê PAFF é adiada após pedidos de esclarecimentos e pressão do setor produtivo europeu. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/macron-diz-que-carne-brasileira-e-dopada-e-comemora-veto-da-ue-ao-produto.ghtml">G1</a>.</li><li><time datetime="2026-11-23">23/11/2026</time>a ministra da Agricultura da França, Annie Genevard, reconhece o rigor da auditoria (segundo a ABPA). <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml">G1</a>.</li><li><time datetime="2026-11-25">25/11/2026</time>Macron comemora o veto e chama a carne de "dopada". <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/macron-diz-que-carne-brasileira-e-dopada-e-comemora-veto-da-ue-ao-produto.ghtml">G1</a>.</li><li><time datetime="2026-11-26">26/11/2026</time>o Mapa rebate: "desinformação"; a decisão de reabertura está marcada para 8 e 9/12. <a href="https://g1.globo.com/economia/agronegocios/noticia/2026/11/26/governo-lula-acusa-franca-de-disseminar-desinformacao.ghtml">G1, Mapa</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A suspensão nasceu técnica, mas a revisão dos controles já tinha sido aprovada pela própria missão do bloco — faltava a decisão política dos Estados-membros. A fala de Macron entra depois, a serviço da disputa doméstica francesa (agronegócio e presidencial de 2027), e transforma um item técnico de agenda em obstáculo simbólico.</p><p><strong>Evidência contrária e lacunas.</strong> (1) O relatório europeu cobre frango e mel; a carne bovina ainda não foi inspecionada, e a exigência de "vida inteira sem antimicrobianos" é mais dura — o diagnóstico de veto injusto vale, por ora, para as cadeias auditadas; (2) a data da reunião aparece como 7–8/12 numa chamada e 8–9/12 em outra; (3) a UE representa ~5% das exportações brasileiras de carne bovina — dano real, porém concentrado.</p></article>
+  <article class="correlation"><h3>Covid: seis semanas de alta com as doses paradas</h3><ol class="timeline"><li><time datetime="2024-01-01">2024</time>a vacina contra covid entra no calendário nacional (crianças de 6m–5 anos, gestantes e 60+; reforço semestral para idosos e imunossuprimidos). <a href="https://www.gov.br/saude/pt-br/assuntos/noticias/2026/novembro/ministerio-da-saude-reforca-vacinacao-contra-covid-19-com-mensagens-a-populacao-e-envio-de-doses-aos-estados">Ministério da Saúde</a>.</li><li><time datetime="2025-01-01">2025</time>21,9 milhões de doses distribuídas, apenas 8 milhões aplicadas (projeção: 15 milhões). <a href="https://www.dw.com/pt-br/casos-de-covid-crescem-no-brasil-mesmo-com-vacina-sobrando/a-80004772">DW</a>.</li><li><time datetime="2026-11-20">20/11/2026</time>alta em 19 estados. <a href="https://www.dw.com/pt-br/casos-de-covid-crescem-no-brasil-mesmo-com-vacina-sobrando/a-80004772">DW</a>.</li><li><time datetime="2026-11-25">25/11/2026</time>alta em 21 estados. <a href="https://veja.abril.com.br/saude/covid-sobe-para-21-o-numero-de-estados-com-alta-de-casos-da-doenca/">Veja</a>.</li><li><time datetime="2026-11-26">26/11/2026</time>SE46: 23 estados e DF, seis semanas de crescimento, positividade pública em 2,51%, RJ e PA em alerta; o ministério lança mensageria e libera 2,1 milhões de doses extras. <a href="https://g1.globo.com/saude/noticia/2026/11/27/covid-19-avanca-em-23-estados-e-no-df-e-brasil-aplica-apenas-um-terco-do-volume-de-vacinas-distribuidas-neste-ano.ghtml">G1</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> O problema hoje não é oferta, é adesão: a vacina deixou de ser percebida como necessária quando a gravidade caiu, e o calendário do SUS não recomenda reforço para adultos saudáveis. A resposta do Ministério da Saúde (mensageria) ataca o elo de comunicação, não o de logística.</p><p><strong>Evidência contrária.</strong> (1) O quadro geral segue de baixo risco: em 2026 até 23/11, 4.101 SRAG e 481 óbitos — queda de ~60–68% sobre 2025; (2) a ligação direta entre alta de casos e baixa cobertura é plausível, mas os boletins não estabelecem causalidade; especialistas apontam também desinformação e dificuldade de acesso.</p></article>
+  <article class="correlation"><h3>Márquez: do úmero de 2020 ao octacampeonato e à despedida no auge</h3><ol class="timeline"><li><time datetime="2013-01-01">2013–2019</time>seis títulos na Honda, incluindo o de estreia (mais jovem campeão da categoria). <a href="https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml">O Globo</a>.</li><li><time datetime="2020-07-19">2020</time>fratura do úmero em Jerez; cirurgias e abertura de boa parte das temporadas seguintes. <a href="https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml">O Globo</a>.</li><li><time datetime="2024-01-01">2024</time>primeira vitória na Gresini/Ducati após mais de 1.000 dias sem triunfos; 7º título na Ducati de fábrica em 2025. <a href="https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml">O Globo</a>.</li><li><time datetime="2026-11-22">21–22/11/2026</time>8º título em Portimão, igualando Agostini. <a href="https://motorsport.uol.com.br/motogp/news/marc-marquez-anuncia-aposentadoria-imediata-da-motogp-ao-final-de-2026/10878142/">UOL</a>.</li><li><time datetime="2026-11-27">27/11/2026</time>anúncio da aposentadoria no FP1 do GP de Valência; contrato com a Ducati ia até 2028 (renovado em junho). <a href="https://www.motogp.com/pt/news/2026/11/27/marc-marquez-announces-retirement-from-motogp/1268528">MotoGP.com</a>.</li></ol><p><strong>Nexo e mecanismo.</strong> A aposentadoria chega no pico — o mesmo corpo que ameaçou encerrar a carreira em 2020 produziu dois títulos seguidos — e tira da categoria seu maior trunfo comercial.</p><p><strong>Evidência contrária.</strong> Nenhuma fonte cita razão médica nova; com contrato até 2028, a decisão é tratada como escolha pessoal — o motivo exato não aparece nas capas capturadas.</p></article>
+</section>
+
+<section id="globo" class="explore">
+  <h2>Onde as notícias acontecem</h2>
+  <p class="section-note">Arraste para explorar. Passe o mouse para pausar o giro. Selecione um ponto no globo ou uma localidade na lista para ler a notícia.</p>
+  <p>Este globo mostra a edição das 8h de 27/11. Veja também o <a href="edicoes/2026-11-26-1400.html#globo">globo da edição das 14h de 26/11</a> e o <a href="edicoes/2026-11-25-2000.html#globo">da edição das 20h de 25/11</a>.</p>
+  <ul id="locais-noticias" aria-label="Notícias por localidade"></ul>
+  <div id="globe-container" aria-label="Globo de referências geográficas"></div>
+</section>
+
+<!-- GRAFO 3D -->
+<section id="grafo" class="explore">
+  <h2>Como as notícias se conectam</h2>
+  <p class="section-note">Clique em um ponto para ver detalhes. As linhas indicam relações editoriais, não provam causa e efeito. Pontos turquesa representam antecedentes documentados.</p>
+  <p>Este grafo mostra a edição das 8h de 27/11. Veja também o <a href="edicoes/2026-11-26-1400.html#grafo">grafo da edição das 14h de 26/11</a> e o <a href="edicoes/2026-11-25-2000.html#grafo">da edição das 20h de 25/11</a>.</p>
+  <div id="graph-container" aria-label="Grafo de notícias e antecedentes"></div>
+  <div id="graph-info" aria-live="polite" hidden></div>
+</section>
+
+<section id="correlacoes"><h2>Impactos possíveis</h2><article class="correlation"><ul><li><strong>Vida cotidiana:</strong> idosos e imunossuprimidos devem atualizar a vacina contra covid — a alta chega ao fim de seis semanas com 17 milhões de doses distribuídas paradas. Na Black Friday de hoje, 58% dos itens têm desconto real, mas um terço está mais caro; quem compra pela primeira vez sob as novas regras do SAC vê o prazo de resposta em teste.</li><li><strong>Macroeconomia:</strong> com Trabuco confirmado, a leitura de mercado vira "benefício da dúvida" — a continuidade depende da 2ª etapa do ajuste fiscal e da equipe que o acompanhará. Dólar a R$ 5,74 alivia repasses ao IPCA, que segue acima do centro da meta (4,64% em 12 meses).</li><li><strong>Finanças:</strong> EWZ +9% e operadores vendo espaço para o dólar cair mais 3,5%; o rolo da infraestrutura de IA segue o humor da Nvidia — hoje o sinal é de alívio, com o teste de Huang no Congresso em 03/12.</li><li><strong>Cenário global:</strong> Espanha (domingo) e o impasse orçamentário da UE testam o humor político europeu; a Guiné-Bissau adia a volta à democracia por dois anos, num ano de retrocessos militares na África Ocidental.</li></ul></article></section>
+
+<section id="edicoes" class="archive-search" aria-labelledby="titulo-edicoes">
+  <h2 id="titulo-edicoes">Arquivo de edições</h2>
+  <p>O arquivo preserva cada captura. Edições antigas podem conter informações não reconfirmadas; consulte as limitações de cada relatório.</p>
+  <details open><summary>27 de novembro de 2026</summary><ul>
+    <li>8h — Edição vigente na capa · <a href="edicoes/noticias-2026-11-27-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>26 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-26-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-26-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>25 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-25-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-25-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-25-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-25-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-25-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-25-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>24 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-24-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-24-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-24-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-24-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/noticias-2026-11-24-0800.md" download>08h — Relatório</a> (captura sem publicação)</li>
+  </ul></details>
+  <details open><summary>23 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-23-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-23-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-23-1600.html">16h — Edição</a> · <a href="edicoes/noticias-2026-11-23-1600.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-23-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-23-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-23-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-23-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>22 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-22-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-22-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-22-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-22-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>20 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-20-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-20-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>19 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-19-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-19-1400.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-19-0800.html">08h — Edição</a> · <a href="edicoes/noticias-2026-11-19-0800.md" download>Relatório</a></li>
+  </ul></details>
+  <details open><summary>18 de novembro de 2026</summary><ul>
+    <li><a href="edicoes/2026-11-18-2000.html">20h — Edição</a> · <a href="edicoes/noticias-2026-11-18-2000.md" download>Relatório</a></li>
+    <li><a href="edicoes/2026-11-18-1400.html">14h — Edição</a> · <a href="edicoes/noticias-2026-11-18-1400.md" download>Relatório</a></li>
+  </ul></details>
+  <div id="busca-arquivo" hidden>
+    <label>Buscar no histórico <input id="arquivo-termo" type="search" placeholder="Ex.: Senado, dólar, Nvidia"></label>
+    <label>Tema <select id="arquivo-tema"><option value="">Todos</option><option value="mundo">Mundo</option><option value="politica">Política</option><option value="economia">Economia</option><option value="tecnologia">Tecnologia</option><option value="saude">Saúde</option><option value="ciencia">Ciência</option><option value="esporte">Esporte</option><option value="cultura">Cultura</option><option value="social">Sociedade</option></select></label>
+    <p id="arquivo-status" role="status"></p><ul id="arquivo-resultados" tabindex="0" aria-label="Resultados da busca"></ul>
+  </div>
+</section>
+</main>
+
+<dialog id="leitura" aria-labelledby="leitura-titulo" style="width:min(42rem,90vw);border:1px solid #8895a8;border-radius:1rem;padding:1.5rem">
+  <form method="dialog" style="text-align:right"><button type="submit" aria-label="Fechar janela de leitura">Fechar ✕</button></form>
+  <p>Jornal Digital · Resumo editorial</p><h2 id="leitura-titulo"></h2><div id="leitura-conteudo"></div>
+</dialog>
+
+<footer class="container">
+  <p class="meta">Jornal Digital · edição de 27/11/2026, 8h (Brasília). Conteúdo editorial próprio, com links para as fontes originais. Nenhuma imagem de terceiros foi reproduzida. Custo de inferência da edição: ver relatório.</p>
+</footer>
+
+<script>
+// ========== DADOS DE NOTÍCIAS PARA O GLOBO 3D ==========
+const newsLocations = [
+{"lat": -15.79, "lng": -47.88, "name": "Brasília, DF", "title": "Trabuco é confirmado na Fazenda às 20h04 de quinta", "story": "trabuco-confirmado", "color": "#ffcf99", "size": 1},
+{"lat": -23.55, "lng": -46.63, "name": "São Paulo, Brasil", "title": "Ibovespa fechou +5,27% e dólar a R$ 5,74", "story": "ibovespa-fechamento", "color": "#ffcf99", "size": 0.9},
+{"lat": 48.86, "lng": 2.35, "name": "Paris, França", "title": "Auditoria da UE contraria Macron sobre a carne 'dopada'", "story": "ue-auditoria-carne", "color": "#ffcf99", "size": 0.9},
+{"lat": 50.85, "lng": 4.35, "name": "Bruxelas, Bélgica", "title": "UE adia decisão sobre frango e mel para 8 e 9/12", "story": "ue-auditoria-carne", "color": "#ffcf99", "size": 0.8},
+{"lat": -15.87, "lng": -47.92, "name": "São José dos Campos, Brasil", "title": "Vieira oferece apoio à Embraer contra tarifa de aviões", "story": "vieira-embraer", "color": "#ffcf99", "size": 0.85},
+{"lat": 40.44, "lng": -79.99, "name": "Pensilvânia, EUA", "title": "Tempestades deixam centenas de milhares sem energia", "story": "thanksgiving-energia", "color": "#ff6b6b", "size": 0.85},
+{"lat": 43.65, "lng": -79.38, "name": "Ottawa, Canadá", "title": "Suprema decide lei do Quebec sobre símbolos religiosos", "story": "canada-quebec", "color": "#ff6b6b", "size": 0.75},
+{"lat": 40.41, "lng": -3.70, "name": "Madri, Espanha", "title": "Espanha encerra campanha; eleição antecipada é domingo", "story": "espanha-eleicao", "color": "#ff6b6b", "size": 0.9},
+{"lat": 50.45, "lng": 30.52, "name": "Kiev, Ucrânia", "title": "Zelensky critica a amizade 'estranha' entre Trump e Putin", "story": "zelensky-entrevista", "color": "#ff6b6b", "size": 0.85},
+{"lat": 33.31, "lng": 44.36, "name": "Bagdá, Iraque", "title": "Trump apoia envio de tropas iraquianas para fora do país", "story": "iraque-tropas", "color": "#ff6b6b", "size": 0.75},
+{"lat": -1.45, "lng": 2.56, "name": "Leste da RDC, África", "title": "Uganda anuncia retirada de tropas em meio a crise diplomática", "story": "uganda-rdc", "color": "#ff6b6b", "size": 0.7},
+{"lat": 11.86, "lng": -15.60, "name": "Bissau, Guiné-Bissau", "title": "Junta adia eleições de 6/12 para 2028", "story": "guine-bissau-2028", "color": "#ff6b6b", "size": 0.85},
+{"lat": 51.51, "lng": -0.13, "name": "Londres, Reino Unido", "title": "Serviços do órgão de aposentadorias saem do ar após ataque", "story": "uk-pension-cyber", "color": "#a3e635", "size": 0.85},
+{"lat": 34.05, "lng": -118.24, "name": "Santa Clara, EUA", "title": "Nvidia barra servidores ao Sudeste Asiático", "story": "nvidia-serve-asiatico", "color": "#a3e635", "size": 0.85},
+{"lat": -34.90, "lng": -56.16, "name": "Montevidéu, Uruguai", "title": "Véspera da final da Libertadores: Palmeiras x Estudiantes", "story": "libertadores-lema", "color": "#818cf8", "size": 0.9},
+{"lat": -23.60, "lng": -46.70, "name": "Morumbis, São Paulo", "title": "Dorival e Rafinha deixam o São Paulo no fim do Brasileirão", "story": "dorival-saida", "color": "#818cf8", "size": 0.85},
+{"lat": 39.47, "lng": -0.38, "name": "Valência, Espanha", "title": "Márquez anuncia aposentadoria no GP de Valência", "story": "marquez-aposenta", "color": "#818cf8", "size": 0.9}
+];
+
+
+const reader = document.getElementById('leitura');
+const cards = [...document.querySelectorAll('article.card')];
+function readStory(card) {
+  if (!card || typeof reader.showModal !== 'function') return;
+  document.getElementById('leitura-titulo').textContent = card.querySelector('h3').textContent;
+  const body = [...card.querySelectorAll('p')].map(p => p.cloneNode(true));
+  document.getElementById('leitura-conteudo').replaceChildren(...body);
+  if (!reader.open) reader.showModal();
+}
+for (const card of cards) {
+  const heading = card.querySelector('h3');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = heading.textContent;
+  button.style.cssText = 'font:inherit;color:inherit;background:none;border:0;padding:0;text-align:left;cursor:pointer;text-decoration:underline';
+  button.addEventListener('click', () => readStory(card));
+  heading.replaceChildren(button);
+}
+for (const link of document.querySelectorAll('[data-open-story]')) {
+  const card = document.getElementById(`pauta-${link.dataset.openStory}`);
+  if (!card || typeof reader.showModal !== 'function') continue;
+  link.setAttribute('aria-haspopup', 'dialog');
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    readStory(card);
+  });
+}
+function readLocation(place) {
+  readStory(document.getElementById(`pauta-${place.story}`));
+}
+newsLocations.forEach(place => {
+  const li = document.createElement('li');
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.textContent = `${place.name} — ${place.title}`;
+  button.addEventListener('click', () => readLocation(place));
+  li.append(button);
+  document.getElementById('locais-noticias').append(li);
+});
+
+// ========== GLOBO 3D ==========
+const globeContainer = document.getElementById('globe-container');
+if (!initGlobe()) showVizFallback(globeContainer, 'Globo indisponível neste navegador. As pautas por localização continuam disponíveis nas editorias.');
+
+function initGlobe(){
+try {
+const world = Globe()(globeContainer)
+  .globeImageUrl('//unpkg.com/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//unpkg.com/three-globe/example/img/earth-topology.png')
+  .backgroundColor('#081321')
+  .atmosphereColor('#6caeff')
+  .atmosphereAltitude(0.16)
+  .onPointClick(readLocation)
+  .onPointHover(point => { globeContainer.style.cursor = point ? 'pointer' : 'grab'; })
+  .pointLat(d => d.lat)
+  .pointLng(d => d.lng)
+  .pointColor(d => d.color)
+  .pointAltitude(0.02)
+  .pointRadius(d => d.size * 0.5)
+  .pointLabel(d => `<div style="background:rgba(0,0,0,.8);padding:6px 10px;border-radius:6px;color:#fff;font-size:12px"><b>${d.name}</b><br>${d.title}</div>`)
+  .pointsMerge(false);
+
+world.pointsData(newsLocations);
+
+const controls = world.controls();
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+let hovered = false;
+const updateRotation = () => { controls.autoRotate = !hovered && !reducedMotion.matches; };
+globeContainer.addEventListener('mouseenter', () => { hovered = true; updateRotation(); });
+globeContainer.addEventListener('mouseleave', () => { hovered = false; updateRotation(); });
+reducedMotion.addEventListener('change', updateRotation);
+updateRotation();
+controls.autoRotateSpeed = 0.5;
+world.pointOfView({ lat: 20, lng: -40, altitude: 2.5 });
+fitCanvas(globeContainer, world);
+return true;
+} catch { return false; }
+}
+
+function fitCanvas(container, view){
+  const fit = () => view.width(container.clientWidth).height(container.clientHeight);
+  fit();
+  new ResizeObserver(fit).observe(container);
+}
+
+function showVizFallback(container, message){
+  const note = document.createElement('p');
+  note.className = 'viz-fallback';
+  note.textContent = message;
+  container.replaceChildren(note);
+}
+
+// ========== GRAFO 3D ==========
+const graphNodes = [
+{"id": "mundo", "name": "Mundo", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "politica", "name": "Política", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "economia", "name": "Economia", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "tecnologia", "name": "Tecnologia", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "saude", "name": "Saúde", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "ciencia", "name": "Ciência", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "esporte", "name": "Esporte", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "cultura", "name": "Cultura", "type": "hub", "desc": "", "color": "#ffd166", "size": 5, "url": ""},
+{"id": "trabuco-confirmado", "name": "Trabuco é confirmado na Fazenda", "type": "news", "desc": "Fato — 26/11/2026, 20h04. Primeiro nome oficializado do Lula 4; assume em janeiro.", "color": "#ffcf99", "size": 8, "url": "https://g1.globo.com/politica/noticia/2026/11/26/governo-lula-anuncia-luiz-trabuco-para-ministerio-da-fazenda.ghtml"},
+{"id": "h-trabuco-2014", "name": "2014 — Trabuco recusa o mesmo convite a Dilma", "type": "history", "desc": "Recusou e apoiou Joaquim Levy, que durou menos de um ano na Fazenda.", "color": "#61dfd3", "size": 5, "url": "https://noticias.uol.com.br/ultimas-noticias/reuters/2026/11/26/trabuco-aceita-convite-de-lula-para-ministerio-da-fazenda-diz-fonte.htm"},
+{"id": "h-zelotes", "name": "2016 — Operação Zelotes", "type": "history", "desc": "Réu; ação trancada pelo TRF-1 (06/2017) e STJ (08/2018), sem indícios.", "color": "#61dfd3", "size": 4, "url": "https://www.bbc.com/portuguese/articles/c3n0lrq5kgd1o"},
+{"id": "h-moretti-sancao", "name": "24/11/2026 — ajuste fiscal sancionado", "type": "history", "desc": "Impacto de até R$ 56 bi; meta de superávit de 0,5% do PIB em 2027.", "color": "#61dfd3", "size": 5, "url": "https://www.bbc.com/portuguese/articles/c3n0lrq5kgd1o"},
+{"id": "ibovespa-fechamento", "name": "Bolsa fecha +5,27% com Trabuco confirmado", "type": "news", "desc": "Fato — fechamento de 26/11/2026. Ibovespa 175.467; dólar R$ 5,7441.", "color": "#ffcf99", "size": 7, "url": "https://g1.globo.com/politica/noticia/2026/11/26/governo-lula-anuncia-luiz-trabuco-para-ministerio-da-fazenda.ghtml"},
+{"id": "durigan-futuro", "name": "Futuro de Durigan fica incerto", "type": "news", "desc": "Reportado — 27/11/2026. Atual ministro cede o posto em janeiro.", "color": "#ffcf99", "size": 4, "url": "https://g1.globo.com/economia/noticia/2026/11/27/apos-atuar-como-porta-voz-da-economia-na-campanha-futuro-de-durigan-no-governo-lula-4-e-incerto.ghtml"},
+{"id": "alcolumbre-stf", "name": "Alcolumbre e Lula decidem STF", "type": "news", "desc": "Relato de fontes — 27/11/2026. Sem nome decidido.", "color": "#ffcf99", "size": 4, "url": "https://g1.globo.com/politica/blog/valdo-cruz/post/2026/11/27/alcolumbre-deve-se-reunir-com-lula-para-bater-martelo-sobre-ministro-do-stf.ghtml"},
+{"id": "senado-estatais", "name": "Senado retira regra de prazo para estatais", "type": "news", "desc": "Fato — 27/11/2026. Emenda sai do relatório.", "color": "#ffcf99", "size": 4, "url": "https://g1.globo.com/politica/noticia/2026/11/27/relatorio-do-senado-retira-reducao-de-prazo-para-dirigentes-de-partidos-assumirem-estatais.ghtml"},
+{"id": "ue-auditoria-carne", "name": "Auditoria da UE contraria Macron", "type": "news", "desc": "Fato — 27/11/2026. Relatório de 28/09 aprovou frango e mel; decisão em 8-9/12.", "color": "#ffcf99", "size": 7, "url": "https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml"},
+{"id": "h-carne-setembro", "name": "03/09/2026 — UE suspende carne e derivados do Brasil", "type": "history", "desc": "Motivo: avaliação de controles insuficientes, não irregularidade na carne.", "color": "#61dfd3", "size": 5, "url": "https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml"},
+{"id": "h-carne-auditoria", "name": "28/09/2026 — relatório aprova frango e mel", "type": "history", "desc": "Missão no Brasil entre 24/08 e 04/09; bovina ainda sem inspeção.", "color": "#61dfd3", "size": 5, "url": "https://g1.globo.com/economia/agronegocios/noticia/2026/11/27/carne-brasileira-dopada-auditoria-da-propria-uniao-europeia-contraria-declaracao-de-macron.ghtml"},
+{"id": "vieira-embraer", "name": "Vieira oferece apoio à Embraer", "type": "news", "desc": "Fato — 27/11/2026. Contra a proposta de 10% do USTR sobre aviões.", "color": "#ffcf99", "size": 5, "url": "https://g1.globo.com/politica/noticia/2026/11/27/apos-eua-proporem-taxar-avioes-brasileiros-mauro-vieira-oferece-apoio-a-embraer-para-buscar-novos-mercados.ghtml"},
+{"id": "blackfriday-dia", "name": "Black Friday: 58% com desconto real", "type": "news", "desc": "Fato — 27/11/2026. 33% dos itens estão mais caros; teste do novo SAC.", "color": "#ffcf99", "size": 4, "url": "https://g1.globo.com/guia/guia-de-compras/no-dia-da-black-friday-58percent-dos-itens-pesquisados-tem-descontos-33percent-estao-mais-caros.ghtml"},
+{"id": "zelensky-entrevista", "name": "Zelensky critica 'estranha' amizade Trump-Putin", "type": "news", "desc": "Fato — 27/11/2026. Diz que EUA não pressionam a Rússia nas conversas de paz.", "color": "#ff6b6b", "size": 6, "url": "https://www.bbc.com/news/articles/c820q9wgrpyyo"},
+{"id": "espanha-eleicao", "name": "Espanha: eleição antecipada no domingo", "type": "news", "desc": "Fato — 27/11/2026. Campanha fechou com moradia no centro.", "color": "#ff6b6b", "size": 6, "url": "https://g1.globo.com/mundo/noticia/2026/11/27/espanha-encerra-campanha-eleitoral-sanchez-tenta-frear-direita-e-extrema-direita.ghtml"},
+{"id": "h-espanha-out", "name": "05/10/2026 — Sánchez antecipa a eleição", "type": "history", "desc": "Congresso derrubou decretos de aluguel; caso Abascal levou multidões às ruas.", "color": "#61dfd3", "size": 5, "url": "https://www.bbc.com/portuguese/articles/crz65w49ddxzo"},
+{"id": "guine-bissau-2028", "name": "Guiné-Bissau adia eleições para 2028", "type": "news", "desc": "Fato — 27/11/2026. Junta alegou condições insuficientes.", "color": "#ff6b6b", "size": 5, "url": "https://www.bbc.com/news/articles/cm879e5yxjq5o"},
+{"id": "h-guine-golpe", "name": "26/11/2025 — golpe na Guiné-Bissau", "type": "history", "desc": "Três dias após eleições cujos resultados nunca foram divulgados.", "color": "#61dfd3", "size": 5, "url": "https://observador.pt/2026/11/22/democracia-na-guine-bissau-continua-suspensa-um-ano-depois-do-golpe-militar/"},
+{"id": "iraque-tropas", "name": "Trump apoia desdobramento de tropas do Iraque", "type": "news", "desc": "Fato — 27/11/2026. Destinos não detalhados.", "color": "#ff6b6b", "size": 4, "url": "https://g1.globo.com/mundo/noticia/2026/11/27/trump-declara-apoio-a-decisao-do-iraque-de-enviar-de-tropas-para-fora-do-pais.ghtml"},
+{"id": "venezuela-revoga", "name": "Venezuela vai revogar lei contra opositores", "type": "news", "desc": "Reportado — 26/11/2026. Lei previa até 30 anos de prisão.", "color": "#ff6b6b", "size": 4, "url": "https://g1.globo.com/mundo/noticia/2026/11/26/venezuela-revogara-lei-que-torna-opositores-inelegiveis-pelo-resto-da-vida-diz-chefe-do-parlamento.ghtml"},
+{"id": "canada-quebec", "name": "Suprema do Canadá decide símbolos religiosos", "type": "news", "desc": "Pendente na captura — 27/11/2026. Efeito nacional esperado.", "color": "#ff6b6b", "size": 4, "url": "https://www.bbc.com/news/articles/c78j8vk3r50o"},
+{"id": "thanksgiving-energia", "name": "Centenas de milhares sem energia nos EUA", "type": "news", "desc": "Fato — 27/11/2026. Tempestades de Ação de Graças.", "color": "#ff6b6b", "size": 4, "url": "https://www.bbc.com/news/articles/cre3dj5n7dpwo"},
+{"id": "eu-orcamento", "name": "Orcamento da UE trava; Ucrânia em jogo", "type": "news", "desc": "Fato — 27/11/2026. Líderes sem acordo.", "color": "#ff6b6b", "size": 4, "url": "https://www.bbc.com/news/articles/cw4gnm3m9deno"},
+{"id": "uganda-rdc", "name": "Uganda retira tropas da RDC", "type": "news", "desc": "Fato — 27/11/2026. Crise diplomática com Kinshasa.", "color": "#ff6b6b", "size": 3, "url": "https://www.bbc.com/news/articles/cq4gnj2ldkyzo"},
+{"id": "uk-pension-cyber", "name": "Órgão de aposentadorias do Reino Unido fora do ar", "type": "news", "desc": "Reportado — 27/11/2026. 'Incidente cibernético'; autoria desconhecida.", "color": "#a3e635", "size": 5, "url": "https://g1.globo.com/tecnologia/ciberseguranca/noticia/2026/11/27/reino-unido-tira-servicos-do-ar-apos-incidente-cibernetico-em-orgao-que-paga-aposentadorias.ghtml"},
+{"id": "nvidia-serve-asiatico", "name": "Nvidia barra servidores ao Sudeste Asiático", "type": "news", "desc": "Reportado — 26/11/2026. Desdobramento da crise de espionagem e desvio de chips.", "color": "#a3e635", "size": 6, "url": "https://g1.globo.com/tecnologia/noticia/2026/11/26/escandalo-de-espionagem-leva-eua-a-endurecer-regras-e-nvidia-barra-servidores-no-sudeste-asiatico.ghtml"},
+{"id": "h-nvidia-1211", "name": "12/11/2026 — Jensen Huang renuncia", "type": "history", "desc": "Caso com executiva suspeita de espionagem chinesa; reintegrado em 23/11.", "color": "#61dfd3", "size": 5, "url": "https://fortune.com/2026/11/24/tsmc-gains-158-billion-in-value-in-one-day-as-jensen-huang-returns-as-nvidia-ceo/"},
+{"id": "google-multas", "name": "Governo exige dados de anúncios do Google", "type": "news", "desc": "Fato — 26/11/2026. Multa diária de R$ 200 mil.", "color": "#a3e635", "size": 4, "url": "https://g1.globo.com/economia/noticia/2026/11/26/governo-da-10-dias-para-que-google-amplie-informacoes-sobre-anuncios-e-fixa-multa-diaria-de-r-200-mil-em-caso-de-descumprimento.ghtml"},
+{"id": "covid-23estados", "name": "Covid avança em 23 estados com 1/3 das doses aplicadas", "type": "news", "desc": "Fato — 27/11/2026 (SE46). Seis semanas de alta; positividade 2,51%.", "color": "#a3e635", "size": 6, "url": "https://g1.globo.com/saude/noticia/2026/11/27/covid-19-avanca-em-23-estados-e-no-df-e-brasil-aplica-apenas-um-terco-do-volume-de-vacinas-distribuidas-neste-ano.ghtml"},
+{"id": "h-covid-calendario", "name": "2024 — vacina entra no calendário nacional", "type": "history", "desc": "Prioritários: crianças 6m-5a, gestantes, 60+; reforço semestral para idosos.", "color": "#61dfd3", "size": 5, "url": "https://www.gov.br/saude/pt-br/assuntos/noticias/2026/novembro/ministerio-da-saude-reforca-vacinacao-contra-covid-19-com-mensagens-a-populacao-e-envio-de-doses-aos-estados"},
+{"id": "fda-mama", "name": "FDA aprova novo remédio para câncer de mama", "type": "news", "desc": "Fato — 27/11/2026. Primeiro em 20 anos; até R$ 120 mil/mês.", "color": "#a3e635", "size": 5, "url": "https://g1.globo.com/saude/noticia/2026/11/27/fda-aprova-primeiro-remedio-novo-em-20-anos-para-cancer-de-mama-em-fase-inicial-preco-pode-chegar-a-r-120-mil-por-mes.ghtml"},
+{"id": "anvisa-muwiz", "name": "Anvisa recolhe suplementos da Muwiz", "type": "news", "desc": "Fato — 27/11/2026. Sete produtos por ingredientes não autorizados.", "color": "#a3e635", "size": 4, "url": "https://g1.globo.com/saude/noticia/2026/11/27/anvisa-manda-recolher-sete-suplementos-da-muwiz-por-ingredientes-nao-autorizados-veja-lista.ghtml"},
+{"id": "inca-atlas", "name": "INCA lança atlas genético de tumores", "type": "news", "desc": "Fato — 26/11/2026. Base inédita sobre câncer em brasileiros.", "color": "#a3e635", "size": 4, "url": "https://g1.globo.com/saude/noticia/2026/11/26/por-que-o-cancer-pode-ser-diferente-entre-brasileiros-inca-lanca-atlas-genetico-inedito-para-investigar-tumores-e-orientar-tratamentos.ghtml"},
+{"id": "hera-cratera", "name": "Hera revela cratera de estádio em Dimorphos", "type": "news", "desc": "Fato — 25-26/11/2026. Cratera atravessa o corpo; giro caótico.", "color": "#a3e635", "size": 6, "url": "https://www.bbc.com/portuguese/articles/cmx29v1ekq9qo"},
+{"id": "h-dart-2022", "name": "26/09/2022 — DART atinge Dimorphos", "type": "history", "desc": "Primeiro teste de defesa planetária; órbita encurtada em ~33 min.", "color": "#61dfd3", "size": 5, "url": "https://www.esa.int/articles/about-us/directorates/operations/space-safety/hera/hera-reveals-stadium-sized-asteroid-crater-left-after-spacecraft-impact"},
+{"id": "china-espaco", "name": "Primeiro astronauta estrangeiro na estação chinesa", "type": "news", "desc": "Reportado — 26/11/2026. País do astronauta não ficou claro na captura.", "color": "#a3e635", "size": 4, "url": "https://g1.globo.com/ciencia/noticia/2026/11/26/estacao-espacial-chinesa-recebe-o-primeiro-astronauta-estrangeiro.ghtml"},
+{"id": "marquez-aposenta", "name": "Márquez anuncia aposentadoria no auge", "type": "news", "desc": "Fato — 27/11/2026. 8 títulos; contrato ia até 2028; despedida domingo.", "color": "#818cf8", "size": 6, "url": "https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml"},
+{"id": "h-marquez-2020", "name": "2020 — fratura do úmero quase encerra carreira", "type": "history", "desc": "Jerez; cirurgias e anos de recuperação até a volta às vitórias em 2024.", "color": "#61dfd3", "size": 4, "url": "https://oglobo.globo.com/esportes/noticia/2026/11/27/marc-marquez-anuncia-aposentadoria-apos-conquistar-oitavo-titulo-mundial.ghtml"},
+{"id": "dorival-saida", "name": "Dorival e Rafinha deixam o São Paulo", "type": "news", "desc": "Fato — 26-27/11/2026. Saída após vitória sobre o Remo, com protestos.", "color": "#818cf8", "size": 5, "url": "https://ge.globo.com/futebol/times/sao-paulo/noticia/2026/11/26/dorival-junior-avisa-que-deixara-o-sao-paulo-no-fim-do-brasileirao.ghtml"},
+{"id": "corinthians-justica", "name": "Justiça nega intervenção no Corinthians", "type": "news", "desc": "Fato — 26/11/2026. Restrições à diretoria; Janikian descarta SAF.", "color": "#818cf8", "size": 4, "url": "https://ge.globo.com/futebol/times/corinthians/noticia/2026/11/26/justica-nega-intervencao-no-corinthians-e-impoe-restricoes-a-diretoria.ghtml"},
+{"id": "rodada-37-cenarios", "name": "Rodada 37 define G-4 e rebaixamento", "type": "news", "desc": "Fato — 27/11/2026. Fluminense x Cruzeiro às 20h.", "color": "#818cf8", "size": 4, "url": "https://ge.globo.com/sp/tem-esporte/futebol/brasileirao-serie-a/noticia/2026/11/27/brasileirao-da-libertadores-ao-rebaixamento-veja-o-que-a-37a-rodada-pode-definir.ghtml"},
+{"id": "libertadores-lema", "name": "Véspera da final da Libertadores", "type": "news", "desc": "Fato — 26/11/2026. Palmeiras x Estudiantes, sábado 17h, Montevidéu.", "color": "#818cf8", "size": 5, "url": "https://ge.globo.com/futebol/times/palmeiras/noticia/2026/11/26/palmeiras-cria-lema-inspirado-em-gustavo-gomez-para-final-da-libertadores-saiba-qual-e.ghtml"},
+{"id": "miss-universo", "name": "Primeira mãe vence o Miss Universo", "type": "news", "desc": "Fato — 26/11/2026. Vencedora tem dois mestrados.", "color": "#818cf8", "size": 4, "url": "https://g1.globo.com/pop-arte/noticia/2026/11/26/nova-miss-universo-tem-dois-mestrados-e-e-a-primeira-mae-a-vencer-o-concurso.ghtml"},
+{"id": "belchior-doc", "name": "Documentário sobre Belchior nos cinemas", "type": "news", "desc": "Fato — 26/11/2026. 50 anos do disco 'Alucinação'.", "color": "#818cf8", "size": 4, "url": "https://g1.globo.com/pop-arte/noticia/2026/11/26/documentario-alucinacao-belchior-estreia-nos-cinemas-nos-50-anos-do-classico-disco-do-cantor.ghtml"},
+{"id": "cliff-booth", "name": "Crítica: novo filme com Brad Pitt", "type": "news", "desc": "Crítica — 27/11/2026. 'As Novas Desventuras de Cliff Booth'.", "color": "#818cf8", "size": 4, "url": "https://g1.globo.com/pop-arte/cinema/noticia/2026/11/27/com-brad-pitt-carismatico-as-novas-desventuras-de-cliff-booth-diverte-do-inicio-ao-fim-g1-ja-viu.ghtml"},
+{"id": "chico-buarque-serie", "name": "Série homenageia Chico Buarque", "type": "news", "desc": "Fato — 26/11/2026. Estreia em dezembro.", "color": "#818cf8", "size": 4, "url": "https://g1.globo.com/pop-arte/musica/blog/mauro-ferreira/post/2026/11/26/chico-buarque-e-cantado-por-pericles-gaby-amarantos-don-l-ze-ibarra-ze-manoel-zeca-veloso-catto-jaloo-e-flor-em-serie-que-estreia-em-dezembro.ghtml"}
+];
+
+const graphLinks = [
+{"source": "politica", "target": "trabuco-confirmado", "label": "Editoria"},
+{"source": "politica", "target": "alcolumbre-stf", "label": "Editoria"},
+{"source": "politica", "target": "senado-estatais", "label": "Editoria"},
+{"source": "politica", "target": "durigan-futuro", "label": "Editoria"},
+{"source": "economia", "target": "ibovespa-fechamento", "label": "Editoria"},
+{"source": "economia", "target": "ue-auditoria-carne", "label": "Editoria"},
+{"source": "economia", "target": "vieira-embraer", "label": "Editoria"},
+{"source": "economia", "target": "blackfriday-dia", "label": "Editoria"},
+{"source": "tecnologia", "target": "uk-pension-cyber", "label": "Editoria"},
+{"source": "tecnologia", "target": "nvidia-serve-asiatico", "label": "Editoria"},
+{"source": "tecnologia", "target": "google-multas", "label": "Editoria"},
+{"source": "saude", "target": "covid-23estados", "label": "Editoria"},
+{"source": "saude", "target": "fda-mama", "label": "Editoria"},
+{"source": "saude", "target": "anvisa-muwiz", "label": "Editoria"},
+{"source": "saude", "target": "inca-atlas", "label": "Editoria"},
+{"source": "ciencia", "target": "hera-cratera", "label": "Editoria"},
+{"source": "ciencia", "target": "china-espaco", "label": "Editoria"},
+{"source": "esporte", "target": "marquez-aposenta", "label": "Editoria"},
+{"source": "esporte", "target": "dorival-saida", "label": "Editoria"},
+{"source": "esporte", "target": "corinthians-justica", "label": "Editoria"},
+{"source": "esporte", "target": "rodada-37-cenarios", "label": "Editoria"},
+{"source": "esporte", "target": "libertadores-lema", "label": "Editoria"},
+{"source": "cultura", "target": "miss-universo", "label": "Editoria"},
+{"source": "cultura", "target": "belchior-doc", "label": "Editoria"},
+{"source": "cultura", "target": "cliff-booth", "label": "Editoria"},
+{"source": "cultura", "target": "chico-buarque-serie", "label": "Editoria"},
+{"source": "mundo", "target": "zelensky-entrevista", "label": "Editoria"},
+{"source": "mundo", "target": "espanha-eleicao", "label": "Editoria"},
+{"source": "mundo", "target": "guine-bissau-2028", "label": "Editoria"},
+{"source": "mundo", "target": "iraque-tropas", "label": "Editoria"},
+{"source": "mundo", "target": "venezuela-revoga", "label": "Editoria"},
+{"source": "mundo", "target": "canada-quebec", "label": "Editoria"},
+{"source": "mundo", "target": "thanksgiving-energia", "label": "Editoria"},
+{"source": "mundo", "target": "eu-orcamento", "label": "Editoria"},
+{"source": "mundo", "target": "uganda-rdc", "label": "Editoria"},
+{"source": "trabuco-confirmado", "target": "h-trabuco-2014", "label": "Repete o convite feito em"},
+{"source": "trabuco-confirmado", "target": "h-zelotes", "label": "Dossiê judicial trancado em"},
+{"source": "trabuco-confirmado", "target": "h-moretti-sancao", "label": "Executa o ajuste sancionado em"},
+{"source": "trabuco-confirmado", "target": "durigan-futuro", "label": "Sucedido por"},
+{"source": "ibovespa-fechamento", "target": "trabuco-confirmado", "label": "Precifica a confirmação de"},
+{"source": "ue-auditoria-carne", "target": "h-carne-auditoria", "label": "Retoma o relatório de"},
+{"source": "ue-auditoria-carne", "target": "h-carne-setembro", "label": "Contraria a manutenção da suspensão de"},
+{"source": "vieira-embraer", "target": "blackfriday-dia", "label": "Mesma agenda de tarifas e consumo", "weak": true},
+{"source": "espanha-eleicao", "target": "h-espanha-out", "label": "Consequência da antecipação de"},
+{"source": "guine-bissau-2028", "target": "h-guine-golpe", "label": "Adiada no 1º aniversário do golpe de"},
+{"source": "covid-23estados", "target": "h-covid-calendario", "label": "Testa o calendário criado em"},
+{"source": "hera-cratera", "target": "h-dart-2022", "label": "Investiga o impacto de"},
+{"source": "marquez-aposenta", "target": "h-marquez-2020", "label": "Fecha o ciclo aberto em"},
+{"source": "nvidia-serve-asiatico", "target": "h-nvidia-1211", "label": "Desdobra a crise aberta em"},
+{"source": "uk-pension-cyber", "target": "google-multas", "label": "Mesma semana de cibersegurança", "weak": true}
+];
+
+
+const graphContainer = document.getElementById('graph-container');
+try {
+const graph = ForceGraph3D()(graphContainer)
+  .backgroundColor('#07080d')
+  .nodeLabel(n => n.name)
+  .linkLabel(l => l.label || (l.weak ? 'Hipótese editorial' : 'Agrupamento por tema'))
+  .nodeColor(n => n.color)
+  .nodeVal(n => n.size)
+  .nodeRelSize(4)
+  .nodeOpacity(0.94)
+  .linkColor(l => l.weak ? 'rgba(140,160,200,.15)' : 'rgba(140,160,200,.4)')
+  .linkWidth(l => l.weak ? 0.4 : 0.8)
+  .linkDirectionalParticles(0)
+  .enableNodeDrag(true)
+  .onNodeClick(n => {
+    const info = document.getElementById('graph-info');
+    const title = document.createElement('h3');
+    title.textContent = n.name;
+    const detail = document.createElement('p');
+    detail.textContent = n.desc || 'Agrupamento por tema.';
+    const close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = 'Fechar';
+    close.addEventListener('click', () => { info.hidden = true; });
+    info.replaceChildren(title, detail);
+    if (n.url) {
+      const source = document.createElement('a');
+      source.href = n.url;
+      source.textContent = 'Abrir fonte';
+      const row = document.createElement('p');
+      row.append(source);
+      info.append(row);
+    }
+    info.append(close);
+    info.hidden = false;
+  });
+
+fitCanvas(graphContainer, graph);
+graph.graphData({nodes: graphNodes, links: graphLinks});
+let firstLayout = true;
+graph.onEngineStop(() => {
+  if (!firstLayout) return;
+  firstLayout = false;
+  graph.zoomToFit(matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 500, 36);
+});
+} catch {
+  showVizFallback(graphContainer, 'Grafo indisponível neste navegador. As relações documentadas estão na linha do tempo.');
+}
+</script>
+<script>
+(() => {
+  const filter = document.getElementById('filtro-editorias');
+  const buttons = [...filter.querySelectorAll('button')];
+  const topics = buttons.slice(1).map(button => button.dataset.editoria);
+  function select(topic) {
+    buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.editoria === topic)));
+    topics.forEach(id => { const section = document.getElementById(id); if (section) section.hidden = topic !== 'todos' && topic !== id; });
+  }
+  buttons.forEach(button => button.addEventListener('click', () => select(button.dataset.editoria)));
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    const topic = link.hash.slice(1);
+    if (topics.includes(topic)) link.addEventListener('click', event => { if (!event.defaultPrevented) select(topic); });
+  });
+  filter.hidden = false;
+})();
+</script>
+<script src="arquivo-dados.js" defer></script>
+<script src="arquivo.js" defer></script>
+</body>
+</html>
